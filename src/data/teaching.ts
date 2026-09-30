@@ -137,3 +137,64 @@ export const timeHorizon = {
     { model: "Claude Opus 4.5", date: "2025-11", minutes: 320 },
   ],
 };
+
+// ---------- What's next: agents with their own computers ----------
+
+// Sources (checked 30 September 2026):
+// - Meta, "Introducing Muse" (about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/), launched 8 Sept 2026
+// - InfoQ, "Grok Bot" (infoq.com/news/2026/08/grok-bot-agent/), xAI beta from 11 Aug 2026
+// - TechCrunch, "OpenAI launches Dots" (techcrunch.com/2026/09/29/...), announced 29 Sept 2026
+export const computerAgents = [
+  { name: "Grok Bot", maker: "xAI", when: "Aug 2026" },
+  { name: "Muse", maker: "Meta", when: "Sep 2026" },
+  { name: "Dots", maker: "OpenAI", when: "Sep 2026" },
+];
+
+export const computerAgentTraits = [
+  { label: "Always on", human: false },
+  { label: "Signs in like a person", human: false },
+  { label: "Remembers how you work", human: false },
+  { label: "Asks before sensitive steps", human: true },
+];
+
+// ---------- What's next: Copilot as the operating system of work ----------
+
+// Satya Nadella on X, 25 September 2026 (reported by Windows Latest):
+// "We're building Copilot as a new OS for work that spans every model, every form factor, and every task."
+export const copilotQuote = {
+  text: "A new OS for work",
+  who: "Satya Nadella, Microsoft CEO, September 2026",
+};
+
+export const todayApps = ["Email", "Teams", "Claim system", "Excel", "Policy site", "Calendar", "Phone notes", "Word"];
+
+export const copilotGoal = "Get this claim ready for a decision";
+
+// ---------- What's next: their agent meets our agent ----------
+
+export const agentMeeting = {
+  worker: "Worker's agent",
+  employer: "Employer's agent",
+  wcb: "WCB's agent",
+  checks: ["Is it really acting for them?", "Is consent on file?"],
+};
+
+// ---------- What's next: a day in 2028 (a scenario, not a plan) ----------
+
+export const dayIn2028: { time: string; who: "agent" | "person"; text: string }[] = [
+  { time: "6:00", who: "agent", text: "Overnight: files prepared, gaps flagged" },
+  { time: "8:30", who: "person", text: "Starts with decisions, not paperwork" },
+  { time: "10:15", who: "agent", text: "Answers the worker's agent, with sources" },
+  { time: "13:00", who: "person", text: "Calls the worker. Time to listen." },
+  { time: "15:30", who: "agent", text: "Supervisor agent flags an odd pattern" },
+  { time: "16:30", who: "person", text: "Signs decisions. Every step recorded." },
+];
+
+// ---------- What's next: what shifts for us ----------
+
+export const shifts = [
+  { from: "Opening apps", to: "Asking for outcomes" },
+  { from: "Doing every step", to: "Supervising agents" },
+  { from: "Staff accounts only", to: "Agent identities and permissions" },
+  { from: "Yearly reviews", to: "Always-on monitoring" },
+];

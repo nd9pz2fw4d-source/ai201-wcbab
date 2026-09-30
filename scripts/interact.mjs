@@ -34,7 +34,7 @@ let page = await open({}, "?length=75");
 await page.mouse.click(960, 540);
 await page.waitForTimeout(300);
 check("click on background advances", (await hash(page)) === "#/2");
-for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/33"], ["Home", "#/1"]]) {
+for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/38"], ["Home", "#/1"]]) {
   await page.keyboard.press(key === " " ? "Space" : key);
   await page.waitForTimeout(250);
   check(`key ${key === " " ? "Space" : key}`, (await hash(page)) === want, await hash(page));
@@ -124,7 +124,7 @@ await page.keyboard.press("m");
 await page.waitForTimeout(500);
 check("M opens menu", await page.getByRole("navigation", { name: "Slides" }).isVisible());
 const greyed = await page.locator("nav button:has-text('not in this version')").count();
-check("menu greys the 6 slides outside the 75 version", greyed === 6, `greyed ${greyed}`);
+check("menu greys the 7 slides outside the 75 version", greyed === 7, `greyed ${greyed}`);
 await page.screenshot({ path: `${out}/menu-75.png` });
 await page.keyboard.press("ArrowRight");
 await page.waitForTimeout(300);
@@ -169,14 +169,14 @@ await page.context().close();
 // ---- 60-minute version skips 10, 18, 19 ----
 page = await open({}, "?length=60");
 const seen = [];
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 45; i++) {
   seen.push(await hash(page));
   await page.keyboard.press("ArrowRight");
   await page.waitForTimeout(120);
 }
 const uniq = [...new Set(seen)];
-check("60 shows 22 slides", uniq.length === 22, uniq.join(" "));
-const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "what-stays", "supervisor", "discussion"];
+check("60 shows 23 slides", uniq.length === 23, uniq.join(" "));
+const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "computer-agents", "agent-meets-agent", "day-in-2028", "what-shifts", "what-stays", "supervisor", "discussion"];
 const hiddenNums = [];
 for (const id of hidden60) hiddenNums.push(await goId(page, id, 120, 300));
 check("60 skips every slide outside its version", hiddenNums.every((n) => !uniq.includes(n)), hiddenNums.join(" "));
@@ -225,7 +225,7 @@ await page.locator("button:has-text('It looks things up')").click();
 await page.waitForTimeout(600);
 check("myth card flips without advancing", (await hash(page)) === h && (await page.locator("text=It predicts, unless we give it sources").count()) > 0);
 await page.screenshot({ path: `${out}/myths-flipped.png` });
-for (const [len, want] of [[60, 22], [75, 27], [90, 32], [120, 33]]) {
+for (const [len, want] of [[60, 23], [75, 31], [90, 37], [120, 38]]) {
   await page.goto(file + `?length=${len}#/1`);
   await page.reload();
   await page.waitForTimeout(300);

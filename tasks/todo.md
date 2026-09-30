@@ -52,3 +52,11 @@ Decisions (from the user): grow Act 1 and add a 120-minute version; visual first
 - Chart data verified against METR's own page (Time Horizon 1.1, 29 Jan 2026); only METR's published points are plotted, no fitted line of my own. Next-word scores are labelled illustrative in data and notes.
 - `#/<slide-id>` links added; tests rewritten to use ids so they survive reordering. 48/48 interaction checks pass, no console errors; all 33 slides screenshotted at 1920x1080 and fixed slides re-checked.
 - Fixed during review: bars near the edge, wrapped source chips, crowded footer, loop line overlap, muddy dial colours and a clipped label, empty agent circles, duplicate heading.
+
+---
+
+# Round 3: futurism (computer-using agents, Copilot as the operating system of work)
+- [x] Verified Grok Bot (xAI, beta 11 Aug 2026), Muse (Meta, 8 Sept 2026), Dots (OpenAI, 29 Sept 2026) and Nadella's 25 Sept 2026 "new OS for work" post from primary or reputable sources
+- [x] Five slides after the task-length chart: Agents now have their own computers (75+), Copilot becomes the operating system of work (all), Their agent will call our agent (75+), A day in 2028 (90+), What shifts for us (75+)
+- [x] Sources and VERIFY notes in slide notes and `src/data/teaching.ts`
+- [x] Tests updated (23 / 31 / 37 / 38 slides); 48/48 pass, no console errors; new slides screenshotted and fixed

@@ -32,6 +32,11 @@ import SlideMyths from "./SlideMyths";
 import SlideWhereGoing from "./SlideWhereGoing";
 import SlideTimeHorizon from "./SlideTimeHorizon";
 import SlideWhatStays from "./SlideWhatStays";
+import SlideComputerAgents from "./SlideComputerAgents";
+import SlideCopilotOS from "./SlideCopilotOS";
+import SlideAgentMeetsAgent from "./SlideAgentMeetsAgent";
+import SlideDayIn2028 from "./SlideDayIn2028";
+import SlideWhatShifts from "./SlideWhatShifts";
 
 const ALL: SlideDef["include"] = [60, 75, 90, 120];
 const FROM_75: SlideDef["include"] = [75, 90, 120];
@@ -244,6 +249,56 @@ export const slides: SlideDef[] = [
     tone: "light",
     notes:
       "Source: METR (an independent AI evaluation group), 'Time Horizon 1.1', 29 January 2026, metr.org/blog/2026-1-29-time-horizon-1-1. The measure: how long a task takes a skilled person, for tasks that an AI agent completes about half the time. Data (50% time horizon, TH1.1): GPT-4 (Mar 2023) 3.5 min; GPT-4 Nov 2023 3.6 min; Claude 3.7 Sonnet (Feb 2025) 60 min; o3 (Apr 2025) 121 min; Claude Opus 4 (May 2025) 101 min; GPT-5 (Aug 2025) 214 min; Claude Opus 4.5 (Nov 2025) 320 min, about 5 hours. METR estimates the long-run doubling time at about 7 months (196 days), and about 4 months (131 days) since 2023. Caveats to say out loud: these are software and research tasks, not claims work; 'half the time' is not good enough for decisions about people; and METR notes the measure depends on the tasks chosen. Release months are public release dates. Hover a dot for its value. The point for leaders: plan for capability that keeps growing, and build the oversight now.",
+  },
+  {
+    id: "computer-agents",
+    act: "see",
+    title: "Agents now have their own computers",
+    include: FROM_75,
+    component: SlideComputerAgents,
+    tone: "light",
+    notes:
+      "The newest wave, all launched in the last two months: agents that get their own computer in the cloud, stay on around the clock, sign in to websites and apps the way a person does (no special integration needed), remember how you work, and come back to you before sensitive steps. xAI's Grok Bot went into beta on 11 August 2026 for paid subscribers; a group of bots can coordinate and return to the user for decisions. Meta's Muse launched 8 September 2026: it runs on its own dedicated cloud computer, works through WhatsApp and a Mac app, checks with the person before sensitive actions like sending an email or making a purchase, and has a separate 'Sentinel' agent watching its actions plus a full audit trail. OpenAI announced Dots on 29 September 2026: always-on agents with their own cloud computer that you message through Slack or Teams, which can be given their own identities, credentials and tools, and which OpenAI says it is integrating with Microsoft's Agent 365 security controls. Point for WCB: these are consumer and business products today, so our workers, employers and staff will meet them before we formally adopt anything. Sources: about.fb.com/news/2026/09/introducing-muse-personal-ai-agent; infoq.com/news/2026/08/grok-bot-agent; techcrunch.com/2026/09/29/openai-launches-dots-its-bubbly-agentic-avatar. Details were days old when this deck was built. VERIFY before the session.",
+  },
+  {
+    id: "copilot-os",
+    act: "see",
+    title: "Copilot becomes the operating system of work",
+    include: ALL,
+    component: SlideCopilotOS,
+    tone: "light",
+    notes:
+      "Today, an adjudicator is the integration layer: they open email, Teams, the claim system, Excel, the policy site, and stitch it together themselves. Microsoft's direction is that Copilot becomes the place you work from: you state an outcome ('get this claim ready for a decision'), and Copilot and its agents work across the apps, within permissions the organization sets. On 25 September 2026 Satya Nadella wrote: 'We're building Copilot as a new OS for work that spans every model, every form factor, and every task.' Microsoft is pairing this with governance: Agent 365 for controlling agents' permissions, auditing and oversight, and Copilot Cowork for handing off multi-step tasks. Because everyone at WCB already has Copilot, this is the most likely way agents arrive here: not as a separate project, but as a feature switch in tools we already own. That makes the governance decisions in Act 3 urgent. Sources: Windows Latest, 26 Sept 2026 (windowslatest.com/2026/09/26/...); Microsoft Build 2026 coverage (visualstudiomagazine.com/articles/2026/06/02/...). VERIFY product names and licensing with WCB IT before the session.",
+  },
+  {
+    id: "agent-meets-agent",
+    act: "see",
+    title: "Their agent will call our agent",
+    include: FROM_75,
+    component: SlideAgentMeetsAgent,
+    tone: "light",
+    notes:
+      "Futurism, but close: when personal agents like Muse can make calls, send messages and fill in forms, the worker may send their agent to report an injury or chase a claim status, and the employer may send theirs to file the employer report. WCB's agent will be talking to other agents. New questions: how do we know the agent is really acting for this worker? Is their consent on file, and for what? What can we share with an agent versus a person? How do we keep the worker's voice when a machine is speaking for them? And a person at WCB still decides. This is a scenario to plan for, not a current WCB capability.",
+  },
+  {
+    id: "day-in-2028",
+    act: "see",
+    title: "A day in 2028",
+    include: FROM_90,
+    component: SlideDayIn2028,
+    tone: "light",
+    notes:
+      "A scenario, not a plan: one adjudicator's day in 2028. Overnight, agents prepared files and flagged gaps. The adjudicator starts with decisions, not paperwork. Mid-morning, WCB's agent answers a worker's agent, with sources. After lunch, the adjudicator calls the worker: more time to listen, because the chasing is done. Mid-afternoon, a supervisor agent flags an unusual pattern for a person to look at. At the end of the day, the adjudicator signs decisions, and every step is recorded. Ask the room: what would have to be true for this day to be safe? What would you want to measure?",
+  },
+  {
+    id: "what-shifts",
+    act: "see",
+    title: "What shifts for us",
+    include: FROM_75,
+    component: SlideWhatShifts,
+    tone: "light",
+    notes:
+      "Four shifts for leaders. From opening apps to asking for outcomes: work starts with a goal, not a screen. From doing every step to supervising agents: the skill becomes setting goals, checking work and making the call. From staff accounts only to agent identities and permissions: every agent needs an identity, a manager, and only the access its job needs, like a new hire. From yearly reviews to always-on monitoring: agents act around the clock, so oversight has to as well. None of these shifts moves accountability away from people.",
   },
   {
     id: "what-stays",
