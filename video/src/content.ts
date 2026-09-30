@@ -3,25 +3,33 @@ import {
   BookOpenCheck,
   Bot,
   Brain,
-  ClipboardList,
+  Cpu,
   Eye,
   FlaskConical,
   Gauge,
-  HandHelping,
+  Gavel,
+  Handshake,
+  HeartHandshake,
+  HeartPulse,
+  Hourglass,
+  House,
   KeyRound,
   ListChecks,
   MessageCircleWarning,
   Repeat,
+  Scale,
+  ServerCog,
   ShieldCheck,
-  ShieldPlus,
-  Shuffle,
-  Users,
+  Truck,
+  Umbrella,
+  Workflow,
 } from "lucide-react";
 
-// On-screen words for the pre-read. Figures come from:
-//   Deloitte Canada, "The future of workers' compensation: How workers' compensation
-//   organizations are improving return-to-work outcomes" (2020), survey of 18 WCOs.
-//   https://www.deloitte.com/ca/en/Industries/insurance/research/the-future-of-workers-compensation.html
+// On-screen words for the pre-read. Deloitte figures and wording come from:
+//   Deloitte Canada, "The Future of Workers' Compensation: Industry Perspectives and Global Signals"
+//   (Zohair Masood, Jason Condon, Chris Duvinage; 26 August 2026). A survey of Canadian WCB leaders,
+//   plus expert interviews in the United States, Australia and New Zealand.
+//   https://www.deloitte.com/ca/en/Industries/insurance/perspectives/future-workers-compensation.html
 // Key terms match the session deck (src/slides/index.ts and src/data/teaching.ts in the repo root).
 
 export const session = {
@@ -30,34 +38,42 @@ export const session = {
   date: "[SESSION DATE]", // VERIFY: set before sending
 };
 
-export const deloitteSource = "Source: Deloitte, The future of workers' compensation (2020), survey of 18 WCOs";
+export const deloitteSource = "Source: Deloitte, The Future of Workers' Compensation (August 2026)";
 
-export const surveyCountries = [
-  { name: "Canada", count: 7 },
-  { name: "Australia", count: 8 },
-  { name: "United States", count: 3 },
+export const surveyReach = [
+  { where: "Canada", how: "WCB leaders surveyed" },
+  { where: "U.S. · Australia · New Zealand", how: "experts interviewed" },
 ];
 
-export const pressures: { title: string; detail: string }[] = [
-  { title: "Rising expectations", detail: "Service as fast and digital as the apps on their phone" },
-  { title: "Work is changing", detail: "Gig roles and more small and medium-sized employers" },
-  { title: "Harder injuries", detail: "More complex claims, including mental health" },
-  { title: "A shifting world", detail: "Ageing workforce, economic risk, new laws" },
+/** Deloitte's eight forces, in the order the verse sings them (two per line). */
+export const forces: { title: string; detail: string; icon: LucideIcon }[] = [
+  { title: "Whole-person recovery", detail: "Half of leaders rank mental health support the #1 barrier", icon: HeartPulse },
+  { title: "An ageing workforce", detail: "55+ heading to 23.1% of the labour force by 2041", icon: Hourglass },
+  { title: "A widening protection gap", detail: "Gig and platform work stretch coverage", icon: Umbrella },
+  { title: "Evolving lifestyles", detail: "17.4% still worked from home in May 2025", icon: House },
+  { title: "The future of work", detail: "Delivery, micromobility, automation: new risks", icon: Truck },
+  { title: "AI and technology", detail: "Spot risks and step in before injuries happen", icon: Cpu },
+  { title: "Modernization", detail: "Core systems: where leaders feel least prepared", icon: ServerCog },
+  { title: "Legislative agility", detail: "Mental health, gig work, long COVID test old rules", icon: Gavel },
 ];
 
-export const levers: { name: string; detail: string; icon: LucideIcon }[] = [
-  { name: "Risk-based segmentation", detail: "Triage by the risk of not getting back to work, not just the injury", icon: Shuffle },
-  { name: "Standardized plans", detail: "Proven recovery and return-to-work blueprints", icon: ClipboardList },
-  { name: "Teams matched to the case", detail: "Generalists for simple cases, specialists for complex ones", icon: Users },
-  { name: "Focus on prevention", detail: "Stop injuries before they happen, with employers", icon: ShieldPlus },
-  { name: "Behavioural economics", detail: "Nudges: reminders, goals, recovery-first language", icon: HandHelping },
+/** Deloitte's four shifts driving the future of workers' compensation. */
+export const shifts: { name: string; detail: string; icon: LucideIcon }[] = [
+  { name: "Product & pricing", detail: "Premium stability and risk-based pricing", icon: Scale },
+  { name: "Customer engagement", detail: "Proactive, personal, recovery first", icon: HeartHandshake },
+  { name: "Operations", detail: "Prevention, services and claims in one intelligence-driven model", icon: Workflow },
+  { name: "Strategic partnerships", detail: "Health, rehab and community, aligned on recovery", icon: Handshake },
 ];
 
-export const leverStats: { value: string; label: string }[] = [
-  { value: "70–80%", label: "of claims are simple; 55–65% could be fully automated" },
-  { value: "83%", label: "build a bespoke plan for every case today" },
-  { value: "27%", label: "faster back to full health with nudges (Allianz / NSW study)" },
+export const shiftStats: { value: string; label: string }[] = [
+  { value: "83%", label: "say their AI maturity in core business is still low" },
+  { value: "1", label: "leader called their board an early adopter" },
+  { value: "1 in 2", label: "rank mental health support the #1 barrier" },
 ];
+
+/** Deloitte's first readiness question, quoted. */
+export const readinessQuestion =
+  "Is AI embedded in the fabric of your business model, or do you still see it as a standalone capability?";
 
 export const acts: { n: number; name: string; detail: string; icon: LucideIcon }[] = [
   { n: 1, name: "See it", detail: "What AI can do now, how it works, where it's going", icon: Eye },

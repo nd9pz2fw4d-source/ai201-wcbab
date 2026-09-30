@@ -1,11 +1,15 @@
 import { FolderOpen } from "lucide-react";
 import { interpolate } from "remotion";
-import { fadeUp, useIn, useSeconds } from "../anim";
+import { fadeUp, popIn, progress, useIn, useSeconds } from "../anim";
 import { DeloitteLogo, WcbLogo, theme } from "../brand";
 import { session } from "../content";
 import { Stage } from "../components/Stage";
+import { teaserAt } from "../timeline";
 
-// 0 to 8 s. A claim file flies in, gets stamped, and the title lands.
+/** Teaser chips, shown in the intro's instrumental stretch in place of the subtitle. */
+const teasers = ["One claim", "Three acts", "Eight key terms", "One song"];
+
+// A claim file flies in, gets stamped, and the title lands; then a teaser of what's coming.
 export function Intro() {
   const t = useSeconds();
   const fly = useIn(0.2, 12);
@@ -13,6 +17,7 @@ export function Intro() {
   const title = useIn(3.2);
   const sub = useIn(4.2);
   const logos = useIn(5.2);
+  const swap = progress(t, teaserAt(0) - 0.4, teaserAt(0));
 
   const folderX = interpolate(fly, [0, 1], [-1400, 0]);
   const folderSpin = interpolate(fly, [0, 1], [-30, -4]);
@@ -66,8 +71,15 @@ export function Intro() {
         <div style={{ ...fadeUp(title), fontSize: 150, fontWeight: 900, letterSpacing: -2, lineHeight: 1 }}>
           Follow the <span style={{ color: theme.brandAccent }}>claim</span>
         </div>
-        <div style={{ ...fadeUp(sub), marginTop: 30, fontSize: 46, color: theme.brandTint, fontWeight: 400 }}>
-          {session.programme}: your two-minute warm-up. Sound on!
+        <div style={{ position: "relative", marginTop: 30, height: 80 }}>
+          <div style={{ ...fadeUp(sub), opacity: Math.min(1, sub) * (1 - swap), fontSize: 46, color: theme.brandTint, fontWeight: 400 }}>
+            {session.programme}: your two-minute warm-up. Sound on!
+          </div>
+          <div style={{ position: "absolute", inset: 0, display: "flex", justifyContent: "center", gap: 28 }}>
+            {teasers.map((label, i) => (
+              <Teaser key={label} label={label} delay={teaserAt(i)} />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -89,5 +101,24 @@ export function Intro() {
         <DeloitteLogo height={46} on="dark" />
       </div>
     </Stage>
+  );
+}
+
+function Teaser({ label, delay }: { label: string; delay: number }) {
+  const p = useIn(delay);
+  return (
+    <div
+      style={{
+        ...popIn(p),
+        padding: "12px 32px",
+        borderRadius: 999,
+        background: theme.paper,
+        color: theme.brandPrimary,
+        fontSize: 40,
+        fontWeight: 900,
+      }}
+    >
+      {label}
+    </div>
   );
 }

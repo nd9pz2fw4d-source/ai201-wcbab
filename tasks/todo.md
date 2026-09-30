@@ -84,3 +84,18 @@ Goal: a short, light-hearted music video sent before the session. It sets up the
 - Verified: typecheck clean; stills of every scene reviewed at 1920x1080; full 140.0 s MP4 rendered (silent preview) and frames checked, including mid-animation. Audio path tested with stand-in tones: song and SFX mux in at the cue times; forced-alignment mapping tested with a mocked API response; stand-ins removed.
 - Fixed during review: lever 3 icon squeezed out by a 3-line title, 4-line stat, 2-line term title, bingo checks crowding labels, "WCO" jargon in a headline, hallucination wobble clipping the header, stale lyric timing kept after a new song.
 - Blocked: no ElevenLabs key or connector in this environment, so no audio generated yet. `npm run audio` then `npm run render` once `ELEVENLABS_API_KEY` is set.
+
+## Round 4b: the 2026 Deloitte paper, and real audio
+- [x] Swap the source to "The Future of Workers' Compensation: Industry Perspectives and Global Signals" (Deloitte Canada, 26 Aug 2026); read the page itself and quote its figures as written (eight forces, four shifts, 83% low AI maturity, one early adopter, half rank mental health support the #1 barrier, 23.1% by 2041, 17.4% worked from home, human-in-the-loop, the readiness question)
+- [x] Rewrite verse 1 (eight forces) and verse 2 (four shifts) lyrics and scenes; outro carries Deloitte's readiness question
+- [x] Generate through the ElevenLabs connector: two song takes, seven effects; transcribe both takes to pick one (take 1: every line heard)
+- [x] Make the video follow the take: scene cuts, cards, effects and captions keyed to when each line is sung (`song-timing.json`); local alignment script (faster-whisper) for the connector route; API route writes the same file
+- [x] Normalize effect levels; balance song and effects without clipping
+- [x] Verify: typecheck, stills at the take's times, full render with audio, frames and levels checked
+
+### Review (round 4b)
+- Source verified from the page HTML, not a summary. The survey's size isn't published, so the video doesn't state one.
+- The take ran longer than the plan in places (16 s intro, instrumental breaks after the choruses and agenda). Rather than force the song to the plan, every cue now keys off sung lines, so any future take syncs by re-running alignment. Added an intro teaser beat to fill the longer lead-in.
+- Alignment: priming Whisper with the lyrics made it skip verse 1; without the prompt it heard all 52 lines. Kept that finding as a comment in the script.
+- Mix: song mastered near 0 dB and effects came out between -19 and 0 dB peak. Effects are peak-normalized to -3 dB, song at 75%, effects at 80%: every effect measurably above the song at its cue, final peak about -0.5 dB.
+- Credits: about 8,200 (about $0.82).

@@ -70,7 +70,7 @@ Planned minutes per act: 60 = 5 / 25 / 12 / 13 / 5; 75 = 5 / 35 / 15 / 15 / 5; 9
 
 ## Pre-read video
 
-`video/` holds a 2 minute 20 second music video to send before the session: the agenda, the key terms and Deloitte's view of the future of workers' compensation, set to a song. Built with Remotion; the song and sound effects come from ElevenLabs. See `video/README.md`.
+`video/` holds a 2 minute 20 second music video to send before the session: the agenda, the key terms and Deloitte's August 2026 view of the future of workers' compensation, set to a song. Built with Remotion; the song and sound effects come from ElevenLabs. See `video/README.md`.
 
 ## Checks
 

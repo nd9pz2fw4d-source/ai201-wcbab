@@ -3,11 +3,13 @@ import { theme } from "../brand";
 import { acts } from "../content";
 import { Header } from "../components/Header";
 import { Stage } from "../components/Stage";
+import { useSectionTiming } from "../sectionTiming";
 
-// 16 s. The day: one claim, three acts. Each act lands on its sung line (4 s apart).
+// The day: one claim, three acts. Each act lands on its sung line.
 export function Agenda() {
+  const s = useSectionTiming();
   const head = useIn(0);
-  const foot = useIn(13);
+  const foot = useIn(s.lines[3] + 1);
 
   return (
     <Stage chip="The day ahead">
@@ -20,7 +22,7 @@ export function Agenda() {
       </div>
       <div style={{ position: "absolute", left: 80, right: 80, top: 420, display: "flex", gap: 40 }}>
         {acts.map((a, i) => (
-          <ActCard key={a.name} n={a.n} name={a.name} detail={a.detail} Icon={a.icon} delay={4 * (i + 1)} />
+          <ActCard key={a.name} n={a.n} name={a.name} detail={a.detail} Icon={a.icon} delay={s.lines[i + 1]} />
         ))}
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 850, textAlign: "center", fontSize: 38, color: theme.brandTint, ...fadeUp(foot) }}>

@@ -1,14 +1,19 @@
 // Generates the pre-read's audio with ElevenLabs, from src/timeline.ts:
-//   song   public/audio/song.mp3     Music API, one chunk per section, so the song follows the video's timing
-//   sfx    public/audio/sfx/*.mp3     Sound Effects API
-//   align  public/audio/lyrics.json   Forced Alignment API: when each sung line starts, for the captions
+//   song   public/audio/song.mp3          Music API, one chunk per section of the plan in src/timeline.ts
+//   sfx    public/audio/sfx/*.mp3          Sound Effects API
+//   align  public/audio/song-timing.json   Forced Alignment API: when each sung line starts. The video's
+//          scenes, cues and captions follow it, so re-run it after every new take.
+//          (No API key? scripts/align_lyrics.py does the same locally.)
 //
-//   ELEVENLABS_API_KEY=... node scripts/elevenlabs.mjs [all|song|sfx|align] [--force] [--dry-run]
+//   ELEVENLABS_API_KEY=... node scripts/elevenlabs.mjs [all|song|sfx|align|normalize] [--force] [--dry-run]
+//
+// normalize (no key needed) brings every sound effect to the same peak level, so the volumes in
+// src/timeline.ts mean the same for each; the sfx step runs it by itself.
 //
 // Existing files are kept (generation costs credits); --force regenerates them.
 // --dry-run prints the requests without calling the API or needing a key.
 // Needs Node 22.18 or later (it imports the TypeScript timeline directly).
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { sections, sfxLibrary, song, totalSeconds } from "../src/timeline.ts";
@@ -17,7 +22,8 @@ const API = "https://api.elevenlabs.io/v1";
 const root = path.resolve(import.meta.dirname, "..");
 const audioDir = path.join(root, "public/audio");
 const songPath = path.join(audioDir, "song.mp3");
-const lyricsPath = path.join(audioDir, "lyrics.json");
+const timingPath = path.join(audioDir, "song-timing.json");
+const SFX_PEAK_DB = -3;
 
 const args = process.argv.slice(2);
 const step = args.find((a) => !a.startsWith("--")) ?? "all";
@@ -25,13 +31,14 @@ const force = args.includes("--force");
 const dryRun = args.includes("--dry-run");
 const key = process.env.ELEVENLABS_API_KEY;
 
-if (!["all", "song", "sfx", "align"].includes(step)) fail(`Unknown step "${step}". Use all, song, sfx or align.`);
-if (!key && !dryRun) fail("Set ELEVENLABS_API_KEY (or use --dry-run to see the requests).");
+if (!["all", "song", "sfx", "align", "normalize"].includes(step)) fail(`Unknown step "${step}". Use all, song, sfx, align or normalize.`);
+if (!key && !dryRun && step !== "normalize") fail("Set ELEVENLABS_API_KEY (or use --dry-run to see the requests).");
 mkdirSync(path.join(audioDir, "sfx"), { recursive: true });
 
 if (step === "all" || step === "song") await makeSong();
 if (step === "all" || step === "sfx") await makeSfx();
 if (step === "all" || step === "align") await alignLyrics();
+if (step === "normalize") normalizeSfx();
 
 // ---------- Song ----------
 
@@ -58,12 +65,9 @@ async function makeSong() {
   writeFileSync(path.join(audioDir, "song-plan.json"), JSON.stringify(body, null, 2));
   console.log("song: wrote public/audio/song.mp3");
 
-  const seconds = probeSeconds(songPath);
-  if (seconds !== undefined && Math.abs(seconds - totalSeconds) > 1) {
-    console.warn(`song: WARNING it is ${seconds.toFixed(1)}s but the video is ${totalSeconds}s. Scenes are timed to the plan; check the sync.`);
-  }
+  console.log(`song: the take is ${probeSeconds(songPath)?.toFixed(1) ?? "?"}s. Run the align step so the video follows it.`);
   // A new song makes the old line timing wrong; the captions fall back to even timing until it is re-aligned.
-  if (existsSync(lyricsPath)) unlinkSync(lyricsPath);
+  if (existsSync(timingPath)) unlinkSync(timingPath);
 }
 
 // ---------- Sound effects ----------
@@ -82,6 +86,23 @@ async function makeSfx() {
     }
     writeFileSync(out, await post("/sound-generation?output_format=mp3_44100_128", JSON.stringify(body), { "Content-Type": "application/json" }));
     console.log(`sfx: wrote ${id}.mp3`);
+  }
+  if (!dryRun) normalizeSfx();
+}
+
+/** Peak-normalize every effect to SFX_PEAK_DB. Generated effects come out anywhere from -19 to 0 dB. */
+function normalizeSfx() {
+  for (const id of Object.keys(sfxLibrary)) {
+    const file = path.join(audioDir, "sfx", `${id}.mp3`);
+    if (!existsSync(file)) continue;
+    const probe = spawnSync("ffmpeg", ["-v", "info", "-i", file, "-af", "volumedetect", "-f", "null", "-"], { encoding: "utf8" });
+    const peak = Number(/max_volume: (-?[\d.]+) dB/.exec(probe.stderr)?.[1]);
+    const gain = SFX_PEAK_DB - peak;
+    if (!Number.isFinite(gain) || Math.abs(gain) < 1) continue; // within 1 dB: leave it (re-encoding moves peaks slightly)
+    const tmp = file.replace(/\.mp3$/, ".tmp.mp3");
+    execFileSync("ffmpeg", ["-v", "error", "-y", "-i", file, "-af", `volume=${gain.toFixed(1)}dB`, "-b:a", "128k", tmp]);
+    execFileSync("mv", [tmp, file]);
+    console.log(`normalize: ${id}.mp3 ${gain > 0 ? "+" : ""}${gain.toFixed(1)} dB`);
   }
 }
 
@@ -118,8 +139,9 @@ async function alignLyrics() {
     const end = Math.min(next ? next.start : Infinity, l.lastEnd + 1.2);
     return { text: l.text, start: round(l.start), end: round(Math.max(end, l.start + 0.5)) };
   });
-  writeFileSync(lyricsPath, JSON.stringify(out, null, 2));
-  console.log(`align: wrote public/audio/lyrics.json (alignment loss ${result.loss?.toFixed?.(3) ?? "n/a"})`);
+  const duration = probeSeconds(songPath) ?? totalSeconds;
+  writeFileSync(timingPath, JSON.stringify({ duration: round(duration), lines: out }, null, 2) + "\n");
+  console.log(`align: wrote public/audio/song-timing.json (alignment loss ${result.loss?.toFixed?.(3) ?? "n/a"})`);
 }
 
 // ---------- Helpers ----------

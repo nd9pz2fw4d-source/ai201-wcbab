@@ -3,19 +3,19 @@ import { Easing, interpolate } from "remotion";
 import { fadeUp, popIn, useIn, useSeconds } from "../anim";
 import { stations, theme } from "../brand";
 import { Header } from "../components/Header";
+import { useSectionTiming } from "../sectionTiming";
+import { claimTravel } from "../timeline";
 import { Stage } from "../components/Stage";
 
 const LEFT = 80;
 const WIDTH = 1760;
 const STEP = WIDTH / stations.length;
 const LINE_Y = 560;
-const FIRST = 0.8; // s: claim leaves the first station
-const LAST = 13.6; // s: claim reaches the last station
 
-/** Claim position in stations (0 to 7): it hops, pausing briefly at each one. */
-const claimAt = (t: number): number => {
-  const hop = (LAST - FIRST) / (stations.length - 1);
-  const x = (t - FIRST) / hop;
+/** Claim position in stations (0 to 7) at time t: it hops, pausing briefly at each one. */
+const claimAt = (t: number, first: number, last: number): number => {
+  const hop = (last - first) / (stations.length - 1);
+  const x = (t - first) / hop;
   if (x <= 0) return 0;
   if (x >= stations.length - 1) return stations.length - 1;
   const i = Math.floor(x);
@@ -29,13 +29,15 @@ interface Props {
   chip: string;
 }
 
-// 16 s. The claim hops along the eight stations of the journey, from report to close.
+// The claim hops along the eight stations of the journey, from report to close, across the chorus.
 export function Chorus({ tagline, chip }: Props) {
+  const s = useSectionTiming();
+  const { first, last } = claimTravel(s);
   const t = useSeconds();
   const title = useIn(0);
-  const tag = useIn(8);
-  const home = useIn(13.8);
-  const pos = claimAt(t);
+  const tag = useIn(s.lines[2]);
+  const home = useIn(last + 0.2);
+  const pos = claimAt(t, first, last);
   const x = LEFT + STEP * (pos + 0.5);
 
   return (

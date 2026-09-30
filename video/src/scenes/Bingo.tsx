@@ -4,18 +4,21 @@ import { theme } from "../brand";
 import { bingoFree, terms } from "../content";
 import { Header } from "../components/Header";
 import { Stage } from "../components/Stage";
+import { useSectionTiming } from "../sectionTiming";
+import { bingoMarkAt } from "../timeline";
 
 // The eight terms around a free centre square, in a 3 x 3 grid.
 const squares = [...terms.slice(0, 4).map((t) => t.short), bingoFree, ...terms.slice(4).map((t) => t.short)];
 const FREE = 4;
-/** Order squares get marked, starting from the centre square, then the rest (2 s in, 1.5 s apart). */
+/** Order the squares get marked in; the centre square is free. */
 const markOrder = [0, 4, 8, 2, 6, 1, 7, 3, 5].filter((i) => i !== FREE);
 
-// 16 s, final chorus. Buzzword bingo: the terms get marked as the chorus plays.
+// Final chorus. Buzzword bingo: the terms get marked as the chorus plays.
 export function Bingo() {
+  const s = useSectionTiming();
   const head = useIn(0);
   const rules = useIn(1);
-  const win = useIn(14);
+  const win = useIn(s.seconds - 2);
 
   return (
     <Stage chip="Game on">
@@ -58,7 +61,7 @@ export function Bingo() {
         }}
       >
         {squares.map((label, i) => (
-          <Square key={label} label={label} free={i === FREE} markAt={i === FREE ? 0 : 2 + markOrder.indexOf(i) * 1.5} />
+          <Square key={label} label={label} free={i === FREE} markAt={i === FREE ? 0 : bingoMarkAt(markOrder.indexOf(i), s)} />
         ))}
       </div>
     </Stage>

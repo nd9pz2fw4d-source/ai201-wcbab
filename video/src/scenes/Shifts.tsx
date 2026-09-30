@@ -1,43 +1,44 @@
 import { interpolate } from "remotion";
 import { fadeUp, popIn, useIn, useSeconds } from "../anim";
 import { theme } from "../brand";
-import { deloitteSource, leverStats, levers } from "../content";
+import { deloitteSource, shiftStats, shifts } from "../content";
 import { Header } from "../components/Header";
 import { SourceNote } from "../components/SourceNote";
 import { Stage } from "../components/Stage";
+import { useSectionTiming } from "../sectionTiming";
 
-/** When each lever is sung (seconds into the section); the lyric lines are 2 s apart. */
-const PULL_AT = [0, 4, 8, 12, 14];
-const STATS_AT = 16;
-const GOAL_AT = 20;
-
-// 24 s. Deloitte's five levers get pulled one by one, then the numbers and the one goal.
-export function Levers() {
+// 24 s. Deloitte's four shifts click into place one by one, then the survey numbers and human in the loop.
+export function Shifts() {
+  const s = useSectionTiming();
+  // Each shift clicks in on its line; the numbers on "eighty-three percent"; the header on "tech and the people".
+  const shiftAt = [0, 2, 4, 6].map((n) => s.lines[n]);
+  const statsAt = s.lines[8];
+  const goalAt = s.lines[10];
   const t = useSeconds();
   const head = useIn(0);
-  const goal = useIn(GOAL_AT);
+  const goal = useIn(goalAt);
 
   return (
     <Stage chip="Context: Deloitte">
       <Header />
       <div style={{ position: "absolute", left: 80, right: 80, top: 160, height: 90 }}>
         <div style={{ position: "absolute", fontSize: 64, fontWeight: 900, opacity: head * (1 - goal) }}>
-          Five levers for the future of comp
+          Four shifts driving the future of comp
         </div>
         <div style={{ position: "absolute", fontSize: 64, fontWeight: 900, ...fadeUp(goal) }}>
-          Every lever, one goal: <span style={{ color: theme.brandAccent }}>return to work (RTW)</span>
+          Tech and people in tandem: <span style={{ color: theme.brandAccent }}>human in the loop</span>
         </div>
       </div>
 
       <div style={{ position: "absolute", left: 80, right: 80, top: 270, display: "flex", gap: 28 }}>
-        {levers.map((l, i) => (
-          <LeverCard key={l.name} n={i + 1} name={l.name} detail={l.detail} Icon={l.icon} pulledAt={PULL_AT[i]} t={t} />
+        {shifts.map((l, i) => (
+          <ShiftCard key={l.name} n={i + 1} name={l.name} detail={l.detail} Icon={l.icon} pulledAt={shiftAt[i]} t={t} />
         ))}
       </div>
 
       <div style={{ position: "absolute", left: 80, right: 80, top: 720, display: "flex", gap: 28 }}>
-        {leverStats.map((s, i) => (
-          <Stat key={s.value} value={s.value} label={s.label} delay={STATS_AT + i * 0.6} grow={i === 0 ? 1.4 : 1} />
+        {shiftStats.map((s, i) => (
+          <Stat key={s.value} value={s.value} label={s.label} delay={statsAt + i * 0.6} />
         ))}
       </div>
       <SourceNote text={deloitteSource} />
@@ -45,7 +46,7 @@ export function Levers() {
   );
 }
 
-function LeverCard({
+function ShiftCard({
   n,
   name,
   detail,
@@ -56,14 +57,14 @@ function LeverCard({
   n: number;
   name: string;
   detail: string;
-  Icon: (typeof levers)[number]["icon"];
+  Icon: (typeof shifts)[number]["icon"];
   pulledAt: number;
   t: number;
 }) {
   const appear = useIn(pulledAt * 0.1);
   const pull = useIn(pulledAt, 10);
   const on = pull > 0.5;
-  // The knob travels down the slot as the lever is pulled.
+  // The knob travels down the slot as the shift clicks into place.
   const knobY = interpolate(pull, [0, 1], [0, 70]);
   const glow = on ? Math.max(0, 1 - (t - pulledAt) / 1.5) : 0;
 
@@ -84,7 +85,7 @@ function LeverCard({
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <div style={{ fontSize: 26, fontWeight: 700, color: on ? theme.brandDeep : theme.brandSky, letterSpacing: 1 }}>LEVER {n}</div>
+        <div style={{ fontSize: 26, fontWeight: 700, color: on ? theme.brandDeep : theme.brandSky, letterSpacing: 1 }}>SHIFT {n}</div>
         <div style={{ position: "relative", width: 34, height: 110, borderRadius: 17, background: on ? theme.line : "rgba(255,255,255,0.2)" }}>
           <div
             style={{
@@ -100,19 +101,19 @@ function LeverCard({
         </div>
       </div>
       <Icon size={64} color={on ? theme.agent : theme.brandSky} strokeWidth={2} style={{ marginTop: -40, flexShrink: 0 }} />
-      <div style={{ fontSize: 36, fontWeight: 900, lineHeight: 1.1, color: on ? theme.brandPrimary : theme.paper }}>{name}</div>
-      <div style={{ fontSize: 27, lineHeight: 1.3, color: on ? theme.muted : theme.brandSky }}>{detail}</div>
+      <div style={{ fontSize: 42, fontWeight: 900, lineHeight: 1.1, color: on ? theme.brandPrimary : theme.paper }}>{name}</div>
+      <div style={{ fontSize: 30, lineHeight: 1.3, color: on ? theme.muted : theme.brandSky }}>{detail}</div>
     </div>
   );
 }
 
-function Stat({ value, label, delay, grow }: { value: string; label: string; delay: number; grow: number }) {
+function Stat({ value, label, delay }: { value: string; label: string; delay: number }) {
   const p = useIn(delay);
   return (
     <div
       style={{
         ...popIn(p),
-        flex: grow,
+        flex: 1,
         borderRadius: 24,
         border: `3px solid ${theme.brandAccent}`,
         background: "rgba(251,180,58,0.1)",

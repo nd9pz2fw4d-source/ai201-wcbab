@@ -5,14 +5,17 @@ import { theme } from "../brand";
 import { terms, type Term } from "../content";
 import { Header } from "../components/Header";
 import { Stage } from "../components/Stage";
+import { useSectionTiming } from "../sectionTiming";
 import { FPS } from "../timeline";
 
-const CARD_SECONDS = 4; // two sung lines per term
-
-// 32 s. Eight key terms, one flashcard each, with a progress row underneath.
+// Eight key terms, one flashcard per two sung lines, with a progress row underneath.
 export function Terms() {
+  const s = useSectionTiming();
   const t = useSeconds();
-  const current = Math.min(terms.length - 1, Math.floor(t / CARD_SECONDS));
+  // Card i is up from its first line (a beat early) until the next card's first line; the last runs to the end.
+  const cardStart = terms.map((_, i) => (i === 0 ? 0 : s.lines[2 * i] - 0.2));
+  const cardEnd = terms.map((_, i) => (i + 1 < terms.length ? cardStart[i + 1] : s.seconds));
+  const current = cardStart.filter((c) => t >= c).length - 1;
 
   return (
     <Stage chip={`Key terms ${current + 1} / ${terms.length}`}>
@@ -20,11 +23,15 @@ export function Terms() {
       <div style={{ position: "absolute", left: 80, top: 150, fontSize: 40, color: theme.brandSky, fontWeight: 500 }}>
         Your cheat sheet for today
       </div>
-      {terms.map((term, i) => (
-        <Sequence key={term.term} from={i * CARD_SECONDS * FPS} durationInFrames={CARD_SECONDS * FPS} layout="none">
-          <Flashcard term={term} />
-        </Sequence>
-      ))}
+      {terms.map((term, i) => {
+        const from = Math.round(cardStart[i] * FPS);
+        const frames = Math.round(cardEnd[i] * FPS) - from;
+        return (
+          <Sequence key={term.term} from={from} durationInFrames={frames} layout="none">
+            <Flashcard term={term} frames={frames} />
+          </Sequence>
+        );
+      })}
       <div style={{ position: "absolute", left: 80, right: 80, top: 830, display: "flex", gap: 14, justifyContent: "center" }}>
         {terms.map((term, i) => (
           <div
@@ -50,11 +57,11 @@ export function Terms() {
   );
 }
 
-function Flashcard({ term }: { term: Term }) {
+function Flashcard({ term, frames }: { term: Term; frames: number }) {
   const frame = useCurrentFrame();
   const flip = useIn(0, 13);
-  const text = useIn(0.35);
-  const out = interpolate(frame, [CARD_SECONDS * FPS - 8, CARD_SECONDS * FPS], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const text = useIn(0.15);
+  const out = interpolate(frame, [frames - 8, frames], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const wobble = term.wobble ? Math.sin(frame * 0.9) * interpolate(frame, [4, 30], [3, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 0;
   const Icon = term.icon;
 

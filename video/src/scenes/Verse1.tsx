@@ -1,26 +1,32 @@
 import { ArrowRight, FolderOpen, HardHat } from "lucide-react";
 import { Sequence, interpolate } from "remotion";
+import type { LucideIcon } from "lucide-react";
 import { fadeUp, popIn, useIn, useSeconds } from "../anim";
 import { theme } from "../brand";
-import { deloitteSource, pressures, surveyCountries } from "../content";
+import { deloitteSource, forces, surveyReach } from "../content";
 import { Header } from "../components/Header";
 import { SourceNote } from "../components/SourceNote";
 import { Stage } from "../components/Stage";
-import { FPS } from "../timeline";
+import { useSectionTiming } from "../sectionTiming";
+import { FPS, forceAt } from "../timeline";
 
-// 8 to 24 s. A worker is hurt, a claim starts; Deloitte asked 18 WCOs; four pressures.
+// 8 to 24 s. A worker is hurt, a claim starts; Deloitte asked Canada's WCB leaders; eight forces.
+// Beats change on the sung lines: the claim (lines 1-2), the survey (3-4), the forces (5-8).
 export function Verse1() {
+  const s = useSectionTiming();
+  const survey = Math.round((s.lines[2] - 0.2) * FPS);
+  const forces = Math.round((s.lines[4] - 0.2) * FPS);
   return (
     <Stage chip="Why now">
       <Header />
-      <Sequence durationInFrames={4 * FPS} layout="none">
+      <Sequence durationInFrames={survey} layout="none">
         <ClaimStarts />
       </Sequence>
-      <Sequence from={4 * FPS} durationInFrames={4 * FPS} layout="none">
+      <Sequence from={survey} durationInFrames={forces - survey} layout="none">
         <Survey />
       </Sequence>
-      <Sequence from={8 * FPS} layout="none">
-        <Pressures />
+      <Sequence from={forces} layout="none">
+        <Forces />
       </Sequence>
     </Stage>
   );
@@ -79,19 +85,20 @@ function ClaimStarts() {
 
 function Survey() {
   const head = useIn(0.1);
-  const t = useSeconds();
-  const count = Math.round(interpolate(t, [0.2, 1.6], [0, 18], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
-
+  const big = useIn(0.5);
   return (
     <>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 210, textAlign: "center", ...fadeUp(head) }}>
-        <div style={{ fontSize: 40, color: theme.brandSky, fontWeight: 500 }}>Deloitte asked workers' comp organizations about the future</div>
-        <div style={{ fontSize: 260, fontWeight: 900, color: theme.brandAccent, lineHeight: 1.05 }}>{count}</div>
-        <div style={{ fontSize: 44, fontWeight: 500 }}>organizations, three countries</div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 200, textAlign: "center" }}>
+        <div style={{ fontSize: 40, color: theme.brandSky, fontWeight: 500, ...fadeUp(head) }}>Deloitte, August 2026</div>
+        <div style={{ fontSize: 110, fontWeight: 900, lineHeight: 1.1, marginTop: 20, ...fadeUp(big) }}>
+          What's next for
+          <br />
+          <span style={{ color: theme.brandAccent }}>workers' comp?</span>
+        </div>
       </div>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 700, display: "flex", justifyContent: "center", gap: 36 }}>
-        {surveyCountries.map((c, i) => (
-          <CountryChip key={c.name} name={c.name} count={c.count} delay={1 + i * 0.4} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 690, display: "flex", justifyContent: "center", gap: 36 }}>
+        {surveyReach.map((r, i) => (
+          <ReachChip key={r.where} where={r.where} how={r.how} delay={1.2 + i * 0.5} />
         ))}
       </div>
       <SourceNote text={deloitteSource} />
@@ -99,7 +106,7 @@ function Survey() {
   );
 }
 
-function CountryChip({ name, count, delay }: { name: string; count: number; delay: number }) {
+function ReachChip({ where, how, delay }: { where: string; how: string; delay: number }) {
   const p = useIn(delay);
   return (
     <div
@@ -109,35 +116,39 @@ function CountryChip({ name, count, delay }: { name: string; count: number; dela
         borderRadius: 999,
         background: "rgba(128,195,226,0.15)",
         border: `2px solid ${theme.brandSky}`,
-        fontSize: 38,
+        fontSize: 36,
         fontWeight: 500,
       }}
     >
-      {name} <span style={{ color: theme.brandAccent, fontWeight: 900 }}>{count}</span>
+      <span style={{ color: theme.brandAccent, fontWeight: 900 }}>{where}</span> {how}
     </div>
   );
 }
 
-function Pressures() {
+// Eight forces, in the order the verse sings them.
+function Forces() {
+  const s = useSectionTiming();
   const head = useIn(0);
+  // This beat starts 0.2 s before line 5; card times are relative to that.
+  const t0 = s.lines[4] - 0.2;
   return (
     <>
-      <div style={{ position: "absolute", left: 80, top: 190, fontSize: 72, fontWeight: 900, ...fadeUp(head) }}>
-        The pressure is on workers' comp <span style={{ color: theme.brandAccent }}>everywhere</span>
+      <div style={{ position: "absolute", left: 80, top: 170, fontSize: 68, fontWeight: 900, ...fadeUp(head) }}>
+        <span style={{ color: theme.brandAccent }}>Eight forces</span> reshaping workers' comp
       </div>
       <div
         style={{
           position: "absolute",
           left: 80,
           right: 80,
-          top: 330,
+          top: 290,
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 32,
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 24,
         }}
       >
-        {pressures.map((p, i) => (
-          <PressureCard key={p.title} n={i + 1} title={p.title} detail={p.detail} delay={i * 2} />
+        {forces.map((f, i) => (
+          <ForceCard key={f.title} title={f.title} detail={f.detail} Icon={f.icon} delay={forceAt(i, s) - t0} />
         ))}
       </div>
       <SourceNote text={deloitteSource} />
@@ -145,7 +156,7 @@ function Pressures() {
   );
 }
 
-function PressureCard({ n, title, detail, delay }: { n: number; title: string; detail: string; delay: number }) {
+function ForceCard({ title, detail, Icon, delay }: { title: string; detail: string; Icon: LucideIcon; delay: number }) {
   const p = useIn(delay);
   return (
     <div
@@ -153,35 +164,17 @@ function PressureCard({ n, title, detail, delay }: { n: number; title: string; d
         ...popIn(p),
         background: theme.paper,
         color: theme.ink,
-        borderRadius: 28,
-        padding: "30px 40px",
+        borderRadius: 24,
+        padding: "24px 26px",
+        height: 260,
         display: "flex",
-        gap: 30,
-        alignItems: "center",
-        minHeight: 190,
+        flexDirection: "column",
+        gap: 10,
       }}
     >
-      <div
-        style={{
-          flex: "none",
-          width: 90,
-          height: 90,
-          borderRadius: "50%",
-          background: theme.brandAccent,
-          color: theme.brandPrimary,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 50,
-          fontWeight: 900,
-        }}
-      >
-        {n}
-      </div>
-      <div>
-        <div style={{ fontSize: 48, fontWeight: 700, color: theme.brandPrimary }}>{title}</div>
-        <div style={{ fontSize: 34, color: theme.muted, marginTop: 6 }}>{detail}</div>
-      </div>
+      <Icon size={52} color={theme.agent} strokeWidth={2} style={{ flexShrink: 0 }} />
+      <div style={{ fontSize: 34, fontWeight: 900, lineHeight: 1.1, color: theme.brandPrimary }}>{title}</div>
+      <div style={{ fontSize: 26, lineHeight: 1.3, color: theme.muted }}>{detail}</div>
     </div>
   );
 }
