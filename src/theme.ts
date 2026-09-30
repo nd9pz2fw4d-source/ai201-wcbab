@@ -46,4 +46,3 @@ export const cssVars: Record<string, string> = {
   "--risk": theme.risk,
 };
 
-export const DELOITTE_GREEN = "#86BC25";

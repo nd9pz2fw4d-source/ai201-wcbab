@@ -61,6 +61,7 @@ Planned minutes per act: 60 = 5 / 25 / 12 / 13 / 5; 75 = 5 / 35 / 15 / 15 / 5; 9
 - [ ] "One claim" slide: the hands count (`handsOnOneClaim`, currently 12) is a placeholder. VERIFY with the WCB claims team
 - [ ] "Many ideas, a few patterns" slide: "100+ ideas. About 8 patterns." comes from the brief. VERIFY against the idea inventory
 - [ ] "Five stops on the journey" slide: opportunity names. Confirm with the WCB team
+- [ ] Logos: the WCB logo is drawn from WCB's own SVG (dark slides) and WCB's light-background colours from their share image (light slides), with no backing box. The Deloitte logo is drawn from Deloitte's own SVG on deloitte.com (white on dark, black on light as in their print logo). Confirm co-branding use with both brand teams
 - [ ] Brand: WCB blue `#3399CC`, dark blue `#117BBC`, logo blue `#80C3E2`, gold `#FBB43A`, green `#98C857` and the Roboto font were taken from wcb.ab.ca. The deep background blue `#0C3553` is derived (WCB's site has no navy). Confirm with the WCB brand team
 - [ ] The human/AI split bars on the era slides are illustrative, not measured
 - [ ] Task-length chart: METR, "Time Horizon 1.1" (29 January 2026), https://metr.org/blog/2026-1-29-time-horizon-1-1/. Refresh the data if METR publishes a newer update before the session

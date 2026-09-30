@@ -1,7 +1,7 @@
-import { DELOITTE_GREEN } from "../theme";
+import { DeloitteLogo } from "./DeloitteLogo";
 import { WcbLogo } from "./WcbLogo";
 
-/** On every slide: the composite-example label, a small WCB logo and the Deloitte wordmark. */
+/** On every slide: the composite-example label, a small WCB logo and the Deloitte logo. */
 export function Footer({ tone, showLogo }: { tone: "dark" | "light" | "dawn"; showLogo: boolean }) {
   const dark = tone !== "light";
   return (
@@ -12,13 +12,12 @@ export function Footer({ tone, showLogo }: { tone: "dark" | "light" | "dawn"; sh
       <span>Composite example. Not a real claim or person.</span>
       <span className="flex items-center gap-4">
         {showLogo && (
-          <span className={`rounded-md px-2 py-1 ${dark ? "" : "bg-[#D3F1FC]"}`}>
-            <WcbLogo height={38} on={dark ? "dark" : "light"} />
-          </span>
+          <>
+            <WcbLogo height={40} on={dark ? "dark" : "light"} />
+            <span className="h-[30px] w-[2px]" style={{ background: dark ? "rgba(255,255,255,0.3)" : "rgba(22,51,74,0.2)" }} />
+          </>
         )}
-        <span className="text-[24px] font-bold tracking-tight" style={{ color: dark ? "#fff" : "#000" }}>
-          Deloitte<span style={{ color: DELOITTE_GREEN }}>.</span>
-        </span>
+        <DeloitteLogo height={22} on={dark ? "dark" : "light"} />
       </span>
     </div>
   );
