@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { actLabels, actOrder, plannedMinutes, type SessionLength } from "../config";
+import { actLabels, actOrder, plannedMinutes, SESSION_LENGTHS, type SessionLength } from "../config";
 import type { SlideDef } from "../slides/types";
 
 interface Props {
@@ -15,7 +15,6 @@ interface Props {
   onToggleTimer: () => void;
 }
 
-const lengths: SessionLength[] = [60, 75, 90];
 
 export function SlideMenu(p: Props) {
   const plan = plannedMinutes[p.sessionLength];
@@ -60,8 +59,8 @@ export function SlideMenu(p: Props) {
             </div>
 
             <div className="flex items-center gap-2 px-5 pb-4 text-sm">
-              <span className="text-white/60">Session</span>
-              {lengths.map((l) => (
+              <span className="text-white/60">Minutes</span>
+              {SESSION_LENGTHS.map((l) => (
                 <button
                   key={l}
                   type="button"
@@ -70,7 +69,7 @@ export function SlideMenu(p: Props) {
                     l === p.sessionLength ? "bg-brand-accent text-brand-primary" : "bg-white/10 hover:bg-white/20"
                   }`}
                 >
-                  {l} min
+                  {l}
                 </button>
               ))}
               <button

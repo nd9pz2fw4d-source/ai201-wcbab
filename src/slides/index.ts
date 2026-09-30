@@ -19,8 +19,24 @@ import Slide17FindIt from "./Slide17FindIt";
 import Slide18Supervisor from "./Slide18Supervisor";
 import Slide19Discussion from "./Slide19Discussion";
 import Slide20Close from "./Slide20Close";
+import SlideHowItWorks from "./SlideHowItWorks";
+import SlideNextWord from "./SlideNextWord";
+import SlideGrounding from "./SlideGrounding";
+import SlideAnatomy from "./SlideAnatomy";
+import SlideAgentLoop from "./SlideAgentLoop";
+import SlideTools from "./SlideTools";
+import SlideAutonomyDial from "./SlideAutonomyDial";
+import SlideAgentTeams from "./SlideAgentTeams";
+import SlideEvaluations from "./SlideEvaluations";
+import SlideMyths from "./SlideMyths";
+import SlideWhereGoing from "./SlideWhereGoing";
+import SlideTimeHorizon from "./SlideTimeHorizon";
+import SlideWhatStays from "./SlideWhatStays";
 
-const ALL: SlideDef["include"] = [60, 75, 90];
+const ALL: SlideDef["include"] = [60, 75, 90, 120];
+const FROM_75: SlideDef["include"] = [75, 90, 120];
+const FROM_90: SlideDef["include"] = [90, 120];
+const ONLY_120: SlideDef["include"] = [120];
 
 // The deck, in order. Add, remove or reorder slides here only.
 export const slides: SlideDef[] = [
@@ -107,6 +123,138 @@ export const slides: SlideDef[] = [
     notes:
       "Zoom out. Many claims at once. The contact centre, claims, medical review, audit and appeals share one flow of information instead of handing paper over walls. People stay at the decision points. The point is not faster steps. It is a better journey for the worker.",
   },
+
+  // ---------- Act 1, part 2: How it works / Where it's going ----------
+  {
+    id: "how-it-works",
+    act: "see",
+    title: "How it works",
+    include: ALL,
+    component: SlideHowItWorks,
+    tone: "dark",
+    notes:
+      "We have seen what AI can do on the claim. Now we look inside: what a model actually does, what turns a model into an agent, and how much we let it do alone. No code, no maths. The goal is that every leader here can ask a vendor or a project team the right questions.",
+  },
+  {
+    id: "next-word",
+    act: "see",
+    title: "It predicts the next word",
+    include: ALL,
+    component: SlideNextWord,
+    tone: "light",
+    notes:
+      "At its core, a large language model does one thing: given the words so far, it scores every possible next word and picks a likely one, then repeats. It learned those patterns from vast amounts of text during training. That is why it writes so fluently. It is also why it can be confidently wrong: it produces what sounds likely, not what it has checked. It has no built-in fact check and, on its own, no access to our files. The scores on screen are illustrative, not real model output. Newer 'reasoning' models write out working steps before answering, which improves harder problems, but the same rule holds: fluent is not the same as verified.",
+  },
+  {
+    id: "grounding",
+    act: "see",
+    title: "Give it the right sources",
+    include: FROM_75,
+    component: SlideGrounding,
+    tone: "light",
+    notes:
+      "The fix for guessing is grounding: before answering, the system searches trusted sources (our policy manual, the claim file, medical guidelines) and answers from them, with citations you can click. You may hear this called retrieval-augmented generation, or RAG. For WCB this matters twice: answers are only as good as the sources we connect, and a cited answer is one a person can check in seconds. Ask any vendor: where does the answer come from, and can I see it?",
+  },
+  {
+    id: "anatomy",
+    act: "see",
+    title: "What makes an agent",
+    include: ALL,
+    component: SlideAnatomy,
+    tone: "light",
+    notes:
+      "A chatbot answers a question. An agent pursues a goal. The model is the reasoning engine in the middle. Around it: a goal (what done looks like), instructions (the rules and limits it must follow), tools (the systems it can use: claim file, email, scheduling), memory (what it knows about this claim so far), and a person who approves and decides. When something goes wrong with an agent, it is usually one of these parts: a vague goal, a missing rule, a tool with too much access, stale memory, or no person at the right moment.",
+  },
+  {
+    id: "agent-loop",
+    act: "see",
+    title: "The agent loop",
+    include: ALL,
+    component: SlideAgentLoop,
+    tone: "light",
+    notes:
+      "This is how an agent actually works: a loop. Plan the next step toward the goal. Act, usually by using a tool. Check the result. Then decide: carry on, try something else, or stop. It stops when the goal is met, when a rule says a person must approve, or when it is unsure. Watch the right side: the agent finds the doctor's note is missing, plans to request it, drafts the request, and then hands to a person because sending outside WCB needs approval. The loop is what makes agents powerful, and it is also why one early mistake can carry forward. We will come back to that in Act 3.",
+  },
+  {
+    id: "tools",
+    act: "see",
+    title: "Tools are its hands",
+    include: FROM_75,
+    component: SlideTools,
+    tone: "light",
+    notes:
+      "An agent can only touch what we connect it to. Think in three permission levels. Read: look things up. Draft: prepare something for a person. Act: change something in the world, like sending an email or scheduling a payment. Most value comes from read and draft; act needs the strongest controls, with a person approving. The principle is least privilege: give each agent only the access its job needs. Industry is converging on open standards for connecting AI to tools and data (for example the Model Context Protocol, MCP), which makes connecting easier. That makes the permission decision more important, not less.",
+  },
+  {
+    id: "autonomy-dial",
+    act: "see",
+    title: "The autonomy dial",
+    include: ALL,
+    component: SlideAutonomyDial,
+    tone: "light",
+    notes:
+      "Click the dial to move it (it never advances the slide). Autonomy is a setting we choose per task, not a property of the technology. Suggests, drafts, acts with approval, acts then reports, acts alone. The rule: the more independently it acts, the stronger the oversight must be. Most of WCB's claim work belongs in the first three positions. Acting alone fits only low-risk, reversible, rule-based tasks, like routing mail. Ask the room: where on this dial is anything we use today? This sets up the sort exercise in Act 2.",
+  },
+  {
+    id: "agent-teams",
+    act: "see",
+    title: "Agents work in teams",
+    include: FROM_90,
+    component: SlideAgentTeams,
+    tone: "light",
+    notes:
+      "Complex work is increasingly split across several agents: a coordinator breaks the goal down and hands pieces to specialists (intake, evidence, medical, policy), who write to a shared case file. A person decides. This is powerful because each agent can be simpler and tested on its own. The weak point is the handoff: an error or a misunderstanding passes from one agent to the next and looks more certain each time. Keep this picture in mind for Act 3.",
+  },
+  {
+    id: "evaluations",
+    act: "see",
+    title: "Test before you trust",
+    include: FROM_90,
+    component: SlideEvaluations,
+    tone: "light",
+    notes:
+      "How do we know an AI system is good enough? We test it, like any other control. Build a set of past claims (de-identified), run the system over them, and score it: right answer, shows its sources, fair across groups of workers, protects privacy, knows when to hand to a person. These tests are called evaluations, or evals. Testing will find gaps (shown here as 'needs work'); that is the point. Then keep testing after launch, because models, data and policies change. Ask any project: what is your test set, who wrote it, and what score is good enough?",
+  },
+  {
+    id: "myths",
+    act: "see",
+    title: "Myth or reality?",
+    include: ONLY_120,
+    component: SlideMyths,
+    tone: "light",
+    notes:
+      "Read each myth and ask the room to vote myth or reality before clicking the card. It looks things up: no, it predicts unless we connect sources. It sounds sure, so it's right: confidence is not evidence. It remembers every claim: it only knows what is in front of it for this task, plus whatever memory we deliberately give it. More autonomy is always better: autonomy should match the risk of the task.",
+  },
+  {
+    id: "where-going",
+    act: "see",
+    title: "Five things to watch",
+    include: FROM_75,
+    component: SlideWhereGoing,
+    tone: "light",
+    notes:
+      "Five directions to watch. Longer tasks: agents can now work on multi-hour tasks without help (next slide in the 90 and 120 versions). Uses screens like people do: 'computer use' agents operate ordinary software through the screen, which can reach older systems without new integrations, and also raises new control questions. Reads scans, handwriting and voice: multimodal models read scanned forms, handwritten notes, images and phone calls, which matters for a paper-heavy claim file. Thinks before answering: reasoning models work through steps first, better on complex cases but slower and costlier. Cheaper and faster: cost per task keeps falling, and smaller models can run inside our own environment, which helps with privacy. None of these change who is accountable.",
+  },
+  {
+    id: "time-horizon",
+    act: "see",
+    title: "Tasks it can finish keep getting longer",
+    include: FROM_90,
+    component: SlideTimeHorizon,
+    tone: "light",
+    notes:
+      "Source: METR (an independent AI evaluation group), 'Time Horizon 1.1', 29 January 2026, metr.org/blog/2026-1-29-time-horizon-1-1. The measure: how long a task takes a skilled person, for tasks that an AI agent completes about half the time. Data (50% time horizon, TH1.1): GPT-4 (Mar 2023) 3.5 min; GPT-4 Nov 2023 3.6 min; Claude 3.7 Sonnet (Feb 2025) 60 min; o3 (Apr 2025) 121 min; Claude Opus 4 (May 2025) 101 min; GPT-5 (Aug 2025) 214 min; Claude Opus 4.5 (Nov 2025) 320 min, about 5 hours. METR estimates the long-run doubling time at about 7 months (196 days), and about 4 months (131 days) since 2023. Caveats to say out loud: these are software and research tasks, not claims work; 'half the time' is not good enough for decisions about people; and METR notes the measure depends on the tasks chosen. Release months are public release dates. Hover a dot for its value. The point for leaders: plan for capability that keeps growing, and build the oversight now.",
+  },
+  {
+    id: "what-stays",
+    act: "see",
+    title: "What doesn't change",
+    include: FROM_75,
+    component: SlideWhatStays,
+    tone: "light",
+    notes:
+      "Whatever the technology does next, four things stay with people at WCB: judgment on decisions that affect a worker's life, empathy for someone who is hurt and worried, accountability for every decision (Alberta's Protection of Privacy Act, in force since June 11, 2025, includes duties when public bodies use automated systems with personal information), and the worker's voice, including the right to ask for a human review. Then ask: so where is our claim today?",
+  },
   {
     id: "where-today",
     act: "see",
@@ -121,7 +269,7 @@ export const slides: SlideDef[] = [
     id: "live-moment",
     act: "see",
     title: "Live moment: an agent works the claim",
-    include: [75, 90],
+    include: FROM_75,
     component: Slide10LiveMoment,
     tone: "light",
     notes:
@@ -203,7 +351,7 @@ export const slides: SlideDef[] = [
     id: "supervisor",
     act: "govern",
     title: "Agents watching agents",
-    include: [90],
+    include: FROM_90,
     component: Slide18Supervisor,
     tone: "light",
     notes:
@@ -213,7 +361,7 @@ export const slides: SlideDef[] = [
     id: "discussion",
     act: "discussion",
     title: "Open discussion",
-    include: [90],
+    include: FROM_90,
     component: Slide19Discussion,
     tone: "dark",
     notes: "Open the floor: what would you need to trust this? Listen for evidence, explanation, audit, the worker's voice, and who is accountable.",

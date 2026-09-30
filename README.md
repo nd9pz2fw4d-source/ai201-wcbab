@@ -2,6 +2,8 @@
 
 A browser slide deck for the WCB-Alberta Executive AI Academy. The whole session follows one injured worker's claim (a composite, fictional example) through three acts: **See it**, **Choose it**, **Govern it**.
 
+Act 1 also carries the teaching block: **How it works** (what a model does, grounding, what makes an agent, the agent loop, tools and permissions, the autonomy dial, teams of agents, testing) and **Where it's going** (five trends, the METR task-length chart, what doesn't change).
+
 ## Run it
 
 Open `dist/index.html` by double-clicking it. It is one self-contained file (scripts, styles and fonts inlined), so it needs no server and no internet.
@@ -22,7 +24,7 @@ npm run dev       # live preview while editing
 | ←, Page Up | Previous slide |
 | Home / End | First / last slide |
 | `F` or the top-right button | Full screen |
-| `M` or the top-left button | Slide menu (also switches 60 / 75 / 90 and the timer) |
+| `M` or the top-left button | Slide menu (also switches 60 / 75 / 90 / 120 and the timer) |
 | `T` | Presenter timer (turns amber 2 minutes over the act's plan) |
 | `Esc` | Close menu or leave full screen |
 
@@ -30,13 +32,17 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 
 ## Settings
 
-`src/config.ts`: session length (60, 75, 90), presenter timer default, worker name, claim type (`physical` or `psychological`). You can also add `?length=60` to the URL or use the switch in the menu.
+`src/config.ts`: session length (60, 75, 90, 120), planned minutes per act, presenter timer default, worker name, claim type (`physical` or `psychological`). You can also add `?length=120` to the URL or use the switch in the menu. Link straight to a slide by its id, e.g. `#/autonomy-dial`.
 
-| Slide | 60 | 75 | 90 |
-|---|---|---|---|
-| 10 Live moment | hidden | shown | shown |
-| 18 Agents watching agents | hidden | hidden | shown |
-| 19 Open discussion | hidden | hidden | shown |
+| Slides | 60 | 75 | 90 | 120 |
+|---|---|---|---|---|
+| Core deck, plus How it works, next word, what makes an agent, the agent loop, the autonomy dial | shown | shown | shown | shown |
+| Live moment, grounding, tools, where it's going, what doesn't change | | shown | shown | shown |
+| Agents work in teams, test before you trust, task-length chart, agents watching agents, open discussion | | | shown | shown |
+| Myth or reality? | | | | shown |
+| **Slides in total** | 22 | 27 | 32 | 33 |
+
+Planned minutes per act: 60 = 5 / 25 / 12 / 13 / 5; 75 = 5 / 35 / 15 / 15 / 5; 90 = 5 / 40 / 17 / 18 / discussion 5 / 5; 120 = 5 / 50 / 22 / 28 / discussion 10 / 5.
 
 ## Editing
 
@@ -46,16 +52,19 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 - The five opportunities: `src/data/opportunities.ts`
 - Agent steps (live moment and the claim that went wrong): `src/data/agentTraces.ts`
 - On-screen numbers: `src/data/claimFacts.ts`
+- Teaching content (next-word example, loop steps, tools, autonomy levels, myths, trends, METR data): `src/data/teaching.ts`
 - Colours: `src/theme.ts` (the only place colours are defined)
 
 ## Before the session: items to confirm
 
 - [ ] `workerName` in `src/config.ts` is still the `[WORKER_NAME]` placeholder
-- [ ] Slide 2 "hands" count (`handsOnOneClaim`, currently 12) is a placeholder. VERIFY with the WCB claims team
-- [ ] Slide 13 "100+ ideas. About 8 patterns." comes from the brief. VERIFY against the idea inventory
-- [ ] Slide 14 opportunity names. Confirm with the WCB team
+- [ ] "One claim" slide: the hands count (`handsOnOneClaim`, currently 12) is a placeholder. VERIFY with the WCB claims team
+- [ ] "Many ideas, a few patterns" slide: "100+ ideas. About 8 patterns." comes from the brief. VERIFY against the idea inventory
+- [ ] "Five stops on the journey" slide: opportunity names. Confirm with the WCB team
 - [ ] Brand: WCB blue `#3399CC`, dark blue `#117BBC`, logo blue `#80C3E2`, gold `#FBB43A`, green `#98C857` and the Roboto font were taken from wcb.ab.ca. The deep background blue `#0C3553` is derived (WCB's site has no navy). Confirm with the WCB brand team
 - [ ] The human/AI split bars on the era slides are illustrative, not measured
+- [ ] Task-length chart: METR, "Time Horizon 1.1" (29 January 2026), https://metr.org/blog/2026-1-29-time-horizon-1-1/. Refresh the data if METR publishes a newer update before the session
+- [ ] The next-word scores on "It predicts the next word" are illustrative, not real model output
 
 ## Checks
 

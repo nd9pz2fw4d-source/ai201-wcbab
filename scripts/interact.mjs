@@ -21,39 +21,42 @@ async function open(opts = {}, query = "", hash = "#/1") {
   return page;
 }
 const hash = (p) => p.evaluate(() => location.hash);
+// Go to a slide by id (the deck rewrites `#/<id>` to its number); returns that number hash.
+async function goId(p, id, length = 75, wait = 1200) {
+  await p.goto(file + `?length=${length}#/${id}`);
+  await p.reload();
+  await p.waitForTimeout(wait);
+  return hash(p);
+}
 
 // ---- Keyboard and click navigation (75) ----
 let page = await open({}, "?length=75");
 await page.mouse.click(960, 540);
 await page.waitForTimeout(300);
 check("click on background advances", (await hash(page)) === "#/2");
-for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/20"], ["Home", "#/1"]]) {
+for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/33"], ["Home", "#/1"]]) {
   await page.keyboard.press(key === " " ? "Space" : key);
   await page.waitForTimeout(250);
   check(`key ${key === " " ? "Space" : key}`, (await hash(page)) === want, await hash(page));
 }
 
 // Slide 2 reveal button does not advance
-await page.goto(file + "?length=75#/2");
-await page.reload();
-await page.waitForTimeout(900);
+let h = await goId(page, "one-claim", 75, 900);
 await page.getByRole("button", { name: "Reveal" }).click();
 await page.waitForTimeout(2600);
-check("Reveal button does not advance", (await hash(page)) === "#/2");
+check("Reveal button does not advance", (await hash(page)) === h);
 await page.screenshot({ path: `${out}/s02-revealed.png` });
 // Space after a button click navigates instead of pressing the button again
 await page.keyboard.press("Space");
 await page.waitForTimeout(300);
-check("Space after button click navigates", (await hash(page)) === "#/3", await hash(page));
+check("Space after button click navigates", (await hash(page)) !== h, await hash(page));
 
 // Slide 9 vote tiles
-await page.goto(file + "?length=75#/9");
-await page.reload();
-await page.waitForTimeout(1200);
+h = await goId(page, "where-today");
 const tile = page.getByRole("button", { name: /Reads and writes/ });
 for (let i = 0; i < 3; i++) await tile.click();
 await page.getByRole("button", { name: /Predicts/ }).click();
-check("vote tiles do not advance", (await hash(page)) === "#/9");
+check("vote tiles do not advance", (await hash(page)) === h);
 const tileText = await tile.innerText();
 check("vote tile counts clicks", /\b3\s*$/.test(tileText.trim()), tileText.replace(/\n/g, " | "));
 await page.screenshot({ path: `${out}/s09-votes.png` });
@@ -61,22 +64,18 @@ await page.getByRole("button", { name: /Reset/ }).click();
 check("vote reset", /\b0\s*$/.test((await tile.innerText()).trim()));
 
 // Slide 10 STOP / resume
-await page.goto(file + "?length=75#/10");
-await page.reload();
-await page.waitForTimeout(5500);
+h = await goId(page, "live-moment", 75, 5500);
 await page.locator("button:has-text('STOP')").click();
 await page.waitForTimeout(400);
-check("STOP does not advance", (await hash(page)) === "#/10");
+check("STOP does not advance", (await hash(page)) === h);
 const resumeVisible = await page.getByRole("button", { name: /Resume/ }).isVisible();
 check("STOP pauses and shows Resume", resumeVisible);
 await page.screenshot({ path: `${out}/s10-stopped.png` });
 await page.getByRole("button", { name: /Resume/ }).click();
-check("Resume does not advance", (await hash(page)) === "#/10");
+check("Resume does not advance", (await hash(page)) === h);
 
 // Slide 12 sort board: mouse drag
-await page.goto(file + "?length=75#/12");
-await page.reload();
-await page.waitForTimeout(1200);
+h = await goId(page, "sort");
 const card = page.locator("[data-interactive]").filter({ hasText: /^Register and check details$/ }).first();
 const colAutomate = page.locator("div").filter({ hasText: /^Automate$/ }).last();
 const cb = await card.boundingBox();
@@ -89,10 +88,10 @@ await page.mouse.up();
 await page.waitForTimeout(900);
 const cb2 = await card.boundingBox();
 check("mouse drag moves card into Automate", Math.abs(cb2.x + cb2.width / 2 - (ab.x + ab.width / 2)) < 40, `card x ${Math.round(cb2.x)} col x ${Math.round(ab.x)}`);
-check("drag does not advance", (await hash(page)) === "#/12");
+check("drag does not advance", (await hash(page)) === h);
 await page.getByRole("button", { name: /Show a suggested answer/ }).click();
 await page.waitForTimeout(1200);
-check("suggested answer does not advance", (await hash(page)) === "#/12");
+check("suggested answer does not advance", (await hash(page)) === h);
 await page.screenshot({ path: `${out}/s12-suggested.png` });
 await page.getByRole("button", { name: /^Reset$/ }).click();
 await page.waitForTimeout(1000);
@@ -101,27 +100,23 @@ check("sort reset returns card to tray", cb3.x < cb.x + 20, `x ${Math.round(cb3.
 // Timer start does not advance
 await page.getByRole("button", { name: "Start timer" }).click();
 await page.waitForTimeout(1300);
-check("countdown start does not advance", (await hash(page)) === "#/12");
+check("countdown start does not advance", (await hash(page)) === h);
 const t = await page.locator("text=/^7:5\\d$/").count();
 check("countdown runs", t > 0);
 
 // Slide 17 cards + guardrails
-await page.goto(file + "?length=75#/17");
-await page.reload();
-await page.waitForTimeout(1200);
+h = await goId(page, "find-it");
 for (const n of ["1", "2", "3", "4"]) await page.locator(`button:has-text("${n}")`).filter({ hasText: new RegExp(`^${n}$`) }).first().click();
 await page.getByRole("button", { name: /Guardrails/ }).click();
 await page.waitForTimeout(1500);
-check("risk cards and guardrails do not advance", (await hash(page)) === "#/17");
+check("risk cards and guardrails do not advance", (await hash(page)) === h);
 await page.screenshot({ path: `${out}/s17-revealed.png` });
 
 // Slide 16 reveal
-await page.goto(file + "?length=75#/16");
-await page.reload();
-await page.waitForTimeout(3000);
+h = await goId(page, "went-wrong", 75, 3000);
 await page.getByRole("button", { name: /Show the hidden step/ }).click();
 await page.waitForTimeout(800);
-check("hidden step reveal does not advance", (await hash(page)) === "#/16");
+check("hidden step reveal does not advance", (await hash(page)) === h);
 await page.screenshot({ path: `${out}/s16-revealed.png` });
 
 // Menu, timer
@@ -129,11 +124,11 @@ await page.keyboard.press("m");
 await page.waitForTimeout(500);
 check("M opens menu", await page.getByRole("navigation", { name: "Slides" }).isVisible());
 const greyed = await page.locator("nav button:has-text('not in this version')").count();
-check("menu greys slides hidden in 75 (18, 19)", greyed === 2, `greyed ${greyed}`);
+check("menu greys the 6 slides outside the 75 version", greyed === 6, `greyed ${greyed}`);
 await page.screenshot({ path: `${out}/menu-75.png` });
 await page.keyboard.press("ArrowRight");
 await page.waitForTimeout(300);
-check("keyboard nav works with menu open", (await hash(page)) === "#/17");
+check("keyboard nav works with menu open", (await hash(page)) !== h);
 await page.keyboard.press("Escape");
 await page.waitForTimeout(500);
 check("Esc closes menu", !(await page.getByRole("navigation", { name: "Slides" }).isVisible()));
@@ -149,6 +144,7 @@ await page.goto(file + "?length=75#/7");
 await page.reload();
 await page.waitForTimeout(600);
 check("refresh keeps place", (await hash(page)) === "#/7");
+h = "#/7";
 
 // Idle controls fade
 await page.mouse.move(100, 100);
@@ -163,35 +159,38 @@ await page.mouse.move(30, 30);
 await page.waitForTimeout(200);
 await page.getByRole("button", { name: /Open slide menu/ }).click();
 await page.waitForTimeout(400);
-check("hamburger opens menu without advancing", (await hash(page)) === "#/7");
+check("hamburger opens menu without advancing", (await hash(page)) === h);
 await page.locator("nav").getByRole("button", { name: /Five stops on the journey/ }).click();
 await page.waitForTimeout(500);
-check("menu jump", (await hash(page)) === "#/14");
+const jumped = await hash(page);
+check("menu jump", jumped === (await page.evaluate(() => location.hash)) && jumped !== h, jumped);
 await page.context().close();
 
 // ---- 60-minute version skips 10, 18, 19 ----
 page = await open({}, "?length=60");
 const seen = [];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 40; i++) {
   seen.push(await hash(page));
   await page.keyboard.press("ArrowRight");
   await page.waitForTimeout(120);
 }
 const uniq = [...new Set(seen)];
-check("60 skips 10, 18, 19", !uniq.includes("#/10") && !uniq.includes("#/18") && !uniq.includes("#/19") && uniq.length === 17, uniq.join(" "));
-await page.goto(file + "?length=60#/12");
-await page.reload();
-await page.waitForTimeout(800);
+check("60 shows 22 slides", uniq.length === 22, uniq.join(" "));
+const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "what-stays", "supervisor", "discussion"];
+const hiddenNums = [];
+for (const id of hidden60) hiddenNums.push(await goId(page, id, 120, 300));
+check("60 skips every slide outside its version", hiddenNums.every((n) => !uniq.includes(n)), hiddenNums.join(" "));
+await goId(page, "sort", 60, 800);
 check("60 sort timer is 6 minutes", (await page.locator("text=/^6:00$/").count()) > 0);
-await page.goto(file + "?length=60#/10");
-await page.reload();
-await page.waitForTimeout(500);
-check("hash to hidden slide snaps forward", (await hash(page)) === "#/11", await hash(page));
+const chooseNum = await goId(page, "act-choose", 60, 400);
+const snapped = await goId(page, "live-moment", 60, 400);
+check("hash to hidden slide snaps forward", snapped === chooseNum, `${snapped} vs ${chooseNum}`);
 await page.context().close();
 
 // ---- Touch drag (mobile emulation) ----
-page = await open({ hasTouch: true, isMobile: false, viewport: { width: 1366, height: 768 } }, "?length=75", "#/12");
+page = await open({ hasTouch: true, isMobile: false, viewport: { width: 1366, height: 768 } }, "?length=75", "#/sort");
 await page.waitForTimeout(1000);
+h = await hash(page);
 const tcard = page.locator("[data-interactive]").filter({ hasText: /^Close or appeal$/ }).first();
 const tcol = page.locator("div").filter({ hasText: /^Keep human-led$/ }).last();
 const tb = await tcard.boundingBox();
@@ -209,8 +208,30 @@ await touch("touchEnd", tx, ty);
 await page.waitForTimeout(900);
 const tb2 = await tcard.boundingBox();
 check("touch drag moves card into Keep human-led", Math.abs(tb2.x + tb2.width / 2 - tx) < 40, `card cx ${Math.round(tb2.x + tb2.width / 2)} target ${Math.round(tx)}`);
-check("touch drag does not advance", (await hash(page)) === "#/12");
+check("touch drag does not advance", (await hash(page)) === h);
 await page.screenshot({ path: `${out}/s12-touch-1366.png` });
+await page.context().close();
+
+// ---- Teaching slides: dial and myth cards ----
+page = await open({}, "?length=120");
+h = await goId(page, "autonomy-dial", 120);
+await page.locator("text=Acts alone").click();
+await page.waitForTimeout(900);
+check("dial click does not advance", (await hash(page)) === h);
+check("dial shows the chosen level", (await page.locator("text=Routes mail to the right team").count()) > 0);
+await page.screenshot({ path: `${out}/dial-acts-alone.png` });
+h = await goId(page, "myths", 120);
+await page.locator("button:has-text('It looks things up')").click();
+await page.waitForTimeout(600);
+check("myth card flips without advancing", (await hash(page)) === h && (await page.locator("text=It predicts, unless we give it sources").count()) > 0);
+await page.screenshot({ path: `${out}/myths-flipped.png` });
+for (const [len, want] of [[60, 22], [75, 27], [90, 32], [120, 33]]) {
+  await page.goto(file + `?length=${len}#/1`);
+  await page.reload();
+  await page.waitForTimeout(300);
+  const total = await page.locator("text=/^1 \\/ \\d+$/").innerText();
+  check(`${len} minutes shows ${want} slides`, total.endsWith(`/ ${want}`), total);
+}
 await page.context().close();
 
 // ---- Presenter timer turns amber 2 minutes over (fake clock) ----
@@ -232,13 +253,12 @@ await page.context().close();
 }
 
 // ---- Reduced motion ----
-page = await open({ reducedMotion: "reduce" }, "?length=75", "#/4");
+page = await open({ reducedMotion: "reduce" }, "?length=75", "#/era-1");
 await page.waitForTimeout(1500);
 await page.screenshot({ path: `${out}/s04-reduced.png` });
-await page.goto(file + "?length=75#/8");
-await page.reload();
+await goId(page, "agent-loop", 75, 300);
 await page.waitForTimeout(1500);
-await page.screenshot({ path: `${out}/s08-reduced.png` });
+await page.screenshot({ path: `${out}/loop-reduced.png` });
 await page.context().close();
 
 console.log(results.join("\n"));

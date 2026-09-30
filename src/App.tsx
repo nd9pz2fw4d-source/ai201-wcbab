@@ -1,6 +1,6 @@
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState, type MouseEvent } from "react";
-import { config, plannedMinutes, type ActId, type SessionLength } from "./config";
+import { config, plannedMinutes, SESSION_LENGTHS as LENGTHS, type ActId, type SessionLength } from "./config";
 import { Controls } from "./components/Controls";
 import { Footer } from "./components/Footer";
 import { PresenterTimer } from "./components/PresenterTimer";
@@ -12,10 +12,9 @@ import { useIdle } from "./hooks/useIdle";
 import { slides } from "./slides";
 import { theme } from "./theme";
 
-const LENGTHS: SessionLength[] = [60, 75, 90];
 const LENGTH_KEY = "ftc.sessionLength";
 
-// config.ts sets the default. `?length=60` in the URL, or the menu switch, overrides it.
+// config.ts sets the default. `?length=120` in the URL, or the menu switch, overrides it.
 function initialLength(): SessionLength {
   const fromQuery = Number(new URLSearchParams(window.location.search).get("length"));
   if (LENGTHS.includes(fromQuery as SessionLength)) return fromQuery as SessionLength;

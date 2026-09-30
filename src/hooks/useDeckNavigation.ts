@@ -2,13 +2,20 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { SessionLength } from "../config";
 
 interface Includable {
+  id: string;
   include: SessionLength[];
 }
 
-/** Slide number in the URL hash is the slide's fixed number (1-based) in slides/index.ts. */
-function readHash(): number | null {
-  const match = window.location.hash.match(/^#\/(\d+)/);
-  return match ? Number(match[1]) - 1 : null;
+/**
+ * The URL hash is the slide's number (1-based) in slides/index.ts, e.g. `#/7`.
+ * A slide id also works, e.g. `#/sort`, and is rewritten to the number.
+ */
+function readHash(slides: Includable[]): number | null {
+  const match = window.location.hash.match(/^#\/([\w-]+)/);
+  if (!match) return null;
+  if (/^\d+$/.test(match[1])) return Number(match[1]) - 1;
+  const i = slides.findIndex((s) => s.id === match[1]);
+  return i >= 0 ? i : null;
 }
 
 export function useDeckNavigation<T extends Includable>(slides: T[], sessionLength: SessionLength) {
@@ -23,7 +30,7 @@ export function useDeckNavigation<T extends Includable>(slides: T[], sessionLeng
     [visible],
   );
 
-  const [index, setIndex] = useState(() => snap(readHash() ?? 0));
+  const [index, setIndex] = useState(() => snap(readHash(slides) ?? 0));
   const [direction, setDirection] = useState<1 | -1>(1);
 
   const goTo = useCallback(
@@ -71,12 +78,12 @@ export function useDeckNavigation<T extends Includable>(slides: T[], sessionLeng
 
   useEffect(() => {
     const onHash = () => {
-      const h = readHash();
+      const h = readHash(slides);
       if (h !== null) goTo(h);
     };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
-  }, [goTo]);
+  }, [goTo, slides]);
 
   const position = visible.indexOf(index); // 0-based among visible slides
   return { index, direction, visible, position, total: visible.length, next, prev, first, last, goTo };

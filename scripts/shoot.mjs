@@ -17,7 +17,7 @@ page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
 await page.goto(file + (length ? `?length=${length}` : "") + "#/1");
 await page.waitForTimeout(800);
 const seen = new Set();
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 40; i++) {
   const hash = await page.evaluate(() => location.hash);
   if (seen.has(hash)) break;
   seen.add(hash);
