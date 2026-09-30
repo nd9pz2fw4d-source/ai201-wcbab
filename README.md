@@ -68,6 +68,10 @@ Planned minutes per act: 60 = 5 / 25 / 12 / 13 / 5; 75 = 5 / 35 / 15 / 15 / 5; 9
 - [ ] The next-word scores on "It predicts the next word" are illustrative, not real model output
 - [ ] Agent products (Grok Bot, Muse, Dots) and Microsoft's Copilot direction were checked on 30 September 2026, days after launch. Recheck names, availability and the Nadella quote the week of the session (sources in `src/data/teaching.ts` and the slide notes)
 
+## Pre-read video
+
+`video/` holds a 2 minute 20 second music video to send before the session: the agenda, the key terms and Deloitte's view of the future of workers' compensation, set to a song. Built with Remotion; the song and sound effects come from ElevenLabs. See `video/README.md`.
+
 ## Checks
 
 `scripts/shoot.mjs` screenshots every slide from the built file; `scripts/interact.mjs` tests navigation, interactive elements, drag and drop (mouse and touch), session lengths, the menu and the presenter timer. Both need Playwright and Chromium.

@@ -60,3 +60,27 @@ Decisions (from the user): grow Act 1 and add a 120-minute version; visual first
 - [x] Five slides after the task-length chart: Agents now have their own computers (75+), Copilot becomes the operating system of work (all), Their agent will call our agent (75+), A day in 2028 (90+), What shifts for us (75+)
 - [x] Sources and VERIFY notes in slide notes and `src/data/teaching.ts`
 - [x] Tests updated (23 / 31 / 37 / 38 slides); 48/48 pass, no console errors; new slides screenshotted and fixed
+
+---
+
+# Round 4: pre-read music video (Remotion + ElevenLabs)
+
+Goal: a short, light-hearted music video sent before the session. It sets up the day's agenda, teaches the key terms, and uses Deloitte's "The future of workers' compensation" (Deloitte Canada, 2020, survey of 18 WCOs) for context.
+
+## Plan
+- [x] Source: Deloitte report PDF read in full; figures used: 18 WCOs (CA 7, AU 8, US 3), five levers, 70 to 80% low complexity (55 to 65% fully automated), 94% say multi-variable triage is the top segmentation priority, 83% build bespoke plans today, standardized plans 11% to 39%, Allianz/NSW nudging study 27% faster to full health
+- [x] Song structure at 120 BPM, sections in whole bars so visuals lock to the music: intro 8s, verse 1 16s, chorus 16s, verse 2 (five levers) 24s, agenda 16s, key terms 32s, chorus 16s, outro 12s = 140s
+- [x] Lyrics and timeline as one data file (`video/src/timeline.ts`), shared by the video and the audio script
+- [x] Remotion project in `video/` (own package.json, 1920x1080, 30 fps), reusing the deck's brand tokens and logo paths from `src/`
+- [x] Scenes: title, "a claim starts" + Deloitte survey, the claim journey, five levers, agenda (three acts), key-term flashcards, buzzword bingo, see you in the room
+- [x] `video/scripts/elevenlabs.mjs`: song (Music API, composition plan with section durations), sound effects (Sound Effects API), lyric timing (Forced Alignment API); reads `ELEVENLABS_API_KEY`
+- [x] Video renders without audio files (silent preview) and picks audio up when present
+- [x] Verify: typecheck, render stills of every scene, render the full MP4, review frames
+- [ ] Blocked: ElevenLabs key is not in this environment. Generate audio once it is added, then re-render
+
+## Review (round 4)
+- `video/`: Remotion project, 1920x1080, 30 fps, 140 s. Eight scenes timed to eight song sections (whole bars at 120 BPM). Lyrics, section lengths, SFX prompts and cues live in `video/src/timeline.ts`; on-screen words and Deloitte figures in `video/src/content.ts`. Brand, logos and station names are imported from the deck, not copied.
+- Deloitte source is "The future of workers' compensation" (Deloitte Canada, Sept 2020), the only one on Deloitte's site; read in full, every on-screen figure checked against the PDF.
+- Verified: typecheck clean; stills of every scene reviewed at 1920x1080; full 140.0 s MP4 rendered (silent preview) and frames checked, including mid-animation. Audio path tested with stand-in tones: song and SFX mux in at the cue times; forced-alignment mapping tested with a mocked API response; stand-ins removed.
+- Fixed during review: lever 3 icon squeezed out by a 3-line title, 4-line stat, 2-line term title, bingo checks crowding labels, "WCO" jargon in a headline, hallucination wobble clipping the header, stale lyric timing kept after a new song.
+- Blocked: no ElevenLabs key or connector in this environment, so no audio generated yet. `npm run audio` then `npm run render` once `ELEVENLABS_API_KEY` is set.
