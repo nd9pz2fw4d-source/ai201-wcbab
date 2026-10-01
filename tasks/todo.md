@@ -63,7 +63,46 @@ Decisions (from the user): grow Act 1 and add a 120-minute version; visual first
 
 ---
 
-# Round 4: anchor to the learning objectives; AI is more than Copilot
+# Round 4: pre-read music video (Remotion + ElevenLabs)
+
+Goal: a short, light-hearted music video sent before the session. It sets up the day's agenda, teaches the key terms, and uses Deloitte's "The future of workers' compensation" (Deloitte Canada, 2020, survey of 18 WCOs) for context.
+
+## Plan
+- [x] Source: Deloitte report PDF read in full; figures used: 18 WCOs (CA 7, AU 8, US 3), five levers, 70 to 80% low complexity (55 to 65% fully automated), 94% say multi-variable triage is the top segmentation priority, 83% build bespoke plans today, standardized plans 11% to 39%, Allianz/NSW nudging study 27% faster to full health
+- [x] Song structure at 120 BPM, sections in whole bars so visuals lock to the music: intro 8s, verse 1 16s, chorus 16s, verse 2 (five levers) 24s, agenda 16s, key terms 32s, chorus 16s, outro 12s = 140s
+- [x] Lyrics and timeline as one data file (`video/src/timeline.ts`), shared by the video and the audio script
+- [x] Remotion project in `video/` (own package.json, 1920x1080, 30 fps), reusing the deck's brand tokens and logo paths from `src/`
+- [x] Scenes: title, "a claim starts" + Deloitte survey, the claim journey, five levers, agenda (three acts), key-term flashcards, buzzword bingo, see you in the room
+- [x] `video/scripts/elevenlabs.mjs`: song (Music API, composition plan with section durations), sound effects (Sound Effects API), lyric timing (Forced Alignment API); reads `ELEVENLABS_API_KEY`
+- [x] Video renders without audio files (silent preview) and picks audio up when present
+- [x] Verify: typecheck, render stills of every scene, render the full MP4, review frames
+- [ ] Blocked: ElevenLabs key is not in this environment. Generate audio once it is added, then re-render
+
+## Review (round 4)
+- `video/`: Remotion project, 1920x1080, 30 fps, 140 s. Eight scenes timed to eight song sections (whole bars at 120 BPM). Lyrics, section lengths, SFX prompts and cues live in `video/src/timeline.ts`; on-screen words and Deloitte figures in `video/src/content.ts`. Brand, logos and station names are imported from the deck, not copied.
+- Deloitte source is "The future of workers' compensation" (Deloitte Canada, Sept 2020), the only one on Deloitte's site; read in full, every on-screen figure checked against the PDF.
+- Verified: typecheck clean; stills of every scene reviewed at 1920x1080; full 140.0 s MP4 rendered (silent preview) and frames checked, including mid-animation. Audio path tested with stand-in tones: song and SFX mux in at the cue times; forced-alignment mapping tested with a mocked API response; stand-ins removed.
+- Fixed during review: lever 3 icon squeezed out by a 3-line title, 4-line stat, 2-line term title, bingo checks crowding labels, "WCO" jargon in a headline, hallucination wobble clipping the header, stale lyric timing kept after a new song.
+- Blocked: no ElevenLabs key or connector in this environment, so no audio generated yet. `npm run audio` then `npm run render` once `ELEVENLABS_API_KEY` is set.
+
+## Round 4b: the 2026 Deloitte paper, and real audio
+- [x] Swap the source to "The Future of Workers' Compensation: Industry Perspectives and Global Signals" (Deloitte Canada, 26 Aug 2026); read the page itself and quote its figures as written (eight forces, four shifts, 83% low AI maturity, one early adopter, half rank mental health support the #1 barrier, 23.1% by 2041, 17.4% worked from home, human-in-the-loop, the readiness question)
+- [x] Rewrite verse 1 (eight forces) and verse 2 (four shifts) lyrics and scenes; outro carries Deloitte's readiness question
+- [x] Generate through the ElevenLabs connector: two song takes, seven effects; transcribe both takes to pick one (take 1: every line heard)
+- [x] Make the video follow the take: scene cuts, cards, effects and captions keyed to when each line is sung (`song-timing.json`); local alignment script (faster-whisper) for the connector route; API route writes the same file
+- [x] Normalize effect levels; balance song and effects without clipping
+- [x] Verify: typecheck, stills at the take's times, full render with audio, frames and levels checked
+
+### Review (round 4b)
+- Source verified from the page HTML, not a summary. The survey's size isn't published, so the video doesn't state one.
+- The take ran longer than the plan in places (16 s intro, instrumental breaks after the choruses and agenda). Rather than force the song to the plan, every cue now keys off sung lines, so any future take syncs by re-running alignment. Added an intro teaser beat to fill the longer lead-in.
+- Alignment: priming Whisper with the lyrics made it skip verse 1; without the prompt it heard all 52 lines. Kept that finding as a comment in the script.
+- Mix: song mastered near 0 dB and effects came out between -19 and 0 dB peak. Effects are peak-normalized to -3 dB, song at 75%, effects at 80%: every effect measurably above the song at its cue, final peak about -0.5 dB.
+- Credits: about 8,200 (about $0.82).
+
+---
+
+# Round 5: anchor to the learning objectives; AI is more than Copilot
 Objectives: (1) recognize where AI creates value and how transformation is accomplished; (2) distinguish and evaluate AI opportunity types; (3) understand executive accountabilities for driving adoption.
 
 ## Plan
@@ -76,7 +115,7 @@ Objectives: (1) recognize where AI creates value and how transformation is accom
 - [x] Act 3: "What only executives can do" (all)
 - [x] Rebalance planned minutes; update tests and README; verify and commit
 
-## Review (round 4)
+## Review (round 5)
 - 7 slides added; 28 / 37 / 44 / 45 slides for 60 / 75 / 90 / 120. Planned minutes rebalanced toward Acts 2 and 3.
 - Electrification lesson verified (Paul A. David, AER 80(2), 1990); source on slide and in notes.
 - 49/49 interaction checks pass, no console errors; new slides screenshotted and spacing fixed.
