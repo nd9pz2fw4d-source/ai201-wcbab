@@ -60,3 +60,23 @@ Decisions (from the user): grow Act 1 and add a 120-minute version; visual first
 - [x] Five slides after the task-length chart: Agents now have their own computers (75+), Copilot becomes the operating system of work (all), Their agent will call our agent (75+), A day in 2028 (90+), What shifts for us (75+)
 - [x] Sources and VERIFY notes in slide notes and `src/data/teaching.ts`
 - [x] Tests updated (23 / 31 / 37 / 38 slides); 48/48 pass, no console errors; new slides screenshotted and fixed
+
+---
+
+# Round 4: anchor to the learning objectives; AI is more than Copilot
+Objectives: (1) recognize where AI creates value and how transformation is accomplished; (2) distinguish and evaluate AI opportunity types; (3) understand executive accountabilities for driving adoption.
+
+## Plan
+- [x] Opening: "Three things to leave with", mapping each objective to an act (all lengths)
+- [x] Act 1: "Copilot is the floor, not the ceiling" (faster hands versus a better journey) right after the Copilot slide (all)
+- [x] Act 1: "The gain came from redesign" (Paul David, 1990, electrification) (90+)
+- [x] Act 2: "Four kinds of AI opportunity" ladder with owner per rung (all)
+- [x] Act 2: "Four questions for any opportunity" (value, feasible, safe, ready) (all)
+- [x] Act 2: "Where do our five sit?" interactive matrix with a suggested placement (75+)
+- [x] Act 3: "What only executives can do" (all)
+- [x] Rebalance planned minutes; update tests and README; verify and commit
+
+## Review (round 4)
+- 7 slides added; 28 / 37 / 44 / 45 slides for 60 / 75 / 90 / 120. Planned minutes rebalanced toward Acts 2 and 3.
+- Electrification lesson verified (Paul A. David, AER 80(2), 1990); source on slide and in notes.
+- 49/49 interaction checks pass, no console errors; new slides screenshotted and spacing fixed.

@@ -37,6 +37,13 @@ import SlideCopilotOS from "./SlideCopilotOS";
 import SlideAgentMeetsAgent from "./SlideAgentMeetsAgent";
 import SlideDayIn2028 from "./SlideDayIn2028";
 import SlideWhatShifts from "./SlideWhatShifts";
+import SlideObjectives from "./SlideObjectives";
+import SlideFloorNotCeiling from "./SlideFloorNotCeiling";
+import SlideDynamo from "./SlideDynamo";
+import SlideOpportunityTypes from "./SlideOpportunityTypes";
+import SlideFourQuestions from "./SlideFourQuestions";
+import SlidePlaceOurFive from "./SlidePlaceOurFive";
+import SlideExecAccountabilities from "./SlideExecAccountabilities";
 
 const ALL: SlideDef["include"] = [60, 75, 90, 120];
 const FROM_75: SlideDef["include"] = [75, 90, 120];
@@ -66,6 +73,16 @@ export const slides: SlideDef[] = [
     tone: "light",
     notes:
       "Ask the room first: how many hands touch this claim? Take a few guesses, then click Reveal. The pages are the injury report, employer report, doctor's note, pay stubs, emails and phone notes. Every hand is a person doing careful work. The number shown is a placeholder // VERIFY with WCB claims team (src/data/claimFacts.ts). Do not present it as a real figure until confirmed.",
+  },
+  {
+    id: "objectives",
+    act: "opening",
+    title: "Three things to leave with",
+    include: ALL,
+    component: SlideObjectives,
+    tone: "light",
+    notes:
+      "Our three learning objectives, one per act. See it: recognize where AI creates value and how transformation is accomplished with AI. Choose it: distinguish and evaluate the types of AI opportunity. Govern it: understand your accountabilities as executives for driving adoption. One thread runs through all three: AI is much more than Copilot and personal productivity. The value is in redesigning how the claim journey works, and that is executive work.",
   },
 
   // ---------- Act 1: See it ----------
@@ -271,6 +288,26 @@ export const slides: SlideDef[] = [
       "Today, an adjudicator is the integration layer: they open email, Teams, the claim system, Excel, the policy site, and stitch it together themselves. Microsoft's direction is that Copilot becomes the place you work from: you state an outcome ('get this claim ready for a decision'), and Copilot and its agents work across the apps, within permissions the organization sets. On 25 September 2026 Satya Nadella wrote: 'We're building Copilot as a new OS for work that spans every model, every form factor, and every task.' Microsoft is pairing this with governance: Agent 365 for controlling agents' permissions, auditing and oversight, and Copilot Cowork for handing off multi-step tasks. Because everyone at WCB already has Copilot, this is the most likely way agents arrive here: not as a separate project, but as a feature switch in tools we already own. That makes the governance decisions in Act 3 urgent. Sources: Windows Latest, 26 Sept 2026 (windowslatest.com/2026/09/26/...); Microsoft Build 2026 coverage (visualstudiomagazine.com/articles/2026/06/02/...). VERIFY product names and licensing with WCB IT before the session.",
   },
   {
+    id: "floor-not-ceiling",
+    act: "see",
+    title: "Copilot is the floor, not the ceiling",
+    include: ALL,
+    component: SlideFloorNotCeiling,
+    tone: "light",
+    notes:
+      "This is the anchor of the session. On the left: give every one of the many hands on the claim a Copilot, and each person gets a bit faster. That is real and worth doing, but the journey is the same shape: the same handoffs, the same waiting, the same rework. The minutes saved are scattered across hundreds of people and rarely show up as a better outcome for the worker. On the right: redesign the journey itself, with agents doing the busywork between people and people at the decisions, and you change what matters: time to decision, return to work, the worker's experience. Copilot is the floor everyone stands on. The ceiling is redesigned work, and that is not something a licence delivers; leaders do.",
+  },
+  {
+    id: "dynamo",
+    act: "see",
+    title: "The gain came from redesign",
+    include: FROM_90,
+    component: SlideDynamo,
+    tone: "light",
+    notes:
+      "A history lesson executives remember. Electric power reached factories from the 1880s. At first, factories swapped the big steam engine for a big electric motor and kept the same layout: one power source, long shafts and belts to every machine. Productivity barely moved for decades. The large gains came in the 1920s, when factories were redesigned around many small motors, one per machine, with new single-storey layouts and new ways of organizing work. The economist Paul David used this in 1990 to explain why computers took so long to show up in productivity figures. Source: Paul A. David, 'The Dynamo and the Computer: An Historical Perspective on the Modern Productivity Paradox', American Economic Review 80(2), 1990, pp. 355-361. The lesson for AI: Copilot on the old process is the motor on the old layout.",
+  },
+  {
     id: "agent-meets-agent",
     act: "see",
     title: "Their agent will call our agent",
@@ -342,6 +379,16 @@ export const slides: SlideDef[] = [
     notes: "Act 2: where should AI help on this claim, and where shouldn't it?",
   },
   {
+    id: "opportunity-types",
+    act: "choose",
+    title: "Four kinds of AI opportunity",
+    include: ALL,
+    component: SlideOpportunityTypes,
+    tone: "light",
+    notes:
+      "A simple way to tell AI opportunities apart. 1. Personal productivity: Copilot helping one person draft, summarize, search. Owned by each of us; value is real but scattered. 2. Team workflow: AI built into a team's process, like medical files summarized for adjudicators. Owned by managers; value shows up as faster, more consistent work. 3. End-to-end journey: the claim journey redesigned with agents and people, across teams and systems. 4. New services: things WCB could not do before, like reaching a worker early, before a claim goes long. The top two rungs cross organizational boundaries, change policy, roles and data, and need funding and risk decisions. Only executives can own them. Most organizations stop at rung 1. The value is at 3 and 4.",
+  },
+  {
     id: "sort",
     act: "choose",
     title: "The sort",
@@ -370,6 +417,26 @@ export const slides: SlideDef[] = [
     tone: "light",
     notes:
       "The five priority opportunities, placed where they help the claim: real-time help for contact centre staff, service forecasting, medical file assessment support, claims audit review, appeals review support. Labels and stations are editable in src/data/opportunities.ts. Confirm final names with the WCB team before the session.",
+  },
+  {
+    id: "place-our-five",
+    act: "choose",
+    title: "Where do our five sit?",
+    include: FROM_75,
+    component: SlidePlaceOurFive,
+    tone: "light",
+    notes:
+      "Ask the room to place each of the five priority opportunities on the ladder; click a cell to place it (click again to clear). Then click 'Show a suggested placement' to compare. The suggestion puts all five at team workflow, which is a good thing: none of them is just personal productivity. The executive question is which of them grows into an end-to-end journey or a new service. For example: medical file assessment support plus claims audit review are building blocks for a redesigned decision journey; real-time help for contact centre staff could grow into round-the-clock help for workers. The suggestion lives in src/data/strategy.ts and is for discussion, not an assessment.",
+  },
+  {
+    id: "four-questions",
+    act: "choose",
+    title: "Four questions for any opportunity",
+    include: ALL,
+    component: SlideFourQuestions,
+    tone: "light",
+    notes:
+      "The lens for evaluating any AI opportunity, from a Copilot add-on to a journey redesign. Valuable: does it help workers, employers or WCB in a way we can measure, and who measures it? Feasible: is the data there and good enough, and is the technology proven for this kind of task? Safe: if it is wrong, who is affected, how badly, and who checks? This links to the autonomy dial: the higher the stakes, the more a person decides. Ready: are the people and processes ready to change, and who leads that change? An opportunity that scores well on all four is a candidate; one that fails 'Safe' or 'Ready' is not ready yet, however exciting.",
   },
 
   // ---------- Act 3: Govern it ----------
@@ -411,6 +478,16 @@ export const slides: SlideDef[] = [
     tone: "light",
     notes:
       "A supervisor agent watches the other agents and catches the old doctor's note at Gather evidence, before it carries forward, and flags it to a person. Oversight that never sleeps, with a person still deciding. Hand off to the live demo here; keep this slide simple so the demo carries the detail.",
+  },
+  {
+    id: "exec-accountabilities",
+    act: "govern",
+    title: "What only executives can do",
+    include: ALL,
+    component: SlideExecAccountabilities,
+    tone: "light",
+    notes:
+      "Our third objective: your accountabilities for driving adoption. Pick journeys, not tools: start from an outcome for workers and employers, not a product. Name one accountable owner for each journey, with the authority to change it end to end. Redesign the work, not just add AI: process, roles, policy and measures change together. Bring your people with you: skills, time to learn, and frontline staff in the design; AI supports people and keeps them accountable. Fund the foundations: data quality, platforms, identity and security for agents. Measure outcomes and keep the guardrails: time to decision, return to work, worker experience, plus the controls from this act. And use it yourself, visibly: people follow what leaders do. Ask each executive: which one of these will you act on first?",
   },
   {
     id: "discussion",
