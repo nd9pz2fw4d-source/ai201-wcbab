@@ -38,7 +38,7 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 
 | Slides | 60 | 75 | 90 | 120 |
 |---|---|---|---|---|
-| Core deck, plus three things to leave with, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as the operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (slider), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
+| Core deck, plus three things to leave with, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as the operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (plays by itself: start now versus wait a year), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
 | Live moment, agents with their own computers, their agent will call our agent, how we must adapt (click to reveal), build your agent team (live governance check) | | shown | shown | shown |
 | How it works (section card), give it the right sources, tools are its hands, five things to watch, what shifts for us, what doesn't change, many ideas a few patterns, where do our five sit?, four questions for any opportunity, how ready are we? (room scores six foundations, radar, CSV download), agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, open discussion | | | shown | shown |
 | Myth or reality? | | | | shown |
