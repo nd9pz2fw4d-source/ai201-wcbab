@@ -38,11 +38,11 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 
 | Slides | 60 | 75 | 90 | 120 |
 |---|---|---|---|---|
-| Core deck, plus three things to leave with, How it works, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as the operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (slider), how ready are we? (room scores six foundations, radar, CSV download), Copilot is the floor not the ceiling, four kinds of AI opportunity, four questions for any opportunity, what only executives can do | shown | shown | shown | shown |
-| Live moment, grounding, tools, five things to watch, agents with their own computers, their agent will call our agent, what shifts for us, what doesn't change, where do our five sit?, how we must adapt (click to reveal), build your agent team (live governance check) | | shown | shown | shown |
-| Agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, open discussion | | | shown | shown |
+| Core deck, plus three things to leave with, How it works, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as the operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (slider), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
+| Live moment, grounding, tools, five things to watch, agents with their own computers, their agent will call our agent, what shifts for us, what doesn't change, how we must adapt (click to reveal), build your agent team (live governance check) | | shown | shown | shown |
+| Many ideas a few patterns, where do our five sit?, four questions for any opportunity, how ready are we? (room scores six foundations, radar, CSV download), agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, open discussion | | | shown | shown |
 | Myth or reality? | | | | shown |
-| **Slides in total** | 30 | 41 | 48 | 49 |
+| **Slides in total** | 27 | 37 | 48 | 49 |
 
 Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 90 = 5 / 35 / 20 / 20 / discussion 5 / 5; 120 = 5 / 45 / 27 / 28 / discussion 10 / 5.
 

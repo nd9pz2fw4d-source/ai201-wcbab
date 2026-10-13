@@ -436,7 +436,7 @@ export const slides: SlideDef[] = [
     id: "patterns",
     act: "choose",
     title: "Many ideas, a few patterns",
-    include: ALL,
+    include: FROM_90,
     component: Slide13Patterns,
     tone: "light",
     notes:
@@ -456,7 +456,7 @@ export const slides: SlideDef[] = [
     id: "place-our-five",
     act: "choose",
     title: "Where do our five sit?",
-    include: FROM_75,
+    include: FROM_90,
     component: SlidePlaceOurFive,
     tone: "light",
     notes:
@@ -466,7 +466,7 @@ export const slides: SlideDef[] = [
     id: "four-questions",
     act: "choose",
     title: "Four questions for any opportunity",
-    include: ALL,
+    include: FROM_90,
     component: SlideFourQuestions,
     tone: "light",
     notes:
@@ -517,7 +517,7 @@ export const slides: SlideDef[] = [
     id: "readiness",
     act: "govern",
     title: "How ready are we?",
-    include: ALL,
+    include: FROM_90,
     component: SlideReadiness,
     tone: "light",
     notes:
