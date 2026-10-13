@@ -74,7 +74,7 @@ export function AgentTrace({
                   boxShadow: risky
                     ? `inset 6px 0 0 ${theme.risk}, 0 1px 0 #C9DDEA`
                     : isStop
-                      ? "0 10px 26px rgba(224,122,95,0.35)"
+                      ? "0 10px 26px rgba(95,146,48,0.35)"
                       : dark
                         ? undefined
                         : "0 1px 0 #C9DDEA",

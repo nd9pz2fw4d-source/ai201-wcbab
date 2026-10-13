@@ -6,7 +6,7 @@ import { TeachLayout } from "./TeachLayout";
 
 const columns: { id: Permission; icon: typeof Eye; color: string }[] = [
   { id: "read", icon: Eye, color: theme.agent },
-  { id: "draft", icon: PenLine, color: theme.brandSecondary },
+  { id: "draft", icon: PenLine, color: theme.brandDeep },
   { id: "act", icon: Zap, color: theme.human },
 ];
 const COL_W = 480;

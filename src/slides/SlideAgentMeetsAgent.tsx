@@ -64,7 +64,7 @@ export default function SlideAgentMeetsAgent() {
         <Party p={EMPLOYER} icon={Building2} label={agentMeeting.employer} color={theme.agent} />
       </motion.div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-        <Party p={WCB} icon={Landmark} label={agentMeeting.wcb} color={theme.brandSecondary} />
+        <Party p={WCB} icon={Landmark} label={agentMeeting.wcb} color={theme.brandDeep} />
       </motion.div>
 
       {/* The checks WCB's agent must make */}

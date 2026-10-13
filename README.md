@@ -38,11 +38,11 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 
 | Slides | 60 | 75 | 90 | 120 |
 |---|---|---|---|---|
-| Core deck, plus three things to leave with, How it works, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as the operating system of work, Copilot is the floor not the ceiling, four kinds of AI opportunity, four questions for any opportunity, what only executives can do | shown | shown | shown | shown |
-| Live moment, grounding, tools, five things to watch, agents with their own computers, their agent will call our agent, what shifts for us, what doesn't change, where do our five sit? | | shown | shown | shown |
+| Core deck, plus three things to leave with, How it works, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as the operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (slider), how ready are we? (room scores six foundations, radar, CSV download), Copilot is the floor not the ceiling, four kinds of AI opportunity, four questions for any opportunity, what only executives can do | shown | shown | shown | shown |
+| Live moment, grounding, tools, five things to watch, agents with their own computers, their agent will call our agent, what shifts for us, what doesn't change, where do our five sit?, how we must adapt (click to reveal), build your agent team (live governance check) | | shown | shown | shown |
 | Agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, open discussion | | | shown | shown |
 | Myth or reality? | | | | shown |
-| **Slides in total** | 28 | 37 | 44 | 45 |
+| **Slides in total** | 30 | 41 | 48 | 49 |
 
 Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 90 = 5 / 35 / 20 / 20 / discussion 5 / 5; 120 = 5 / 45 / 27 / 28 / discussion 10 / 5.
 
@@ -56,7 +56,8 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 - On-screen numbers: `src/data/claimFacts.ts`
 - Teaching content (next-word example, loop steps, tools, autonomy levels, myths, trends, METR data): `src/data/teaching.ts`
 - Objectives, opportunity types, the suggested placement of our five, evaluation questions, executive accountabilities, the electrification source: `src/data/strategy.ts`
-- Colours: `src/theme.ts` (the only place colours are defined)
+- Copilot as the operating system content, agent team rules, readiness foundations, the cost-of-waiting assumption: `src/data/osOfWork.ts`
+- Colours: `src/theme.ts` (the only place colours are defined). Everything uses the WCB-Alberta palette: AI and agents in WCB blue `#3399CC`, people deciding in WCB green (`#98C857`, deepened to `#5F9230` where white text sits on it), the claim file in WCB dark blue `#117BBC`, key moments in WCB gold `#FBB43A`. Red is for risk only
 
 ## Before the session: items to confirm
 
@@ -69,6 +70,7 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 - [ ] The human/AI split bars on the era slides are illustrative, not measured
 - [ ] Task-length chart: METR, "Time Horizon 1.1" (29 January 2026), https://metr.org/blog/2026-1-29-time-horizon-1-1/. Refresh the data if METR publishes a newer update before the session
 - [ ] "Where do our five sit?": the suggested placement (all five at team workflow) is a prompt for discussion. Agree it with the WCB team before showing it
+- [ ] "The cost of waiting": the readiness period (2.5 years) is an illustrative assumption, and the AI line extrapolates METR's software-task trend. Replace with WCB's own estimate in `src/data/osOfWork.ts`
 - [ ] The next-word scores on "It predicts the next word" are illustrative, not real model output
 - [ ] Agent products (Grok Bot, Muse, Dots) and Microsoft's Copilot direction were checked on 30 September 2026, days after launch. Recheck names, availability and the Nadella quote the week of the session (sources in `src/data/teaching.ts` and the slide notes)
 

@@ -44,6 +44,10 @@ import SlideOpportunityTypes from "./SlideOpportunityTypes";
 import SlideFourQuestions from "./SlideFourQuestions";
 import SlidePlaceOurFive from "./SlidePlaceOurFive";
 import SlideExecAccountabilities from "./SlideExecAccountabilities";
+import SlideAdaptOS from "./SlideAdaptOS";
+import SlideAgentTeamBuilder from "./SlideAgentTeamBuilder";
+import SlideCostOfWaiting from "./SlideCostOfWaiting";
+import SlideReadiness from "./SlideReadiness";
 
 const ALL: SlideDef["include"] = [60, 75, 90, 120];
 const FROM_75: SlideDef["include"] = [75, 90, 120];
@@ -288,6 +292,26 @@ export const slides: SlideDef[] = [
       "Today, an adjudicator is the integration layer: they open email, Teams, the claim system, Excel, the policy site, and stitch it together themselves. Microsoft's direction is that Copilot becomes the place you work from: you state an outcome ('get this claim ready for a decision'), and Copilot and its agents work across the apps, within permissions the organization sets. On 25 September 2026 Satya Nadella wrote: 'We're building Copilot as a new OS for work that spans every model, every form factor, and every task.' Microsoft is pairing this with governance: Agent 365 for controlling agents' permissions, auditing and oversight, and Copilot Cowork for handing off multi-step tasks. Because everyone at WCB already has Copilot, this is the most likely way agents arrive here: not as a separate project, but as a feature switch in tools we already own. That makes the governance decisions in Act 3 urgent. Sources: Windows Latest, 26 Sept 2026 (windowslatest.com/2026/09/26/...); Microsoft Build 2026 coverage (visualstudiomagazine.com/articles/2026/06/02/...). VERIFY product names and licensing with WCB IT before the session.",
   },
   {
+    id: "adapt-os",
+    act: "see",
+    title: "How we must adapt",
+    include: FROM_75,
+    component: SlideAdaptOS,
+    tone: "light",
+    notes:
+      "If Copilot becomes the operating system of work, the organization has to change around it. Read each 'from', ask the room what it becomes, then click to reveal. Where work starts: from opening an app to stating an outcome. Jobs: from doing the steps to directing, checking and deciding. The org chart: from people only to people plus agents, each agent with a named human owner. Access: from staff accounts to agent identities with least privilege and credentials that expire. Knowledge: from what is in people's heads and shared drives to current, permissioned sources agents can cite. Oversight: from periodic review to continuous monitoring of what agents do. The executive point: an agent can only use data that is clean, rules that are written down, permissions that are set and processes someone owns. That is the investment, and it cannot be rushed later.",
+  },
+  {
+    id: "agent-team",
+    act: "see",
+    title: "Build your agent team",
+    include: FROM_75,
+    component: SlideAgentTeamBuilder,
+    tone: "light",
+    notes:
+      "Hands-on: the room builds an adjudicator's agent team. Add agents with the plus button, give each Read, Draft or Act access, and for agents that act, decide whether a person approves. The governance check on the right reacts live: no named owner, an agent acting on a worker's letters or payments with no one approving, or every agent able to act with no one checking the whole picture. Try it in this order: add the Payment agent with Act and no approval (red flag), then add an approval step, then name an owner, until it reads 'Owned, approved, governed'. The lesson: in Copilot's world, giving agents identities, permissions and owners is a leadership decision, not an IT setting.",
+  },
+  {
     id: "floor-not-ceiling",
     act: "see",
     title: "Copilot is the floor, not the ceiling",
@@ -336,6 +360,16 @@ export const slides: SlideDef[] = [
     tone: "light",
     notes:
       "Four shifts for leaders. From opening apps to asking for outcomes: work starts with a goal, not a screen. From doing every step to supervising agents: the skill becomes setting goals, checking work and making the call. From staff accounts only to agent identities and permissions: every agent needs an identity, a manager, and only the access its job needs, like a new hire. From yearly reviews to always-on monitoring: agents act around the clock, so oversight has to as well. None of these shifts moves accountability away from people.",
+  },
+  {
+    id: "cost-of-waiting",
+    act: "see",
+    title: "The cost of waiting",
+    include: ALL,
+    component: SlideCostOfWaiting,
+    tone: "light",
+    notes:
+      "The burning platform. Drag the slider to change when WCB starts building readiness (data, written rules, agent identities, skills, owners, monitoring). The blue line is what AI can do; the green line is what we can actually use. The gold area between them is value we leave on the table, and it grows fast the longer we wait, because capability compounds while readiness takes years to build. The readout uses METR's long-run trend (task length doubling about every 7 months, measured on software and research tasks) and is an extrapolation: it holds only if the trend continues. The readiness period (2.5 years) is an illustrative assumption; replace it with WCB's own estimate (src/data/osOfWork.ts). The message is not 'AI will do X by 2030'. It is: readiness is slow, capability is fast, so the cost of starting late is a widening gap.",
   },
   {
     id: "what-stays",
@@ -478,6 +512,16 @@ export const slides: SlideDef[] = [
     tone: "light",
     notes:
       "A supervisor agent watches the other agents and catches the old doctor's note at Gather evidence, before it carries forward, and flags it to a person. Oversight that never sleeps, with a person still deciding. Hand off to the live demo here; keep this slide simple so the demo carries the detail.",
+  },
+  {
+    id: "readiness",
+    act: "govern",
+    title: "How ready are we?",
+    include: ALL,
+    component: SlideReadiness,
+    tone: "light",
+    notes:
+      "Score WCB 1 to 5 on the six foundations agents depend on. Take a quick show of hands or a table consensus for each, and click the score. The radar draws as you go and the two weakest are marked 'Invest first'. Clean, connected data: can an agent find the right, current information? Rules written down: are policies and decision rules explicit enough for an agent to follow and cite? Agent identities and access: could we give an agent its own identity and only the access it needs today? Skills to direct agents: can our people delegate to agents and judge their work? Journey owners: does someone own the claim journey end to end? Monitoring and audit: could we see and rebuild what an agent did? Click 'Save the room's scores' to download a CSV for the follow-up. This leads straight into what only executives can do.",
   },
   {
     id: "exec-accountabilities",

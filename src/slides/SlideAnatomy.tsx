@@ -37,7 +37,7 @@ export default function SlideAnatomy() {
 
       <motion.div
         className="absolute flex h-[260px] w-[260px] flex-col items-center justify-center rounded-full text-white"
-        style={{ left: CX - 130, top: CY - 130, background: theme.agent, boxShadow: "0 20px 50px rgba(31,181,168,0.35)" }}
+        style={{ left: CX - 130, top: CY - 130, background: theme.agent, boxShadow: "0 20px 50px rgba(51,153,204,0.35)" }}
         initial={{ scale: 0.6, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 150, damping: 15, delay: 0.2 }}

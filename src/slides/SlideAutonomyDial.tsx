@@ -13,7 +13,7 @@ const R = 400;
 const N = autonomyLevels.length;
 
 // Coral (people do more) through a neutral blue to teal (AI does more).
-const segColors = [theme.human, "#EDA792", theme.brandSky, "#7FD3CB", theme.agent];
+const segColors = [theme.human, theme.humanLight, "#C9D6E0", theme.brandSky, theme.agent];
 const polar = (deg: number, r: number) => ({ x: CX + r * Math.cos((deg * Math.PI) / 180), y: CY + r * Math.sin((deg * Math.PI) / 180) });
 // Segment k spans 180 + k*36 to 180 + (k+1)*36 degrees (left to right over the top).
 const segAngle = (k: number) => 180 + (k + 0.5) * (180 / N);
@@ -104,7 +104,7 @@ export default function SlideAutonomyDial() {
             {current.example}
           </span>
         </div>
-        <div className="flex items-start gap-4 rounded-2xl p-5" style={{ background: "#FCEFEA" }}>
+        <div className="flex items-start gap-4 rounded-2xl p-5" style={{ background: "#EEF5E6" }}>
           {level < 3 ? <UserRound size={34} color={theme.human} className="shrink-0" /> : <ShieldCheck size={34} color={theme.human} className="shrink-0" />}
           <span className="text-[28px] font-medium" style={{ color: theme.ink }}>
             {current.oversight}

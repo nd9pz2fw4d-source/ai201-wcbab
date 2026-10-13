@@ -54,7 +54,7 @@ export default function Slide10LiveMoment() {
             }}
             disabled={paused || done}
             className="grid h-[250px] w-[250px] place-items-center rounded-full text-white disabled:opacity-50"
-            style={{ background: theme.human, boxShadow: "0 18px 40px rgba(224,122,95,0.4)" }}
+            style={{ background: theme.human, boxShadow: "0 18px 40px rgba(95,146,48,0.4)" }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="flex flex-col items-center gap-2">

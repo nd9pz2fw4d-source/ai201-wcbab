@@ -35,7 +35,7 @@ function StackToSummary() {
       >
         <FileText size={30} color={theme.agent} />
         {[80, 60, 72, 50].map((w, i) => (
-          <div key={i} className="h-[7px] rounded" style={{ width: `${w}%`, background: "#CDEFEB" }} />
+          <div key={i} className="h-[7px] rounded" style={{ width: `${w}%`, background: "#CCE5F2" }} />
         ))}
       </motion.div>
     </div>
@@ -81,7 +81,7 @@ function DraftLetter() {
           <motion.div
             key={i}
             className="h-[8px] rounded"
-            style={{ background: "#CDEFEB" }}
+            style={{ background: "#CCE5F2" }}
             initial={{ width: 0 }}
             animate={{ width: `${w}%` }}
             transition={{ delay: 0.9 + i * 0.25, duration: 0.3 }}

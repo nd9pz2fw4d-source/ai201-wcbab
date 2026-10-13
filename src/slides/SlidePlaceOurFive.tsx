@@ -64,7 +64,7 @@ export default function SlidePlaceOurFive() {
                   >
                     <motion.span
                       className="block h-[46px] w-[46px] rounded-full"
-                      style={{ background: on ? theme.agent : "#EEF3F7", boxShadow: on ? "0 0 0 6px rgba(31,181,168,0.2)" : "inset 0 0 0 2px #DDE7EE" }}
+                      style={{ background: on ? theme.agent : "#EEF3F7", boxShadow: on ? "0 0 0 6px rgba(51,153,204,0.2)" : "inset 0 0 0 2px #DDE7EE" }}
                       animate={{ scale: on ? 1 : 0.7 }}
                     />
                   </button>

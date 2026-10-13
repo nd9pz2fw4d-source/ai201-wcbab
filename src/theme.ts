@@ -22,9 +22,10 @@ export const theme = {
   paper: "#FFFFFF",
   line: "#C9DDEA", // quiet lines on light backgrounds
 
-  // Meaning colours
-  human: "#E07A5F", // a person deciding
-  agent: "#1FB5A8", // AI or agents
+  // Meaning colours, all from the WCB-Alberta palette (red is for risk only)
+  human: "#5F9230", // a person deciding: WCB green #98C857, deepened so white text stays readable
+  humanLight: "#98C857", // WCB green as published, for light fills
+  agent: "#3399CC", // AI or agents: WCB primary blue
   risk: "#D64545", // risk moments only
 } as const;
 

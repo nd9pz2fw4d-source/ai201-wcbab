@@ -119,3 +119,14 @@ Objectives: (1) recognize where AI creates value and how transformation is accom
 - 7 slides added; 28 / 37 / 44 / 45 slides for 60 / 75 / 90 / 120. Planned minutes rebalanced toward Acts 2 and 3.
 - Electrification lesson verified (Paul A. David, AER 80(2), 1990); source on slide and in notes.
 - 49/49 interaction checks pass, no console errors; new slides screenshotted and spacing fixed.
+
+---
+
+# Round 6: Copilot as the operating system of work, interactivity, WCB colours
+- [x] Copilot slide made interactive: Today versus "Copilot as the OS" toggle; the room's goal typed in and run (agents fan out to apps, a person approves)
+- [x] How we must adapt (click to reveal six from-to shifts) (75+)
+- [x] Build your agent team: add agents, set Read / Draft / Act, approval and an accountable owner; live governance check (75+)
+- [x] The cost of waiting: start-year slider, capability versus readiness, gap shaded; METR trend labelled as an extrapolation, readiness period labelled illustrative (all)
+- [x] How ready are we?: six foundations scored 1 to 5, live radar, weakest two marked "Invest first", CSV download (all, in Act 3 before executive accountabilities)
+- [x] WCB-Alberta palette: AI blue #3399CC, people green #98C857 (deepened #5F9230 for text contrast 3.7:1), claim file dark blue #117BBC, gold key moments; old teal and coral tints replaced
+- [x] Verify: 49/49 interaction checks, new `scripts/futurism-states.mjs` drives every new interaction (no slide advance, download works), no console errors, screenshots reviewed

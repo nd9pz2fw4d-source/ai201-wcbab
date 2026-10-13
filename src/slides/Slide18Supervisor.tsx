@@ -24,7 +24,7 @@ function Supervisor({ caught }: { caught: boolean }) {
       >
         <motion.circle
           r={78}
-          fill="rgba(31,181,168,0.08)"
+          fill="rgba(51,153,204,0.08)"
           stroke={theme.agent}
           strokeWidth={7}
           animate={reduce ? undefined : { scale: [1, 1.06, 1] }}

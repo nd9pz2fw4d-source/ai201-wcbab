@@ -31,7 +31,7 @@ export default function SlideMyths() {
                   className="absolute inset-0 flex flex-col items-start justify-center gap-4 rounded-3xl px-12 text-left"
                   style={{
                     background: flipped ? theme.agent : "#fff",
-                    boxShadow: flipped ? "0 16px 40px rgba(31,181,168,0.3)" : "0 1px 0 #C9DDEA, 0 12px 30px rgba(12,53,83,0.08)",
+                    boxShadow: flipped ? "0 16px 40px rgba(51,153,204,0.3)" : "0 1px 0 #C9DDEA, 0 12px 30px rgba(12,53,83,0.08)",
                   }}
                   initial={{ rotateY: -90, opacity: 0 }}
                   animate={{ rotateY: 0, opacity: 1 }}

@@ -97,7 +97,7 @@ function Card({ station, place, slot }: { station: Station; place: Place; slot: 
         ? theme.human
         : place === "assist"
           ? `linear-gradient(90deg, ${theme.human} 50%, ${theme.agent} 50%)`
-          : theme.brandSecondary;
+          : theme.brandDeep;
   const dx = transform ? transform.x / scale : 0;
   const dy = transform ? transform.y / scale : 0;
 

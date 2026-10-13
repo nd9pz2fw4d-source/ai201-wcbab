@@ -44,7 +44,7 @@ export default function SlideNextWord() {
             <div className="h-[44px]" style={{ width: BAR_MAX }}>
               <motion.div
                 className="h-full rounded-r-md"
-                style={{ background: i === 0 ? theme.agent : "#A7DDD7" }}
+                style={{ background: i === 0 ? theme.agent : "#A9D3EA" }}
                 initial={{ width: 0 }}
                 animate={{ width: (c.p / max) * BAR_MAX }}
                 transition={{ delay: 0.7 + i * 0.1, duration: 0.8, ease: "easeOut" }}

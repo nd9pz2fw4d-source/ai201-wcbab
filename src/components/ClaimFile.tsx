@@ -19,7 +19,7 @@ interface Props {
  * injury icon, and a stack of pages behind it. An SVG <g> drawn centred on
  * (0, 0), so it can sit inside the journey or any other SVG.
  */
-export function ClaimFile({ pages = 2, named = true, color = theme.brandSecondary }: Props) {
+export function ClaimFile({ pages = 2, named = true, color = theme.brandDeep }: Props) {
   const x = -CARD_W / 2;
   const y = -CARD_H / 2;
   const stack = Math.min(pages, 8);

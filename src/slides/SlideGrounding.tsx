@@ -73,8 +73,8 @@ export default function SlideGrounding() {
             );
           })}
         </div>
-        <motion.div className="flex items-start gap-5 rounded-2xl p-6" style={{ background: "#E6F6F4" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>
-          <AnswerLines color="#A7DDD7" widths={[90, 84, 70]} />
+        <motion.div className="flex items-start gap-5 rounded-2xl p-6" style={{ background: "#E6F2F9" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>
+          <AnswerLines color="#A9D3EA" widths={[90, 84, 70]} />
           <div className="flex shrink-0 flex-col items-end gap-2">
             <Quote size={36} color={theme.agent} />
             <div className="flex gap-2">

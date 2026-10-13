@@ -218,7 +218,7 @@ function MovingClaim({
   return (
     <motion.g style={{ x, y, opacity }}>
       <g transform={`scale(${scale})`}>
-        <line x1={0} y1={CARD_H / 2} x2={0} y2={CARD_H / 2 + 30} stroke={theme.brandSecondary} strokeWidth={3} />
+        <line x1={0} y1={CARD_H / 2} x2={0} y2={CARD_H / 2 + 30} stroke={theme.brandDeep} strokeWidth={3} />
         <ClaimFile pages={pages} named={named} />
       </g>
     </motion.g>

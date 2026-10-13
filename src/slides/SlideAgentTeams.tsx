@@ -51,7 +51,7 @@ export default function SlideAgentTeams() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <span className="grid h-[150px] w-[150px] place-items-center rounded-full" style={{ background: theme.agent, boxShadow: "0 0 0 10px rgba(31,181,168,0.2)" }}>
+        <span className="grid h-[150px] w-[150px] place-items-center rounded-full" style={{ background: theme.agent, boxShadow: "0 0 0 10px rgba(51,153,204,0.2)" }}>
           <Network size={70} color="#fff" />
         </span>
       </motion.div>
@@ -82,12 +82,12 @@ export default function SlideAgentTeams() {
 
       <motion.div
         className="absolute flex items-center gap-4 rounded-2xl bg-white px-7 py-5"
-        style={{ left: FILE.x - 120, top: FILE.y - 50, boxShadow: `0 0 0 3px ${theme.brandSecondary}` }}
+        style={{ left: FILE.x - 120, top: FILE.y - 50, boxShadow: `0 0 0 3px ${theme.brandDeep}` }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9 }}
       >
-        <FolderOpen size={40} color={theme.brandSecondary} />
+        <FolderOpen size={40} color={theme.brandDeep} />
         <span className="text-[28px] font-medium" style={{ color: theme.ink }}>
           Shared case file
         </span>

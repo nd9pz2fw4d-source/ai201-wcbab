@@ -55,7 +55,7 @@ export default function Slide02OneClaim() {
             >
               <g transform={`rotate(${(angle + 90) * 0.2})`}>
                 <rect x={-95} y={-58} width={190} height={116} rx={10} fill="#fff" stroke={theme.line} strokeWidth={2.5} />
-                <Icon x={-18} y={-44} width={36} height={36} color={theme.brandSecondary} />
+                <Icon x={-18} y={-44} width={36} height={36} color={theme.brandDeep} />
                 <text y={22} textAnchor="middle" fontSize={20} fontWeight={500} fill={theme.ink}>
                   {label}
                 </text>

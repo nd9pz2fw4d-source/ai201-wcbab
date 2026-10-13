@@ -34,7 +34,7 @@ let page = await open({}, "?length=75");
 await page.mouse.click(960, 540);
 await page.waitForTimeout(300);
 check("click on background advances", (await hash(page)) === "#/2");
-for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/45"], ["Home", "#/1"]]) {
+for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/49"], ["Home", "#/1"]]) {
   await page.keyboard.press(key === " " ? "Space" : key);
   await page.waitForTimeout(250);
   check(`key ${key === " " ? "Space" : key}`, (await hash(page)) === want, await hash(page));
@@ -169,14 +169,14 @@ await page.context().close();
 // ---- 60-minute version skips 10, 18, 19 ----
 page = await open({}, "?length=60");
 const seen = [];
-for (let i = 0; i < 45; i++) {
+for (let i = 0; i < 55; i++) {
   seen.push(await hash(page));
   await page.keyboard.press("ArrowRight");
   await page.waitForTimeout(120);
 }
 const uniq = [...new Set(seen)];
-check("60 shows 28 slides", uniq.length === 28, uniq.join(" "));
-const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "computer-agents", "agent-meets-agent", "day-in-2028", "what-shifts", "what-stays", "supervisor", "discussion", "dynamo", "place-our-five"];
+check("60 shows 30 slides", uniq.length === 30, uniq.join(" "));
+const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "computer-agents", "agent-meets-agent", "day-in-2028", "what-shifts", "what-stays", "supervisor", "discussion", "dynamo", "place-our-five", "adapt-os", "agent-team"];
 const hiddenNums = [];
 for (const id of hidden60) hiddenNums.push(await goId(page, id, 120, 300));
 check("60 skips every slide outside its version", hiddenNums.every((n) => !uniq.includes(n)), hiddenNums.join(" "));
@@ -231,7 +231,7 @@ await page.getByRole("button", { name: /Show a suggested placement/ }).click();
 await page.waitForTimeout(600);
 check("our-five matrix and suggestion do not advance", (await hash(page)) === h && (await page.locator("text=A strong first wave. Next: the journey.").count()) > 0);
 await page.screenshot({ path: `${out}/place-five-suggested.png` });
-for (const [len, want] of [[60, 28], [75, 37], [90, 44], [120, 45]]) {
+for (const [len, want] of [[60, 30], [75, 41], [90, 48], [120, 49]]) {
   await page.goto(file + `?length=${len}#/1`);
   await page.reload();
   await page.waitForTimeout(300);

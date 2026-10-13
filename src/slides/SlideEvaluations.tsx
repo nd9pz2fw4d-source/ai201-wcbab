@@ -19,7 +19,7 @@ export default function SlideEvaluations() {
               animate={{ opacity: 1, x: i * 9, y: 30 - i * 8 }}
               transition={{ delay: 0.2 + i * 0.06 }}
             >
-              {i === 5 && <FileText size={64} color={theme.brandSecondary} />}
+              {i === 5 && <FileText size={64} color={theme.brandDeep} />}
             </motion.div>
           ))}
         </div>
