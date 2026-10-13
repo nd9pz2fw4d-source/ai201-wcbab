@@ -3,3 +3,5 @@ export { theme } from "../../src/theme";
 export { WcbLogo } from "../../src/components/WcbLogo";
 export { DeloitteLogo } from "../../src/components/DeloitteLogo";
 export { stations } from "../../src/data/journey";
+export { suggestedSort } from "../../src/data/sortAnswer";
+export { futureYear } from "../../src/data/claimFacts";

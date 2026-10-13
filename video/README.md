@@ -12,7 +12,7 @@ Finished file: `out/follow-the-claim-pre-read.mp4` (render it with `npm run rend
 | 0:48 | Verse 2 | Deloitte's four shifts click into place, then the survey figures and "human in the loop" |
 | 1:12 | Pre-chorus | The day: one claim, three acts (See it, Choose it, Govern it) |
 | 1:24 | Verse 3 | Eight key-term flashcards: LLM, hallucination, grounding (RAG), agent, the agent loop, least privilege, the autonomy dial, evals and human in the loop |
-| 1:57 | Final chorus | Buzzword bingo: mark a square each time you hear a term in the session |
+| 1:57 | Final chorus | The claim, done well (2028): agents carry it through the routine stations; on "A person decides" it stops at the entitlement decision and the rest dims; it finishes at close and the worker is back at work. "Agents do the legwork. People make the call." |
 | 2:10 | Outro | See you in the room, with Deloitte's readiness question to bring an answer to |
 
 The sung words are always on screen as captions, because many people will watch with the sound off.
@@ -55,6 +55,7 @@ Credits used for the current audio: two song takes 4,200, seven effects 95, two 
 - Lyrics, song style, planned section lengths, sound effect prompts, cue times: `src/timeline.ts` (change lyrics and you need a new take and new timing)
 - On-screen words and Deloitte figures: `src/content.ts`
 - Scenes: `src/scenes/`; song and effect volume: `src/PreRead.tsx`
+- Who does what in the final chorus (agent or person, per station) is the deck's suggested sort, `../src/data/sortAnswer.ts`: change it there and both follow
 - Colours, logos and station names come from the deck (`../src/theme.ts`, `../src/components/*Logo*.tsx`, `../src/data/journey.ts`), so the video always matches it
 - `node scripts/stills.mjs [seconds...]` renders review stills to `out/stills`
 

@@ -221,8 +221,16 @@ export const forceAt = (i: number, s: SectionTiming) => s.lines[4 + Math.floor(i
 /** Chorus: the claim leaves the first station and reaches the last. */
 export const claimTravel = (s: SectionTiming) => ({ first: 0.8, last: s.seconds - 2.4 });
 
-/** Final chorus: bingo square k (of 8) gets marked, spread across the chorus. */
-export const bingoMarkAt = (k: number, s: SectionTiming) => 2 + (k * (s.seconds - 5)) / 7;
+/**
+ * Final chorus: agents carry the claim to the decision, which lands on "A person decides" (line 3)
+ * and holds; the claim moves on with the last line and reaches the end of the journey.
+ */
+export const doneWellTravel = (s: SectionTiming) => ({
+  depart: 0.6,
+  decide: s.lines[2] - 0.2,
+  resume: s.lines[3] - 0.2,
+  home: Math.min(s.lines[3] + 1.6, s.seconds - 1.6),
+});
 
 // ---------- Sound effects ----------
 
@@ -269,6 +277,8 @@ export const sfxCues: SfxCue[] = [
       ? { id: "scratch", section: "terms", at: line(2, 0.1), volume: 0.7 }
       : { id: "whoosh", section: "terms", at: line(2 * i), volume: 0.45 },
   ),
-  ...range(8).map((k): SfxCue => ({ id: "ding", section: "chorus2", at: (s) => bingoMarkAt(k, s), volume: 0.45 })),
+  { id: "whoosh", section: "chorus2", at: (s) => doneWellTravel(s).depart },
+  { id: "stamp", section: "chorus2", at: (s) => doneWellTravel(s).decide + 0.1 },
+  { id: "ding", section: "chorus2", at: (s) => doneWellTravel(s).home + 0.2 },
   { id: "applause", section: "outro", at: fixed(0.5) },
 ];

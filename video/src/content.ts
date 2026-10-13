@@ -110,4 +110,3 @@ export const terms: Term[] = [
   { term: "Evals + human in the loop", short: "Evals", meaning: "Test before you trust. A person decides.", example: "Right answer, sources shown, fair, private", icon: FlaskConical },
 ];
 
-export const bingoFree = "Follow the claim";
