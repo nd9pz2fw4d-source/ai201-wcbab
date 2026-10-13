@@ -27,16 +27,9 @@ function check(team: Team): Flag[] {
   if (!team.owner) flags.push({ level: "risk", text: "No accountable person owns these agents" });
   for (const c of on) {
     const m = team.members[c.id];
-    if (m.access === "act" && !m.approval) {
-      flags.push(
-        c.sensitive
-          ? { level: "risk", text: `${c.name} acts with no one approving` }
-          : { level: "warn", text: `${c.name} acts alone. Is the risk low enough?` },
-      );
+    if (c.needsApproval && m.access === "act" && !m.approval) {
+      flags.push({ level: "risk", text: `${c.name} acts with no one approving` });
     }
-  }
-  if (on.length >= 4 && on.every((c) => team.members[c.id].access === "act")) {
-    flags.push({ level: "warn", text: "Every agent can act. Who checks the whole picture?" });
   }
   return flags;
 }
@@ -100,12 +93,17 @@ export default function SlideAgentTeamBuilder() {
                   </Pill>
                 ))}
               </div>
-              {m.on && m.access === "act" && (
+              {m.on && m.access === "act" && c.needsApproval && (
                 <div className="ml-auto">
                   <Pill active={m.approval} color={theme.human} onClick={() => set(c.id, { approval: !m.approval })}>
                     {m.approval ? "Person approves" : "No approval"}
                   </Pill>
                 </div>
+              )}
+              {m.on && m.access === "act" && !c.needsApproval && (
+                <span className="ml-auto text-[21px] font-medium" style={{ color: theme.agent }}>
+                  Fine to act on its own
+                </span>
               )}
             </div>
           );

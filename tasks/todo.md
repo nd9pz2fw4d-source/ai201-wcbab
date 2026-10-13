@@ -139,3 +139,12 @@ Objectives: (1) recognize where AI creates value and how transformation is accom
 - [x] How ready are we?: six foundations scored 1 to 5, live radar, weakest two marked "Invest first", CSV download (all, in Act 3 before executive accountabilities)
 - [x] WCB-Alberta palette: AI blue #3399CC, people green #98C857 (deepened #5F9230 for text contrast 3.7:1), claim file dark blue #117BBC, gold key moments; old teal and coral tints replaced
 - [x] Verify: 49/49 interaction checks, new `scripts/futurism-states.mjs` drives every new interaction (no slide advance, download works), no console errors, screenshots reviewed
+
+---
+
+# Round 7: feedback on the agent team, cost of waiting, live moment and sort
+- [x] Agent team: only Letters and Payment need a person's approval to act; Intake, Evidence and Medical show "Fine to act on its own"; removed the "every agent can act" warning
+- [x] Cost of waiting: linear scale so AI capability curves exponentially; readiness catches up late; added "Waiting also costs our people" (skills fade, people want the latest tools, no one wants to feel left behind) on the slide and in the notes
+- [x] Live moment: steps play in order every 3.5 s with Pause and Next step; the room votes stop signs onto any step (click adds, right-click removes); "Show suggested stops" after the last step (recommendation, payment, decision letter). Clinic request no longer a suggested stop
+- [x] Sort: suggested Automate now Register, Sort and assign, Gather evidence, Benefits and payment; Assist: Report, Medical review; notes updated
+- [x] Verify: 50/50 interaction checks (new live-moment checks), futurism-states script, screenshots reviewed

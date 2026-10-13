@@ -64,15 +64,21 @@ await page.getByRole("button", { name: /Reset/ }).click();
 check("vote reset", /\b0\s*$/.test((await tile.innerText()).trim()));
 
 // Slide 10 STOP / resume
-h = await goId(page, "live-moment", 75, 5500);
-await page.locator("button:has-text('STOP')").click();
-await page.waitForTimeout(400);
-check("STOP does not advance", (await hash(page)) === h);
-const resumeVisible = await page.getByRole("button", { name: /Resume/ }).isVisible();
-check("STOP pauses and shows Resume", resumeVisible);
-await page.screenshot({ path: `${out}/s10-stopped.png` });
-await page.getByRole("button", { name: /Resume/ }).click();
-check("Resume does not advance", (await hash(page)) === h);
+h = await goId(page, "live-moment", 75, 800);
+await page.getByRole("button", { name: /Pause/ }).click();
+await page.getByRole("button", { name: /Next step/ }).click();
+await page.getByRole("button", { name: /Next step/ }).click();
+check("live moment steps in order on Next step", (await page.locator("text=Pulled employer report").count()) === 1 && (await page.locator("text=Sent request to clinic").count()) === 0);
+await page.getByRole("button", { name: "Stop sign on: Pulled employer report" }).click();
+await page.getByRole("button", { name: "Stop sign on: Pulled employer report" }).click();
+check("stop-sign votes do not advance", (await hash(page)) === h);
+const stopText = await page.getByRole("button", { name: "Stop sign on: Pulled employer report" }).innerText();
+check("stop-sign votes count", stopText.trim() === "2", stopText);
+for (let i = 0; i < 10; i++) { const n = page.getByRole("button", { name: /Next step/ }); if (await n.count()) await n.click(); }
+await page.getByRole("button", { name: /Show suggested stops/ }).click();
+await page.waitForTimeout(500);
+check("suggested stops shown without advancing", (await hash(page)) === h && (await page.locator("text=A person steps in").count()) === 3);
+await page.screenshot({ path: `${out}/s10-stops.png` });
 
 // Slide 12 sort board: mouse drag
 h = await goId(page, "sort");

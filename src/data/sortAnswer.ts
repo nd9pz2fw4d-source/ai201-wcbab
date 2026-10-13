@@ -12,10 +12,10 @@ export const sortColumns: { id: SortColumn; label: string }[] = [
 export const suggestedSort: Record<StationId, SortColumn> = {
   report: "assist",
   register: "automate",
-  sort: "assist",
-  evidence: "assist",
+  sort: "automate",
+  evidence: "automate",
   medical: "assist",
   entitlement: "human",
-  benefits: "assist",
+  benefits: "automate",
   close: "human",
 };

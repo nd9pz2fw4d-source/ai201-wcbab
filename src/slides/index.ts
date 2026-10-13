@@ -309,7 +309,7 @@ export const slides: SlideDef[] = [
     component: SlideAgentTeamBuilder,
     tone: "light",
     notes:
-      "Hands-on: the room builds an adjudicator's agent team. Add agents with the plus button, give each Read, Draft or Act access, and for agents that act, decide whether a person approves. The governance check on the right reacts live: no named owner, an agent acting on a worker's letters or payments with no one approving, or every agent able to act with no one checking the whole picture. Try it in this order: add the Payment agent with Act and no approval (red flag), then add an approval step, then name an owner, until it reads 'Owned, approved, governed'. The lesson: in Copilot's world, giving agents identities, permissions and owners is a leadership decision, not an IT setting.",
+      "Hands-on: the room builds an adjudicator's agent team. Add agents with the plus button and give each Read, Draft or Act access. Not every action needs a person: intake checks, evidence requests to clinics and medical summaries can run on their own, with every step recorded. What reaches the worker (letters) or moves money (payments) needs a person to approve. The governance check reacts live: no named owner, or the Letters or Payment agent acting with no one approving. Try it: give Intake, Evidence and Medical 'Act' (no flags), then add the Payment agent with Act (red flag), add the approval step, then name an owner, until it reads 'Owned, approved, governed'. The lesson: in Copilot's world, giving agents identities, permissions and owners is a leadership decision, not an IT setting.",
   },
   {
     id: "floor-not-ceiling",
@@ -369,7 +369,7 @@ export const slides: SlideDef[] = [
     component: SlideCostOfWaiting,
     tone: "light",
     notes:
-      "The burning platform. Drag the slider to change when WCB starts building readiness (data, written rules, agent identities, skills, owners, monitoring). The blue line is what AI can do; the green line is what we can actually use. The gold area between them is value we leave on the table, and it grows fast the longer we wait, because capability compounds while readiness takes years to build. The readout uses METR's long-run trend (task length doubling about every 7 months, measured on software and research tasks) and is an extrapolation: it holds only if the trend continues. The readiness period (2.5 years) is an illustrative assumption; replace it with WCB's own estimate (src/data/osOfWork.ts). The message is not 'AI will do X by 2030'. It is: readiness is slow, capability is fast, so the cost of starting late is a widening gap.",
+      "The burning platform. Drag the slider to change when WCB starts building readiness (data, written rules, agent identities, skills, owners, monitoring). The blue line is what AI can do, compounding (on this scale it curves sharply upward); the green line is what we can actually use. The gold area between them is value we leave on the table, and it grows fast the longer we wait, because capability compounds while readiness takes years to build. The readout uses METR's long-run trend (task length doubling about every 7 months, measured on software and research tasks) and is an extrapolation: it holds only if the trend continues. The readiness period (2.5 years) is an illustrative assumption; replace it with WCB's own estimate (src/data/osOfWork.ts). The message is not 'AI will do X by 2030'. It is: readiness is slow, capability is fast, so the cost of starting late is a widening gap. It also costs our people. Even if today feels fine and we could keep working the way we do, standing still is not neutral: skills fade while the tools move on, and our people want to learn the latest tools and work somewhere forward-thinking. Nobody wants to feel they are falling behind because they don't have access. Investing in readiness is also investing in our people.",
   },
   {
     id: "what-stays",
@@ -399,7 +399,7 @@ export const slides: SlideDef[] = [
     component: Slide10LiveMoment,
     tone: "light",
     notes:
-      "The trace plays one step at a time. Ask the room to call 'stop' where a person should step in, and click STOP to pause and mark that step. Resume to continue. Natural places to stop: before it sends anything outside WCB (request to clinic), before a recommendation on entitlement, before a payment is scheduled, before a decision letter goes to the worker. You can replace this slide with a live demo; keep this trace as the backup in case the live tool fails.",
+      "The trace plays one step at a time, in order, every few seconds; use Pause and Next step to go at the room's pace and narrate each step. As steps appear, the room calls out where a person should step in; click that step's stop sign to add a vote (right-click removes one). Several stop signs are fine. When the trace finishes, click 'Show suggested stops' to compare. Suggested: the recommendation to accept the claim (a decision about benefits), scheduling the first payment (money moves) and emailing the worker a decision letter (it reaches the worker). Opening the claim, checking details, pulling reports, finding the missing note and requesting it from the clinic can run on their own, with every step recorded. Expect debate on the clinic request: that is the point. You can replace this slide with a live demo; keep this trace as the backup in case the live tool fails.",
   },
 
   // ---------- Act 2: Choose it ----------
@@ -430,7 +430,7 @@ export const slides: SlideDef[] = [
     component: Slide12Sort,
     tone: "light",
     notes:
-      "Start the timer (8 minutes, 6 in the 60-minute version). Tables discuss each station; drag the cards live as the room answers. Then click 'Show a suggested answer' to compare. It is a suggestion, not the correct answer. Low-risk, high-confidence tasks can be automated with rules and checks. Decisions that affect a person's benefits keep a person accountable. The suggested layout lives in src/data/sortAnswer.ts.",
+      "Start the timer (8 minutes, 6 in the 60-minute version). Tables discuss each station; drag the cards live as the room answers. Then click 'Show a suggested answer' to compare. It is a suggestion, not the correct answer. The suggestion is deliberately ambitious: registering and checking details, sorting and assigning, gathering evidence and issuing benefits and payments that a person has already decided can all be automated, with rules, checks and every step recorded. Reporting the injury and medical review are assisted, because they involve a worker's story and clinical judgment. The entitlement decision and closing or appeals stay human-led because they decide a person's benefits. The suggested layout lives in src/data/sortAnswer.ts.",
   },
   {
     id: "patterns",

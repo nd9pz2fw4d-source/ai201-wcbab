@@ -34,7 +34,7 @@ export const liveTrace: TraceStep[] = [
   { time: "09:03", actor: "agent", who: "Evidence agent", text: "Pulled employer report", station: "evidence" },
   { time: "09:03", actor: "agent", who: "Evidence agent", text: "Found missing doctor's note", station: "evidence" },
   { time: "09:04", actor: "agent", who: "Evidence agent", text: "Drafted request to clinic", station: "evidence" },
-  { time: "09:04", actor: "agent", who: "Evidence agent", text: "Sent request to clinic", station: "evidence", stepInHint: true },
+  { time: "09:04", actor: "agent", who: "Evidence agent", text: "Sent request to clinic", station: "evidence" },
   { time: "11:40", actor: "agent", who: "Medical agent", text: "Summarized doctor's note", station: "medical" },
   { time: "11:41", actor: "agent", who: "Policy agent", text: "Checked claim against policy", station: "entitlement" },
   { time: "11:41", actor: "agent", who: "Policy agent", text: "Recommended: accept claim", station: "entitlement", stepInHint: true },

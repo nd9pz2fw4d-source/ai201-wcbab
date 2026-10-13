@@ -28,11 +28,12 @@ export const adaptations = [
 // "Build your agent team".
 export type Access = "read" | "draft" | "act";
 export const teamCandidates = [
-  { id: "intake", name: "Intake agent", acts: "Opens and checks new claims", sensitive: false },
-  { id: "evidence", name: "Evidence agent", acts: "Requests records from clinics", sensitive: false },
-  { id: "medical", name: "Medical agent", acts: "Summarizes medical files", sensitive: true },
-  { id: "letters", name: "Letters agent", acts: "Writes to the worker", sensitive: true },
-  { id: "payment", name: "Payment agent", acts: "Schedules payments", sensitive: true },
+  // needsApproval: acting on its own is only a problem when it reaches the worker or moves money.
+  { id: "intake", name: "Intake agent", acts: "Opens and checks new claims", needsApproval: false },
+  { id: "evidence", name: "Evidence agent", acts: "Requests records from clinics", needsApproval: false },
+  { id: "medical", name: "Medical agent", acts: "Summarizes medical files", needsApproval: false },
+  { id: "letters", name: "Letters agent", acts: "Writes to the worker", needsApproval: true },
+  { id: "payment", name: "Payment agent", acts: "Schedules payments", needsApproval: true },
 ] as const;
 
 // "How ready are we?": six foundations, scored 1 to 5 by the room.
