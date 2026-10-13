@@ -10,7 +10,7 @@ import { useSlideState } from "../hooks/useSlideState";
 import { theme } from "../theme";
 
 // Slow enough for the presenter to narrate each step. The one sequence that runs longer than 2.5 seconds.
-const STEP_MS = 3500;
+const STEP_MS = 1800;
 
 /** A small stop sign. */
 function StopSign({ size, filled, count }: { size: number; filled: boolean; count?: number }) {

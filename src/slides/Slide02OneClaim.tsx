@@ -1,10 +1,9 @@
-import { AnimatePresence, animate, motion, useMotionValue, useTransform } from "framer-motion";
-import { Calculator, FileText, Hand, Mail, Phone, Stethoscope, Building2 } from "lucide-react";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
+import { Building2, Calculator, FileText, Hand, Mail, Phone, RotateCcw, Stethoscope } from "lucide-react";
 import { ClaimFile } from "../components/ClaimFile";
-import { SlideButton } from "../components/Interactive";
+import { Interactive } from "../components/Interactive";
 import { Headline } from "../components/Text";
-import { claimPages, handsOnOneClaim } from "../data/claimFacts";
+import { claimPages, handRanges } from "../data/claimFacts";
 import { useSlideState } from "../hooks/useSlideState";
 import { theme } from "../theme";
 
@@ -12,25 +11,9 @@ const pageIcons = [FileText, Building2, Stethoscope, Calculator, Mail, Phone];
 const CX = 820;
 const CY = 610;
 
-function Counter({ to }: { to: number }) {
-  const n = useMotionValue(0);
-  const text = useTransform(n, (v) => Math.round(v).toString());
-  useEffect(() => {
-    const c = animate(n, to, { duration: 2, ease: "easeOut" });
-    return () => c.stop();
-  }, [n, to]);
-  return <motion.span>{text}</motion.span>;
-}
-
 export default function Slide02OneClaim() {
-  const [revealed, setRevealed] = useSlideState("s2:revealed", false);
-
-  // Hands on an arc round the file's sides and underneath, clear of the pages fanned above.
-  const hands = Array.from({ length: handsOnOneClaim }, (_, i) => {
-    const deg = 8 + (164 * i) / Math.max(1, handsOnOneClaim - 1);
-    const rad = (deg * Math.PI) / 180;
-    return { x: CX + 580 * Math.cos(rad), y: CY + 30 + 320 * Math.sin(rad), d: 0.1 + i * (1.6 / handsOnOneClaim) };
-  });
+  const [votes, setVotes] = useSlideState<Record<string, number>>("s2:votes", {});
+  const vote = (r: string, d: number) => setVotes((v) => ({ ...v, [r]: Math.max(0, (v[r] ?? 0) + d) }));
 
   return (
     <div className="absolute inset-0">
@@ -76,41 +59,51 @@ export default function Slide02OneClaim() {
           </g>
         </motion.g>
 
-        {/* Hands: one per person who touches the claim */}
-        <AnimatePresence>
-          {revealed &&
-            hands.map((h, i) => (
-              <motion.g
-                key={i}
-                initial={{ x: CX, y: CY, opacity: 0, scale: 0.2 }}
-                animate={{ x: h.x, y: h.y, opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 140, damping: 15, delay: h.d }}
-              >
-                <circle r={34} fill={theme.human} />
-                <Hand x={-19} y={-19} width={38} height={38} color="#fff" strokeWidth={2} />
-              </motion.g>
-            ))}
-        </AnimatePresence>
       </svg>
 
-      {/* Counter */}
-      <div className="absolute right-[150px] top-[330px] flex flex-col items-center gap-8">
-        <div
-          className="grid h-[300px] w-[300px] place-items-center rounded-full bg-white text-[150px] font-bold tabular-nums"
-          style={{ color: revealed ? theme.human : "#C9DDEA", boxShadow: "0 1px 0 #C9DDEA, 0 16px 40px rgba(12,53,83,0.1)" }}
-        >
-          {revealed ? <Counter to={handsOnOneClaim} /> : "?"}
+      {/* Quick vote: how many hands touch this claim? */}
+      <Interactive className="absolute right-[90px] top-[280px] flex w-[440px] flex-col gap-4 rounded-3xl bg-white p-8" style={{ boxShadow: "0 1px 0 #C9DDEA, 0 16px 40px rgba(12,53,83,0.1)" }}>
+        <div className="flex items-center gap-3 text-[34px] font-bold leading-tight" style={{ color: theme.brandPrimary }}>
+          <Hand size={38} color={theme.human} className="shrink-0" /> How many hands touch this claim?
         </div>
-        {!revealed ? (
-          <SlideButton tone="coral" onClick={() => setRevealed(true)}>
-            <Hand size={30} /> Reveal
-          </SlideButton>
-        ) : (
-          <SlideButton tone="ghost" className="!px-6 !py-2 !text-[22px]" onClick={() => setRevealed(false)}>
-            Hide
-          </SlideButton>
-        )}
-      </div>
+        {handRanges.map((r) => {
+          const n = votes[r] ?? 0;
+          const max = Math.max(1, ...handRanges.map((x) => votes[x] ?? 0));
+          return (
+            <button
+              key={r}
+              type="button"
+              data-interactive
+              aria-label={`Vote: ${r}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                vote(r, 1);
+              }}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                vote(r, -1);
+              }}
+              className="relative flex h-[70px] items-center overflow-hidden rounded-2xl px-5 text-left"
+              style={{ background: "#F2F7FA" }}
+            >
+              <motion.span className="absolute inset-y-0 left-0" style={{ background: theme.humanLight, opacity: 0.45 }} animate={{ width: `${(n / max) * 100}%` }} />
+              <span className="relative flex-1 text-[30px] font-medium" style={{ color: theme.ink }}>
+                {r}
+              </span>
+              <span className="relative text-[34px] font-bold tabular-nums" style={{ color: n ? theme.human : "#C9D6E0" }}>
+                {n}
+              </span>
+            </button>
+          );
+        })}
+        <div className="flex items-center justify-between text-[19px]" style={{ color: theme.muted }}>
+          <span>Click to add a vote, right-click to remove</span>
+          <button type="button" data-interactive className="flex items-center gap-1 underline" onClick={(e) => { e.stopPropagation(); setVotes({}); }}>
+            <RotateCcw size={16} /> Reset
+          </button>
+        </div>
+      </Interactive>
     </div>
   );
 }

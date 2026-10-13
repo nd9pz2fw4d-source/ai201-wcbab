@@ -62,7 +62,7 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 ## Before the session: items to confirm
 
 - [ ] `workerName` in `src/config.ts` is still the `[WORKER_NAME]` placeholder
-- [ ] "One claim" slide: the hands count (`handsOnOneClaim`, currently 12) is a placeholder. VERIFY with the WCB claims team
+- [ ] "One claim" slide: the room now votes on a range; no number is shown. If the WCB claims team gives a typical number of roles, say it aloud (notes). `handsOnOneClaim` (12) is only used to draw the hands on "Copilot is the floor, not the ceiling" and is not shown as a figure
 - [ ] "Many ideas, a few patterns" slide: "100+ ideas. About 8 patterns." comes from the brief. VERIFY against the idea inventory
 - [ ] "Five stops on the journey" slide: opportunity names. Confirm with the WCB team
 - [ ] Logos: the WCB logo is drawn from WCB's own SVG (dark slides) and WCB's light-background colours from their share image (light slides), with no backing box. The Deloitte logo is drawn from Deloitte's own SVG on deloitte.com (white on dark, black on light as in their print logo). Confirm co-branding use with both brand teams

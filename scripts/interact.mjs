@@ -42,10 +42,13 @@ for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/
 
 // Slide 2 reveal button does not advance
 let h = await goId(page, "one-claim", 75, 900);
-await page.getByRole("button", { name: "Reveal" }).click();
-await page.waitForTimeout(2600);
-check("Reveal button does not advance", (await hash(page)) === h);
-await page.screenshot({ path: `${out}/s02-revealed.png` });
+await page.getByRole("button", { name: "Vote: 5 to 10" }).click();
+await page.getByRole("button", { name: "Vote: 5 to 10" }).click();
+await page.getByRole("button", { name: "Vote: 11 to 20" }).click();
+await page.waitForTimeout(500);
+check("hands vote does not advance", (await hash(page)) === h);
+check("hands vote counts", (await page.getByRole("button", { name: "Vote: 5 to 10" }).innerText()).trim().endsWith("2"));
+await page.screenshot({ path: `${out}/s02-vote.png` });
 // Space after a button click navigates instead of pressing the button again
 await page.keyboard.press("Space");
 await page.waitForTimeout(300);

@@ -76,7 +76,7 @@ export const slides: SlideDef[] = [
     component: Slide02OneClaim,
     tone: "light",
     notes:
-      "Ask the room first: how many hands touch this claim? Take a few guesses, then click Reveal. The pages are the injury report, employer report, doctor's note, pay stubs, emails and phone notes. Every hand is a person doing careful work. The number shown is a placeholder // VERIFY with WCB claims team (src/data/claimFacts.ts). Do not present it as a real figure until confirmed.",
+      "Ask the room: how many hands touch this one claim? Take a quick vote: click a range once per hand raised (right-click removes one). There is no 'right' number on screen on purpose. Use the spread of answers: whatever the number, every hand is a person doing careful work, and every handoff between them is a place the claim waits. If the WCB claims team gives you a typical number of roles before the session, say it out loud here. The pages are the injury report, employer report, doctor's note, pay stubs, emails and phone notes.",
   },
   {
     id: "objectives",
@@ -399,7 +399,7 @@ export const slides: SlideDef[] = [
     component: Slide10LiveMoment,
     tone: "light",
     notes:
-      "The trace plays one step at a time, in order, every few seconds; use Pause and Next step to go at the room's pace and narrate each step. As steps appear, the room calls out where a person should step in; click that step's stop sign to add a vote (right-click removes one). Several stop signs are fine. When the trace finishes, click 'Show suggested stops' to compare. Suggested: the recommendation to accept the claim (a decision about benefits), scheduling the first payment (money moves) and emailing the worker a decision letter (it reaches the worker). Opening the claim, checking details, pulling reports, finding the missing note and requesting it from the clinic can run on their own, with every step recorded. Expect debate on the clinic request: that is the point. You can replace this slide with a live demo; keep this trace as the backup in case the live tool fails.",
+      "The trace plays one step at a time, in order, about every 2 seconds; use Pause and Next step to go at the room's pace and narrate each step. As steps appear, the room calls out where a person should step in; click that step's stop sign to add a vote (right-click removes one). Several stop signs are fine. When the trace finishes, click 'Show suggested stops' to compare. Suggested: the recommendation to accept the claim (a decision about benefits), scheduling the first payment (money moves) and emailing the worker a decision letter (it reaches the worker). Opening the claim, checking details, pulling reports, finding the missing note and requesting it from the clinic can run on their own, with every step recorded. Expect debate on the clinic request: that is the point. You can replace this slide with a live demo; keep this trace as the backup in case the live tool fails.",
   },
 
   // ---------- Act 2: Choose it ----------
