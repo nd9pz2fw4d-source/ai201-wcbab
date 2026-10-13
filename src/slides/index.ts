@@ -155,7 +155,7 @@ export const slides: SlideDef[] = [
     id: "how-it-works",
     act: "see",
     title: "How it works",
-    include: ALL,
+    include: FROM_90,
     component: SlideHowItWorks,
     tone: "dark",
     notes:
@@ -175,7 +175,7 @@ export const slides: SlideDef[] = [
     id: "grounding",
     act: "see",
     title: "Give it the right sources",
-    include: FROM_75,
+    include: FROM_90,
     component: SlideGrounding,
     tone: "light",
     notes:
@@ -205,7 +205,7 @@ export const slides: SlideDef[] = [
     id: "tools",
     act: "see",
     title: "Tools are its hands",
-    include: FROM_75,
+    include: FROM_90,
     component: SlideTools,
     tone: "light",
     notes:
@@ -255,7 +255,7 @@ export const slides: SlideDef[] = [
     id: "where-going",
     act: "see",
     title: "Five things to watch",
-    include: FROM_75,
+    include: FROM_90,
     component: SlideWhereGoing,
     tone: "light",
     notes:
@@ -355,7 +355,7 @@ export const slides: SlideDef[] = [
     id: "what-shifts",
     act: "see",
     title: "What shifts for us",
-    include: FROM_75,
+    include: FROM_90,
     component: SlideWhatShifts,
     tone: "light",
     notes:
@@ -375,7 +375,7 @@ export const slides: SlideDef[] = [
     id: "what-stays",
     act: "see",
     title: "What doesn't change",
-    include: FROM_75,
+    include: FROM_90,
     component: SlideWhatStays,
     tone: "light",
     notes:
@@ -420,7 +420,7 @@ export const slides: SlideDef[] = [
     component: SlideOpportunityTypes,
     tone: "light",
     notes:
-      "A simple way to tell AI opportunities apart. 1. Personal productivity: Copilot helping one person draft, summarize, search. Owned by each of us; value is real but scattered. 2. Team workflow: AI built into a team's process, like medical files summarized for adjudicators. Owned by managers; value shows up as faster, more consistent work. 3. End-to-end journey: the claim journey redesigned with agents and people, across teams and systems. 4. New services: things WCB could not do before, like reaching a worker early, before a claim goes long. The top two rungs cross organizational boundaries, change policy, roles and data, and need funding and risk decisions. Only executives can own them. Most organizations stop at rung 1. The value is at 3 and 4.",
+      "A simple way to tell AI opportunities apart. 1. Personal productivity: Copilot helping one person draft, summarize, search. Owned by each of us; value is real but scattered. 2. Team workflow: AI built into a team's process, like medical files summarized for adjudicators. Owned by managers; value shows up as faster, more consistent work. 3. End-to-end journey: the claim journey redesigned with agents and people, across teams and systems. 4. New services: things WCB could not do before, like reaching a worker early, before a claim goes long. The top two rungs cross organizational boundaries, change policy, roles and data, and need funding and risk decisions. Only executives can own them. Most organizations stop at rung 1. The value is at 3 and 4. To weigh any opportunity, on any rung, ask four questions: Is it valuable (does it help workers, employers or WCB in a way we can measure)? Is it feasible (is the data there, is the technology proven)? Is it safe (if it is wrong, who is affected, and who checks)? Is it ready (are our people and processes ready to change)?",
   },
   {
     id: "sort",

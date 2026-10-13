@@ -130,7 +130,7 @@ await page.keyboard.press("m");
 await page.waitForTimeout(500);
 check("M opens menu", await page.getByRole("navigation", { name: "Slides" }).isVisible());
 const greyed = await page.locator("nav button:has-text('not in this version')").count();
-check("menu greys the 12 slides outside the 75 version", greyed === 12, `greyed ${greyed}`);
+check("menu greys the 18 slides outside the 75 version", greyed === 18, `greyed ${greyed}`);
 await page.screenshot({ path: `${out}/menu-75.png` });
 await page.keyboard.press("ArrowRight");
 await page.waitForTimeout(300);
@@ -181,8 +181,8 @@ for (let i = 0; i < 55; i++) {
   await page.waitForTimeout(120);
 }
 const uniq = [...new Set(seen)];
-check("60 shows 27 slides", uniq.length === 27, uniq.join(" "));
-const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "computer-agents", "agent-meets-agent", "day-in-2028", "what-shifts", "what-stays", "supervisor", "discussion", "dynamo", "place-our-five", "adapt-os", "agent-team", "patterns", "four-questions", "readiness"];
+check("60 shows 26 slides", uniq.length === 26, uniq.join(" "));
+const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "computer-agents", "agent-meets-agent", "day-in-2028", "what-shifts", "what-stays", "supervisor", "discussion", "dynamo", "place-our-five", "adapt-os", "agent-team", "patterns", "four-questions", "readiness", "how-it-works"];
 const hiddenNums = [];
 for (const id of hidden60) hiddenNums.push(await goId(page, id, 120, 300));
 check("60 skips every slide outside its version", hiddenNums.every((n) => !uniq.includes(n)), hiddenNums.join(" "));
@@ -237,7 +237,7 @@ await page.getByRole("button", { name: /Show a suggested placement/ }).click();
 await page.waitForTimeout(600);
 check("our-five matrix and suggestion do not advance", (await hash(page)) === h && (await page.locator("text=A strong first wave. Next: the journey.").count()) > 0);
 await page.screenshot({ path: `${out}/place-five-suggested.png` });
-for (const [len, want] of [[60, 27], [75, 37], [90, 48], [120, 49]]) {
+for (const [len, want] of [[60, 26], [75, 31], [90, 48], [120, 49]]) {
   await page.goto(file + `?length=${len}#/1`);
   await page.reload();
   await page.waitForTimeout(300);
