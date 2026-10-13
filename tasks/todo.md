@@ -100,6 +100,28 @@ Goal: a short, light-hearted music video sent before the session. It sets up the
 - Mix: song mastered near 0 dB and effects came out between -19 and 0 dB peak. Effects are peak-normalized to -3 dB, song at 75%, effects at 80%: every effect measurably above the song at its cue, final peak about -0.5 dB.
 - Credits: about 8,200 (about $0.82).
 
+---
+
+# Round 5: anchor to the learning objectives; AI is more than Copilot
+Objectives: (1) recognize where AI creates value and how transformation is accomplished; (2) distinguish and evaluate AI opportunity types; (3) understand executive accountabilities for driving adoption.
+
+## Plan
+- [x] Opening: "Three things to leave with", mapping each objective to an act (all lengths)
+- [x] Act 1: "Copilot is the floor, not the ceiling" (faster hands versus a better journey) right after the Copilot slide (all)
+- [x] Act 1: "The gain came from redesign" (Paul David, 1990, electrification) (90+)
+- [x] Act 2: "Four kinds of AI opportunity" ladder with owner per rung (all)
+- [x] Act 2: "Four questions for any opportunity" (value, feasible, safe, ready) (all)
+- [x] Act 2: "Where do our five sit?" interactive matrix with a suggested placement (75+)
+- [x] Act 3: "What only executives can do" (all)
+- [x] Rebalance planned minutes; update tests and README; verify and commit
+
+## Review (round 5)
+- 7 slides added; 28 / 37 / 44 / 45 slides for 60 / 75 / 90 / 120. Planned minutes rebalanced toward Acts 2 and 3.
+- Electrification lesson verified (Paul A. David, AER 80(2), 1990); source on slide and in notes.
+- 49/49 interaction checks pass, no console errors; new slides screenshotted and spacing fixed.
+
+---
+
 ## Round 4c: replace the bingo ending
 - [x] Final chorus becomes "The claim, done well": the journey from the first chorus, now with agent and person roles per station (from the deck's suggested sort), pausing on the entitlement decision as "A person decides" is sung, then back at work
 - [x] Journey track shared by both choruses (`video/src/components/ClaimTrack.tsx`); bingo scene, its timing helper and cues removed
