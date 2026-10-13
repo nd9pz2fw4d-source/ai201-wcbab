@@ -99,3 +99,13 @@ Goal: a short, light-hearted music video sent before the session. It sets up the
 - Alignment: priming Whisper with the lyrics made it skip verse 1; without the prompt it heard all 52 lines. Kept that finding as a comment in the script.
 - Mix: song mastered near 0 dB and effects came out between -19 and 0 dB peak. Effects are peak-normalized to -3 dB, song at 75%, effects at 80%: every effect measurably above the song at its cue, final peak about -0.5 dB.
 - Credits: about 8,200 (about $0.82).
+
+## Round 4c: replace the bingo ending
+- [x] Final chorus becomes "The claim, done well": the journey from the first chorus, now with agent and person roles per station (from the deck's suggested sort), pausing on the entitlement decision as "A person decides" is sung, then back at work
+- [x] Journey track shared by both choruses (`video/src/components/ClaimTrack.tsx`); bingo scene, its timing helper and cues removed
+- [x] Verify: typecheck, stills of both choruses, full render
+
+### Review (round 4c)
+- The user found the bingo ending didn't resonate. The new ending lands on the song's strongest line and mirrors the deck's closing slide, so the video ends where the session does.
+- Roles come from `src/data/sortAnswer.ts` (entitlement and close are "Keep human-led"), the same answer the room compares against in Act 2.
+- Fixed in review: the role badge only reached full size after the claim left its station, so the "Person" badges were nearly invisible during the pause.

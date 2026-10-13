@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { Caption } from "./components/Caption";
 import { Agenda } from "./scenes/Agenda";
-import { Bingo } from "./scenes/Bingo";
 import { Chorus } from "./scenes/Chorus";
+import { DoneWell } from "./scenes/DoneWell";
 import { Intro } from "./scenes/Intro";
 import { Outro } from "./scenes/Outro";
 import { Shifts } from "./scenes/Shifts";
@@ -25,11 +25,11 @@ export interface PreReadProps {
 const scenes: Record<SectionId, () => ReactNode> = {
   intro: () => <Intro />,
   verse1: () => <Verse1 />,
-  chorus1: () => <Chorus chip="The journey" tagline="Same care. Better journey." />,
+  chorus1: () => <Chorus />,
   shifts: () => <Shifts />,
   agenda: () => <Agenda />,
   terms: () => <Terms />,
-  chorus2: () => <Bingo />,
+  chorus2: () => <DoneWell />,
   outro: () => <Outro />,
 };
 
