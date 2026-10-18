@@ -26,7 +26,7 @@ async function loadSong(props: PreReadProps): Promise<PreReadProps> {
   return { ...props, timing, sfx, hasSong: files.has("audio/song.mp3") };
 }
 
-const explainerDefaults: ExplainerProps = { manifest: { scenes: [] }, voiced: [], song: songDefaults };
+const explainerDefaults: ExplainerProps = { manifest: { scenes: [] }, song: songDefaults };
 
 export function Root() {
   return (
@@ -53,14 +53,11 @@ export function Root() {
         durationInFrames={FPS * 60}
         defaultProps={explainerDefaults}
         calculateMetadata={async ({ props }) => {
-          // The script's lines and their lengths (scripts/explainer.mjs manifest), and which have a voice yet.
+          // The script's lines, their lengths, and which have a voice yet (scripts/explainer.mjs manifest).
           const manifest = await fetchJson<Manifest>("explainer/manifest.json");
-          const voiced = getStaticFiles()
-            .map((f) => /^explainer\/voice\/(s\d+-\d+)\.mp3$/.exec(f.name)?.[1])
-            .filter((id): id is string => Boolean(id));
           const song = await loadSong(props.song);
           const seconds = musicVideoStart(scheduleBeats(manifest)) + song.timing.duration;
-          return { durationInFrames: Math.ceil(seconds * FPS), props: { ...props, manifest, voiced, song } };
+          return { durationInFrames: Math.ceil(seconds * FPS), props: { ...props, manifest, song } };
         }}
       />
     </>

@@ -11,7 +11,7 @@ import { useBeat } from "./beat";
 
 /** Which part of the explainer each scene belongs to, shown in the pill above the heading. */
 const partOf = (n: number) =>
-  n <= 1 ? "Welcome" : n <= 4 ? "Part 1 · What AI is" : n <= 9 ? "Part 2 · Agents" : n <= 12 ? "Part 3 · Executive work" : "What stays human";
+  n <= 1 ? "Welcome" : n <= 5 ? "A Tuesday with AI" : n <= 8 ? "Watch it work" : n === 9 ? "Decode the pitch" : "Before the session";
 
 /** A content scene: light background, part pill, heading (the script's scene title) and logos. */
 export function SceneShell({ children, heading }: { children: ReactNode; heading?: string }) {
@@ -96,3 +96,72 @@ export function Rise({ at, children, style }: { at: number; children: ReactNode;
 
 export const blue = (text: string) => <span style={{ color: theme.brandSecondary }}>{text}</span>;
 export const green = (text: string) => <span style={{ color: theme.human }}>{text}</span>;
+
+// ---------- Everyday mock-ups: a phone, a chat bubble, an AI assistant window ----------
+
+/** A phone, for the Tuesday scenes. */
+export function Phone({ children, x, y, title }: { children: ReactNode; x: number; y: number; title: string }) {
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: 440, height: 660, borderRadius: 56, background: theme.brandPrimary, padding: 16, boxShadow: "0 30px 60px rgba(12,53,83,0.25)" }}>
+      <div style={{ width: "100%", height: "100%", borderRadius: 42, background: theme.paper, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <div style={{ padding: "26px 24px 14px", borderBottom: `2px solid ${theme.line}`, fontSize: 26, fontWeight: 700, color: theme.brandPrimary, textAlign: "center" }}>{title}</div>
+        <div style={{ flex: 1, padding: 22, display: "flex", flexDirection: "column", gap: 14, justifyContent: "flex-end" }}>{children}</div>
+      </div>
+    </div>
+  );
+}
+
+/** A chat bubble: "me" on the right in WCB blue, others on the left in white. */
+export function Bubble({ children, me, style }: { children: ReactNode; me?: boolean; style?: CSSProperties }) {
+  return (
+    <div
+      style={{
+        alignSelf: me ? "flex-end" : "flex-start",
+        maxWidth: "88%",
+        padding: "14px 20px",
+        borderRadius: 24,
+        borderBottomRightRadius: me ? 6 : 24,
+        borderBottomLeftRadius: me ? 24 : 6,
+        background: me ? theme.agent : theme.brandTint,
+        color: me ? theme.paper : theme.ink,
+        fontSize: 28,
+        lineHeight: 1.3,
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** An AI assistant's window, for the three demos. Always marked illustrative: these are made-up examples. */
+export function AssistantWindow({ children, x, y, w, h, prompt }: { children: ReactNode; x: number; y: number; w: number; h: number; prompt: ReactNode }) {
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: w, height: h, borderRadius: 24, background: theme.paper, border: `3px solid ${theme.brandSky}`, boxShadow: "0 20px 40px rgba(12,53,83,0.12)", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "14px 22px", background: theme.brandTint }}>
+        {[theme.risk, theme.brandAccent, theme.humanLight].map((c) => (
+          <span key={c} style={{ width: 16, height: 16, borderRadius: "50%", background: c }} />
+        ))}
+        <span style={{ marginLeft: 10, fontSize: 24, fontWeight: 700, color: theme.brandPrimary }}>AI assistant</span>
+        <span style={{ marginLeft: "auto", fontSize: 20, fontWeight: 700, color: theme.brandDeep, background: theme.paper, borderRadius: 999, padding: "4px 14px" }}>Illustrative</span>
+      </div>
+      <div style={{ padding: "18px 24px", display: "flex", flexDirection: "column", gap: 16, flex: 1 }}>
+        <Bubble me style={{ fontSize: 26 }}>
+          {prompt}
+        </Bubble>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/** A small rounded label. */
+export function Tag({ children, tone = "agent", style }: { children: ReactNode; tone?: "agent" | "human" | "risk" | "gold" | "plain"; style?: CSSProperties }) {
+  const bg = { agent: theme.agent, human: theme.human, risk: theme.risk, gold: theme.brandAccent, plain: theme.paper }[tone];
+  const fg = tone === "plain" || tone === "gold" ? theme.brandPrimary : theme.paper;
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 20px", borderRadius: 999, background: bg, color: fg, border: tone === "plain" ? `3px solid ${theme.brandSky}` : "none", fontSize: 28, fontWeight: 700, ...style }}>
+      {children}
+    </span>
+  );
+}

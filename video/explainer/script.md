@@ -1,195 +1,153 @@
-# Follow the claim: the fundamentals
+# Follow the claim: before the session
 
-A pre-read for the Executive AI Academy. About 10 minutes of conversation, then the 2:20 music video as a recap.
+A pre-read for the Executive AI Academy. About 10 minutes of conversation, then the 2:20 music video as a send-off. It goes out with a one-page cheat sheet.
 
-**Ava** (a woman; her voice matched to the song's singer) guides. **Sam** (a man) asks the questions an executive would ask. Both are narrators, not real people.
+The session is about WCB: the claim, our choices, our accountabilities. This video is about you and the world: the AI you already meet, what it looks like when it works and when it slips, how to see through a pitch, and the questions to bring. It does not walk through the session's slides.
 
-Pace: slow, about 130 words a minute, with a short pause between scenes. Every spoken line is captioned. Lines marked **Ava:** or **Sam:** are spoken; lines starting "On screen" describe the picture and are not spoken.
+**Ava** (a woman; her voice matched to the song's singer) explains. **Sam** (a man; a busy, slightly sceptical executive) asks. Both are narrators, not real people.
+
+Pace: slow, about 130 words a minute, with a short pause between scenes. "(pause 2.5s)" after a line holds the picture for the viewer to think before the answer. Every spoken line is captioned. Lines marked **Ava:** or **Sam:** are spoken; lines starting "On screen" describe the picture and are not spoken. The three demos are made-up examples, labelled "Illustrative" on screen.
 
 ---
 
 ## 0. Song sting
 
-On screen: the "Follow the claim" title, the claim file stamped "Pre-read". The chorus plays for about 10 seconds and fades under Ava's first line.
+On screen: the "Follow the claim" title. The chorus plays for about 10 seconds and fades under Sam's first line.
 
-## 1. Opening
+## 1. Why watch
 
-On screen: one claim file, then the eight stations of the claim journey.
+On screen: Sam's calendar, packed; then the four parts of the video as chapter cards.
 
-**Ava:** Hi, and welcome. Before the Executive AI Academy, we want to give you something simple: a shared vocabulary.
+**Sam:** I've got a busy week. Why should I spend ten minutes on this?
 
-**Sam:** In the session, we'll follow one injured worker's claim, from the day it's reported to the day they're back at work.
+**Ava:** Because the session will use a handful of words about AI, and you already know more about them than you think. You meet AI every day.
 
-**Ava:** And to talk about where AI fits on that journey, we all need to mean the same thing when we say "AI", "agent", or "human in the loop". So: about ten minutes, a dozen ideas. Let's start.
+**Ava:** So: first, a day with AI. Then we'll watch it work, and watch it slip. Then, how to see through a sales pitch. And finally, three questions to bring with you.
 
-## 2. Three kinds of AI
+## 2. A Tuesday with AI: the next word
 
-On screen: three cards appear in turn: Predicts, Writes, Does.
+On screen: a phone keyboard. Sam types "Running late, be there in"; the suggestions "10", "five", "a minute" appear. Then the label "Large language model (LLM)".
 
-**Sam:** When people say "AI", what do they actually mean?
+**Sam:** Okay. Seven thirty, I'm texting my team that I'm running late, and my phone finishes the sentence for me.
 
-**Ava:** It helps to think of three kinds. The first predicts. Predictive AI, or machine learning, learns patterns from past data to score or forecast. How complex is this claim likely to be? How many calls will we get next week?
+**Ava:** That's the core idea behind tools like Copilot. A large language model, or LLM, predicts a likely next word, again and again. Your keyboard does a small version of it.
 
-**Ava:** The second reads and writes. Generative AI can summarize a thick claim file, answer questions about it, or draft a letter. That's what Copilot does today.
+**Sam:** So it's autocomplete.
 
-**Ava:** The third does the work. An agent doesn't just answer. It takes steps toward a goal.
+**Ava:** A very, very good autocomplete, trained on a huge amount of text. That's why these tools write so fluently. And it's also why they can be wrong: they produce what sounds likely, not what they've checked. On its own, it has no fact check, and no access to our files.
 
-**Sam:** Predicts, writes, does.
+## 3. A Tuesday with AI: the bank alert
 
-**Ava:** Exactly.
+On screen: a text from the bank, "Did you just spend $1,240 in another city? Reply YES or NO". Then the label "Predictive AI (machine learning)".
 
-## 3. The large language model, and hallucination
+**Sam:** Eight fifteen. My bank texts me. Did I just spend twelve hundred dollars in another city?
 
-On screen: "The worker hurt their…" with candidate words and their scores. Then a confident answer stamped "Not verified".
+**Ava:** That's a different kind of AI. Predictive AI, or machine learning, learns patterns from past data and scores how unusual something is. It doesn't write anything. It predicts. WCB already uses this kind, to forecast and to sort.
 
-**Sam:** So how does the "reads and writes" kind actually work?
+**Ava:** And notice what the bank does next. It doesn't cancel your card for good. It asks you. When the stakes are high, the machine flags, and a person decides.
 
-**Ava:** Underneath is a large language model, or LLM. It does one thing: given the words so far, it predicts a likely next word. Then it does it again, and again.
+## 4. A Tuesday with AI: "page four"
 
-**Ava:** Take "The worker hurt their…". The model scores every possible next word, like back, hand or knee, and picks a likely one.
+On screen: a colleague's chat reply, "Yes, section 3.2 says so. Page 4 of the policy," with a link chip. Then the labels "Grounding" and "RAG: retrieval-augmented generation".
 
-**Sam:** That sounds almost too simple.
+**Sam:** Ten o'clock. I ask a colleague about a policy, and she says: yes, it's on page four.
 
-**Ava:** It is simple. It's why these models are so fluent. But it's also why they can be wrong: a model produces what sounds likely, not what it has checked. A fluent, confident answer that isn't true is called a hallucination.
+**Ava:** And you trust it, because she showed you where. That's grounding. A grounded AI looks things up in trusted sources first, answers from them, and shows you the source.
 
-**Sam:** So confident isn't the same as correct.
+**Sam:** And if she'd just said "I think so"?
 
-**Ava:** Right. Fluent is not the same as verified.
+**Ava:** Then you'd check. Hold AI to the same standard. You'll hear grounding called RAG: retrieval-augmented generation. Retrieve the right documents, add them to the question, then generate the answer from them. And it's only as good as the documents we give it.
 
-## 4. Grounding, and RAG
+## 5. A Tuesday with AI: the trip
 
-On screen: the question goes to three sources (policy manual, claim file, medical guideline); the answer comes back with a citation chip, "Clinic report, page 2". Then the three letters R, A, G, each expanding into its word.
+On screen: two panels. Left, a chatbot listing flights. Right, an agent working through steps (flight, hotel, calendar), then pausing on "Pay $1,860?" with Approve and Decline buttons.
 
-**Sam:** Then how can we trust what it says about a real claim?
+**Sam:** One o'clock. I need to get to Calgary on Thursday.
 
-**Ava:** We ground it. Before it answers, the system looks things up in trusted sources, like our policy manual, the claim file, or medical guidelines, and answers from those.
+**Ava:** A chatbot would list some flights. An agent books the trip. It has a goal, tools it's allowed to use, some memory of your preferences, and instructions. It plans a step, acts, checks the result, and repeats.
 
-**Ava:** You'll hear this called RAG: retrieval-augmented generation. Retrieval: find the right documents. Augmented: add them to the question. Generation: write the answer from them.
+**Ava:** It can only use what it's connected to: it can search flights and hold a hotel, but it can't spend from the company account. Only the access the job needs. That's called least privilege.
 
-**Sam:** And how would I know it did that?
+**Ava:** And a good one stops before it pays, and asks you. That's the autonomy dial: how much it may do alone, from just suggesting, to drafting, to acting with approval, all the way to acting alone. You, approving, are the human in the loop.
 
-**Ava:** Citations. A grounded answer shows where it came from, so a person can check it in seconds. Ask that of any AI tool: where did this answer come from, and can I see it?
+**Sam:** So: predicts, writes, does.
 
-## 5. What makes an agent
+**Ava:** Three kinds of AI. Exactly.
 
-On screen: the model in the middle; five parts appear around it: Goal, Instructions, Tools, Memory, Person.
+## 6. Watch it work: two summaries
 
-**Sam:** You said agents do the work. How is that different from a chatbot?
+On screen: an AI assistant window, labelled "Illustrative". The prompt "Summarize this 40-message thread". Two answers side by side: one with source chips under each point, one without. A countdown, then a tick on the sourced answer.
 
-**Ava:** A chatbot answers a question. An agent pursues a goal. The language model is the reasoning engine in the middle, and around it are five parts.
+**Ava:** Now let's watch some AI at work. Here are two summaries of the same long email thread. Which would you trust?
 
-**Ava:** A goal: what "done" looks like, say, "get this claim ready for a decision". Instructions: the rules and limits it must follow. Tools: the systems it may use. Memory: what it knows about this claim so far. And a person, who approves and decides.
+(pause 2.5s)
 
-**Sam:** And when an agent goes wrong?
+**Sam:** The one that shows me where each point came from.
 
-**Ava:** It's usually one of those five: a vague goal, a missing rule, too much access, out-of-date memory, or no person at the right moment.
+**Ava:** Same. Both read well. Only one lets you check it in seconds. Now picture a thick medical file instead of an email thread. A summary is only useful if the person deciding can see the page it came from.
 
-## 6. The agent loop
+## 7. Watch it slip: the confident answer
 
-On screen: a loop of Plan, Act, Check, with the example steps lighting up in turn, ending on "Hand to a person".
+On screen: the assistant is asked "What did the leadership team decide last Tuesday?" A beat with "What do you think happens?" Then a confident, specific answer. Then a stamp: "Made up".
 
-**Sam:** What does an agent actually do, step by step?
+**Ava:** Next, we ask it something it can't know: what the leadership team decided last Tuesday. It wasn't in the room, and nobody gave it the notes. What do you think happens?
 
-**Ava:** It runs a loop. Plan the next step. Act, usually by using a tool. Check the result. Then repeat until the goal is met.
+(pause 2.5s)
 
-**Ava:** Say it finds the doctor's note is missing. It plans to ask the clinic for it, drafts the request, and then stops, because sending anything outside WCB needs a person's approval.
+**Sam:** It says it doesn't know?
 
-**Sam:** So it knows when to stop.
+**Ava:** Sometimes. Here, it gives a confident, specific answer, and none of it happened. That's called a hallucination.
 
-**Ava:** If we design it to: when the goal is met, when a rule says a person must approve, or when it's unsure. And because each step builds on the last, one early mistake can carry forward. You'll see that in the session.
+**Sam:** Why would it do that?
 
-## 7. Tools and permissions
+**Ava:** Remember the next word. It's built to produce a likely-sounding answer, not to say "I wasn't there". The fix is the same as before: ground it in the right sources, ask where an answer came from, and have a person check anything that matters. Fluent is not the same as verified.
 
-On screen: three levels, Read, Draft, Act, with "Act" outlined in red. Then an agent badge with its own ID and a named owner.
+## 8. Watch it work: the draft
 
-**Sam:** What decides what an agent can touch?
+On screen: the assistant drafts a reply to a worker who is upset about a delay. A person's cursor changes one sentence to warmer wording, then clicks Send. Labels: "AI drafts", "A person decides", "Who sent it? The person".
 
-**Ava:** Tools are its hands, and it can only use what we connect it to. There are three levels: read, to look things up; draft, to prepare something for a person; and act, to change something in the world, like sending a letter or scheduling a payment.
+**Ava:** Last one. It drafts a reply to a worker who's upset about a delay. It's quick and mostly right. But a person reads it, changes one sentence to sound more human, and only then sends it.
 
-**Ava:** The principle is least privilege: only the access the job needs. And like a new hire, every agent gets its own identity and a named human owner.
+**Sam:** And if it had gone out wrong?
 
-**Sam:** So that's an IT setting?
+**Ava:** The person who sent it owns it. AI can draft, sort and fetch, but accountability doesn't move to the machine. That's why, for anything that reaches a worker or decides their benefits, a person stays in the loop.
 
-**Ava:** IT sets it up. But what agents may do on WCB's behalf is a leadership decision.
+## 9. Decode the pitch
 
-## 8. The autonomy dial, and human in the loop
+On screen: a glossy pitch slide: "Our AI agent is 99% accurate, fully autonomous, learns your business, and plugs into all your systems." Each phrase is struck through in turn and replaced by a question, numbered 1 to 5.
 
-On screen: a dial with five positions: Suggests, Drafts, Acts with approval, Acts then reports, Acts alone. The needle moves as Ava names each one.
+**Sam:** Here's one I hear a lot. "Our AI agent is ninety-nine percent accurate, fully autonomous, learns your business, and plugs into all your systems."
 
-**Sam:** How much should an agent do on its own?
+**Ava:** Let's decode it. "Ninety-nine percent accurate": on what tests, and on cases like ours? Those tests are called evals. Ask to see them.
 
-**Ava:** Picture a dial. At one end, it only suggests. Then it drafts for a person. Then it acts with approval. Then it acts and reports afterwards. At the far end, it acts alone.
+**Ava:** "Fully autonomous": for which tasks, and where does a person approve? "Learns your business": from what data, and can it show where an answer came from?
 
-**Ava:** Autonomy is a setting we choose for each task, not a feature of the technology. The rule: the more independently it acts, the stronger the oversight must be.
+**Ava:** "Plugs into all your systems": what can it read, what can it draft, and what can it actually do? It should have only the access the job needs. That's least privilege.
 
-**Sam:** Which is where "human in the loop" comes in.
+**Ava:** And one more: when it's wrong, who notices, and can we see what it did?
 
-**Ava:** Yes. A person reviews or approves at the moments that matter. And for decisions about a worker's benefits, a person decides.
+**Sam:** And if they can't answer?
 
-## 9. Evals
+**Ava:** Then that is your answer.
 
-On screen: a test set of past claims, scored on five checks: right answer, sources shown, fair, private, knows when to hand over.
+**Sam:** Five questions. I can use those on Monday.
 
-**Sam:** Before we switch something on, how do we know it's good enough?
+## 10. Three questions to bring
 
-**Ava:** We test it, like any other control. These tests are called evals, short for evaluations. Run it over past claims, with personal details removed, and score it: right answer, sources shown, fair, private, and knows when to hand over to a person.
+On screen: one line from Deloitte's 2026 paper, with its source. Then three question cards, one at a time. Then the cheat sheet, sliding in.
 
-**Ava:** Then keep testing after launch, because models, data and policies change. Test before you trust.
+**Ava:** One last thing. In Deloitte's 2026 survey of Canadian workers' compensation leaders, eighty-three percent said their AI maturity is still low. So nobody's far ahead. What matters is where we choose to start.
 
-## 10. Copilot is the floor, not the ceiling
+**Ava:** Before the session, think about your own area. First: where does work wait the longest? Waiting is where AI usually helps first.
 
-On screen: left, many people each with a Copilot, same journey; right, the redesigned journey with agents between people. Then the factory: a steam engine, an electric motor on the old layout ("little gain"), the redesigned factory ("big gain").
+**Ava:** Second: which decision would you never hand to a machine, and why? Your answer says a lot about where the person must stay.
 
-**Sam:** We all have Copilot already. Isn't that our AI strategy?
+**Ava:** And third: what would you need to see before you trusted an AI's answer? A source, a test result, a person who checked?
 
-**Ava:** Copilot is the floor, not the ceiling. Give everyone a Copilot and each person gets a bit faster. That's real. But the journey stays the same shape: same handoffs, same waiting.
+**Sam:** And the words?
 
-**Ava:** The bigger gains come from redesigning the journey itself, with agents doing the busywork between people, and people at the decisions.
+**Ava:** They're all on the one-page cheat sheet that came with this video. Bring it, and bring your answers. And now, the short version, set to music.
 
-**Sam:** That's a much bigger change.
+## 11. The music video
 
-**Ava:** And history says it's the one that pays. When factories got electricity, most bolted an electric motor onto the old layout, and productivity barely moved for decades. The big gains came when factories were redesigned around the new power.
-
-## 11. Four kinds of AI opportunity
-
-On screen: a ladder with four rungs: Personal productivity, Team workflow, End-to-end journey, New services, each with its owner. The top two rungs light up gold, labelled "Executives".
-
-**Sam:** How do we tell AI opportunities apart?
-
-**Ava:** Think of a ladder. Rung one: personal productivity, like Copilot drafting a letter, owned by each of us. Rung two: team workflow, like medical files summarized for adjudicators, owned by managers.
-
-**Ava:** Rung three: an end-to-end journey, like the claim journey redesigned. Rung four: new services, things WCB couldn't do before, like reaching a worker early, before a claim goes long.
-
-**Sam:** And the top two?
-
-**Ava:** They cross teams, systems and policy, so only executives can own them. Most organizations stop at rung one. The value is at three and four.
-
-## 12. Readiness
-
-On screen: a steep rising line, "What AI can do", next to a slow-filling bar, "Getting ready". Then six foundations appear: Data, Written rules, Agent identities, Skills, Journey owners, Monitoring.
-
-**Sam:** Why not wait until the technology settles down?
-
-**Ava:** Because the two move at different speeds. By one independent measure, the length of task an AI agent can complete has been doubling roughly every seven months. Getting ready takes years.
-
-**Ava:** Agents depend on foundations: clean, connected data; rules that are written down; identities and access for agents; people with the skills to direct them; owners for each journey; and monitoring, so we can see what an agent did.
-
-**Sam:** So starting late costs more than the delay.
-
-**Ava:** Much more.
-
-## 13. What stays human, and the day ahead
-
-On screen: four words lock in: Judgment, Empathy, Accountability, The worker's voice. Then the three acts: See it, Choose it, Govern it.
-
-**Sam:** With all that change, what stays the same?
-
-**Ava:** Four things stay with people. Judgment on decisions that affect a worker's life. Empathy for someone who is hurt and worried. Accountability for every decision. And the worker's voice, including the right to ask for a human review.
-
-**Sam:** In the session, we'll put this to work in three acts. See it: where AI creates value. Choose it: which opportunities to pursue. Govern it: what only executives can do.
-
-**Ava:** Bring one question you want answered. And now, the short version, set to music.
-
-## 14. The music video
-
-On screen: the 2:20 "Follow the claim" music video plays in full as a recap.
+On screen: the 2:20 "Follow the claim" music video plays in full.

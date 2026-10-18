@@ -173,3 +173,16 @@ Decisions (from the user):
 - Voices picked from the ElevenLabs library (no voice design: it needs the user's own sample line and description). Ava: Caroline Braden; Sam: Marcus (Canadian).
 - BLOCKED: after the first line, ElevenLabs refused generation: "Unusual activity has been detected on your account, so Free Tier access has been disabled... Please upgrade to a paid subscription to continue." Needs the account owner. 1 of 63 lines generated.
 - Built anyway on estimated line lengths: all 13 scenes, captions, song sting, music video recap; preview renders silent except line 1. New voice files slot in with `explainer.mjs voice` then `manifest`.
+
+## Round 6b: make the explainer a true pre-read
+The user's feedback: the first cut "feels like we're just going through the content in the deck". Split: the session is about WCB (the claim, our choices); the pre-read is about you and the world. No "try it this week" (the user won't have that opportunity), so participation happens inside the video.
+
+Decisions (from the user): open with "A Tuesday with AI" (everyday moments, one term each); centrepiece "Watch it work, and slip" (three simulated demos with a predict-then-see beat); "Decode the pitch" (buzzwords become five questions to ask); close with three questions to bring; the song as the send-off; plus a one-page cheat sheet.
+
+## Plan
+- [x] Rewrite `video/explainer/script.md` to the new shape (about 1,250 spoken words)
+- [x] One data file for the words, the five pitch questions and the three questions (`video/src/explainer/cheatsheet.ts`), used by the video and the cheat sheet
+- [x] Cheat sheet: one page, letter size, WCB look, generated from that data to PDF
+- [x] New scenes for the new script; keep the timing system, captions, voices, sting and recap
+- [ ] Verify: stills, preview render, cheat sheet PDF; commit
+- [ ] Still blocked: voiceover (ElevenLabs account)

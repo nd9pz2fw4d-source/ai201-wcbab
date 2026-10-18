@@ -12,6 +12,8 @@ export interface VoiceLine {
   /** Length of the line's audio, or an estimate until it exists. */
   seconds: number;
   estimated?: boolean;
+  /** Seconds to hold the picture after this line, for the viewer to think ("(pause 2.5s)" in the script). */
+  pauseAfter?: number;
 }
 
 export interface ScriptScene {
@@ -58,7 +60,7 @@ export const scheduleBeats = (manifest: Manifest): Beat[] => {
     let at = SCENE_LEAD;
     const lines = scene.lines.map((l) => {
       const placed = { ...l, at };
-      at += l.seconds + LINE_GAP;
+      at += l.seconds + LINE_GAP + (l.pauseAfter ?? 0);
       return placed;
     });
     const seconds = at - LINE_GAP + SCENE_TAIL;

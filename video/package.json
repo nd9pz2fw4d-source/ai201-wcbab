@@ -12,8 +12,9 @@
     "audio:song": "node scripts/elevenlabs.mjs song",
     "audio:sfx": "node scripts/elevenlabs.mjs sfx",
     "audio:align": "node scripts/elevenlabs.mjs align",
-    "render:explainer": "remotion render Explainer out/follow-the-claim-fundamentals.mp4",
-    "explainer:manifest": "node scripts/explainer.mjs manifest"
+    "render:explainer": "remotion render Explainer out/follow-the-claim-before-the-session.mp4",
+    "explainer:manifest": "node scripts/explainer.mjs manifest",
+    "cheatsheet": "node scripts/cheatsheet.mjs"
   },
   "dependencies": {
     "@fontsource/roboto": "5.3.0",
@@ -28,6 +29,7 @@
     "@remotion/renderer": "4.0.531",
     "@types/react": "18.3.31",
     "@types/react-dom": "18.3.7",
+    "playwright": "1.63.0",
     "typescript": "5.9.3"
   }
 }

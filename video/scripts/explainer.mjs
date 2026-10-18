@@ -1,13 +1,18 @@
 // The explainer's script (explainer/script.md) is the single source for its voiceover, captions and timing.
 //
 //   node scripts/explainer.mjs lines      print every spoken line with its id, speaker and text (JSON)
+// Each downloaded line is saved as public/explainer/voice-raw/<id>.mp3 with <id>.txt beside it holding the exact
+// text it was generated from. Audio whose text no longer matches the script is ignored, so an edited line can
+// never play its old words.
+//
 //   node scripts/explainer.mjs voice      prepare each downloaded line: public/explainer/voice-raw/<id>.mp3 is slowed
 //                                         a little (pitch kept) and levelled, into public/explainer/voice/<id>.mp3
 //   node scripts/explainer.mjs manifest   measure public/explainer/voice/<id>.mp3 and write public/explainer/manifest.json
 //                                         (a line with no voice file yet gets an estimated length, marked "estimated")
 //
 // Script format: "## <n>. <title>" starts a scene; "**Ava:** ..." / "**Sam:** ..." is a spoken line;
-// lines starting "On screen" describe the picture and are not spoken.
+// lines starting "On screen" describe the picture and are not spoken; "(pause 2.5s)" after a line holds
+// the picture that long before the next line, so the viewer can think.
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -32,6 +37,11 @@ export function parseScript(text = readFileSync(scriptPath, "utf8")) {
       scenes.push({ n: Number(scene[1]), title: scene[2].trim(), lines: [] });
       continue;
     }
+    const pause = /^\(pause (\d+(?:\.\d+)?)s\)$/.exec(raw.trim());
+    if (pause && scenes.at(-1)?.lines.length) {
+      scenes.at(-1).lines.at(-1).pauseAfter = Number(pause[1]);
+      continue;
+    }
     const line = /^\*\*(Ava|Sam):\*\* (.+)$/.exec(raw);
     if (line && scenes.length) {
       const s = scenes.at(-1);
@@ -40,6 +50,12 @@ export function parseScript(text = readFileSync(scriptPath, "utf8")) {
   }
   return scenes;
 }
+
+/** True when the line's downloaded audio was generated from its current text. */
+const matchesScript = (l) => {
+  const txt = path.join(rawDir, `${l.id}.txt`);
+  return existsSync(txt) && readFileSync(txt, "utf8").trim() === l.text;
+};
 
 const seconds = (file) =>
   Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", file]).toString().trim());
@@ -50,7 +66,7 @@ if (step === "voice") {
   let n = 0;
   for (const l of parseScript().flatMap((sc) => sc.lines)) {
     const raw = path.join(rawDir, `${l.id}.mp3`);
-    if (!existsSync(raw)) continue;
+    if (!existsSync(raw) || !matchesScript(l)) continue;
     execFileSync("ffmpeg", ["-v", "error", "-y", "-i", raw, "-af", `atempo=${TEMPO},${LOUDNESS}`, "-ar", "44100", "-b:a", "160k", path.join(voiceDir, `${l.id}.mp3`)]);
     n++;
   }
@@ -62,7 +78,7 @@ if (step === "voice") {
     ...s,
     lines: s.lines.map((l) => {
       const file = path.join(voiceDir, `${l.id}.mp3`);
-      if (existsSync(file)) return { ...l, seconds: Math.round(seconds(file) * 100) / 100 };
+      if (existsSync(file) && matchesScript(l)) return { ...l, seconds: Math.round(seconds(file) * 100) / 100 };
       // Until the voice exists: the length it would take at a steady 150 words a minute.
       return { ...l, seconds: Math.round((l.text.split(/\s+/).length / 2.5 + 0.3) * 100) / 100, estimated: true };
     }),

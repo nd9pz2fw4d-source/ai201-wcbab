@@ -4,15 +4,13 @@ import { Caption } from "../components/Caption";
 import { PreRead, type PreReadProps } from "../PreRead";
 import { FPS } from "../timeline";
 import { BeatContext } from "./beat";
-import { Anatomy, AgentLoop, AutonomyDial, Evals, Tools } from "./scenes/Part2";
-import { Close, FloorCeiling, Ladder, Readiness } from "./scenes/Part3";
-import { Grounding, Llm, Opening, Sting, ThreeKinds } from "./scenes/Part1";
+import { ConfidentAnswer, TheDraft, TwoSummaries } from "./scenes/Demos";
+import { DecodePitch, ThreeQuestions } from "./scenes/Pitch";
+import { BankAlert, NextWord, PageFour, Sting, Trip, WhyWatch } from "./scenes/Tuesday";
 import { STING_MUSIC_SECONDS, STING_SECONDS, STING_SONG_FROM, captionCues, musicVideoStart, scheduleBeats, type Manifest } from "./timing";
 
 export interface ExplainerProps {
   manifest: Manifest;
-  /** Voice lines whose audio exists in public/explainer/voice. */
-  voiced: string[];
   /** The music video's own props (song timing, effects), for the recap at the end. */
   song: PreReadProps;
   [key: string]: unknown;
@@ -20,24 +18,21 @@ export interface ExplainerProps {
 
 /** The picture for each scene of the script, by scene number. */
 const scenes: Record<number, () => ReactNode> = {
-  1: () => <Opening />,
-  2: () => <ThreeKinds />,
-  3: () => <Llm />,
-  4: () => <Grounding />,
-  5: () => <Anatomy />,
-  6: () => <AgentLoop />,
-  7: () => <Tools />,
-  8: () => <AutonomyDial />,
-  9: () => <Evals />,
-  10: () => <FloorCeiling />,
-  11: () => <Ladder />,
-  12: () => <Readiness />,
-  13: () => <Close />,
+  1: () => <WhyWatch />,
+  2: () => <NextWord />,
+  3: () => <BankAlert />,
+  4: () => <PageFour />,
+  5: () => <Trip />,
+  6: () => <TwoSummaries />,
+  7: () => <ConfidentAnswer />,
+  8: () => <TheDraft />,
+  9: () => <DecodePitch />,
+  10: () => <ThreeQuestions />,
 };
 
 const frames = (s: number) => Math.round(s * FPS);
 
-export function Explainer({ manifest, voiced, song }: ExplainerProps) {
+export function Explainer({ manifest, song }: ExplainerProps) {
   const beats = scheduleBeats(manifest);
   const recapAt = musicVideoStart(beats);
   return (
@@ -69,7 +64,7 @@ export function Explainer({ manifest, voiced, song }: ExplainerProps) {
 
       {beats.flatMap((b) =>
         b.lines
-          .filter((l) => voiced.includes(l.id))
+          .filter((l) => !l.estimated) // lines with a voice that matches the script
           .map((l) => (
             <Sequence key={l.id} name={`voice ${l.id}`} from={frames(b.start + l.at)} layout="none">
               <Audio src={staticFile(`explainer/voice/${l.id}.mp3`)} />

@@ -17,26 +17,43 @@ Finished file: `out/follow-the-claim-pre-read.mp4` (render it with `npm run rend
 
 The sung words are always on screen as captions, because many people will watch with the sound off.
 
-## The fundamentals explainer (about 12½ minutes)
+## The pre-read explainer, "Before the session" (about 11 minutes)
 
-A second, slower pre-read in the same project: the composition `Explainer`. Two voices, Ava (a woman, who guides) and Sam (a man, who asks what an executive would ask), take viewers through 13 scenes in about 10 minutes, from three kinds of AI to what stays human. It opens on the song's chorus and ends by playing the music video as a recap. It follows the deck's look: light WCB blue scenes, WCB blue for AI and agents, WCB green for people.
+A second, slower pre-read in the same project: the composition `Explainer`. It is deliberately not a walk through the session's slides. The session is about WCB (the claim, our choices); this is about you and the world. Ava (a woman, who explains) and Sam (a busy, slightly sceptical executive) talk for about 8½ minutes:
 
-- The script is `explainer/script.md`, and it is the single source: `scripts/explainer.mjs` reads its spoken lines (`**Ava:**` / `**Sam:**`) for the voiceover, the captions and the timing.
-- Each scene's picture is in `src/explainer/scenes/`; pictures come in on the word that names them (`useCue(line, phrase)`), so they stay in sync with any take.
-- The visuals reuse the deck's own data (next-word example, grounding sources, agent-loop steps, tools and permissions, autonomy levels, eval checks, opportunity ladder, the electricity story, readiness foundations, learning objectives), so the video and the session show the same thing.
+| Part | What happens |
+|---|---|
+| Why watch | Sam's packed week; the four parts |
+| A Tuesday with AI | 7:30 am the phone finishes a text (LLM), 8:15 the bank's fraud text (predictive AI; the machine flags, a person decides), 10:00 "it's on page 4" (grounding, RAG), 1:00 pm an agent books a trip (agent, the loop, least privilege, the autonomy dial, human in the loop) |
+| Watch it work, and slip | Three illustrative demos in an AI assistant window, each with a predict-then-see beat: two summaries (which would you trust?), a question it can't answer (a hallucination), a draft a person edits before sending (accountability) |
+| Decode the pitch | "99% accurate, fully autonomous, learns your business, plugs into all your systems" becomes five questions to ask |
+| Three questions to bring | Deloitte's 83% (nobody is far ahead), then three questions about the viewer's own area, and the cheat sheet |
 
-Voices (ElevenLabs library, model `eleven_v4`): Ava is "Caroline Braden: warm, bright and genuine" (`yK2Ny0mq8WplixhD1td3`), chosen to sit close to the song's singer; Sam is "Marcus: grounded and conversational", Canadian (`8DuGkCxTvcIIAe89cGqN`). Swap either by regenerating its lines.
+It opens on the song's chorus and ends by playing the music video as a send-off. It follows the deck's look: light WCB blue, WCB blue for AI and agents, WCB green for people.
+
+- The script is `explainer/script.md`, the single source: `scripts/explainer.mjs` reads its spoken lines (`**Ava:**` / `**Sam:**`) and `(pause 2.5s)` think-pauses for the voiceover, the captions and the timing.
+- Pictures are in `src/explainer/scenes/` and come in on the word that names them (`useCue(line, phrase)`), so they stay in sync with any take.
+- The words, the five pitch questions and the three questions are in `src/explainer/cheatsheet.ts`, used by both the video and the cheat sheet.
+
+### The cheat sheet
+
+`node scripts/cheatsheet.mjs` builds `cheatsheet/follow-the-claim-cheat-sheet.pdf`: one letter-size page with the 12 words (each with the everyday example from the video), the five pitch questions and the three questions to bring, with space to write. It fails if the content runs past one page. It needs Playwright's Chromium (`npx playwright install chromium`, or set `CHROMIUM_PATH`).
+
+### Voices
+
+ElevenLabs library voices, model `eleven_v4`: Ava is "Caroline Braden: warm, bright and genuine" (`yK2Ny0mq8WplixhD1td3`), chosen to sit close to the song's singer; Sam is "Marcus: grounded and conversational", Canadian (`8DuGkCxTvcIIAe89cGqN`). Swap either by regenerating its lines.
 
 ```bash
-# 1. Generate each line with ElevenLabs and save it as public/explainer/voice-raw/<id>.mp3
-#    (ids and text: node scripts/explainer.mjs lines). Flow: "Follow the Claim: fundamentals explainer voiceover".
+# 1. Generate each line with ElevenLabs; save it as public/explainer/voice-raw/<id>.mp3, with <id>.txt holding the
+#    exact text it was generated from (ids and text: node scripts/explainer.mjs lines).
+#    Flow: "Follow the Claim: fundamentals explainer voiceover".
 node scripts/explainer.mjs voice      # slows each line to 92% (pitch kept) and levels both voices to -16 LUFS
-node scripts/explainer.mjs manifest   # measures every line; lines without audio yet get an estimated length
-npm run render:explainer             # writes out/follow-the-claim-fundamentals.mp4
+node scripts/explainer.mjs manifest   # measures every line; lines without matching audio get an estimated length
+npm run render:explainer             # writes out/follow-the-claim-before-the-session.mp4
 node scripts/stills.mjs --explainer  # review stills, one per scene
 ```
 
-Lines without a voice file render silent with their captions, at an estimated length, so the video can be reviewed before the voiceover exists.
+Audio whose `.txt` no longer matches the script is ignored, so an edited line can never play its old words. Lines without a voice render silent with their captions, at an estimated length, so the video can be reviewed before the voiceover exists.
 
 ## How the timing works
 
@@ -82,8 +99,10 @@ Credits used for the current audio: two song takes 4,200, seven effects 95, two 
 
 ## Before sending: items to confirm
 
-- [ ] Explainer: scene 12 quotes METR's long-run figure (task length doubling about every 7 months, measured on software and research tasks). Keep, or soften to "growing quickly"
+- [ ] Explainer: the demos, the bank text, the trip and the pitch are made-up examples, labelled "Illustrative" where they appear as screens
+- [ ] Explainer and cheat sheet: Deloitte's 83% is quoted as the paper words it ("organizational maturity for integrating AI into core business functions remains low")
 - [ ] Explainer voices: listen through once for "LLM", "RAG", "evals" and "WCB"
+- [ ] Cheat sheet: the session date is the same `[SESSION DATE]` placeholder (`session.date` in `src/content.ts`)
 - [ ] Session date: `session.date` in `src/content.ts` is the `[SESSION DATE]` placeholder
 - [ ] Deloitte source: "The Future of Workers' Compensation: Industry Perspectives and Global Signals", Deloitte Canada, 26 August 2026 (Zohair Masood, Jason Condon, Chris Duvinage), https://www.deloitte.com/ca/en/Industries/insurance/perspectives/future-workers-compensation.html. On screen, as the page words them: the eight forces; the four shifts; 83% of surveyed Canadian WCB leaders say AI maturity in core business functions remains low, with one respondent an early adopter; half rank mental health and wellness support the number one barrier; 55+ expected to reach 23.1% of the labour force by 2041; 17.4% of employed Canadians worked from home in May 2025; "human-in-the-loop"; and the first readiness question, quoted in the outro. The page does not give the survey's size, so the video doesn't either
 - [ ] Listen through once: the singer's "L-L-M", "RAG" and "read, draft, act" are clear on take 1, but the final call is a human ear
