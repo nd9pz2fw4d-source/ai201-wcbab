@@ -148,3 +148,22 @@ Objectives: (1) recognize where AI creates value and how transformation is accom
 - [x] Live moment: steps play in order every 3.5 s with Pause and Next step; the room votes stop signs onto any step (click adds, right-click removes); "Show suggested stops" after the last step (recommendation, payment, decision letter). Clinic request no longer a suggested stop
 - [x] Sort: suggested Automate now Register, Sort and assign, Gather evidence, Benefits and payment; Assist: Report, Medical review; notes updated
 - [x] Verify: 50/50 interaction checks (new live-moment checks), futurism-states script, screenshots reviewed
+
+---
+
+# Round 6: the fundamentals explainer (10-minute pre-read with two voices)
+
+Goal: a slower, longer pre-read that gives executives the common language before the session: what AI is, how agents work, and why this is executive work. Two voices: a woman who guides (matched to the song's singer) and a man who asks the questions an executive would ask. Opens with a few seconds of the "Follow the claim" chorus; ends by playing the 2:20 music video as a recap.
+
+Decisions (from the user):
+- Concepts: the 12-part outline (three kinds of AI, LLM and hallucination, grounding and RAG, what makes an agent, the agent loop, tools and least privilege, autonomy dial and human in the loop, evals, Copilot is the floor not the ceiling, the opportunity ladder, readiness, what stays human)
+- One voice explains, the other asks; RAG stays in
+- The song opens it and plays at the end; the woman's voice should sound like the singer
+
+## Plan
+- [x] Script for review (`video/explainer/script.md`): about 1,300 spoken words, slow pace, on-screen notes per scene; no spoilers for the session's exercises; no dated product names
+- [ ] User reviews the script
+- [ ] Voices: design a woman's voice to match the singer, pick a man's voice; user picks from previews
+- [ ] Generate the voiceover per line (ElevenLabs), time scenes to it
+- [ ] Explainer composition in the same Remotion project, reusing brand, components and the caption track; song sting at the start, music video at the end
+- [ ] Verify: stills, full render, levels; commit
