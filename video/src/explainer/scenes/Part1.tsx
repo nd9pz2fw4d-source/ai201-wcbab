@@ -1,4 +1,4 @@
-import { Bot, FolderOpen, MessageCircle, PenLine, Search, TrendingUp } from "lucide-react";
+import { BookOpenCheck, Bot, FolderOpen, MessageCircle, PenLine, Search, TrendingUp } from "lucide-react";
 import { interpolate } from "remotion";
 import { fadeUp, popIn, progress, useIn, useSeconds } from "../../anim";
 import { DeloitteLogo, WcbLogo, groundingSources, nextWord, stations, theme } from "../../brand";
@@ -63,8 +63,19 @@ export function Opening() {
   const track = useIn(journeyFrom - 0.3);
   const words = [useCue(2, '"AI"'), useCue(2, '"agent"'), useCue(2, '"human in the loop"')];
   const minutes = useCue(2, "about ten minutes");
+  // While Ava says hello: what this video is, until the journey takes over.
+  const welcome = useIn(0.4) * (1 - progress(t, journeyFrom - 0.6, journeyFrom - 0.1));
   return (
     <SceneShell heading="A shared vocabulary">
+      <At x={0} y={330} w={1920} style={{ display: "flex", justifyContent: "center", opacity: welcome }}>
+        <Card style={{ display: "flex", alignItems: "center", gap: 28, padding: "32px 44px" }}>
+          <IconDot Icon={BookOpenCheck} size={110} />
+          <div>
+            <div style={{ fontSize: 30, color: theme.muted }}>Before the Executive AI Academy</div>
+            <div style={{ fontSize: 56, fontWeight: 700, color: theme.brandPrimary }}>The words we'll all use</div>
+          </div>
+        </Card>
+      </At>
       <div style={{ opacity: track }}>
         <ClaimTrack tone="light" pos={hops(t, 0, stations.length - 1, journeyFrom + 0.5, journeyTo)} />
       </div>
