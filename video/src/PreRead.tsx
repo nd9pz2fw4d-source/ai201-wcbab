@@ -54,7 +54,7 @@ export function PreRead({ timing, hasSong, sfx }: PreReadProps) {
           </Sequence>
         );
       })}
-      <Caption lyrics={timing.lines} />
+      <Caption lines={timing.lines} />
       {hasSong && <Audio src={staticFile("audio/song.mp3")} volume={SONG_VOLUME} />}
       {sfxCues
         .filter((c) => sfx.includes(c.id))

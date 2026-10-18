@@ -1,17 +1,26 @@
 import { Music } from "lucide-react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { theme } from "../brand";
-import type { LyricLine } from "../timeline";
 
-/** The sung line, as a caption: many people watch with the sound off. */
-export function Caption({ lyrics }: { lyrics: LyricLine[] }) {
+export interface CaptionLine {
+  text: string;
+  /** Seconds from the start of the composition. */
+  start: number;
+  end: number;
+  /** Who is speaking; without one, the line is sung and gets a music note. */
+  speaker?: string;
+}
+
+const speakerColour: Record<string, string> = { Ava: theme.brandAccent, Sam: theme.brandSky };
+
+/** What is being sung or said, as a caption: many people watch with the sound off. */
+export function Caption({ lines }: { lines: CaptionLine[] }) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
-  const line = lyrics.find((l) => t >= l.start && t < l.end);
+  const line = lines.find((l) => t >= l.start && t < l.end);
   if (!line) return null;
-  const local = t - line.start;
-  const opacity = interpolate(local, [0, 0.15], [0, 1], { extrapolateRight: "clamp" });
+  const opacity = interpolate(t - line.start, [0, 0.15], [0, 1], { extrapolateRight: "clamp" });
 
   return (
     <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: 44, pointerEvents: "none" }}>
@@ -22,17 +31,21 @@ export function Caption({ lyrics }: { lyrics: LyricLine[] }) {
           display: "flex",
           alignItems: "center",
           gap: 18,
-          maxWidth: 1600,
+          maxWidth: 1640,
           padding: "14px 34px",
           borderRadius: 999,
-          background: "rgba(6, 28, 45, 0.78)",
+          background: "rgba(6, 28, 45, 0.82)",
           color: theme.paper,
           fontFamily: "Roboto, sans-serif",
           fontSize: 38,
           fontWeight: 500,
         }}
       >
-        <Music size={32} color={theme.brandAccent} strokeWidth={2.5} />
+        {line.speaker ? (
+          <span style={{ flex: "none", color: speakerColour[line.speaker] ?? theme.brandSky, fontWeight: 900 }}>{line.speaker}</span>
+        ) : (
+          <Music size={32} color={theme.brandAccent} strokeWidth={2.5} style={{ flex: "none" }} />
+        )}
         <span>{line.text}</span>
       </div>
     </AbsoluteFill>

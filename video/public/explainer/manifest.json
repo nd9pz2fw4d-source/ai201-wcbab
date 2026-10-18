@@ -1,0 +1,532 @@
+{
+  "scenes": [
+    {
+      "n": 0,
+      "title": "Song sting",
+      "lines": []
+    },
+    {
+      "n": 1,
+      "title": "Opening",
+      "lines": [
+        {
+          "id": "s01-01",
+          "speaker": "Ava",
+          "text": "Hi, and welcome. Before the Executive AI Academy, we want to give you something simple: a shared vocabulary.",
+          "seconds": 7.05
+        },
+        {
+          "id": "s01-02",
+          "speaker": "Sam",
+          "text": "In the session, we'll follow one injured worker's claim, from the day it's reported to the day they're back at work.",
+          "seconds": 8.7,
+          "estimated": true
+        },
+        {
+          "id": "s01-03",
+          "speaker": "Ava",
+          "text": "And to talk about where AI fits on that journey, we all need to mean the same thing when we say \"AI\", \"agent\", or \"human in the loop\". So: about ten minutes, a dozen ideas. Let's start.",
+          "seconds": 15.1,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Three kinds of AI",
+      "lines": [
+        {
+          "id": "s02-01",
+          "speaker": "Sam",
+          "text": "When people say \"AI\", what do they actually mean?",
+          "seconds": 3.9,
+          "estimated": true
+        },
+        {
+          "id": "s02-02",
+          "speaker": "Ava",
+          "text": "It helps to think of three kinds. The first predicts. Predictive AI, or machine learning, learns patterns from past data to score or forecast. How complex is this claim likely to be? How many calls will we get next week?",
+          "seconds": 16.3,
+          "estimated": true
+        },
+        {
+          "id": "s02-03",
+          "speaker": "Ava",
+          "text": "The second reads and writes. Generative AI can summarize a thick claim file, answer questions about it, or draft a letter. That's what Copilot does today.",
+          "seconds": 10.7,
+          "estimated": true
+        },
+        {
+          "id": "s02-04",
+          "speaker": "Ava",
+          "text": "The third does the work. An agent doesn't just answer. It takes steps toward a goal.",
+          "seconds": 6.7,
+          "estimated": true
+        },
+        {
+          "id": "s02-05",
+          "speaker": "Sam",
+          "text": "Predicts, writes, does.",
+          "seconds": 1.5,
+          "estimated": true
+        },
+        {
+          "id": "s02-06",
+          "speaker": "Ava",
+          "text": "Exactly.",
+          "seconds": 0.7,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The large language model, and hallucination",
+      "lines": [
+        {
+          "id": "s03-01",
+          "speaker": "Sam",
+          "text": "So how does the \"reads and writes\" kind actually work?",
+          "seconds": 4.3,
+          "estimated": true
+        },
+        {
+          "id": "s03-02",
+          "speaker": "Ava",
+          "text": "Underneath is a large language model, or LLM. It does one thing: given the words so far, it predicts a likely next word. Then it does it again, and again.",
+          "seconds": 12.3,
+          "estimated": true
+        },
+        {
+          "id": "s03-03",
+          "speaker": "Ava",
+          "text": "Take \"The worker hurt their…\". The model scores every possible next word, like back, hand or knee, and picks a likely one.",
+          "seconds": 9.1,
+          "estimated": true
+        },
+        {
+          "id": "s03-04",
+          "speaker": "Sam",
+          "text": "That sounds almost too simple.",
+          "seconds": 2.3,
+          "estimated": true
+        },
+        {
+          "id": "s03-05",
+          "speaker": "Ava",
+          "text": "It is simple. It's why these models are so fluent. But it's also why they can be wrong: a model produces what sounds likely, not what it has checked. A fluent, confident answer that isn't true is called a hallucination.",
+          "seconds": 16.3,
+          "estimated": true
+        },
+        {
+          "id": "s03-06",
+          "speaker": "Sam",
+          "text": "So confident isn't the same as correct.",
+          "seconds": 3.1,
+          "estimated": true
+        },
+        {
+          "id": "s03-07",
+          "speaker": "Ava",
+          "text": "Right. Fluent is not the same as verified.",
+          "seconds": 3.5,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Grounding, and RAG",
+      "lines": [
+        {
+          "id": "s04-01",
+          "speaker": "Sam",
+          "text": "Then how can we trust what it says about a real claim?",
+          "seconds": 5.1,
+          "estimated": true
+        },
+        {
+          "id": "s04-02",
+          "speaker": "Ava",
+          "text": "We ground it. Before it answers, the system looks things up in trusted sources, like our policy manual, the claim file, or medical guidelines, and answers from those.",
+          "seconds": 11.5,
+          "estimated": true
+        },
+        {
+          "id": "s04-03",
+          "speaker": "Ava",
+          "text": "You'll hear this called RAG: retrieval-augmented generation. Retrieval: find the right documents. Augmented: add them to the question. Generation: write the answer from them.",
+          "seconds": 9.9,
+          "estimated": true
+        },
+        {
+          "id": "s04-04",
+          "speaker": "Sam",
+          "text": "And how would I know it did that?",
+          "seconds": 3.5,
+          "estimated": true
+        },
+        {
+          "id": "s04-05",
+          "speaker": "Ava",
+          "text": "Citations. A grounded answer shows where it came from, so a person can check it in seconds. Ask that of any AI tool: where did this answer come from, and can I see it?",
+          "seconds": 13.9,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "title": "What makes an agent",
+      "lines": [
+        {
+          "id": "s05-01",
+          "speaker": "Sam",
+          "text": "You said agents do the work. How is that different from a chatbot?",
+          "seconds": 5.5,
+          "estimated": true
+        },
+        {
+          "id": "s05-02",
+          "speaker": "Ava",
+          "text": "A chatbot answers a question. An agent pursues a goal. The language model is the reasoning engine in the middle, and around it are five parts.",
+          "seconds": 10.7,
+          "estimated": true
+        },
+        {
+          "id": "s05-03",
+          "speaker": "Ava",
+          "text": "A goal: what \"done\" looks like, say, \"get this claim ready for a decision\". Instructions: the rules and limits it must follow. Tools: the systems it may use. Memory: what it knows about this claim so far. And a person, who approves and decides.",
+          "seconds": 17.9,
+          "estimated": true
+        },
+        {
+          "id": "s05-04",
+          "speaker": "Sam",
+          "text": "And when an agent goes wrong?",
+          "seconds": 2.7,
+          "estimated": true
+        },
+        {
+          "id": "s05-05",
+          "speaker": "Ava",
+          "text": "It's usually one of those five: a vague goal, a missing rule, too much access, out-of-date memory, or no person at the right moment.",
+          "seconds": 9.9,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "title": "The agent loop",
+      "lines": [
+        {
+          "id": "s06-01",
+          "speaker": "Sam",
+          "text": "What does an agent actually do, step by step?",
+          "seconds": 3.9,
+          "estimated": true
+        },
+        {
+          "id": "s06-02",
+          "speaker": "Ava",
+          "text": "It runs a loop. Plan the next step. Act, usually by using a tool. Check the result. Then repeat until the goal is met.",
+          "seconds": 9.9,
+          "estimated": true
+        },
+        {
+          "id": "s06-03",
+          "speaker": "Ava",
+          "text": "Say it finds the doctor's note is missing. It plans to ask the clinic for it, drafts the request, and then stops, because sending anything outside WCB needs a person's approval.",
+          "seconds": 12.7,
+          "estimated": true
+        },
+        {
+          "id": "s06-04",
+          "speaker": "Sam",
+          "text": "So it knows when to stop.",
+          "seconds": 2.7,
+          "estimated": true
+        },
+        {
+          "id": "s06-05",
+          "speaker": "Ava",
+          "text": "If we design it to: when the goal is met, when a rule says a person must approve, or when it's unsure. And because each step builds on the last, one early mistake can carry forward. You'll see that in the session.",
+          "seconds": 17.1,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "title": "Tools and permissions",
+      "lines": [
+        {
+          "id": "s07-01",
+          "speaker": "Sam",
+          "text": "What decides what an agent can touch?",
+          "seconds": 3.1,
+          "estimated": true
+        },
+        {
+          "id": "s07-02",
+          "speaker": "Ava",
+          "text": "Tools are its hands, and it can only use what we connect it to. There are three levels: read, to look things up; draft, to prepare something for a person; and act, to change something in the world, like sending a letter or scheduling a payment.",
+          "seconds": 18.7,
+          "estimated": true
+        },
+        {
+          "id": "s07-03",
+          "speaker": "Ava",
+          "text": "The principle is least privilege: only the access the job needs. And like a new hire, every agent gets its own identity and a named human owner.",
+          "seconds": 11.1,
+          "estimated": true
+        },
+        {
+          "id": "s07-04",
+          "speaker": "Sam",
+          "text": "So that's an IT setting?",
+          "seconds": 2.3,
+          "estimated": true
+        },
+        {
+          "id": "s07-05",
+          "speaker": "Ava",
+          "text": "IT sets it up. But what agents may do on WCB's behalf is a leadership decision.",
+          "seconds": 6.7,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "title": "The autonomy dial, and human in the loop",
+      "lines": [
+        {
+          "id": "s08-01",
+          "speaker": "Sam",
+          "text": "How much should an agent do on its own?",
+          "seconds": 3.9,
+          "estimated": true
+        },
+        {
+          "id": "s08-02",
+          "speaker": "Ava",
+          "text": "Picture a dial. At one end, it only suggests. Then it drafts for a person. Then it acts with approval. Then it acts and reports afterwards. At the far end, it acts alone.",
+          "seconds": 13.5,
+          "estimated": true
+        },
+        {
+          "id": "s08-03",
+          "speaker": "Ava",
+          "text": "Autonomy is a setting we choose for each task, not a feature of the technology. The rule: the more independently it acts, the stronger the oversight must be.",
+          "seconds": 11.5,
+          "estimated": true
+        },
+        {
+          "id": "s08-04",
+          "speaker": "Sam",
+          "text": "Which is where \"human in the loop\" comes in.",
+          "seconds": 3.9,
+          "estimated": true
+        },
+        {
+          "id": "s08-05",
+          "speaker": "Ava",
+          "text": "Yes. A person reviews or approves at the moments that matter. And for decisions about a worker's benefits, a person decides.",
+          "seconds": 8.7,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "title": "Evals",
+      "lines": [
+        {
+          "id": "s09-01",
+          "speaker": "Sam",
+          "text": "Before we switch something on, how do we know it's good enough?",
+          "seconds": 5.1,
+          "estimated": true
+        },
+        {
+          "id": "s09-02",
+          "speaker": "Ava",
+          "text": "We test it, like any other control. These tests are called evals, short for evaluations. Run it over past claims, with personal details removed, and score it: right answer, sources shown, fair, private, and knows when to hand over to a person.",
+          "seconds": 17.1,
+          "estimated": true
+        },
+        {
+          "id": "s09-03",
+          "speaker": "Ava",
+          "text": "Then keep testing after launch, because models, data and policies change. Test before you trust.",
+          "seconds": 6.3,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "title": "Copilot is the floor, not the ceiling",
+      "lines": [
+        {
+          "id": "s10-01",
+          "speaker": "Sam",
+          "text": "We all have Copilot already. Isn't that our AI strategy?",
+          "seconds": 4.3,
+          "estimated": true
+        },
+        {
+          "id": "s10-02",
+          "speaker": "Ava",
+          "text": "Copilot is the floor, not the ceiling. Give everyone a Copilot and each person gets a bit faster. That's real. But the journey stays the same shape: same handoffs, same waiting.",
+          "seconds": 12.7,
+          "estimated": true
+        },
+        {
+          "id": "s10-03",
+          "speaker": "Ava",
+          "text": "The bigger gains come from redesigning the journey itself, with agents doing the busywork between people, and people at the decisions.",
+          "seconds": 8.7,
+          "estimated": true
+        },
+        {
+          "id": "s10-04",
+          "speaker": "Sam",
+          "text": "That's a much bigger change.",
+          "seconds": 2.3,
+          "estimated": true
+        },
+        {
+          "id": "s10-05",
+          "speaker": "Ava",
+          "text": "And history says it's the one that pays. When factories got electricity, most bolted an electric motor onto the old layout, and productivity barely moved for decades. The big gains came when factories were redesigned around the new power.",
+          "seconds": 15.9,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "title": "Four kinds of AI opportunity",
+      "lines": [
+        {
+          "id": "s11-01",
+          "speaker": "Sam",
+          "text": "How do we tell AI opportunities apart?",
+          "seconds": 3.1,
+          "estimated": true
+        },
+        {
+          "id": "s11-02",
+          "speaker": "Ava",
+          "text": "Think of a ladder. Rung one: personal productivity, like Copilot drafting a letter, owned by each of us. Rung two: team workflow, like medical files summarized for adjudicators, owned by managers.",
+          "seconds": 12.7,
+          "estimated": true
+        },
+        {
+          "id": "s11-03",
+          "speaker": "Ava",
+          "text": "Rung three: an end-to-end journey, like the claim journey redesigned. Rung four: new services, things WCB couldn't do before, like reaching a worker early, before a claim goes long.",
+          "seconds": 11.9,
+          "estimated": true
+        },
+        {
+          "id": "s11-04",
+          "speaker": "Sam",
+          "text": "And the top two?",
+          "seconds": 1.9,
+          "estimated": true
+        },
+        {
+          "id": "s11-05",
+          "speaker": "Ava",
+          "text": "They cross teams, systems and policy, so only executives can own them. Most organizations stop at rung one. The value is at three and four.",
+          "seconds": 10.3,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "title": "Readiness",
+      "lines": [
+        {
+          "id": "s12-01",
+          "speaker": "Sam",
+          "text": "Why not wait until the technology settles down?",
+          "seconds": 3.5,
+          "estimated": true
+        },
+        {
+          "id": "s12-02",
+          "speaker": "Ava",
+          "text": "Because the two move at different speeds. By one independent measure, the length of task an AI agent can complete has been doubling roughly every seven months. Getting ready takes years.",
+          "seconds": 12.7,
+          "estimated": true
+        },
+        {
+          "id": "s12-03",
+          "speaker": "Ava",
+          "text": "Agents depend on foundations: clean, connected data; rules that are written down; identities and access for agents; people with the skills to direct them; owners for each journey; and monitoring, so we can see what an agent did.",
+          "seconds": 15.5,
+          "estimated": true
+        },
+        {
+          "id": "s12-04",
+          "speaker": "Sam",
+          "text": "So starting late costs more than the delay.",
+          "seconds": 3.5,
+          "estimated": true
+        },
+        {
+          "id": "s12-05",
+          "speaker": "Ava",
+          "text": "Much more.",
+          "seconds": 1.1,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "title": "What stays human, and the day ahead",
+      "lines": [
+        {
+          "id": "s13-01",
+          "speaker": "Sam",
+          "text": "With all that change, what stays the same?",
+          "seconds": 3.5,
+          "estimated": true
+        },
+        {
+          "id": "s13-02",
+          "speaker": "Ava",
+          "text": "Four things stay with people. Judgment on decisions that affect a worker's life. Empathy for someone who is hurt and worried. Accountability for every decision. And the worker's voice, including the right to ask for a human review.",
+          "seconds": 15.5,
+          "estimated": true
+        },
+        {
+          "id": "s13-03",
+          "speaker": "Sam",
+          "text": "In the session, we'll put this to work in three acts. See it: where AI creates value. Choose it: which opportunities to pursue. Govern it: what only executives can do.",
+          "seconds": 12.3,
+          "estimated": true
+        },
+        {
+          "id": "s13-04",
+          "speaker": "Ava",
+          "text": "Bring one question you want answered. And now, the short version, set to music.",
+          "seconds": 5.9,
+          "estimated": true
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "title": "The music video",
+      "lines": []
+    }
+  ]
+}

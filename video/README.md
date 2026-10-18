@@ -17,6 +17,27 @@ Finished file: `out/follow-the-claim-pre-read.mp4` (render it with `npm run rend
 
 The sung words are always on screen as captions, because many people will watch with the sound off.
 
+## The fundamentals explainer (about 12½ minutes)
+
+A second, slower pre-read in the same project: the composition `Explainer`. Two voices, Ava (a woman, who guides) and Sam (a man, who asks what an executive would ask), take viewers through 13 scenes in about 10 minutes, from three kinds of AI to what stays human. It opens on the song's chorus and ends by playing the music video as a recap. It follows the deck's look: light WCB blue scenes, WCB blue for AI and agents, WCB green for people.
+
+- The script is `explainer/script.md`, and it is the single source: `scripts/explainer.mjs` reads its spoken lines (`**Ava:**` / `**Sam:**`) for the voiceover, the captions and the timing.
+- Each scene's picture is in `src/explainer/scenes/`; pictures come in on the word that names them (`useCue(line, phrase)`), so they stay in sync with any take.
+- The visuals reuse the deck's own data (next-word example, grounding sources, agent-loop steps, tools and permissions, autonomy levels, eval checks, opportunity ladder, the electricity story, readiness foundations, learning objectives), so the video and the session show the same thing.
+
+Voices (ElevenLabs library, model `eleven_v4`): Ava is "Caroline Braden: warm, bright and genuine" (`yK2Ny0mq8WplixhD1td3`), chosen to sit close to the song's singer; Sam is "Marcus: grounded and conversational", Canadian (`8DuGkCxTvcIIAe89cGqN`). Swap either by regenerating its lines.
+
+```bash
+# 1. Generate each line with ElevenLabs and save it as public/explainer/voice-raw/<id>.mp3
+#    (ids and text: node scripts/explainer.mjs lines). Flow: "Follow the Claim: fundamentals explainer voiceover".
+node scripts/explainer.mjs voice      # slows each line to 92% (pitch kept) and levels both voices to -16 LUFS
+node scripts/explainer.mjs manifest   # measures every line; lines without audio yet get an estimated length
+npm run render:explainer             # writes out/follow-the-claim-fundamentals.mp4
+node scripts/stills.mjs --explainer  # review stills, one per scene
+```
+
+Lines without a voice file render silent with their captions, at an estimated length, so the video can be reviewed before the voiceover exists.
+
 ## How the timing works
 
 `src/timeline.ts` holds the lyrics and a plan for each section's length (whole bars at 120 BPM). ElevenLabs never lands exactly on the plan, so the video follows the take instead: `public/audio/song-timing.json` records when each of the 52 sung lines starts, and every scene cut, card, sound effect and caption is keyed to those moments (see `scheduleSections` and the cue helpers in `src/timeline.ts`). The video is as long as the song. Without a timing file the plan is used, so the video still renders, silent, with the same structure.
@@ -61,6 +82,8 @@ Credits used for the current audio: two song takes 4,200, seven effects 95, two 
 
 ## Before sending: items to confirm
 
+- [ ] Explainer: scene 12 quotes METR's long-run figure (task length doubling about every 7 months, measured on software and research tasks). Keep, or soften to "growing quickly"
+- [ ] Explainer voices: listen through once for "LLM", "RAG", "evals" and "WCB"
 - [ ] Session date: `session.date` in `src/content.ts` is the `[SESSION DATE]` placeholder
 - [ ] Deloitte source: "The Future of Workers' Compensation: Industry Perspectives and Global Signals", Deloitte Canada, 26 August 2026 (Zohair Masood, Jason Condon, Chris Duvinage), https://www.deloitte.com/ca/en/Industries/insurance/perspectives/future-workers-compensation.html. On screen, as the page words them: the eight forces; the four shifts; 83% of surveyed Canadian WCB leaders say AI maturity in core business functions remains low, with one respondent an early adopter; half rank mental health and wellness support the number one barrier; 55+ expected to reach 23.1% of the labour force by 2041; 17.4% of employed Canadians worked from home in May 2025; "human-in-the-loop"; and the first readiness question, quoted in the outro. The page does not give the survey's size, so the video doesn't either
 - [ ] Listen through once: the singer's "L-L-M", "RAG" and "read, draft, act" are clear on take 1, but the final call is a human ear

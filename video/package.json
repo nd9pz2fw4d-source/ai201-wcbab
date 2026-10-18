@@ -11,7 +11,9 @@
     "audio": "node scripts/elevenlabs.mjs all",
     "audio:song": "node scripts/elevenlabs.mjs song",
     "audio:sfx": "node scripts/elevenlabs.mjs sfx",
-    "audio:align": "node scripts/elevenlabs.mjs align"
+    "audio:align": "node scripts/elevenlabs.mjs align",
+    "render:explainer": "remotion render Explainer out/follow-the-claim-fundamentals.mp4",
+    "explainer:manifest": "node scripts/explainer.mjs manifest"
   },
   "dependencies": {
     "@fontsource/roboto": "5.3.0",

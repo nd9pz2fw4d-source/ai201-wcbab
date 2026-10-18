@@ -162,8 +162,14 @@ Decisions (from the user):
 
 ## Plan
 - [x] Script for review (`video/explainer/script.md`): about 1,300 spoken words, slow pace, on-screen notes per scene; no spoilers for the session's exercises; no dated product names
-- [ ] User reviews the script
+- [x] User reviews the script ("build it!")
 - [ ] Voices: design a woman's voice to match the singer, pick a man's voice; user picks from previews
 - [ ] Generate the voiceover per line (ElevenLabs), time scenes to it
-- [ ] Explainer composition in the same Remotion project, reusing brand, components and the caption track; song sting at the start, music video at the end
+- [x] Explainer composition in the same Remotion project, reusing brand, components and the caption track; song sting at the start, music video at the end
+- [x] WCB colouring, as the user asked: the deck's light content-slide look (light WCB blue, deep blue headings, WCB blue for AI, WCB green for people, WCB and Deloitte logos)
 - [ ] Verify: stills, full render, levels; commit
+
+### Status (round 6)
+- Voices picked from the ElevenLabs library (no voice design: it needs the user's own sample line and description). Ava: Caroline Braden; Sam: Marcus (Canadian).
+- BLOCKED: after the first line, ElevenLabs refused generation: "Unusual activity has been detected on your account, so Free Tier access has been disabled... Please upgrade to a paid subscription to continue." Needs the account owner. 1 of 63 lines generated.
+- Built anyway on estimated line lengths: all 13 scenes, captions, song sting, music video recap; preview renders silent except line 1. New voice files slot in with `explainer.mjs voice` then `manifest`.
