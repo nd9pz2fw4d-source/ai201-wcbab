@@ -1,0 +1,1 @@
+"Plugs into all your systems": what can it read, what can it draft, and what can it actually do? Around here, the only thing that should plug into everything is a block heater. Only the access the job needs: least privilege.

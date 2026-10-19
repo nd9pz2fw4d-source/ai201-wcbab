@@ -4,20 +4,27 @@ import { fadeUp, popIn, progress, useIn, useSeconds } from "../anim";
 import { DeloitteLogo, WcbLogo, theme } from "../brand";
 import { session } from "../content";
 import { Stage } from "../components/Stage";
-import { teaserAt } from "../timeline";
+import { Sfx } from "../components/Sfx";
+import { useCue } from "../explainer/beat";
 
-/** Teaser chips, shown in the intro's instrumental stretch in place of the subtitle. */
-const teasers = ["One claim", "Three acts", "Eight key terms", "One song"];
+/** The shape of the day, each chip popping in as Riphay says it (line 2), in place of the subtitle. */
+const teasers: [string, string][] = [
+  ["One claim", "one claim"],
+  ["Three acts", "three acts"],
+  ["Eight words", "eight words"],
+  ["Your questions", "your questions"],
+];
 
-// A claim file flies in, gets stamped, and the title lands; then a teaser of what's coming.
+// A claim file flies in, gets stamped, and the title lands while Riphay says hello; then the shape of the day.
 export function Intro() {
   const t = useSeconds();
+  const teaserAt = teasers.map(([, phrase]) => useCue(1, phrase));
   const fly = useIn(0.2, 12);
   const stamp = useIn(2.5, 9);
   const title = useIn(3.2);
   const sub = useIn(4.2);
   const logos = useIn(5.2);
-  const swap = progress(t, teaserAt(0) - 0.4, teaserAt(0));
+  const swap = progress(t, teaserAt[0] - 0.4, teaserAt[0]);
 
   const folderX = interpolate(fly, [0, 1], [-1400, 0]);
   const folderSpin = interpolate(fly, [0, 1], [-30, -4]);
@@ -62,7 +69,7 @@ export function Intro() {
               transform: `rotate(12deg) scale(${interpolate(stamp, [0, 1], [2.4, 1])})`,
             }}
           >
-            PRE-READ
+            THE DAY
           </div>
         </div>
       </div>
@@ -73,11 +80,11 @@ export function Intro() {
         </div>
         <div style={{ position: "relative", marginTop: 30, height: 80 }}>
           <div style={{ ...fadeUp(sub), opacity: Math.min(1, sub) * (1 - swap), fontSize: 46, color: theme.brandTint, fontWeight: 400 }}>
-            {session.programme}: your two-minute warm-up. Sound on!
+            {session.programme} · {session.date}
           </div>
           <div style={{ position: "absolute", inset: 0, display: "flex", justifyContent: "center", gap: 28 }}>
-            {teasers.map((label, i) => (
-              <Teaser key={label} label={label} delay={teaserAt(i)} />
+            {teasers.map(([label], i) => (
+              <Teaser key={label} label={label} delay={teaserAt[i]} />
             ))}
           </div>
         </div>
@@ -100,6 +107,11 @@ export function Intro() {
         <div style={{ width: 2, height: 64, background: theme.brandSky, opacity: 0.5 }} />
         <DeloitteLogo height={46} on="dark" />
       </div>
+      <Sfx id="whoosh" at={0.3} />
+      <Sfx id="stamp" at={2.6} />
+      {teaserAt.map((at) => (
+        <Sfx key={at} id="pop" at={at} />
+      ))}
     </Stage>
   );
 }

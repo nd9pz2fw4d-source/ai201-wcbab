@@ -3,17 +3,19 @@ import { fadeUp, popIn, useIn, useSeconds } from "../anim";
 import { stations, theme } from "../brand";
 import { ClaimTrack, hops } from "../components/ClaimTrack";
 import { Header } from "../components/Header";
+import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useSectionTiming } from "../sectionTiming";
-import { claimTravel } from "../timeline";
+import { useBeat, useCue } from "../explainer/beat";
 
-// First chorus. The claim hops along the eight stations of the journey, from report to close.
+// The claim hops along the eight stations of the journey, from report to close, while Riphay
+// says we'll walk it in the session; "the same care" brings in the tag.
 export function Chorus() {
-  const s = useSectionTiming();
-  const { first, last } = claimTravel(s);
+  const b = useBeat();
+  const first = 0.8;
+  const last = b.seconds - 2.4;
   const t = useSeconds();
   const title = useIn(0);
-  const tag = useIn(s.lines[2]);
+  const tag = useIn(useCue(1, "same care"));
   const home = useIn(last + 0.2);
 
   return (
@@ -29,6 +31,8 @@ export function Chorus() {
       <div style={{ position: "absolute", left: 0, right: 0, top: 800, textAlign: "center", fontSize: 64, fontWeight: 700, ...fadeUp(tag) }}>
         Same care. Better journey.
       </div>
+      <Sfx id="whoosh" at={0.3} />
+      <Sfx id="ding" at={last + 0.6} />
     </Stage>
   );
 }

@@ -4,16 +4,16 @@ import { theme } from "../brand";
 import { deloitteSource, shiftStats, shifts } from "../content";
 import { Header } from "../components/Header";
 import { SourceNote } from "../components/SourceNote";
+import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useSectionTiming } from "../sectionTiming";
+import { useCue } from "../explainer/beat";
 
-// 24 s. Deloitte's four shifts click into place one by one, then the survey numbers and human in the loop.
+// Deloitte's four shifts click into place one by one, then the survey numbers and human in the loop.
 export function Shifts() {
-  const s = useSectionTiming();
-  // Each shift clicks in on its line; the numbers on "eighty-three percent"; the header on "tech and the people".
-  const shiftAt = [0, 2, 4, 6].map((n) => s.lines[n]);
-  const statsAt = s.lines[8];
-  const goalAt = s.lines[10];
+  // Each shift clicks in as Riphay names it; the numbers on "Eighty-three percent"; the header on the last line.
+  const shiftAt = [useCue(0, "in pricing"), useCue(0, "in how we engage"), useCue(0, "in operations"), useCue(0, "in partnerships")];
+  const statsAt = useCue(1, "Eighty-three percent");
+  const goalAt = useCue(2);
   const t = useSeconds();
   const head = useIn(0);
   const goal = useIn(goalAt);
@@ -42,6 +42,10 @@ export function Shifts() {
         ))}
       </div>
       <SourceNote text={deloitteSource} />
+      {shiftAt.map((at) => (
+        <Sfx key={at} id="clunk" at={at} />
+      ))}
+      <Sfx id="ding" at={goalAt + 0.4} />
     </Stage>
   );
 }

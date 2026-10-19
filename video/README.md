@@ -1,69 +1,70 @@
-# Follow the claim: pre-read music video
+# Follow the claim: before the session
 
-A 2 minute 20 second music video that goes out before the Executive AI Academy session. It sets up the day and teaches the key terms, with a song, using Deloitte's August 2026 view of the future of workers' compensation in Canada for context. It uses Remotion for the video and ElevenLabs for the song and sound effects.
+A narrated pre-read that goes out before the Executive AI Academy session, with a one-page cheat sheet. It uses Remotion for the video and ElevenLabs for the voices and sound effects. There is no song.
 
-Finished file: `out/follow-the-claim-pre-read.mp4` (render it with `npm run render`; `out/` is not committed).
+Finished file: `out/follow-the-claim-before-the-session.mp4` (render it with `npm run render`; `out/` is not committed).
 
-| Time | Section | On screen |
-|---|---|---|
-| 0:00 | Intro | A claim file flies in and gets stamped "Pre-read". Title, WCB and Deloitte logos, then "One claim · Three acts · Eight key terms · One song" |
-| 0:16 | Verse 1 | A worker is hurt and a claim starts. Deloitte asked Canada's WCB leaders what's next. Deloitte's eight forces reshaping workers' comp |
-| 0:32 | Chorus | The claim hops through the eight stations of the journey. "Same care. Better journey." |
-| 0:48 | Verse 2 | Deloitte's four shifts click into place, then the survey figures and "human in the loop" |
-| 1:12 | Pre-chorus | The day: one claim, three acts (See it, Choose it, Govern it) |
-| 1:24 | Verse 3 | Eight key-term flashcards: LLM, hallucination, grounding (RAG), agent, the agent loop, least privilege, the autonomy dial, evals and human in the loop |
-| 1:57 | Final chorus | The claim, done well (2028): agents carry it through the routine stations; on "A person decides" it stops at the entitlement decision and the rest dims; it finishes at close and the worker is back at work. "Agents do the legwork. People make the call." |
-| 2:10 | Outro | See you in the room, with Deloitte's readiness question to bring an answer to |
+It has two parts, in three voices:
 
-The sung words are always on screen as captions, because many people will watch with the sound off.
+**Before the session (about 9 minutes).** Two co-narrators, Ava and Sam, trade lines: witty, warm and steady, with a light Alberta touch (construction season, the forecast, the block heater). It is deliberately not a walk through the session's slides: the session is about WCB (the claim, our choices); this part is about you and the world.
 
-## How the timing works
+| Part | What happens |
+|---|---|
+| Why watch | A packed week; the four parts |
+| A Tuesday with AI | 7:30 am the phone finishes a text (LLM), 8:15 the bank's fraud text (predictive AI; the machine flags, a person decides), 10:00 "it's on page 4" (grounding, RAG), 1:00 pm an agent books a trip (agent, the loop, least privilege, the autonomy dial, human in the loop) |
+| Watch it work, and slip | Three illustrative demos in an AI assistant window, each with a predict-then-see beat: two summaries (which would you trust?), a question it can't answer (a hallucination), a draft a person edits before sending (accountability) |
+| Decode the pitch | "99% accurate, fully autonomous, learns your business, plugs into all your systems" becomes five questions to ask |
+| Three questions to bring | Deloitte's 83% (nobody is far ahead), three questions about the viewer's own area, and the cheat sheet |
 
-`src/timeline.ts` holds the lyrics and a plan for each section's length (whole bars at 120 BPM). ElevenLabs never lands exactly on the plan, so the video follows the take instead: `public/audio/song-timing.json` records when each of the 52 sung lines starts, and every scene cut, card, sound effect and caption is keyed to those moments (see `scheduleSections` and the cue helpers in `src/timeline.ts`). The video is as long as the song. Without a timing file the plan is used, so the video still renders, silent, with the same structure.
+**The day (about 3 minutes).** Riphay Al-Hussein, who leads the session, introduces it in their own cloned voice, over the session scenes: one claim and Deloitte's eight forces, the claim's journey, Deloitte's four shifts, the three acts (See it, Choose it, Govern it), a lightning round of the eight words, the claim done well ("a person decides"), and "See you in the room" with Deloitte's readiness question and the date.
 
-## Make the video
+The first part follows the deck's light content-slide look (light WCB blue, WCB blue for AI and agents, WCB green for people); the session part switches to the deck's dark title look, so the handover is visible. Every spoken line is captioned with its speaker's name.
 
-```bash
-cd video
-npm install
-npm run render       # writes out/follow-the-claim-pre-read.mp4 from the audio in public/audio
-npm run studio       # preview and scrub in the browser while editing
-```
+## How it fits together
 
-The current audio is committed: `public/audio/song.mp3` (take 1 of 2, chosen because every line is sung and intelligible; take 2 dropped three lines), seven sound effects in `public/audio/sfx/`, and `public/audio/song-timing.json`.
+- **The script is the single source:** `explainer/script.md`. `scripts/explainer.mjs` reads its spoken lines (`**Ava:**`, `**Sam:**`, `**Host:**`), delivery tags in [square brackets] (sent to the voice, never captioned) and `(pause 2.5s)` think-pauses, for the voiceover, the captions and the timing.
+- **Timing follows the voice.** `public/explainer/manifest.json` holds every line's measured length; scenes are placed one after another from those lengths (`src/explainer/timing.ts`), and pictures come in on the word that names them (`useCue(line, phrase)`), so a new take of any line re-times the video by itself.
+- **Pictures:** the first part is in `src/explainer/scenes/`; the session part reuses `src/scenes/` (Intro, Verse1, Chorus, Shifts, Agenda, Terms, DoneWell, Outro). The scene for each script number is listed in `src/explainer/Explainer.tsx`.
+- **Sound effects** sit next to the picture they belong to (`<Sfx id at />`, `src/components/Sfx.tsx`), only in the opening card and the session part, well under the voice.
+- **Words:** the 12 words, the five pitch questions and the three questions are in `src/explainer/cheatsheet.ts`, used by the video and the cheat sheet. Deloitte figures and the session date are in `src/content.ts`.
+- **From the deck:** colours, logos, station names and who does what in "the claim, done well" come from `../src/theme.ts`, `../src/components/*Logo*.tsx`, `../src/data/journey.ts` and `../src/data/sortAnswer.ts`, so the video always matches it.
 
-### Making new audio
+## Voices
 
-There are two routes; both write the same files.
+ElevenLabs, model `eleven_v4` (`voices` in `scripts/explainer.mjs`):
 
-**ElevenLabs API key** (`ELEVENLABS_API_KEY`): `npm run audio` makes the song (Music API, one chunk per section with its lyrics and length), the sound effects, and the line timing (Forced Alignment API). Single steps: `npm run audio:song`, `audio:sfx`, `audio:align`. Existing files are kept because generation costs credits; add `-- --force` to redo one, then re-run `audio:align`. `node scripts/elevenlabs.mjs all --dry-run` prints every request without calling the API.
-
-**ElevenLabs connector** (how the current audio was made, in the flow "Follow the Claim: pre-read song and SFX"): generate the song on a music node (`eleven_music_v2_5`, custom lyrics from `src/timeline.ts`, 140 s) and the effects on sfx nodes (prompts in `sfxLibrary`), save them into `public/audio/`, then:
+- Ava: "Kristen", warm, neutral North American (`CvD6hF1BJzAFN428j1cO`)
+- Sam: "Jay Wayne Pro", warm and grounded (`8Ln42OXYupYsag45MAUy`)
+- Host: Riphay's own cloned voice (`XnhNUCoDPy1eZWeCNrON`). The voice is sent "Rifai" wherever the script says "Riphay" (`pronounce` in `scripts/explainer.mjs`), so it says the name right; captions keep "Riphay".
 
 ```bash
-node scripts/elevenlabs.mjs normalize                        # evens out effect levels (no key needed)
-python3 -m venv .venv && .venv/bin/pip install faster-whisper
-.venv/bin/python scripts/align_lyrics.py                     # writes song-timing.json from the audio
+node scripts/explainer.mjs lines      # every line's id, speaker, voice and the exact text to send
+# Generate each line with ElevenLabs (flow "Follow the claim: narration"), then download it:
+node scripts/explainer.mjs fetch <id> <url>   # saves voice-raw/<id>.mp3 and <id>.txt (the text it was made from)
+npm run voice                         # slows each line to 92% (pitch kept), levels all voices to -16 LUFS, re-measures
+npm run render                        # writes out/follow-the-claim-before-the-session.mp4
+npm run stills                        # review stills, one per scene, to out/stills
 ```
 
-`align_lyrics.py` transcribes the song locally with word timestamps and matches the words to the lyrics; it prints each line's time and flags any line it had to place between its neighbours. On the current take it heard all 52.
+Audio whose `.txt` no longer matches the script is ignored, so an edited line can never play its old words. Lines without a voice render silent with their captions, at an estimated length. To change a line: edit the script, regenerate just that line, `fetch` it, `npm run voice`.
 
-Credits used for the current audio: two song takes 4,200, seven effects 95, two Scribe transcripts to compare the takes about 3,900 (about $0.82 in all).
+The voiceover used about 9,000 credits (65 lines); the auditions about 3,000.
 
-## Editing
+## The cheat sheet
 
-- Lyrics, song style, planned section lengths, sound effect prompts, cue times: `src/timeline.ts` (change lyrics and you need a new take and new timing)
-- On-screen words and Deloitte figures: `src/content.ts`
-- Scenes: `src/scenes/`; song and effect volume: `src/PreRead.tsx`
-- Who does what in the final chorus (agent or person, per station) is the deck's suggested sort, `../src/data/sortAnswer.ts`: change it there and both follow
-- Colours, logos and station names come from the deck (`../src/theme.ts`, `../src/components/*Logo*.tsx`, `../src/data/journey.ts`), so the video always matches it
-- `node scripts/stills.mjs [seconds...]` renders review stills to `out/stills`
+`npm run cheatsheet` builds `cheatsheet/follow-the-claim-cheat-sheet.pdf`: one letter-size page with the 12 words (each with the everyday example from the video), the five pitch questions and the three questions to bring, with space to write. It fails if the content runs past one page. It needs Playwright's Chromium (`npx playwright install chromium`, or set `CHROMIUM_PATH`).
+
+## Sound effects
+
+Five effects in `public/audio/sfx/` (prompts in `src/sfxLibrary.ts`). `ELEVENLABS_API_KEY=... npm run audio:sfx` regenerates missing ones (`-- --force` to redo); `node scripts/elevenlabs.mjs normalize` levels them to the same peak.
 
 ## Before sending: items to confirm
 
-- [ ] Session date: `session.date` in `src/content.ts` is the `[SESSION DATE]` placeholder
-- [ ] Deloitte source: "The Future of Workers' Compensation: Industry Perspectives and Global Signals", Deloitte Canada, 26 August 2026 (Zohair Masood, Jason Condon, Chris Duvinage), https://www.deloitte.com/ca/en/Industries/insurance/perspectives/future-workers-compensation.html. On screen, as the page words them: the eight forces; the four shifts; 83% of surveyed Canadian WCB leaders say AI maturity in core business functions remains low, with one respondent an early adopter; half rank mental health and wellness support the number one barrier; 55+ expected to reach 23.1% of the labour force by 2041; 17.4% of employed Canadians worked from home in May 2025; "human-in-the-loop"; and the first readiness question, quoted in the outro. The page does not give the survey's size, so the video doesn't either
-- [ ] Listen through once: the singer's "L-L-M", "RAG" and "read, draft, act" are clear on take 1, but the final call is a human ear
-- [ ] "Expect games, votes, and a claim that goes wrong on purpose" matches the deck at every session length (the sort, the vote tiles and "The claim that went wrong" are in all of them)
-- [ ] Licences: Remotion is free for individuals, non-profits and companies of up to three people; a larger for-profit company needs a Remotion company licence (https://www.remotion.dev/license). ElevenLabs music and sound effects need a plan that allows commercial use
-- [ ] Co-branding: WCB and Deloitte logos appear on the first and last scenes, as in the deck. Confirm with both brand teams
+- [ ] Listen through once: "LLM", "RAG", "evals", "WCB", "QE2" and "Rifai Al-Hussein"
+- [ ] The demos, the bank text, the trip and the pitch are made-up examples, labelled "Illustrative" where they appear as screens
+- [ ] Deloitte's 83% is quoted as the paper words it ("organizational maturity for integrating AI into core business functions remains low")
+- [x] Session date: Monday, October 26 (`session.date` in `src/content.ts` and the last line of the script), shown on the explainer's last scenes and the cheat sheet
+- [ ] Deloitte source: "The Future of Workers' Compensation: Industry Perspectives and Global Signals", Deloitte Canada, 26 August 2026 (Zohair Masood, Jason Condon, Chris Duvinage), https://www.deloitte.com/ca/en/Industries/insurance/perspectives/future-workers-compensation.html. On screen, as the page words them: the eight forces; the four shifts; 83% of surveyed Canadian WCB leaders say AI maturity in core business functions remains low, with one respondent an early adopter; half rank mental health and wellness support the number one barrier; 55+ expected to reach 23.1% of the labour force by 2041; 17.4% of employed Canadians worked from home in May 2025; "human-in-the-loop"; and the first readiness question, quoted at the end. The page does not give the survey's size, so the video doesn't either
+- [ ] "Expect games, votes, and a claim that goes wrong on purpose" matches the deck at every session length
+- [ ] Licences: Remotion is free for individuals, non-profits and companies of up to three people; a larger for-profit company needs a Remotion company licence (https://www.remotion.dev/license). ElevenLabs voices and effects need a plan that allows commercial use
+- [ ] Co-branding: WCB and Deloitte logos appear throughout, as in the deck. Confirm with both brand teams

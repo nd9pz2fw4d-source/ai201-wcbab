@@ -1,0 +1,1 @@
+That's the core idea behind tools like Copilot. A large language model, or LLM, predicts a likely next word, again and again. Your keyboard does a tiny version of it.

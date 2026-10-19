@@ -1,0 +1,1 @@
+LLM: predicts the next word. Hallucination: confident, but wrong. Grounding, or RAG: answers from trusted sources, and shows them.

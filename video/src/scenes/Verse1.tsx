@@ -6,36 +6,49 @@ import { theme } from "../brand";
 import { deloitteSource, forces, surveyReach } from "../content";
 import { Header } from "../components/Header";
 import { SourceNote } from "../components/SourceNote";
+import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useSectionTiming } from "../sectionTiming";
-import { FPS, forceAt } from "../timeline";
+import { useCue } from "../explainer/beat";
+import { FPS } from "../explainer/timing";
 
-// 8 to 24 s. A worker is hurt, a claim starts; Deloitte asked Canada's WCB leaders; eight forces.
-// Beats change on the sung lines: the claim (lines 1-2), the survey (3-4), the forces (5-8).
+/** Where Riphay names each of Deloitte's eight forces (line 3), in the order of `forces`. */
+const named = ["Whole-person recovery", "An ageing workforce", "Gig work", "Working from home", "New kinds of risk", "Artificial intelligence", "Ageing core systems", "legislation"];
+
+// A worker is hurt, a claim starts; Deloitte asked Canada's WCB leaders; eight forces.
+// The picture changes with Riphay's lines: the claim (line 1), the survey (line 2), the forces (lines 3 and 4).
 export function Verse1() {
-  const s = useSectionTiming();
-  const survey = Math.round((s.lines[2] - 0.2) * FPS);
-  const forces = Math.round((s.lines[4] - 0.2) * FPS);
+  const claimAt = useCue(0, "a claim starts moving");
+  const surveyAt = useCue(1) - 0.2;
+  const forcesAt = useCue(2) - 0.2;
+  const forceAt = named.map((phrase) => useCue(2, phrase) - forcesAt);
+  const survey = Math.round(surveyAt * FPS);
+  const forces = Math.round(forcesAt * FPS);
   return (
     <Stage chip="Why now">
       <Header />
       <Sequence durationInFrames={survey} layout="none">
-        <ClaimStarts />
+        <ClaimStarts claimAt={claimAt} />
       </Sequence>
       <Sequence from={survey} durationInFrames={forces - survey} layout="none">
         <Survey />
       </Sequence>
       <Sequence from={forces} layout="none">
-        <Forces />
+        <Forces at={forceAt} />
       </Sequence>
+      <Sfx id="pop" at={claimAt} />
+      <Sfx id="pop" at={surveyAt + 0.4} />
+      {forceAt.map((at) => (
+        <Sfx key={at} id="pop" at={forcesAt + at} />
+      ))}
     </Stage>
   );
 }
 
-function ClaimStarts() {
+/** The worker is hurt as Riphay starts; the arrow and the claim follow on "a claim starts moving". */
+function ClaimStarts({ claimAt }: { claimAt: number }) {
   const worker = useIn(0.1);
-  const arrow = useIn(1.2);
-  const claim = useIn(2);
+  const arrow = useIn(claimAt - 0.6);
+  const claim = useIn(claimAt);
   const t = useSeconds();
   const wobble = Math.sin(t * 18) * interpolate(t, [0.3, 1.2], [8, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
@@ -125,12 +138,9 @@ function ReachChip({ where, how, delay }: { where: string; how: string; delay: n
   );
 }
 
-// Eight forces, in the order the verse sings them.
-function Forces() {
-  const s = useSectionTiming();
+// Eight forces, each popping in as Riphay names it; `at` is relative to the start of this part.
+function Forces({ at }: { at: number[] }) {
   const head = useIn(0);
-  // This beat starts 0.2 s before line 5; card times are relative to that.
-  const t0 = s.lines[4] - 0.2;
   return (
     <>
       <div style={{ position: "absolute", left: 80, top: 170, fontSize: 68, fontWeight: 900, ...fadeUp(head) }}>
@@ -148,7 +158,7 @@ function Forces() {
         }}
       >
         {forces.map((f, i) => (
-          <ForceCard key={f.title} title={f.title} detail={f.detail} Icon={f.icon} delay={forceAt(i, s) - t0} />
+          <ForceCard key={f.title} title={f.title} detail={f.detail} Icon={f.icon} delay={at[i]} />
         ))}
       </div>
       <SourceNote text={deloitteSource} />

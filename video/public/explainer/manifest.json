@@ -1,0 +1,509 @@
+{
+  "scenes": [
+    {
+      "n": 0,
+      "title": "Opening card",
+      "lines": []
+    },
+    {
+      "n": 1,
+      "title": "Why watch",
+      "lines": [
+        {
+          "id": "s01-01",
+          "speaker": "Ava",
+          "text": "Hi there, and welcome. I know your calendar is busier than the QE2 on a long weekend, so let's make these ten minutes count.",
+          "seconds": 8.65
+        },
+        {
+          "id": "s01-02",
+          "speaker": "Sam",
+          "text": "The session will use a handful of words about AI. And here's the good news: you already know more about them than you think. You've been using AI since breakfast.",
+          "seconds": 10.81
+        },
+        {
+          "id": "s01-03",
+          "speaker": "Ava",
+          "text": "So, here's the plan. First, a day with AI. Then we'll watch it work, and watch it slip. Then, how to see through a sales pitch. And finally, three questions to bring with you. There's no quiz at the end. Probably.",
+          "seconds": 16.54
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "A Tuesday with AI: the next word",
+      "lines": [
+        {
+          "id": "s02-01",
+          "speaker": "Sam",
+          "text": "Seven thirty, Tuesday morning. You're texting your team that you're running late, because it's construction season, which in Alberta is the other season. And your phone finishes the sentence for you.",
+          "seconds": 11.23
+        },
+        {
+          "id": "s02-02",
+          "speaker": "Ava",
+          "text": "That's the core idea behind tools like Copilot. A large language model, or LLM, predicts a likely next word, again and again. Your keyboard does a tiny version of it.",
+          "seconds": 13.87
+        },
+        {
+          "id": "s02-03",
+          "speaker": "Sam",
+          "text": "So, basically, a very, very good autocomplete, trained on a mountain of text.",
+          "seconds": 6.03
+        },
+        {
+          "id": "s02-04",
+          "speaker": "Ava",
+          "text": "That's why these tools write so fluently. And it's also why they can be wrong: they produce what sounds likely, not what they've checked. On its own, it has no fact check, and no access to our files.",
+          "seconds": 14.29
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "A Tuesday with AI: the bank alert",
+      "lines": [
+        {
+          "id": "s03-01",
+          "speaker": "Sam",
+          "text": "Eight fifteen. Your bank texts you: did you just spend twelve hundred dollars in another city? You did not. You've been in traffic for forty minutes.",
+          "seconds": 11.08
+        },
+        {
+          "id": "s03-02",
+          "speaker": "Ava",
+          "text": "That's a different kind of AI. Predictive AI, or machine learning, learns patterns from past data and scores how unusual something is. A bit like an Alberta weather forecast: a confident call, based on patterns. Very useful. Still, bring a jacket. WCB already uses this kind, to forecast and to sort.",
+          "seconds": 28.55
+        },
+        {
+          "id": "s03-03",
+          "speaker": "Sam",
+          "text": "And notice what the bank does next. It doesn't cancel your card for good. It asks you. When the stakes are high, the machine flags, and a person decides.",
+          "seconds": 11.86
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "A Tuesday with AI: \"page four\"",
+      "lines": [
+        {
+          "id": "s04-01",
+          "speaker": "Ava",
+          "text": "Ten o'clock. You ask a colleague about a policy, and she says: yes, it's on page four.",
+          "seconds": 5.85
+        },
+        {
+          "id": "s04-02",
+          "speaker": "Sam",
+          "text": "And you trust it, because she showed you where. That's grounding. A grounded AI looks things up in trusted sources first, answers from them, and shows you the source.",
+          "seconds": 13.06
+        },
+        {
+          "id": "s04-03",
+          "speaker": "Ava",
+          "text": "If she'd just said, \"I think so,\" you'd check. Hold AI to the same standard.",
+          "seconds": 6.64
+        },
+        {
+          "id": "s04-04",
+          "speaker": "Sam",
+          "text": "You'll also hear grounding called RAG: retrieval-augmented generation. Yes, a mouthful. Retrieve the right documents, add them to the question, then generate the answer from them. And it's only as good as the documents we give it.",
+          "seconds": 17.32
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "title": "A Tuesday with AI: the trip",
+      "lines": [
+        {
+          "id": "s05-01",
+          "speaker": "Sam",
+          "text": "One o'clock. You need to be in Calgary on Thursday.",
+          "seconds": 3.34
+        },
+        {
+          "id": "s05-02",
+          "speaker": "Ava",
+          "text": "A chatbot would list some flights. An agent books the trip. It has a goal, tools it's allowed to use, some memory of your preferences, and instructions. It plans a step, acts, checks the result, and repeats. Picture a very keen new hire who never needs a coffee break.",
+          "seconds": 22.47
+        },
+        {
+          "id": "s05-03",
+          "speaker": "Sam",
+          "text": "It can only use what it's connected to: it can search flights and hold a hotel, but it can't spend from the company account. Only the access the job needs. That's called least privilege.",
+          "seconds": 13.58
+        },
+        {
+          "id": "s05-04",
+          "speaker": "Ava",
+          "text": "And a good one stops before it pays, and asks you. That's the autonomy dial: how much it may do alone, from just suggesting, to drafting, to acting with approval, all the way to acting alone. You, approving, are the human in the loop.",
+          "seconds": 19.33
+        },
+        {
+          "id": "s05-05",
+          "speaker": "Sam",
+          "text": "So that's three kinds of AI. One predicts. One writes. One does.",
+          "seconds": 6.19
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "title": "Watch it work: two summaries",
+      "lines": [
+        {
+          "id": "s06-01",
+          "speaker": "Ava",
+          "text": "Now let's watch some AI at work. Here are two summaries of the same long email thread. Which would you trust?",
+          "pauseAfter": 2.5,
+          "seconds": 8.8
+        },
+        {
+          "id": "s06-02",
+          "speaker": "Sam",
+          "text": "If you picked the one that shows where each point came from, good call. Both read well. Only one lets you check it in seconds.",
+          "seconds": 8.46
+        },
+        {
+          "id": "s06-03",
+          "speaker": "Ava",
+          "text": "Now picture a thick medical file instead of an email thread. A summary is only useful if the person deciding can see the page it came from.",
+          "seconds": 10.11
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "title": "Watch it slip: the confident answer",
+      "lines": [
+        {
+          "id": "s07-01",
+          "speaker": "Sam",
+          "text": "Next, we ask it something it can't know: what the leadership team decided last Tuesday. It wasn't in the room, and nobody gave it the notes. What do you think happens?",
+          "pauseAfter": 2.5,
+          "seconds": 13.32
+        },
+        {
+          "id": "s07-02",
+          "speaker": "Ava",
+          "text": "You might expect it to say, \"I don't know.\" Sometimes it does.",
+          "seconds": 4.47
+        },
+        {
+          "id": "s07-03",
+          "speaker": "Sam",
+          "text": "Here, it gives a confident, specific answer, and none of it happened. That's called a hallucination. Think of a fish story from the lake, told with total confidence, and a budget attached.",
+          "seconds": 13.66
+        },
+        {
+          "id": "s07-04",
+          "speaker": "Ava",
+          "text": "Why would it do that? Remember the next word. It's built to produce a likely-sounding answer, not to say \"I wasn't there.\"",
+          "seconds": 8.2
+        },
+        {
+          "id": "s07-05",
+          "speaker": "Sam",
+          "text": "The fix is the same as before: ground it in the right sources, ask where an answer came from, and have a person check anything that matters. Fluent is not the same as verified.",
+          "seconds": 12.8
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "title": "Watch it work: the draft",
+      "lines": [
+        {
+          "id": "s08-01",
+          "speaker": "Ava",
+          "text": "Last one. It drafts a reply to a worker who's upset about a delay. It's quick and mostly right. But a person reads it, changes one sentence to sound more human, and only then sends it.",
+          "seconds": 13.06
+        },
+        {
+          "id": "s08-02",
+          "speaker": "Sam",
+          "text": "So, if that reply had gone out wrong, whose name is on it?",
+          "seconds": 4.28
+        },
+        {
+          "id": "s08-03",
+          "speaker": "Ava",
+          "text": "The person who sent it owns it. AI can draft, sort and fetch, but accountability doesn't move to the machine. That's why, for anything that reaches a worker or decides their benefits, a person stays in the loop.",
+          "seconds": 14.45
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "title": "Decode the pitch",
+      "lines": [
+        {
+          "id": "s09-01",
+          "speaker": "Sam",
+          "text": "Now, a pitch you may have heard: \"Our AI agent is ninety-nine percent accurate, fully autonomous, learns your business, and plugs into all your systems.\" Sounds great. Let's decode it.",
+          "seconds": 15.26
+        },
+        {
+          "id": "s09-02",
+          "speaker": "Ava",
+          "text": "\"Ninety-nine percent accurate\": on what tests, and on cases like ours? Those tests are called evals. Ask to see them.",
+          "seconds": 10.63
+        },
+        {
+          "id": "s09-03",
+          "speaker": "Sam",
+          "text": "\"Fully autonomous\": for which tasks, and where does a person approve? \"Learns your business\": from what data, and can it show where an answer came from?",
+          "seconds": 11
+        },
+        {
+          "id": "s09-04",
+          "speaker": "Ava",
+          "text": "\"Plugs into all your systems\": what can it read, what can it draft, and what can it actually do? Around here, the only thing that should plug into everything is a block heater. Only the access the job needs: least privilege.",
+          "seconds": 17.76
+        },
+        {
+          "id": "s09-05",
+          "speaker": "Sam",
+          "text": "And one more they rarely mention: when it's wrong, who notices, and can we see what it did?",
+          "seconds": 6.9
+        },
+        {
+          "id": "s09-06",
+          "speaker": "Ava",
+          "text": "If they can't answer those, that is your answer.",
+          "seconds": 5.59
+        },
+        {
+          "id": "s09-07",
+          "speaker": "Sam",
+          "text": "Five questions, ready for the next time a vendor calls. They're on your cheat sheet, too.",
+          "seconds": 5.25
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "title": "Three questions to bring",
+      "lines": [
+        {
+          "id": "s10-01",
+          "speaker": "Ava",
+          "text": "One last thing. In Deloitte's 2026 survey of Canadian workers' compensation leaders, eighty-three percent said their AI maturity is still low. So nobody's far ahead. What matters is where we choose to start.",
+          "seconds": 15.6
+        },
+        {
+          "id": "s10-02",
+          "speaker": "Sam",
+          "text": "Before the session, think about your own area. First: where does work wait the longest? Waiting is where AI usually helps first.",
+          "seconds": 10.45
+        },
+        {
+          "id": "s10-03",
+          "speaker": "Ava",
+          "text": "Second: which decision would you never hand to a machine, and why? Your answer says a lot about where a person must stay.",
+          "seconds": 8.28
+        },
+        {
+          "id": "s10-04",
+          "speaker": "Sam",
+          "text": "And third: what would you need to see before you trusted an AI's answer? A source, a test result, a person who checked?",
+          "seconds": 8.46
+        },
+        {
+          "id": "s10-05",
+          "speaker": "Ava",
+          "text": "The words are all on the one-page cheat sheet that came with this video. Bring it, and bring your answers. And now, we'll hand you over to Riphay, who's leading the session, for a quick look at the day itself.",
+          "seconds": 14.29
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "title": "Welcome to the session",
+      "lines": [
+        {
+          "id": "s11-01",
+          "speaker": "Host",
+          "text": "Hi, I'm Riphay Al-Hussein, and I'll be leading the session. Thanks for sticking around. I'll keep this brisk.",
+          "seconds": 6.64
+        },
+        {
+          "id": "s11-02",
+          "speaker": "Host",
+          "text": "Here's the shape of the day: one claim, three acts, eight words, and your questions.",
+          "seconds": 6.22
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "title": "One claim, eight forces",
+      "lines": [
+        {
+          "id": "s12-01",
+          "speaker": "Host",
+          "text": "We'll follow one claim. A worker gets hurt on a Monday morning shift, and a claim starts moving.",
+          "seconds": 6.37
+        },
+        {
+          "id": "s12-02",
+          "speaker": "Host",
+          "text": "That claim lives in a changing world. Deloitte asked workers' compensation leaders across Canada, and experts abroad, what's ahead.",
+          "seconds": 8.65
+        },
+        {
+          "id": "s12-03",
+          "speaker": "Host",
+          "text": "They found eight forces. Whole-person recovery. An ageing workforce. Gig work. Working from home. New kinds of risk. Artificial intelligence. Ageing core systems. And legislation, trying to keep up.",
+          "seconds": 16.72
+        },
+        {
+          "id": "s12-04",
+          "speaker": "Host",
+          "text": "Eight forces. Nine, if you count Alberta weather, but Deloitte left that one out.",
+          "seconds": 6.3
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "title": "Follow the claim",
+      "lines": [
+        {
+          "id": "s13-01",
+          "speaker": "Host",
+          "text": "In the session, we'll walk that claim from the first report all the way back to work. At each step we'll ask: where could AI help, and where should it stay out?",
+          "seconds": 10.48
+        },
+        {
+          "id": "s13-02",
+          "speaker": "Host",
+          "text": "The goal isn't a flashier claim. It's the same care, with a better journey for the worker.",
+          "seconds": 6.11
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "title": "Four shifts",
+      "lines": [
+        {
+          "id": "s14-01",
+          "speaker": "Host",
+          "text": "Deloitte also sees four big shifts: in pricing, in how we engage workers and employers, in operations, and in partnerships.",
+          "seconds": 9.59
+        },
+        {
+          "id": "s14-02",
+          "speaker": "Host",
+          "text": "Here's the honest part. Eighty-three percent of leaders say their AI maturity is still low, and just one called their board an early adopter.",
+          "seconds": 9.43
+        },
+        {
+          "id": "s14-03",
+          "speaker": "Host",
+          "text": "So the aim is technology and people working in tandem, with a human in the loop where it counts.",
+          "seconds": 6.48
+        }
+      ]
+    },
+    {
+      "n": 15,
+      "title": "The day: three acts",
+      "lines": [
+        {
+          "id": "s15-01",
+          "speaker": "Host",
+          "text": "The day comes in three acts.",
+          "seconds": 2.38
+        },
+        {
+          "id": "s15-02",
+          "speaker": "Host",
+          "text": "Act one, See it: what AI can do today, and how it works. Act two, Choose it: where it should help on the claim, and where it shouldn't. Act three, Govern it: when it goes wrong, how we catch it, and who owns it.",
+          "seconds": 16.3
+        },
+        {
+          "id": "s15-03",
+          "speaker": "Host",
+          "text": "Three acts, no intermission. There will be coffee.",
+          "seconds": 4.65
+        }
+      ]
+    },
+    {
+      "n": 16,
+      "title": "Eight words",
+      "lines": [
+        {
+          "id": "s16-01",
+          "speaker": "Host",
+          "text": "You've met the words already. Here's the lightning round.",
+          "seconds": 3.06
+        },
+        {
+          "id": "s16-02",
+          "speaker": "Host",
+          "text": "LLM: predicts the next word. Hallucination: confident, but wrong. Grounding, or RAG: answers from trusted sources, and shows them.",
+          "seconds": 11.42
+        },
+        {
+          "id": "s16-03",
+          "speaker": "Host",
+          "text": "Agent: a goal, tools, memory and instructions. The agent loop: plan, act, check, repeat. Least privilege: only the access the job needs.",
+          "seconds": 12.72
+        },
+        {
+          "id": "s16-04",
+          "speaker": "Host",
+          "text": "The autonomy dial: how much it does alone is a choice we make. And evals: test before you trust, with a human in the loop.",
+          "seconds": 9.59
+        }
+      ]
+    },
+    {
+      "n": 17,
+      "title": "The claim, done well",
+      "lines": [
+        {
+          "id": "s17-01",
+          "speaker": "Host",
+          "text": "Now picture that claim, done well. Agents do the legwork: they gather the reports, check the facts, and draft the summary.",
+          "seconds": 8.8
+        },
+        {
+          "id": "s17-02",
+          "speaker": "Host",
+          "text": "Then a person decides. That part stays the same.",
+          "seconds": 3.5
+        },
+        {
+          "id": "s17-03",
+          "speaker": "Host",
+          "text": "And the worker gets on with what matters: getting better, and getting back to work.",
+          "seconds": 5.07
+        }
+      ]
+    },
+    {
+      "n": 18,
+      "title": "See you in the room",
+      "lines": [
+        {
+          "id": "s18-01",
+          "speaker": "Host",
+          "text": "One question to chew on, straight from Deloitte: is AI embedded in the fabric of your business model, or do you still see it as a standalone capability?",
+          "seconds": 10.03
+        },
+        {
+          "id": "s18-02",
+          "speaker": "Host",
+          "text": "Bring your answer, bring your cheat sheet, and bring a coffee. See you in the room on Monday, October 26.",
+          "seconds": 6.97
+        }
+      ]
+    }
+  ]
+}

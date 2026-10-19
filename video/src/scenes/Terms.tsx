@@ -4,17 +4,31 @@ import { useIn, useSeconds } from "../anim";
 import { theme } from "../brand";
 import { terms, type Term } from "../content";
 import { Header } from "../components/Header";
+import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useSectionTiming } from "../sectionTiming";
-import { FPS } from "../timeline";
+import { useBeat, useCue } from "../explainer/beat";
+import { FPS } from "../explainer/timing";
 
-// Eight key terms, one flashcard per two sung lines, with a progress row underneath.
+/** Where Riphay names each term in the lightning round (line, phrase), in the order of `terms`. */
+const said: [number, string][] = [
+  [1, "LLM"],
+  [1, "Hallucination"],
+  [1, "Grounding"],
+  [2, "Agent:"],
+  [2, "The agent loop"],
+  [2, "Least privilege"],
+  [3, "The autonomy dial"],
+  [3, "And evals"],
+];
+
+// Eight key terms, one flashcard each as Riphay names it, with a progress row underneath.
 export function Terms() {
-  const s = useSectionTiming();
+  const b = useBeat();
   const t = useSeconds();
-  // Card i is up from its first line (a beat early) until the next card's first line; the last runs to the end.
-  const cardStart = terms.map((_, i) => (i === 0 ? 0 : s.lines[2 * i] - 0.2));
-  const cardEnd = terms.map((_, i) => (i + 1 < terms.length ? cardStart[i + 1] : s.seconds));
+  const namedAt = said.map(([line, phrase]) => useCue(line, phrase));
+  // Card i is up from just before its name (the first from the start) until the next card; the last runs to the end.
+  const cardStart = terms.map((_, i) => (i === 0 ? 0 : namedAt[i] - 0.2));
+  const cardEnd = terms.map((_, i) => (i + 1 < terms.length ? cardStart[i + 1] : b.seconds));
   const current = cardStart.filter((c) => t >= c).length - 1;
 
   return (
@@ -53,6 +67,9 @@ export function Terms() {
           </div>
         ))}
       </div>
+      {namedAt.slice(1).map((at) => (
+        <Sfx key={at} id="whoosh" at={at - 0.2} />
+      ))}
     </Stage>
   );
 }

@@ -1,0 +1,1 @@
+It can only use what it's connected to: it can search flights and hold a hotel, but it can't spend from the company account. Only the access the job needs. That's called least privilege.

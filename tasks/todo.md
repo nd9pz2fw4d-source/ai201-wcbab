@@ -148,3 +148,59 @@ Objectives: (1) recognize where AI creates value and how transformation is accom
 - [x] Live moment: steps play in order every 3.5 s with Pause and Next step; the room votes stop signs onto any step (click adds, right-click removes); "Show suggested stops" after the last step (recommendation, payment, decision letter). Clinic request no longer a suggested stop
 - [x] Sort: suggested Automate now Register, Sort and assign, Gather evidence, Benefits and payment; Assist: Report, Medical review; notes updated
 - [x] Verify: 50/50 interaction checks (new live-moment checks), futurism-states script, screenshots reviewed
+
+---
+
+# Round 6: the fundamentals explainer (10-minute pre-read with two voices)
+
+Goal: a slower, longer pre-read that gives executives the common language before the session: what AI is, how agents work, and why this is executive work. Two voices: a woman who guides (matched to the song's singer) and a man who asks the questions an executive would ask. Opens with a few seconds of the "Follow the claim" chorus; ends by playing the 2:20 music video as a recap.
+
+Decisions (from the user):
+- Concepts: the 12-part outline (three kinds of AI, LLM and hallucination, grounding and RAG, what makes an agent, the agent loop, tools and least privilege, autonomy dial and human in the loop, evals, Copilot is the floor not the ceiling, the opportunity ladder, readiness, what stays human)
+- One voice explains, the other asks; RAG stays in
+- The song opens it and plays at the end; the woman's voice should sound like the singer
+
+## Plan
+- [x] Script for review (`video/explainer/script.md`): about 1,300 spoken words, slow pace, on-screen notes per scene; no spoilers for the session's exercises; no dated product names
+- [x] User reviews the script ("build it!")
+- [ ] Voices: design a woman's voice to match the singer, pick a man's voice; user picks from previews
+- [ ] Generate the voiceover per line (ElevenLabs), time scenes to it
+- [x] Explainer composition in the same Remotion project, reusing brand, components and the caption track; song sting at the start, music video at the end
+- [x] WCB colouring, as the user asked: the deck's light content-slide look (light WCB blue, deep blue headings, WCB blue for AI, WCB green for people, WCB and Deloitte logos)
+- [ ] Verify: stills, full render, levels; commit
+
+### Status (round 6)
+- Voices picked from the ElevenLabs library (no voice design: it needs the user's own sample line and description). Ava: Caroline Braden; Sam: Marcus (Canadian).
+- BLOCKED: after the first line, ElevenLabs refused generation: "Unusual activity has been detected on your account, so Free Tier access has been disabled... Please upgrade to a paid subscription to continue." Needs the account owner. 1 of 63 lines generated.
+- Built anyway on estimated line lengths: all 13 scenes, captions, song sting, music video recap; preview renders silent except line 1. New voice files slot in with `explainer.mjs voice` then `manifest`.
+
+## Round 6b: make the explainer a true pre-read
+The user's feedback: the first cut "feels like we're just going through the content in the deck". Split: the session is about WCB (the claim, our choices); the pre-read is about you and the world. No "try it this week" (the user won't have that opportunity), so participation happens inside the video.
+
+Decisions (from the user): open with "A Tuesday with AI" (everyday moments, one term each); centrepiece "Watch it work, and slip" (three simulated demos with a predict-then-see beat); "Decode the pitch" (buzzwords become five questions to ask); close with three questions to bring; the song as the send-off; plus a one-page cheat sheet.
+
+## Plan
+- [x] Rewrite `video/explainer/script.md` to the new shape (about 1,250 spoken words)
+- [x] One data file for the words, the five pitch questions and the three questions (`video/src/explainer/cheatsheet.ts`), used by the video and the cheat sheet
+- [x] Cheat sheet: one page, letter size, WCB look, generated from that data to PDF
+- [x] New scenes for the new script; keep the timing system, captions, voices, sting and recap
+- [ ] Verify: stills, preview render, cheat sheet PDF; commit
+- [ ] Still blocked: voiceover (ElevenLabs account)
+
+---
+
+# Round 7: no song; narrators, and Riphay introduces the session
+
+The user's direction: the song is too gimmicky. Instead, a witty narrator who keeps it fun but professional, welcoming, charming and reliable to an Albertan; narrate the whole explainer; and turn the music video at the end into a new narrator introducing the session.
+
+Decisions (from the user):
+- Voices: the first auditions (Canadian-accented library voices) were rejected ("their accents are a bit weird"), and so was a second round of neutral voices; the user picked two voices themselves: Kristen (`CvD6hF1BJzAFN428j1cO`) and Jay Wayne Pro (`8Ln42OXYupYsag45MAUy`). With two voices, the narration is shared by two co-narrators, Ava and Sam, trading lines
+- The session introduction is the user, Riphay Al-Hussein, in their cloned voice (`XnhNUCoDPy1eZWeCNrON`); ElevenLabs needs "Rifai" to say the name, captions keep "Riphay"
+
+## Plan
+- [x] Rewrite `video/explainer/script.md`: witty narration with a light Alberta touch (construction season, the forecast, the block heater, the QE2), same scenes and cue phrases; new scenes 11 to 18 for the session introduction (the old music video's scenes)
+- [x] `scripts/explainer.mjs`: three speakers, delivery tags sent to the voice but kept out of captions, a pronunciation map, a `fetch` step to download a generated line with its text
+- [x] One timeline: the session scenes move from song-lyric timing to the voice timing (`useCue`), sound effects sit in the scenes (`<Sfx>`); the song, the lyric timeline, the music-video composition and the lyric aligner are removed
+- [x] Generate all 65 lines (about 9,000 credits), level them, transcribe every line to check the words
+- [x] Verify: typecheck, stills of every scene, full render
+- [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing; length is about 12½ minutes

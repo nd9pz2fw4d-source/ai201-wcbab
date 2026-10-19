@@ -34,9 +34,12 @@ interface Props {
   /** 0 to 1: dims every station except `focus`. */
   dim?: number;
   focus?: number;
+  /** "light" for the explainer's light scenes; "dark" (default) for the music video. */
+  tone?: "dark" | "light";
 }
 
-export function ClaimTrack({ pos, roles, dim = 0, focus }: Props) {
+export function ClaimTrack({ pos, roles, dim = 0, focus, tone = "dark" }: Props) {
+  const light = tone === "light";
   const x = LEFT + STEP * (pos + 0.5);
   return (
     <>
@@ -89,7 +92,7 @@ export function ClaimTrack({ pos, roles, dim = 0, focus }: Props) {
                 width: 130,
                 height: 130,
                 borderRadius: "50%",
-                background: lit ? fill : theme.brandPrimary,
+                background: lit ? fill : light ? theme.paper : theme.brandPrimary,
                 border: `5px solid ${lit ? fill : theme.brandSky}`,
                 display: "flex",
                 alignItems: "center",
@@ -97,9 +100,9 @@ export function ClaimTrack({ pos, roles, dim = 0, focus }: Props) {
                 transform: `scale(${lit && Math.abs(pos - i) < 0.3 ? 1.12 : 1})`,
               }}
             >
-              <Icon size={60} color={theme.paper} strokeWidth={2} />
+              <Icon size={60} color={lit || !light ? theme.paper : theme.brandSky} strokeWidth={2} />
             </div>
-            <div style={{ marginTop: 22, fontSize: 28, lineHeight: 1.2, textAlign: "center", fontWeight: 500, color: lit ? theme.paper : theme.brandSky }}>
+            <div style={{ marginTop: 22, fontSize: 28, lineHeight: 1.2, textAlign: "center", fontWeight: 500, color: light ? (lit ? theme.brandPrimary : theme.muted) : lit ? theme.paper : theme.brandSky }}>
               {s.lines.map((l) => (
                 <div key={l}>{l}</div>
               ))}

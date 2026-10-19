@@ -2,9 +2,9 @@ import { fadeUp, progress, useIn, useSeconds } from "../anim";
 import { futureYear, stations, suggestedSort, theme } from "../brand";
 import { ClaimTrack, hops, type Role } from "../components/ClaimTrack";
 import { Header } from "../components/Header";
+import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useSectionTiming } from "../sectionTiming";
-import { doneWellTravel } from "../timeline";
+import { useBeat, useCue } from "../explainer/beat";
 import { BackAtWork } from "./Chorus";
 
 // Who does the work at each station: the deck's suggested sort (src/data/sortAnswer.ts),
@@ -12,11 +12,14 @@ import { BackAtWork } from "./Chorus";
 const roles: Role[] = stations.map((st) => (suggestedSort[st.id] === "human" ? "person" : "agent"));
 const DECIDE = stations.findIndex((st) => st.id === "entitlement");
 
-// Final chorus. The same claim in the future: agents carry it to the decision, everything
-// pauses on "A person decides", then it finishes the journey and the worker is back at work.
+// The same claim in the future: agents carry it to the decision, everything pauses on
+// "a person decides" (line 2), then it finishes the journey with line 3 and the worker is back at work.
 export function DoneWell() {
-  const s = useSectionTiming();
-  const { depart, decide, resume, home } = doneWellTravel(s);
+  const b = useBeat();
+  const depart = 0.6;
+  const decide = useCue(1, "a person decides") - 0.2;
+  const resume = useCue(2) - 0.2;
+  const home = Math.min(resume + 2.4, b.seconds - 1.6);
   const t = useSeconds();
   const pos = t < resume ? hops(t, 0, DECIDE, depart, decide) : hops(t, DECIDE, stations.length - 1, resume, home);
   // The rest of the journey dims while the person decides.
@@ -43,6 +46,9 @@ export function DoneWell() {
       <div style={{ position: "absolute", left: 0, right: 0, top: 830, textAlign: "center", fontSize: 56, fontWeight: 700, ...fadeUp(tagline) }}>
         Agents do the legwork. <span style={{ color: theme.human }}>People make the call.</span>
       </div>
+      <Sfx id="whoosh" at={depart} />
+      <Sfx id="stamp" at={decide + 0.1} />
+      <Sfx id="ding" at={home + 0.2} />
     </Stage>
   );
 }
