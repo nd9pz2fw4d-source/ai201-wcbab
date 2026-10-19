@@ -19,7 +19,7 @@ export interface Section {
 export const song = {
   title: "Follow the Claim (country)",
   prompt:
-    "Upbeat modern country anthem in the style of big-sky prairie country radio hits: a driving two-step groove at 120 bpm, fiddle and banjo hooks, twangy Telecaster, pedal steel, stomp-and-clap percussion, and a warm male lead vocal with a friendly twang and crisp, clear diction. Opens with a fiddle-and-banjo hoedown lick and a shout, big gang-vocal singalong choruses, a quick patter-style third verse, then a triumphant final chorus and a clean fiddle tag to end. Feel-good, light-hearted and corporate-friendly.",
+    "Classic traditional country two-step, warm and cheerful, with a polished, high-fidelity Nashville studio sound. Acoustic-led: bright strummed acoustic guitar, a lively fiddle lead, pedal steel swells, banjo rolls, walking upright bass and a light brushed train-beat on the snare. No electric guitar distortion, no rock drums. A friendly warm baritone male vocal with a gentle twang and very clear diction, harmony vocals on the choruses. Fiddle kick-off intro with a cheerful shout, easy bouncy groove around 116 bpm, a quick talking-blues patter verse, and a fiddle-and-steel tag to finish.",
 };
 
 export const sections: Section[] = [
@@ -140,6 +140,8 @@ export interface LyricLine {
   /** Seconds from the start of the song. */
   start: number;
   end: number;
+  /** False when the line wasn't heard in the take (the singer skipped it): it keeps its place but gets no caption. */
+  heard?: boolean;
 }
 
 export interface SongTiming {

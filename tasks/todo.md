@@ -214,3 +214,4 @@ The user asked for a separate, side version: the "Follow the claim" song remade 
 - [x] Two takes from ElevenLabs Music; take 2 kept (take 1 skipped the intro shout)
 - [x] `scripts/align_lyrics.py` back, pointed at the country take, with a second listening pass for lines the first pass misses: 52 of 52 lines timed
 - [x] Stills checked; full render
+- [x] The user found the first take too rock and not high-quality enough: two new arrangements, traditional two-step and bluegrass, both more acoustic; traditional in the video, both sent to compare. Both skip the "least privilege" line, so unsung lines get no caption

@@ -120,7 +120,10 @@ def main():
     for i, text in enumerate(lines):
         nxt = starts[i + 1] if i + 1 < len(lines) else duration
         end = min(nxt, (last_end[i] or starts[i] + 2.0) + 0.8)
-        out.append({"text": text, "start": round(starts[i], 2), "end": round(max(end, starts[i] + 0.5), 2)})
+        line = {"text": text, "start": round(starts[i], 2), "end": round(max(end, starts[i] + 0.5), 2)}
+        if last_end[i] is None:
+            line["heard"] = False  # placed between its neighbours: probably not sung, so it gets no caption
+        out.append(line)
     if not args.dry_run:
         OUT.write_text(json.dumps({"duration": round(duration, 2), "lines": out}, indent=2) + "\n")
     print(f"Timed {found} of {len(lines)} lines from the audio; placed {len(lines) - found} between neighbours." + ("" if args.dry_run else f" Wrote {OUT.relative_to(ROOT)}"))

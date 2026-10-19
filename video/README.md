@@ -52,11 +52,12 @@ The voiceover used about 9,000 credits (65 lines); the auditions about 3,000.
 
 ## Side version: the country song (2:30)
 
-A separate, upbeat country remake of the original "Follow the claim" song, over the session scenes: composition `CountrySong`, rendered with `npm run render:country` to `out/follow-the-claim-country.mp4`. Same lyrics as the original, with a Stampede "Yahoo!" up top; fiddle, banjo, twangy Telecaster, pedal steel, stomp-and-clap two-step and a warm male lead with a friendly twang. The prompt describes the sound, not any artist (`src/song/timeline.ts`).
+A separate, upbeat country remake of the original "Follow the claim" song, over the session scenes: composition `CountrySong`, rendered with `npm run render:country` to `out/follow-the-claim-country.mp4`. Same lyrics as the original, with a Stampede "Yahoo!" up top; a traditional, acoustic-led two-step (fiddle, pedal steel, banjo, upright bass, brushed drums, no rock guitars) with a warm baritone lead and harmonies. The prompt describes the sound, not any artist (`src/song/timeline.ts`).
 
 - The scenes are the same components as the session part of the main video (`src/scenes/`). Each takes its timing as a `cues` prop: the main video works them out from Riphay's lines (`src/explainer/sessionCues.ts`), the song from its sung lines (`src/song/cues.ts`).
-- The take: `public/audio/country/song.mp3`, take 2 of 2 from ElevenLabs Music (`eleven_music_v2_5`, flow "Follow the claim: country version"), chosen because it sings the intro shout; take 1 skipped it. 4,500 credits for the two takes.
-- Timing: `npm run audio:align` (`scripts/align_lyrics.py`) transcribes the take locally with faster-whisper and matches the words to the lyrics, writing `public/audio/country/song-timing.json`; a second pass listens again to the stretch around any line the first pass missed. It hears all 52 lines on the current take. `--song other.mp3 --dry-run` compares a different take without writing anything.
+- The take: `public/audio/country/song.mp3`, the "traditional" arrangement from ElevenLabs Music (`eleven_music_v2_5`, flow "Follow the claim: country version"). A first, more rock-leaning pair of takes was set aside as not country enough; a bluegrass arrangement (banjo, mandolin, dobro, no drums) is the alternative. 9,000 credits for the four takes.
+- The singer skips one line in the quick third verse ("least privilege: just the access that's right"); both new arrangements did. The aligner marks a line it can't hear `heard: false`, and it gets no caption.
+- Timing: `npm run audio:align` (`scripts/align_lyrics.py`) transcribes the take locally with faster-whisper and matches the words to the lyrics, writing `public/audio/country/song-timing.json`; a second pass listens again to the stretch around any line the first pass missed. It hears 51 of the 52 lines on the current take. `--song other.mp3 --dry-run` compares a different take without writing anything.
 - `npm run stills -- --country` renders review stills to `out/stills-country`.
 
 ## The cheat sheet
