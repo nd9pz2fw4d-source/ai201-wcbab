@@ -31,6 +31,13 @@ export const theme = {
 
 export type ThemeToken = keyof typeof theme;
 
+/** Stage background for each slide tone. */
+export const toneBackground: Record<"dark" | "light" | "dawn", string> = {
+  dark: theme.brandPrimary,
+  light: theme.brandLight,
+  dawn: theme.brandPrimary,
+};
+
 // CSS variable names used by Tailwind (see tailwind.config.ts).
 export const cssVars: Record<string, string> = {
   "--brand-primary": theme.brandPrimary,

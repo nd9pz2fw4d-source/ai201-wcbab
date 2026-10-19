@@ -27,6 +27,7 @@ npm run dev       # live preview while editing
 | Home / End | First / last slide |
 | `F` or the top-right button | Full screen |
 | `M` or the top-left button | Slide menu (also switches 60 / 75 / 90 / 120 and the timer) |
+| `S`, or "Pick slides" in the menu | Slide sorter: every slide as a thumbnail with a check mark. Only checked slides are presented. Start from a standard version (60 / 75 / 90 / 120), then tick or untick slides, or a whole act at once. Your pick is saved in this browser; choosing a length in the menu (or "Reset") goes back to the standard version |
 | `T` | Presenter timer (turns amber 2 minutes over the act's plan) |
 | `Esc` | Close menu or leave full screen |
 
@@ -80,4 +81,4 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 
 ## Checks
 
-`scripts/shoot.mjs` screenshots every slide from the built file; `scripts/interact.mjs` tests navigation, interactive elements, drag and drop (mouse and touch), session lengths, the menu and the presenter timer. Both need Playwright and Chromium.
+`scripts/shoot.mjs` screenshots every slide from the built file; `scripts/sorter.mjs` tests the slide sorter; `scripts/interact.mjs` tests navigation, interactive elements, drag and drop (mouse and touch), session lengths, the menu and the presenter timer. Both need Playwright and Chromium.

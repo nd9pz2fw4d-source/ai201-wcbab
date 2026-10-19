@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
+import { LayoutGrid, X } from "lucide-react";
+import { isShown } from "../hooks/useDeckNavigation";
 import { actLabels, actOrder, plannedMinutes, SESSION_LENGTHS, type SessionLength } from "../config";
 import type { SlideDef } from "../slides/types";
 
@@ -11,6 +12,9 @@ interface Props {
   onJump: (i: number) => void;
   sessionLength: SessionLength;
   onSessionLength: (l: SessionLength) => void;
+  /** The presenter's own pick of slide ids, or null for a standard version. */
+  picked: string[] | null;
+  onOpenSorter: () => void;
   timerOn: boolean;
   onToggleTimer: () => void;
 }
@@ -66,7 +70,7 @@ export function SlideMenu(p: Props) {
                   type="button"
                   onClick={() => p.onSessionLength(l)}
                   className={`whitespace-nowrap rounded-full px-2.5 py-1 tabular-nums ${
-                    l === p.sessionLength ? "bg-brand-accent text-brand-primary" : "bg-white/10 hover:bg-white/20"
+                    !p.picked && l === p.sessionLength ? "bg-brand-accent text-brand-primary" : "bg-white/10 hover:bg-white/20"
                   }`}
                 >
                   {l}
@@ -82,6 +86,22 @@ export function SlideMenu(p: Props) {
               </button>
             </div>
 
+            <div className="flex items-center gap-2 px-5 pb-4 text-sm">
+              <button
+                type="button"
+                onClick={p.onOpenSorter}
+                title="Slide sorter (S)"
+                className={`flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1 ${p.picked ? "bg-brand-accent text-brand-primary" : "bg-white/10 hover:bg-white/20"}`}
+              >
+                <LayoutGrid size={15} /> {p.picked ? `Your pick: ${p.picked.length} slides` : "Pick slides"}
+              </button>
+              {p.picked && (
+                <button type="button" onClick={() => p.onSessionLength(p.sessionLength)} className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1 hover:bg-white/20">
+                  Reset to {p.sessionLength} min
+                </button>
+              )}
+            </div>
+
             <div className="flex-1 overflow-y-auto px-3 pb-4">
               {acts.map((act) => {
                 const minutes = plan[act];
@@ -89,12 +109,12 @@ export function SlideMenu(p: Props) {
                   <section key={act} className="mb-3">
                     <div className="flex items-baseline justify-between px-2 py-1 text-xs uppercase tracking-wider text-brand-sky">
                       <span>{actLabels[act]}</span>
-                      <span className="tabular-nums">{minutes ? `${minutes} min` : "not in this version"}</span>
+                      <span className="tabular-nums">{p.picked ? "" : minutes ? `${minutes} min` : "not in this version"}</span>
                     </div>
                     <ul>
                       {p.slides.map((s, i) => {
                         if (s.act !== act) return null;
-                        const shown = s.include.includes(p.sessionLength);
+                        const shown = isShown(s, p.sessionLength, p.picked);
                         const isCurrent = i === p.current;
                         return (
                           <li key={s.id}>
@@ -116,7 +136,7 @@ export function SlideMenu(p: Props) {
                             >
                               <span className="w-6 shrink-0 text-right tabular-nums opacity-70">{i + 1}</span>
                               <span className="flex-1">{s.title}</span>
-                              {!shown && <span className="shrink-0 text-[11px] italic">not in this version</span>}
+                              {!shown && <span className="shrink-0 text-[11px] italic">{p.picked ? "not picked" : "not in this version"}</span>}
                             </button>
                           </li>
                         );
@@ -128,7 +148,7 @@ export function SlideMenu(p: Props) {
             </div>
 
             <div className="border-t border-white/10 px-5 py-3 text-[12px] leading-relaxed text-white/55">
-              Click or → next · ← back · Home/End · F full screen · M menu · T timer · Esc close
+              Click or → next · ← back · Home/End · F full screen · M menu · S pick slides · T timer · Esc close
             </div>
           </motion.nav>
         </>

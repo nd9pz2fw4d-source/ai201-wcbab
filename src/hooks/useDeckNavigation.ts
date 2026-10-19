@@ -18,10 +18,15 @@ function readHash(slides: Includable[]): number | null {
   return i >= 0 ? i : null;
 }
 
-export function useDeckNavigation<T extends Includable>(slides: T[], sessionLength: SessionLength) {
+/** Slides shown: the presenter's own pick if there is one, otherwise those in the session length. */
+export function isShown(s: Includable, sessionLength: SessionLength, picked: string[] | null) {
+  return picked ? picked.includes(s.id) : s.include.includes(sessionLength);
+}
+
+export function useDeckNavigation<T extends Includable>(slides: T[], sessionLength: SessionLength, picked: string[] | null) {
   const visible = useMemo(
-    () => slides.map((s, i) => (s.include.includes(sessionLength) ? i : -1)).filter((i) => i >= 0),
-    [slides, sessionLength],
+    () => slides.map((s, i) => (isShown(s, sessionLength, picked) ? i : -1)).filter((i) => i >= 0),
+    [slides, sessionLength, picked],
   );
 
   // Closest visible slide at or after `i` (or the last visible one).
@@ -65,7 +70,7 @@ export function useDeckNavigation<T extends Includable>(slides: T[], sessionLeng
   const first = useCallback(() => goTo(visible[0]), [goTo, visible]);
   const last = useCallback(() => goTo(visible[visible.length - 1]), [goTo, visible]);
 
-  // A change in session length can hide the current slide: move forward to a visible one.
+  // A change in session length or pick can hide the current slide: move forward to a visible one.
   useEffect(() => {
     setIndex((current) => snap(current));
   }, [snap]);
