@@ -6,13 +6,15 @@ import { Footer } from "./components/Footer";
 import { PresenterTimer } from "./components/PresenterTimer";
 import { ScaledStage } from "./components/ScaledStage";
 import { SlideMenu } from "./components/SlideMenu";
+import { SlideSorter } from "./components/SlideSorter";
 import { useDeckNavigation } from "./hooks/useDeckNavigation";
 import { useFullscreen } from "./hooks/useFullscreen";
 import { useIdle } from "./hooks/useIdle";
 import { slides } from "./slides";
-import { theme } from "./theme";
+import { toneBackground } from "./theme";
 
 const LENGTH_KEY = "ftc.sessionLength";
+const PICK_KEY = "ftc.picked";
 
 // config.ts sets the default. `?length=120` in the URL, or the menu switch, overrides it.
 function initialLength(): SessionLength {
@@ -27,17 +29,36 @@ function initialLength(): SessionLength {
   return config.sessionLength;
 }
 
-const stageBackground: Record<"dark" | "light" | "dawn", string> = {
-  dark: theme.brandPrimary,
-  light: theme.brandLight,
-  dawn: theme.brandPrimary,
-};
+// The presenter's own pick of slides (slide sorter), kept in this browser. null = a standard version.
+function initialPick(): string[] | null {
+  try {
+    const saved = JSON.parse(localStorage.getItem(PICK_KEY) ?? "null");
+    if (Array.isArray(saved)) {
+      const ids = slides.filter((s) => saved.includes(s.id)).map((s) => s.id);
+      if (ids.length) return ids;
+    }
+  } catch {
+    /* storage unavailable or unreadable */
+  }
+  return null;
+}
+
+function save(key: string, value: string | null) {
+  try {
+    if (value === null) localStorage.removeItem(key);
+    else localStorage.setItem(key, value);
+  } catch {
+    /* storage unavailable */
+  }
+}
 
 const INTERACTIVE = "button, a, input, select, textarea, [data-interactive]";
 
 export default function App() {
   const [sessionLength, setSessionLength] = useState<SessionLength>(initialLength);
-  const nav = useDeckNavigation(slides, sessionLength);
+  const [picked, setPicked] = useState<string[] | null>(initialPick);
+  const nav = useDeckNavigation(slides, sessionLength, picked);
+  const [sorterOpen, setSorterOpen] = useState(false);
   const fullscreen = useFullscreen();
   const idle = useIdle(2000);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,13 +68,17 @@ export default function App() {
   const slide = slides[nav.index];
   const act = slide.act;
 
+  // Choosing a length means its standard version, so it clears any pick.
   const changeLength = useCallback((l: SessionLength) => {
     setSessionLength(l);
-    try {
-      localStorage.setItem(LENGTH_KEY, String(l));
-    } catch {
-      /* storage unavailable */
-    }
+    setPicked(null);
+    save(LENGTH_KEY, String(l));
+    save(PICK_KEY, null);
+  }, []);
+
+  const pick = useCallback((ids: string[]) => {
+    setPicked(ids);
+    save(PICK_KEY, JSON.stringify(ids));
   }, []);
 
   // Presenter timer: time accrues to the act of the slide on screen.
@@ -69,6 +94,10 @@ export default function App() {
       const t = e.target as HTMLElement | null;
       if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
       const k = e.key;
+      if (sorterOpen) {
+        if (k === "Escape" || k === "s" || k === "S") setSorterOpen(false);
+        return;
+      }
       if (k === "ArrowRight" || k === "PageDown" || k === " " || k === "Spacebar") {
         e.preventDefault();
         nav.next();
@@ -85,6 +114,9 @@ export default function App() {
         fullscreen.toggle();
       } else if (k === "m" || k === "M") {
         setMenuOpen((o) => !o);
+      } else if (k === "s" || k === "S") {
+        setMenuOpen(false);
+        setSorterOpen(true);
       } else if (k === "t" || k === "T") {
         setTimerOn((o) => !o);
       } else if (k === "Escape") {
@@ -94,7 +126,7 @@ export default function App() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [nav, fullscreen, menuOpen]);
+  }, [nav, fullscreen, menuOpen, sorterOpen]);
 
   // After a mouse click on a button, drop its focus so Space navigates instead of pressing it again.
   useEffect(() => {
@@ -108,7 +140,7 @@ export default function App() {
 
   // One click on the slide background = next slide. Interactive elements never advance.
   const onStageClick = (e: MouseEvent) => {
-    if (menuOpen) return;
+    if (menuOpen || sorterOpen) return;
     if ((e.target as HTMLElement).closest(INTERACTIVE)) return;
     if (window.getSelection()?.toString()) return;
     nav.next();
@@ -123,6 +155,7 @@ export default function App() {
   const totalSeconds = Object.values(actSeconds).reduce((a, b) => a + (b ?? 0), 0);
   const SlideComponent = slide.component;
   const controlsVisible = !idle || menuOpen;
+  const shownIds = nav.visible.map((i) => slides[i].id);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -130,7 +163,7 @@ export default function App() {
         className={`fixed inset-0 select-none ${controlsVisible ? "" : "hide-cursor"}`}
         onClick={onStageClick}
       >
-        <ScaledStage background={stageBackground[slide.tone]}>
+        <ScaledStage background={toneBackground[slide.tone]}>
           <AnimatePresence initial={false} custom={nav.direction}>
             <motion.div
               key={slide.id}
@@ -177,8 +210,24 @@ export default function App() {
           onJump={nav.goTo}
           sessionLength={sessionLength}
           onSessionLength={changeLength}
+          picked={picked}
+          onOpenSorter={() => {
+            setMenuOpen(false);
+            setSorterOpen(true);
+          }}
           timerOn={timerOn}
           onToggleTimer={() => setTimerOn((o) => !o)}
+        />
+
+        <SlideSorter
+          open={sorterOpen}
+          onClose={() => setSorterOpen(false)}
+          slides={slides}
+          shown={shownIds}
+          onPick={pick}
+          onStandard={changeLength}
+          sessionLength={sessionLength}
+          custom={picked !== null}
         />
       </div>
     </MotionConfig>
