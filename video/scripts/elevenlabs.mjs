@@ -1,74 +1,35 @@
-// Generates the pre-read's audio with ElevenLabs, from src/timeline.ts:
-//   song   public/audio/song.mp3          Music API, one chunk per section of the plan in src/timeline.ts
-//   sfx    public/audio/sfx/*.mp3          Sound Effects API
-//   align  public/audio/song-timing.json   Forced Alignment API: when each sung line starts. The video's
-//          scenes, cues and captions follow it, so re-run it after every new take.
-//          (No API key? scripts/align_lyrics.py does the same locally.)
+// Generates the session introduction's sound effects with ElevenLabs, from src/sfxLibrary.ts:
+//   sfx        public/audio/sfx/*.mp3   Sound Effects API
+//   normalize  (no key needed) brings every effect to the same peak level, so the volumes in
+//              src/components/Sfx.tsx mean the same for each; the sfx step runs it by itself.
 //
-//   ELEVENLABS_API_KEY=... node scripts/elevenlabs.mjs [all|song|sfx|align|normalize] [--force] [--dry-run]
-//
-// normalize (no key needed) brings every sound effect to the same peak level, so the volumes in
-// src/timeline.ts mean the same for each; the sfx step runs it by itself.
+//   ELEVENLABS_API_KEY=... node scripts/elevenlabs.mjs [sfx|normalize] [--force] [--dry-run]
 //
 // Existing files are kept (generation costs credits); --force regenerates them.
 // --dry-run prints the requests without calling the API or needing a key.
-// Needs Node 22.18 or later (it imports the TypeScript timeline directly).
+// The voiceover is generated line by line from the script: see scripts/explainer.mjs.
 import { execFileSync, spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { sections, sfxLibrary, song, totalSeconds } from "../src/timeline.ts";
+import { sfxLibrary } from "../src/sfxLibrary.ts";
 
 const API = "https://api.elevenlabs.io/v1";
 const root = path.resolve(import.meta.dirname, "..");
 const audioDir = path.join(root, "public/audio");
-const songPath = path.join(audioDir, "song.mp3");
-const timingPath = path.join(audioDir, "song-timing.json");
 const SFX_PEAK_DB = -3;
 
 const args = process.argv.slice(2);
-const step = args.find((a) => !a.startsWith("--")) ?? "all";
+const step = args.find((a) => !a.startsWith("--")) ?? "sfx";
 const force = args.includes("--force");
 const dryRun = args.includes("--dry-run");
 const key = process.env.ELEVENLABS_API_KEY;
 
-if (!["all", "song", "sfx", "align", "normalize"].includes(step)) fail(`Unknown step "${step}". Use all, song, sfx, align or normalize.`);
+if (!["sfx", "normalize"].includes(step)) fail(`Unknown step "${step}". Use sfx or normalize.`);
 if (!key && !dryRun && step !== "normalize") fail("Set ELEVENLABS_API_KEY (or use --dry-run to see the requests).");
 mkdirSync(path.join(audioDir, "sfx"), { recursive: true });
 
-if (step === "all" || step === "song") await makeSong();
-if (step === "all" || step === "sfx") await makeSfx();
-if (step === "all" || step === "align") await alignLyrics();
+if (step === "sfx") await makeSfx();
 if (step === "normalize") normalizeSfx();
-
-// ---------- Song ----------
-
-function compositionPlan() {
-  return {
-    chunks: sections.map((s) => ({
-      text: [`[${s.name}]`, ...s.lines].join("\n"),
-      duration_ms: s.seconds * 1000,
-      positive_styles: [...song.globalStyles, ...s.styles],
-      negative_styles: song.negativeGlobalStyles,
-      context_adherence: "high",
-    })),
-  };
-}
-
-async function makeSong() {
-  if (existsSync(songPath) && !force) return console.log("song: public/audio/song.mp3 exists, skipping (--force to redo)");
-  const body = { model_id: "music_v2_5", composition_plan: compositionPlan() };
-  if (dryRun) return console.log("POST /music\n" + JSON.stringify(body, null, 2));
-
-  console.log(`song: composing ${totalSeconds}s across ${sections.length} sections...`);
-  const audio = await post("/music?output_format=mp3_44100_128", JSON.stringify(body), { "Content-Type": "application/json" });
-  writeFileSync(songPath, audio);
-  writeFileSync(path.join(audioDir, "song-plan.json"), JSON.stringify(body, null, 2));
-  console.log("song: wrote public/audio/song.mp3");
-
-  console.log(`song: the take is ${probeSeconds(songPath)?.toFixed(1) ?? "?"}s. Run the align step so the video follows it.`);
-  // A new song makes the old line timing wrong; the captions fall back to even timing until it is re-aligned.
-  if (existsSync(timingPath)) unlinkSync(timingPath);
-}
 
 // ---------- Sound effects ----------
 
@@ -106,62 +67,12 @@ function normalizeSfx() {
   }
 }
 
-// ---------- Lyric timing ----------
-
-async function alignLyrics() {
-  const lines = sections.flatMap((s) => s.lines.map((text) => ({ text })));
-  const transcript = lines.map((l) => l.text).join("\n");
-  if (dryRun) return console.log(`POST /forced-alignment (song.mp3 + ${lines.length} lines of lyrics)`);
-  if (!existsSync(songPath)) fail("align: no public/audio/song.mp3 yet. Run the song step first.");
-
-  const form = new FormData();
-  form.append("file", new Blob([readFileSync(songPath)], { type: "audio/mpeg" }), "song.mp3");
-  form.append("text", transcript);
-  const result = JSON.parse((await post("/forced-alignment", form)).toString("utf8"));
-
-  // Map each line to the aligned time of its first character. Whitespace is dropped on both
-  // sides so the mapping holds however the aligner treats spaces and line breaks.
-  const aligned = result.characters.filter((c) => c.text.trim() !== "");
-  const expected = transcript.replace(/\s/g, "").length;
-  if (aligned.length !== expected) fail(`align: got ${aligned.length} characters back, expected ${expected}. Keeping even timing.`);
-
-  let i = 0;
-  const timed = lines.map((l) => {
-    const n = l.text.replace(/\s/g, "").length;
-    const first = aligned[i];
-    const last = aligned[i + n - 1];
-    i += n;
-    return { text: l.text, start: first.start, lastEnd: last.end };
-  });
-  // A caption stays up until the next line starts, or briefly after its last word.
-  const out = timed.map((l, k) => {
-    const next = timed[k + 1];
-    const end = Math.min(next ? next.start : Infinity, l.lastEnd + 1.2);
-    return { text: l.text, start: round(l.start), end: round(Math.max(end, l.start + 0.5)) };
-  });
-  const duration = probeSeconds(songPath) ?? totalSeconds;
-  writeFileSync(timingPath, JSON.stringify({ duration: round(duration), lines: out }, null, 2) + "\n");
-  console.log(`align: wrote public/audio/song-timing.json (alignment loss ${result.loss?.toFixed?.(3) ?? "n/a"})`);
-}
-
 // ---------- Helpers ----------
 
 async function post(route, body, headers = {}) {
   const res = await fetch(API + route, { method: "POST", headers: { "xi-api-key": key, ...headers }, body });
   if (!res.ok) fail(`${route}: HTTP ${res.status}\n${await res.text()}`);
   return Buffer.from(await res.arrayBuffer());
-}
-
-function probeSeconds(file) {
-  try {
-    return Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", file]).toString().trim());
-  } catch {
-    return undefined;
-  }
-}
-
-function round(n) {
-  return Math.round(n * 100) / 100;
 }
 
 function fail(message) {

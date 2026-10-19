@@ -5,15 +5,11 @@
   "type": "module",
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render PreRead out/follow-the-claim-pre-read.mp4",
-    "still": "remotion still PreRead",
+    "render": "remotion render Explainer out/follow-the-claim-before-the-session.mp4",
+    "stills": "node scripts/stills.mjs",
     "typecheck": "tsc --noEmit",
-    "audio": "node scripts/elevenlabs.mjs all",
-    "audio:song": "node scripts/elevenlabs.mjs song",
+    "voice": "node scripts/explainer.mjs voice && node scripts/explainer.mjs manifest",
     "audio:sfx": "node scripts/elevenlabs.mjs sfx",
-    "audio:align": "node scripts/elevenlabs.mjs align",
-    "render:explainer": "remotion render Explainer out/follow-the-claim-before-the-session.mp4",
-    "explainer:manifest": "node scripts/explainer.mjs manifest",
     "cheatsheet": "node scripts/cheatsheet.mjs"
   },
   "dependencies": {

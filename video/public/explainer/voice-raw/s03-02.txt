@@ -1,0 +1,1 @@
+That's a different kind of AI. Predictive AI, or machine learning, learns patterns from past data and scores how unusual something is. A bit like an Alberta weather forecast: a confident call, based on patterns. Very useful. Still, bring a jacket. WCB already uses this kind, to forecast and to sort.

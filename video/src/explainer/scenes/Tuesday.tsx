@@ -6,7 +6,7 @@ import { Stage } from "../../components/Stage";
 import { useBeat, useCue } from "../beat";
 import { At, Bubble, Card, IconDot, Phone, Pop, Rise, SceneShell, Tag, blue } from "../ui";
 
-// ---------- 0. The opening card, over the song's chorus ----------
+// ---------- 0. The opening card, with a whoosh and a stamp ----------
 
 export function Sting() {
   const t = useSeconds();
@@ -111,7 +111,7 @@ const typed = "Running late, be there in";
 export function NextWord() {
   const t = useSeconds();
   const b = useBeat();
-  const typeFrom = useCue(0, "I'm texting");
+  const typeFrom = useCue(0, "You're texting");
   const typeTo = typeFrom + b.lines[0].seconds * 0.45;
   const shown = typed.slice(0, Math.round(typed.length * progress(t, typeFrom, typeTo)));
   const suggest = useCue(0, "finishes the sentence");
@@ -175,7 +175,7 @@ export function NextWord() {
 
 export function BankAlert() {
   const t = useSeconds();
-  const text = useCue(0, "My bank texts me");
+  const text = useCue(0, "Your bank texts you");
   const predictive = useCue(1, "Predictive AI");
   const scores = useCue(1, "scores how unusual");
   const meter = progress(t, scores, scores + 1.2);
@@ -242,7 +242,7 @@ export function BankAlert() {
 // ---------- 4. 10:00 am: "page four" ----------
 
 export function PageFour() {
-  const ask = useCue(0, "I ask a colleague");
+  const ask = useCue(0, "You ask a colleague");
   const page = useCue(0, "page four");
   const grounding = useCue(1, "That's grounding");
   const maybe = useCue(2);

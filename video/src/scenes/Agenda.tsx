@@ -2,14 +2,15 @@ import { fadeUp, popIn, useIn } from "../anim";
 import { theme } from "../brand";
 import { acts } from "../content";
 import { Header } from "../components/Header";
+import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useSectionTiming } from "../sectionTiming";
+import { useCue } from "../explainer/beat";
 
-// The day: one claim, three acts. Each act lands on its sung line.
+// The day: one claim, three acts. Each act lands as Riphay names it.
 export function Agenda() {
-  const s = useSectionTiming();
+  const actAt = [useCue(1, "Act one"), useCue(1, "Act two"), useCue(1, "Act three")];
   const head = useIn(0);
-  const foot = useIn(s.lines[3] + 1);
+  const foot = useIn(useCue(2));
 
   return (
     <Stage chip="The day ahead">
@@ -22,12 +23,15 @@ export function Agenda() {
       </div>
       <div style={{ position: "absolute", left: 80, right: 80, top: 420, display: "flex", gap: 40 }}>
         {acts.map((a, i) => (
-          <ActCard key={a.name} n={a.n} name={a.name} detail={a.detail} Icon={a.icon} delay={s.lines[i + 1]} />
+          <ActCard key={a.name} n={a.n} name={a.name} detail={a.detail} Icon={a.icon} delay={actAt[i]} />
         ))}
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 850, textAlign: "center", fontSize: 38, color: theme.brandTint, ...fadeUp(foot) }}>
         Expect games, votes, and a claim that goes wrong on purpose.
       </div>
+      {actAt.map((at) => (
+        <Sfx key={at} id="pop" at={at} />
+      ))}
     </Stage>
   );
 }

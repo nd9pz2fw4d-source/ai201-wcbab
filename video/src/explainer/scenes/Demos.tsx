@@ -143,8 +143,8 @@ export function ConfidentAnswer() {
       <At x={1240} y={240} w={600} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         <Pop at={guess}>
           <Card tone="plain">
-            <div style={{ fontSize: 24, color: theme.muted }}>Sam's guess</div>
-            <div style={{ fontSize: 32, fontWeight: 500 }}>"It says it doesn't know?"</div>
+            <div style={{ fontSize: 24, color: theme.muted }}>You might expect</div>
+            <div style={{ fontSize: 32, fontWeight: 500 }}>"I don't know."</div>
           </Card>
         </Pop>
         <Pop at={halluc}>

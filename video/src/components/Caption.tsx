@@ -1,4 +1,3 @@
-import { Music } from "lucide-react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { theme } from "../brand";
 
@@ -7,13 +6,18 @@ export interface CaptionLine {
   /** Seconds from the start of the composition. */
   start: number;
   end: number;
-  /** Who is speaking; without one, the line is sung and gets a music note. */
-  speaker?: string;
+  /** Who is speaking, as named in the script. */
+  speaker: string;
 }
 
-const speakerColour: Record<string, string> = { Ava: theme.brandAccent, Sam: theme.brandSky };
+/** Each speaker's name on screen, and its colour. The host is Riphay, who leads the session. */
+const speakers: Record<string, { name: string; colour: string }> = {
+  Ava: { name: "Ava", colour: theme.brandAccent },
+  Sam: { name: "Sam", colour: theme.brandSky },
+  Host: { name: "Riphay", colour: theme.brandGreen },
+};
 
-/** What is being sung or said, as a caption: many people watch with the sound off. */
+/** What is being said, as a caption: many people watch with the sound off. */
 export function Caption({ lines }: { lines: CaptionLine[] }) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -41,11 +45,7 @@ export function Caption({ lines }: { lines: CaptionLine[] }) {
           fontWeight: 500,
         }}
       >
-        {line.speaker ? (
-          <span style={{ flex: "none", color: speakerColour[line.speaker] ?? theme.brandSky, fontWeight: 900 }}>{line.speaker}</span>
-        ) : (
-          <Music size={32} color={theme.brandAccent} strokeWidth={2.5} style={{ flex: "none" }} />
-        )}
+        <span style={{ flex: "none", color: speakers[line.speaker]?.colour ?? theme.brandSky, fontWeight: 900 }}>{speakers[line.speaker]?.name ?? line.speaker}</span>
         <span>{line.text}</span>
       </div>
     </AbsoluteFill>

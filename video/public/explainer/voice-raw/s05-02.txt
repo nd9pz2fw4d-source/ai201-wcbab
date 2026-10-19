@@ -1,0 +1,1 @@
+A chatbot would list some flights. An agent books the trip. It has a goal, tools it's allowed to use, some memory of your preferences, and instructions. It plans a step, acts, checks the result, and repeats. Picture a very keen new hire who never needs a coffee break.

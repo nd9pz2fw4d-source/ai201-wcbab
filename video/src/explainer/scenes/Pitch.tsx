@@ -1,4 +1,4 @@
-import { CalendarDays, Music, Sparkles } from "lucide-react";
+import { CalendarDays, Sparkles, UserRound } from "lucide-react";
 import { Img, interpolate, staticFile } from "remotion";
 import { progress, useIn, useSeconds } from "../../anim";
 import { theme } from "../../brand";
@@ -9,7 +9,7 @@ import { At, Card, Pop, Rise, SceneShell, Tag } from "../ui";
 
 // ---------- 9. Decode the pitch ----------
 
-/** Where Sam reads each claim (line 1) and where Ava decodes it (lines 2 to 5), as phrases in the script. */
+/** Where Sam reads each claim (line 1) and where the narrators decode it (lines 2 to 5), as phrases in the script. */
 const reads = ["ninety-nine percent accurate", "fully autonomous", "learns your business", "plugs into all your systems"];
 const decodes: [number, string][] = [
   [1, "Ninety-nine"],
@@ -24,8 +24,8 @@ export function DecodePitch() {
   const slide = useIn(0.4);
   const readAt = reads.map((r) => useCue(0, r));
   const decodeAt = decodes.map(([i, p]) => useCue(i, p));
-  const answer = useCue(6);
-  const monday = useCue(7);
+  const answer = useCue(5);
+  const keep = useCue(6);
   return (
     <SceneShell heading="Decode the pitch">
       <At x={80} y={240} w={760} h={600} style={{ opacity: slide }}>
@@ -65,8 +65,8 @@ export function DecodePitch() {
             If they can't answer, that is your answer.
           </Tag>
         </Pop>
-        <Pop at={monday}>
-          <Tag style={{ fontSize: 34 }}>Five questions for Monday</Tag>
+        <Pop at={keep}>
+          <Tag style={{ fontSize: 34 }}>Five questions for any pitch</Tag>
         </Pop>
       </At>
     </SceneShell>
@@ -80,8 +80,8 @@ export function ThreeQuestions() {
   const stat = useCue(0, "Deloitte's 2026 survey");
   const ahead = useCue(0, "nobody's far ahead");
   const qAt = [useCue(1, "First:"), useCue(2, "Second:"), useCue(3, "And third:")];
-  const sheet = useCue(5, "cheat sheet");
-  const song = useCue(5, "And now");
+  const sheet = useCue(4, "cheat sheet");
+  const handover = useCue(4, "And now");
   const slide = progress(t, sheet - 0.2, sheet + 0.6);
   return (
     <SceneShell heading="Three questions to bring">
@@ -119,9 +119,9 @@ export function ThreeQuestions() {
             <CalendarDays size={32} strokeWidth={2.5} /> See you {session.date}
           </Tag>
         </Pop>
-        <Pop at={song}>
+        <Pop at={handover}>
           <Tag tone="gold" style={{ fontSize: 34 }}>
-            <Music size={32} strokeWidth={2.5} /> Next: the song
+            <UserRound size={32} strokeWidth={2.5} /> Next: Riphay, on the day
           </Tag>
         </Pop>
       </At>

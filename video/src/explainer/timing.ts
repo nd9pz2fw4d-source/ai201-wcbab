@@ -1,9 +1,10 @@
-// Timing for the fundamentals explainer. The script (explainer/script.md) is parsed into
+// Timing for the pre-read. The script (explainer/script.md) is parsed into
 // public/explainer/manifest.json (scripts/explainer.mjs), one entry per spoken line with its
 // length. Everything on screen is placed from those lengths, so a new take of any line
 // re-times the video by itself.
 
-export type Speaker = "Ava" | "Sam";
+/** The two narrators, and the host (Riphay) who introduces the session at the end. */
+export type Speaker = "Ava" | "Sam" | "Host";
 
 export interface VoiceLine {
   id: string;
@@ -26,11 +27,10 @@ export interface Manifest {
   scenes: ScriptScene[];
 }
 
-/** Opening song sting, and how long the chorus keeps playing under the first scene. */
-export const STING_SECONDS = 8;
-export const STING_MUSIC_SECONDS = 11;
-/** Where the sting starts in the song: the first chorus ("Follow the claim, follow the claim"). */
-export const STING_SONG_FROM = 31.9;
+export const FPS = 30;
+
+/** The opening title card, before the first line. */
+export const STING_SECONDS = 5;
 
 /** Pauses that set the pace: before a scene's first line, between lines, and after the last. */
 const SCENE_LEAD = 0.6;
@@ -51,12 +51,12 @@ export interface Beat {
   lines: PlacedLine[];
 }
 
-/** Scenes 1 to 13, placed one after another after the sting. */
+/** Every scene, placed one after another after the opening card. */
 export const scheduleBeats = (manifest: Manifest): Beat[] => {
   const beats: Beat[] = [];
   let t = STING_SECONDS;
   for (const scene of manifest.scenes) {
-    if (scene.lines.length === 0) continue; // the sting and the music video are placed separately
+    if (scene.lines.length === 0) continue; // the opening card is placed separately
     let at = SCENE_LEAD;
     const lines = scene.lines.map((l) => {
       const placed = { ...l, at };
@@ -70,8 +70,8 @@ export const scheduleBeats = (manifest: Manifest): Beat[] => {
   return beats;
 };
 
-/** When the music video starts: right after the last scene. */
-export const musicVideoStart = (beats: Beat[]) => {
+/** Where the video ends: after the last scene. */
+export const totalSeconds = (beats: Beat[]) => {
   const last = beats.at(-1);
   return last ? last.start + last.seconds : STING_SECONDS;
 };
@@ -93,7 +93,7 @@ export const cue = (beat: Beat, i: number, phrase?: string): number => {
 
 export interface CaptionCue {
   text: string;
-  speaker?: Speaker;
+  speaker: Speaker;
   /** Seconds from the start of the video. */
   start: number;
   end: number;

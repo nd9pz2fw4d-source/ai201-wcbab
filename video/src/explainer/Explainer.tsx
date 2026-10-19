@@ -1,22 +1,27 @@
 import type { ReactNode } from "react";
 import { AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { Caption } from "../components/Caption";
-import { PreRead, type PreReadProps } from "../PreRead";
-import { FPS } from "../timeline";
+import { Sfx } from "../components/Sfx";
+import { Agenda } from "../scenes/Agenda";
+import { Chorus } from "../scenes/Chorus";
+import { DoneWell } from "../scenes/DoneWell";
+import { Intro } from "../scenes/Intro";
+import { Outro } from "../scenes/Outro";
+import { Shifts } from "../scenes/Shifts";
+import { Terms } from "../scenes/Terms";
+import { Verse1 } from "../scenes/Verse1";
 import { BeatContext } from "./beat";
 import { ConfidentAnswer, TheDraft, TwoSummaries } from "./scenes/Demos";
 import { DecodePitch, ThreeQuestions } from "./scenes/Pitch";
 import { BankAlert, NextWord, PageFour, Sting, Trip, WhyWatch } from "./scenes/Tuesday";
-import { STING_MUSIC_SECONDS, STING_SECONDS, STING_SONG_FROM, captionCues, musicVideoStart, scheduleBeats, type Manifest } from "./timing";
+import { FPS, STING_SECONDS, captionCues, scheduleBeats, type Manifest } from "./timing";
 
 export interface ExplainerProps {
   manifest: Manifest;
-  /** The music video's own props (song timing, effects), for the recap at the end. */
-  song: PreReadProps;
   [key: string]: unknown;
 }
 
-/** The picture for each scene of the script, by scene number. */
+/** The picture for each scene of the script, by scene number. Scenes 11 on are Riphay's introduction to the session. */
 const scenes: Record<number, () => ReactNode> = {
   1: () => <WhyWatch />,
   2: () => <NextWord />,
@@ -28,25 +33,29 @@ const scenes: Record<number, () => ReactNode> = {
   8: () => <TheDraft />,
   9: () => <DecodePitch />,
   10: () => <ThreeQuestions />,
+  11: () => <Intro />,
+  12: () => <Verse1 />,
+  13: () => <Chorus />,
+  14: () => <Shifts />,
+  15: () => <Agenda />,
+  16: () => <Terms />,
+  17: () => <DoneWell />,
+  18: () => <Outro />,
 };
 
 const frames = (s: number) => Math.round(s * FPS);
 
-export function Explainer({ manifest, song }: ExplainerProps) {
+export function Explainer({ manifest }: ExplainerProps) {
   const beats = scheduleBeats(manifest);
-  const recapAt = musicVideoStart(beats);
   return (
     <AbsoluteFill style={{ background: "#0C3553" }}>
       <Sequence name="Opening card" durationInFrames={frames(STING_SECONDS)}>
         <SoftCut frames={frames(STING_SECONDS)}>
           <Sting />
         </SoftCut>
+        <Sfx id="whoosh" at={0.2} />
+        <Sfx id="stamp" at={1.6} />
       </Sequence>
-      {song.hasSong && (
-        <Sequence name="Song sting" durationInFrames={frames(STING_MUSIC_SECONDS)}>
-          <StingMusic />
-        </Sequence>
-      )}
 
       {beats.map((b) => {
         const scene = scenes[b.n];
@@ -72,20 +81,8 @@ export function Explainer({ manifest, song }: ExplainerProps) {
           )),
       )}
       <Caption lines={captionCues(beats)} />
-
-      <Sequence name="Music video" from={frames(recapAt)}>
-        <PreRead {...song} />
-      </Sequence>
     </AbsoluteFill>
   );
-}
-
-/** The first chorus, under the opening card, fading out as Ava starts. */
-function StingMusic() {
-  const frame = useCurrentFrame();
-  const t = frame / FPS;
-  const volume = interpolate(t, [0, STING_SECONDS - 1, STING_MUSIC_SECONDS], [0.75, 0.75, 0], { extrapolateRight: "clamp" });
-  return <Audio src={staticFile("audio/song.mp3")} startFrom={frames(STING_SONG_FROM)} volume={volume} />;
 }
 
 /** Fades a scene in and out over a few frames so the cuts feel soft. */

@@ -186,3 +186,21 @@ Decisions (from the user): open with "A Tuesday with AI" (everyday moments, one 
 - [x] New scenes for the new script; keep the timing system, captions, voices, sting and recap
 - [ ] Verify: stills, preview render, cheat sheet PDF; commit
 - [ ] Still blocked: voiceover (ElevenLabs account)
+
+---
+
+# Round 7: no song; narrators, and Riphay introduces the session
+
+The user's direction: the song is too gimmicky. Instead, a witty narrator who keeps it fun but professional, welcoming, charming and reliable to an Albertan; narrate the whole explainer; and turn the music video at the end into a new narrator introducing the session.
+
+Decisions (from the user):
+- Voices: the first auditions (Canadian-accented library voices) were rejected ("their accents are a bit weird"), and so was a second round of neutral voices; the user picked two voices themselves: Kristen (`CvD6hF1BJzAFN428j1cO`) and Jay Wayne Pro (`8Ln42OXYupYsag45MAUy`). With two voices, the narration is shared by two co-narrators, Ava and Sam, trading lines
+- The session introduction is the user, Riphay Al-Hussein, in their cloned voice (`XnhNUCoDPy1eZWeCNrON`); ElevenLabs needs "Rifai" to say the name, captions keep "Riphay"
+
+## Plan
+- [x] Rewrite `video/explainer/script.md`: witty narration with a light Alberta touch (construction season, the forecast, the block heater, the QE2), same scenes and cue phrases; new scenes 11 to 18 for the session introduction (the old music video's scenes)
+- [x] `scripts/explainer.mjs`: three speakers, delivery tags sent to the voice but kept out of captions, a pronunciation map, a `fetch` step to download a generated line with its text
+- [x] One timeline: the session scenes move from song-lyric timing to the voice timing (`useCue`), sound effects sit in the scenes (`<Sfx>`); the song, the lyric timeline, the music-video composition and the lyric aligner are removed
+- [x] Generate all 65 lines (about 9,000 credits), level them, transcribe every line to check the words
+- [x] Verify: typecheck, stills of every scene, full render
+- [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing; length is about 12½ minutes

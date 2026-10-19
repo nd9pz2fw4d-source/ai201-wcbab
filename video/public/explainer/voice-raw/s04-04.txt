@@ -1,0 +1,1 @@
+You'll also hear grounding called RAG: retrieval-augmented generation. [short pause] Yes, a mouthful. Retrieve the right documents, add them to the question, then generate the answer from them. And it's only as good as the documents we give it.

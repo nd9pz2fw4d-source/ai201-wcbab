@@ -1,0 +1,1 @@
+Why would it do that? Remember the next word. It's built to produce a likely-sounding answer, not to say "I wasn't there."
