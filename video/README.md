@@ -50,12 +50,13 @@ Audio whose `.txt` no longer matches the script is ignored, so an edited line ca
 
 The voiceover used about 9,000 credits (65 lines); the auditions about 3,000.
 
-## Side version: the country song (2:30)
+## Side version: the country song (2:26)
 
 A separate, upbeat country remake of the original "Follow the claim" song, over the session scenes: composition `CountrySong`, rendered with `npm run render:country` to `out/follow-the-claim-country.mp4`. Same lyrics as the original, with a Stampede "Yahoo!" up top; a traditional, acoustic-led two-step (fiddle, pedal steel, banjo, upright bass, brushed drums, no rock guitars) with a warm baritone lead and harmonies. The prompt describes the sound, not any artist (`src/song/timeline.ts`).
 
 - The scenes are the same components as the session part of the main video (`src/scenes/`). Each takes its timing as a `cues` prop: the main video works them out from Riphay's lines (`src/explainer/sessionCues.ts`), the song from its sung lines (`src/song/cues.ts`).
 - The take: `public/audio/country/song.mp3`, the "traditional" arrangement from ElevenLabs Music (`eleven_music_v2_5`, flow "Follow the claim: country version"). A first, more rock-leaning pair of takes was set aside as not country enough; a bluegrass arrangement (banjo, mandolin, dobro, no drums) is the alternative. 9,000 credits for the four takes.
+- The intro is two bars shorter than the take: `public/audio/country/song-take.mp3` is the take as generated, and `song.mp3` has the 8 beats from 6.52 s to 10.59 s cut out, beat to beat (117 bpm), with a 40 ms crossfade, so the first verse comes in after about 3 seconds of fiddle instead of 7. Re-cut it with `ffmpeg -i song-take.mp3 -filter_complex "[0:a]atrim=0:6.522,asetpts=PTS-STARTPTS[a];[0:a]atrim=10.592,asetpts=PTS-STARTPTS[b];[a][b]acrossfade=d=0.04:c1=tri:c2=tri" -b:a 192k song.mp3`, then `npm run audio:align`.
 - The singer skips one line in the quick third verse ("least privilege: just the access that's right"); both new arrangements did. The aligner marks a line it can't hear `heard: false`, and it gets no caption.
 - Timing: `npm run audio:align` (`scripts/align_lyrics.py`) transcribes the take locally with faster-whisper and matches the words to the lyrics, writing `public/audio/country/song-timing.json`; a second pass listens again to the stretch around any line the first pass missed. It hears 51 of the 52 lines on the current take. `--song other.mp3 --dry-run` compares a different take without writing anything.
 - `npm run stills -- --country` renders review stills to `out/stills-country`.
