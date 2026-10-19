@@ -2,23 +2,21 @@ import { FolderOpen } from "lucide-react";
 import { interpolate } from "remotion";
 import { fadeUp, popIn, progress, useIn, useSeconds } from "../anim";
 import { DeloitteLogo, WcbLogo, theme } from "../brand";
-import { session } from "../content";
 import { Stage } from "../components/Stage";
 import { Sfx } from "../components/Sfx";
-import { useCue } from "../explainer/beat";
 
-/** The shape of the day, each chip popping in as Riphay says it (line 2), in place of the subtitle. */
-const teasers: [string, string][] = [
-  ["One claim", "one claim"],
-  ["Three acts", "three acts"],
-  ["Eight words", "eight words"],
-  ["Your questions", "your questions"],
-];
+export interface IntroCues {
+  /** The stamp on the claim file. */
+  stamp: string;
+  subtitle: string;
+  /** Chips that replace the subtitle, each with when it pops in (seconds into the scene). */
+  teasers: { label: string; at: number }[];
+}
 
-// A claim file flies in, gets stamped, and the title lands while Riphay says hello; then the shape of the day.
-export function Intro() {
+// A claim file flies in, gets stamped, and the title lands; then the shape of the day, as chips.
+export function Intro({ cues }: { cues: IntroCues }) {
   const t = useSeconds();
-  const teaserAt = teasers.map(([, phrase]) => useCue(1, phrase));
+  const teaserAt = cues.teasers.map((c) => c.at);
   const fly = useIn(0.2, 12);
   const stamp = useIn(2.5, 9);
   const title = useIn(3.2);
@@ -69,7 +67,7 @@ export function Intro() {
               transform: `rotate(12deg) scale(${interpolate(stamp, [0, 1], [2.4, 1])})`,
             }}
           >
-            THE DAY
+            {cues.stamp}
           </div>
         </div>
       </div>
@@ -80,11 +78,11 @@ export function Intro() {
         </div>
         <div style={{ position: "relative", marginTop: 30, height: 80 }}>
           <div style={{ ...fadeUp(sub), opacity: Math.min(1, sub) * (1 - swap), fontSize: 46, color: theme.brandTint, fontWeight: 400 }}>
-            {session.programme} · {session.date}
+            {cues.subtitle}
           </div>
           <div style={{ position: "absolute", inset: 0, display: "flex", justifyContent: "center", gap: 28 }}>
-            {teasers.map(([label], i) => (
-              <Teaser key={label} label={label} delay={teaserAt[i]} />
+            {cues.teasers.map(({ label, at }) => (
+              <Teaser key={label} label={label} delay={at} />
             ))}
           </div>
         </div>

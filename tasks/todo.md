@@ -204,3 +204,12 @@ Decisions (from the user):
 - [x] Generate all 65 lines (about 9,000 credits), level them, transcribe every line to check the words
 - [x] Verify: typecheck, stills of every scene, full render
 - [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing; length is about 12½ minutes
+
+## Round 7b: side version, the song as an upbeat country song
+The user asked for a separate, side version: the "Follow the claim" song remade as upbeat country, in the spirit of Alberta country hits. Not part of the main video.
+
+- [x] Session scenes take their timing as a `cues` prop, with two adapters: Riphay's lines (main video) and the sung lines (country song), so both share one set of scenes
+- [x] `src/song/`: the lyrics (a Stampede "Yahoo!" up top), the prompt, lyric timing, the `CountrySong` composition; sung captions get a music note again
+- [x] Two takes from ElevenLabs Music; take 2 kept (take 1 skipped the intro shout)
+- [x] `scripts/align_lyrics.py` back, pointed at the country take, with a second listening pass for lines the first pass misses: 52 of 52 lines timed
+- [x] Stills checked; full render

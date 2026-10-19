@@ -4,7 +4,6 @@ import { ClaimTrack, hops, type Role } from "../components/ClaimTrack";
 import { Header } from "../components/Header";
 import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useBeat, useCue } from "../explainer/beat";
 import { BackAtWork } from "./Chorus";
 
 // Who does the work at each station: the deck's suggested sort (src/data/sortAnswer.ts),
@@ -12,14 +11,18 @@ import { BackAtWork } from "./Chorus";
 const roles: Role[] = stations.map((st) => (suggestedSort[st.id] === "human" ? "person" : "agent"));
 const DECIDE = stations.findIndex((st) => st.id === "entitlement");
 
+/** Seconds into the scene: the claim departs, stops at the decision, moves on, and reaches the end. */
+export interface DoneWellCues {
+  depart: number;
+  decide: number;
+  resume: number;
+  home: number;
+}
+
 // The same claim in the future: agents carry it to the decision, everything pauses on
-// "a person decides" (line 2), then it finishes the journey with line 3 and the worker is back at work.
-export function DoneWell() {
-  const b = useBeat();
-  const depart = 0.6;
-  const decide = useCue(1, "a person decides") - 0.2;
-  const resume = useCue(2) - 0.2;
-  const home = Math.min(resume + 2.4, b.seconds - 1.6);
+// "a person decides", then it finishes the journey and the worker is back at work.
+export function DoneWell({ cues }: { cues: DoneWellCues }) {
+  const { depart, decide, resume, home } = cues;
   const t = useSeconds();
   const pos = t < resume ? hops(t, 0, DECIDE, depart, decide) : hops(t, DECIDE, stations.length - 1, resume, home);
   // The rest of the journey dims while the person decides.

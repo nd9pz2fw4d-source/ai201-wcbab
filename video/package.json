@@ -6,10 +6,12 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render Explainer out/follow-the-claim-before-the-session.mp4",
+    "render:country": "remotion render CountrySong out/follow-the-claim-country.mp4",
     "stills": "node scripts/stills.mjs",
     "typecheck": "tsc --noEmit",
     "voice": "node scripts/explainer.mjs voice && node scripts/explainer.mjs manifest",
     "audio:sfx": "node scripts/elevenlabs.mjs sfx",
+    "audio:align": ".venv/bin/python scripts/align_lyrics.py",
     "cheatsheet": "node scripts/cheatsheet.mjs"
   },
   "dependencies": {

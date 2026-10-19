@@ -50,6 +50,15 @@ Audio whose `.txt` no longer matches the script is ignored, so an edited line ca
 
 The voiceover used about 9,000 credits (65 lines); the auditions about 3,000.
 
+## Side version: the country song (2:30)
+
+A separate, upbeat country remake of the original "Follow the claim" song, over the session scenes: composition `CountrySong`, rendered with `npm run render:country` to `out/follow-the-claim-country.mp4`. Same lyrics as the original, with a Stampede "Yahoo!" up top; fiddle, banjo, twangy Telecaster, pedal steel, stomp-and-clap two-step and a warm male lead with a friendly twang. The prompt describes the sound, not any artist (`src/song/timeline.ts`).
+
+- The scenes are the same components as the session part of the main video (`src/scenes/`). Each takes its timing as a `cues` prop: the main video works them out from Riphay's lines (`src/explainer/sessionCues.ts`), the song from its sung lines (`src/song/cues.ts`).
+- The take: `public/audio/country/song.mp3`, take 2 of 2 from ElevenLabs Music (`eleven_music_v2_5`, flow "Follow the claim: country version"), chosen because it sings the intro shout; take 1 skipped it. 4,500 credits for the two takes.
+- Timing: `npm run audio:align` (`scripts/align_lyrics.py`) transcribes the take locally with faster-whisper and matches the words to the lyrics, writing `public/audio/country/song-timing.json`; a second pass listens again to the stretch around any line the first pass missed. It hears all 52 lines on the current take. `--song other.mp3 --dry-run` compares a different take without writing anything.
+- `npm run stills -- --country` renders review stills to `out/stills-country`.
+
 ## The cheat sheet
 
 `npm run cheatsheet` builds `cheatsheet/follow-the-claim-cheat-sheet.pdf`: one letter-size page with the 12 words (each with the everyday example from the video), the five pitch questions and the three questions to bring, with space to write. It fails if the content runs past one page. It needs Playwright's Chromium (`npx playwright install chromium`, or set `CHROMIUM_PATH`).
@@ -60,11 +69,11 @@ Five effects in `public/audio/sfx/` (prompts in `src/sfxLibrary.ts`). `ELEVENLAB
 
 ## Before sending: items to confirm
 
-- [ ] Listen through once: "LLM", "RAG", "evals", "WCB", "QE2" and "Rifai Al-Hussein"
+- [ ] Listen through once: "LLM", "RAG", "evals", "WCB", "QE2" and "Rifai Al-Hussein"; in the country song, "L-L-M", "RAG" and "read, draft, act"
 - [ ] The demos, the bank text, the trip and the pitch are made-up examples, labelled "Illustrative" where they appear as screens
 - [ ] Deloitte's 83% is quoted as the paper words it ("organizational maturity for integrating AI into core business functions remains low")
 - [x] Session date: Monday, October 26 (`session.date` in `src/content.ts` and the last line of the script), shown on the explainer's last scenes and the cheat sheet
 - [ ] Deloitte source: "The Future of Workers' Compensation: Industry Perspectives and Global Signals", Deloitte Canada, 26 August 2026 (Zohair Masood, Jason Condon, Chris Duvinage), https://www.deloitte.com/ca/en/Industries/insurance/perspectives/future-workers-compensation.html. On screen, as the page words them: the eight forces; the four shifts; 83% of surveyed Canadian WCB leaders say AI maturity in core business functions remains low, with one respondent an early adopter; half rank mental health and wellness support the number one barrier; 55+ expected to reach 23.1% of the labour force by 2041; 17.4% of employed Canadians worked from home in May 2025; "human-in-the-loop"; and the first readiness question, quoted at the end. The page does not give the survey's size, so the video doesn't either
 - [ ] "Expect games, votes, and a claim that goes wrong on purpose" matches the deck at every session length
-- [ ] Licences: Remotion is free for individuals, non-profits and companies of up to three people; a larger for-profit company needs a Remotion company licence (https://www.remotion.dev/license). ElevenLabs voices and effects need a plan that allows commercial use
+- [ ] Licences: Remotion is free for individuals, non-profits and companies of up to three people; a larger for-profit company needs a Remotion company licence (https://www.remotion.dev/license). ElevenLabs voices, music and effects need a plan that allows commercial use
 - [ ] Co-branding: WCB and Deloitte logos appear throughout, as in the deck. Confirm with both brand teams

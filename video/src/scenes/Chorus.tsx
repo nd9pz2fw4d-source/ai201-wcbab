@@ -5,17 +5,20 @@ import { ClaimTrack, hops } from "../components/ClaimTrack";
 import { Header } from "../components/Header";
 import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useBeat, useCue } from "../explainer/beat";
 
-// The claim hops along the eight stations of the journey, from report to close, while Riphay
-// says we'll walk it in the session; "the same care" brings in the tag.
-export function Chorus() {
-  const b = useBeat();
-  const first = 0.8;
-  const last = b.seconds - 2.4;
+/** Seconds into the scene: the claim leaves the first station and reaches the last; the tag comes in. */
+export interface ChorusCues {
+  first: number;
+  last: number;
+  tagAt: number;
+}
+
+// The claim hops along the eight stations of the journey, from report to close; then "Same care. Better journey."
+export function Chorus({ cues }: { cues: ChorusCues }) {
+  const { first, last } = cues;
   const t = useSeconds();
   const title = useIn(0);
-  const tag = useIn(useCue(1, "same care"));
+  const tag = useIn(cues.tagAt);
   const home = useIn(last + 0.2);
 
   return (
