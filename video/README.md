@@ -102,8 +102,7 @@ Credits used for the current audio: two song takes 4,200, seven effects 95, two 
 - [ ] Explainer: the demos, the bank text, the trip and the pitch are made-up examples, labelled "Illustrative" where they appear as screens
 - [ ] Explainer and cheat sheet: Deloitte's 83% is quoted as the paper words it ("organizational maturity for integrating AI into core business functions remains low")
 - [ ] Explainer voices: listen through once for "LLM", "RAG", "evals" and "WCB"
-- [ ] Cheat sheet: the session date is the same `[SESSION DATE]` placeholder (`session.date` in `src/content.ts`)
-- [ ] Session date: `session.date` in `src/content.ts` is the `[SESSION DATE]` placeholder
+- [x] Session date: Monday, October 26 (`session.date` in `src/content.ts`), shown on the music video's last scene, the explainer's last scene and the cheat sheet
 - [ ] Deloitte source: "The Future of Workers' Compensation: Industry Perspectives and Global Signals", Deloitte Canada, 26 August 2026 (Zohair Masood, Jason Condon, Chris Duvinage), https://www.deloitte.com/ca/en/Industries/insurance/perspectives/future-workers-compensation.html. On screen, as the page words them: the eight forces; the four shifts; 83% of surveyed Canadian WCB leaders say AI maturity in core business functions remains low, with one respondent an early adopter; half rank mental health and wellness support the number one barrier; 55+ expected to reach 23.1% of the labour force by 2041; 17.4% of employed Canadians worked from home in May 2025; "human-in-the-loop"; and the first readiness question, quoted in the outro. The page does not give the survey's size, so the video doesn't either
 - [ ] Listen through once: the singer's "L-L-M", "RAG" and "read, draft, act" are clear on take 1, but the final call is a human ear
 - [ ] "Expect games, votes, and a claim that goes wrong on purpose" matches the deck at every session length (the sort, the vote tiles and "The claim that went wrong" are in all of them)

@@ -1,8 +1,9 @@
-import { Music, Sparkles } from "lucide-react";
+import { CalendarDays, Music, Sparkles } from "lucide-react";
 import { Img, interpolate, staticFile } from "remotion";
 import { progress, useIn, useSeconds } from "../../anim";
 import { theme } from "../../brand";
 import { useCue } from "../beat";
+import { session } from "../../content";
 import { bringQuestions, deloitte, pitchQuestions } from "../cheatsheet";
 import { At, Card, Pop, Rise, SceneShell, Tag } from "../ui";
 
@@ -112,7 +113,12 @@ export function ThreeQuestions() {
       <At x={1240} y={200} w={600} style={{ opacity: slide, transform: `translateX(${interpolate(slide, [0, 1], [400, 0])}px) rotate(${interpolate(slide, [0, 1], [8, 2])}deg)` }}>
         <Img src={staticFile("explainer/cheat-sheet.png")} style={{ width: 600, borderRadius: 12, boxShadow: "0 30px 60px rgba(12,53,83,0.3)" }} />
       </At>
-      <At x={80} y={860} w={1040}>
+      <At x={80} y={860} w={1040} style={{ display: "flex", gap: 18 }}>
+        <Pop at={qAt[2] + 1}>
+          <Tag tone="plain" style={{ fontSize: 34 }}>
+            <CalendarDays size={32} strokeWidth={2.5} /> See you {session.date}
+          </Tag>
+        </Pop>
         <Pop at={song}>
           <Tag tone="gold" style={{ fontSize: 34 }}>
             <Music size={32} strokeWidth={2.5} /> Next: the song

@@ -35,7 +35,7 @@ import {
 export const session = {
   programme: "Executive AI Academy",
   title: "Follow the claim",
-  date: "[SESSION DATE]", // VERIFY: set before sending
+  date: "Monday, October 26",
 };
 
 export const deloitteSource = "Source: Deloitte, The Future of Workers' Compensation (August 2026)";
