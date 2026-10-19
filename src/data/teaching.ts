@@ -157,7 +157,7 @@ export const computerAgentTraits = [
   { label: "Asks before sensitive steps", human: true },
 ];
 
-// ---------- What's next: Copilot as the operating system of work ----------
+// ---------- What's next: Copilot as an operating system of work ----------
 
 // Satya Nadella on X, 25 September 2026 (reported by Windows Latest):
 // "We're building Copilot as a new OS for work that spans every model, every form factor, and every task."

@@ -9,7 +9,7 @@ const go = async (id) => { await p.goto(file + `?length=120#/${id}`); await p.re
 const shot = (n) => p.screenshot({ path: `screenshots/ids/${n}.png` });
 let h;
 h = await go("copilot-os");
-await p.getByRole("button", { name: "Copilot as the OS" }).click();
+await p.getByRole("button", { name: "Copilot as an OS" }).click();
 await p.getByLabel("Goal for Copilot").fill("Book a return-to-work meeting");
 await p.keyboard.press("Space"); // typing a space must not advance
 await p.getByRole("button", { name: /Run/ }).click(); await p.waitForTimeout(3200); await shot("s-copilot-next");

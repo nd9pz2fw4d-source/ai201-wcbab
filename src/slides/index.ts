@@ -284,7 +284,7 @@ export const slides: SlideDef[] = [
   {
     id: "copilot-os",
     act: "see",
-    title: "Copilot becomes the operating system of work",
+    title: "Copilot becomes an operating system of work",
     include: ALL,
     component: SlideCopilotOS,
     tone: "light",
@@ -299,7 +299,7 @@ export const slides: SlideDef[] = [
     component: SlideAdaptOS,
     tone: "light",
     notes:
-      "If Copilot becomes the operating system of work, the organization has to change around it. Read each 'from', ask the room what it becomes, then click to reveal. Where work starts: from opening an app to stating an outcome. Jobs: from doing the steps to directing, checking and deciding. The org chart: from people only to people plus agents, each agent with a named human owner. Access: from staff accounts to agent identities with least privilege and credentials that expire. Knowledge: from what is in people's heads and shared drives to current, permissioned sources agents can cite. Oversight: from periodic review to continuous monitoring of what agents do. The executive point: an agent can only use data that is clean, rules that are written down, permissions that are set and processes someone owns. That is the investment, and it cannot be rushed later.",
+      "If Copilot becomes an operating system of work, the organization has to change around it. Read each 'from', ask the room what it becomes, then click to reveal. Where work starts: from opening an app to stating an outcome. Jobs: from doing the steps to directing, checking and deciding. The org chart: from people only to people plus agents, each agent with a named human owner. Access: from staff accounts to agent identities with least privilege and credentials that expire. Knowledge: from what is in people's heads and shared drives to current, permissioned sources agents can cite. Oversight: from periodic review to continuous monitoring of what agents do. The executive point: an agent can only use data that is clean, rules that are written down, permissions that are set and processes someone owns. That is the investment, and it cannot be rushed later.",
   },
   {
     id: "agent-team",

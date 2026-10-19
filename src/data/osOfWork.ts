@@ -1,4 +1,4 @@
-// Content for the "Copilot as the operating system of work" slides. Edit freely.
+// Content for the "Copilot as an operating system of work" slides. Edit freely.
 
 // "Give it a goal": what each agent does when the presenter runs a goal.
 export const goalSteps = [
