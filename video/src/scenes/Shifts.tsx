@@ -6,14 +6,17 @@ import { Header } from "../components/Header";
 import { SourceNote } from "../components/SourceNote";
 import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useCue } from "../explainer/beat";
+
+/** Seconds into the scene: each shift clicks in, then the survey numbers, then "human in the loop". */
+export interface ShiftsCues {
+  shiftAt: number[];
+  statsAt: number;
+  goalAt: number;
+}
 
 // Deloitte's four shifts click into place one by one, then the survey numbers and human in the loop.
-export function Shifts() {
-  // Each shift clicks in as Riphay names it; the numbers on "Eighty-three percent"; the header on the last line.
-  const shiftAt = [useCue(0, "in pricing"), useCue(0, "in how we engage"), useCue(0, "in operations"), useCue(0, "in partnerships")];
-  const statsAt = useCue(1, "Eighty-three percent");
-  const goalAt = useCue(2);
+export function Shifts({ cues }: { cues: ShiftsCues }) {
+  const { shiftAt, statsAt, goalAt } = cues;
   const t = useSeconds();
   const head = useIn(0);
   const goal = useIn(goalAt);

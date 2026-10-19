@@ -6,29 +6,20 @@ import { terms, type Term } from "../content";
 import { Header } from "../components/Header";
 import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useBeat, useCue } from "../explainer/beat";
 import { FPS } from "../explainer/timing";
 
-/** Where Riphay names each term in the lightning round (line, phrase), in the order of `terms`. */
-const said: [number, string][] = [
-  [1, "LLM"],
-  [1, "Hallucination"],
-  [1, "Grounding"],
-  [2, "Agent:"],
-  [2, "The agent loop"],
-  [2, "Least privilege"],
-  [3, "The autonomy dial"],
-  [3, "And evals"],
-];
+export interface TermsCues {
+  /** When each term's card comes in (seconds into the scene), in the order of `terms`; the first from the start. */
+  cardStart: number[];
+  /** The scene's length: the last card stays up to the end. */
+  seconds: number;
+}
 
-// Eight key terms, one flashcard each as Riphay names it, with a progress row underneath.
-export function Terms() {
-  const b = useBeat();
+// Eight key terms, one flashcard each as it is named, with a progress row underneath.
+export function Terms({ cues }: { cues: TermsCues }) {
   const t = useSeconds();
-  const namedAt = said.map(([line, phrase]) => useCue(line, phrase));
-  // Card i is up from just before its name (the first from the start) until the next card; the last runs to the end.
-  const cardStart = terms.map((_, i) => (i === 0 ? 0 : namedAt[i] - 0.2));
-  const cardEnd = terms.map((_, i) => (i + 1 < terms.length ? cardStart[i + 1] : b.seconds));
+  const { cardStart } = cues;
+  const cardEnd = terms.map((_, i) => (i + 1 < terms.length ? cardStart[i + 1] : cues.seconds));
   const current = cardStart.filter((c) => t >= c).length - 1;
 
   return (
@@ -67,8 +58,8 @@ export function Terms() {
           </div>
         ))}
       </div>
-      {namedAt.slice(1).map((at) => (
-        <Sfx key={at} id="whoosh" at={at - 0.2} />
+      {cardStart.slice(1).map((at) => (
+        <Sfx key={at} id="whoosh" at={at} />
       ))}
     </Stage>
   );

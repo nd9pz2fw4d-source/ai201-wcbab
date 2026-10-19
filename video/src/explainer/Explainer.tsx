@@ -11,10 +11,11 @@ import { Shifts } from "../scenes/Shifts";
 import { Terms } from "../scenes/Terms";
 import { Verse1 } from "../scenes/Verse1";
 import { BeatContext } from "./beat";
+import { agendaCues, chorusCues, doneWellCues, introCues, shiftsCues, termsCues, verse1Cues } from "./sessionCues";
 import { ConfidentAnswer, TheDraft, TwoSummaries } from "./scenes/Demos";
 import { DecodePitch, ThreeQuestions } from "./scenes/Pitch";
 import { BankAlert, NextWord, PageFour, Sting, Trip, WhyWatch } from "./scenes/Tuesday";
-import { FPS, STING_SECONDS, captionCues, scheduleBeats, type Manifest } from "./timing";
+import { FPS, STING_SECONDS, captionCues, scheduleBeats, type Beat, type Manifest } from "./timing";
 
 export interface ExplainerProps {
   manifest: Manifest;
@@ -22,7 +23,7 @@ export interface ExplainerProps {
 }
 
 /** The picture for each scene of the script, by scene number. Scenes 11 on are Riphay's introduction to the session. */
-const scenes: Record<number, () => ReactNode> = {
+const scenes: Record<number, (b: Beat) => ReactNode> = {
   1: () => <WhyWatch />,
   2: () => <NextWord />,
   3: () => <BankAlert />,
@@ -33,13 +34,13 @@ const scenes: Record<number, () => ReactNode> = {
   8: () => <TheDraft />,
   9: () => <DecodePitch />,
   10: () => <ThreeQuestions />,
-  11: () => <Intro />,
-  12: () => <Verse1 />,
-  13: () => <Chorus />,
-  14: () => <Shifts />,
-  15: () => <Agenda />,
-  16: () => <Terms />,
-  17: () => <DoneWell />,
+  11: (b) => <Intro cues={introCues(b)} />,
+  12: (b) => <Verse1 cues={verse1Cues(b)} />,
+  13: (b) => <Chorus cues={chorusCues(b)} />,
+  14: (b) => <Shifts cues={shiftsCues(b)} />,
+  15: (b) => <Agenda cues={agendaCues(b)} />,
+  16: (b) => <Terms cues={termsCues(b)} />,
+  17: (b) => <DoneWell cues={doneWellCues(b)} />,
   18: () => <Outro />,
 };
 
@@ -65,7 +66,7 @@ export function Explainer({ manifest }: ExplainerProps) {
         return (
           <Sequence key={b.n} name={`${b.n}. ${b.title}`} from={from} durationInFrames={len}>
             <BeatContext.Provider value={b}>
-              <SoftCut frames={len}>{scene()}</SoftCut>
+              <SoftCut frames={len}>{scene(b)}</SoftCut>
             </BeatContext.Provider>
           </Sequence>
         );

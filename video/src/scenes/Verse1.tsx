@@ -8,19 +8,23 @@ import { Header } from "../components/Header";
 import { SourceNote } from "../components/SourceNote";
 import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useCue } from "../explainer/beat";
 import { FPS } from "../explainer/timing";
 
-/** Where Riphay names each of Deloitte's eight forces (line 3), in the order of `forces`. */
-const named = ["Whole-person recovery", "An ageing workforce", "Gig work", "Working from home", "New kinds of risk", "Artificial intelligence", "Ageing core systems", "legislation"];
+/** Seconds into the scene. */
+export interface Verse1Cues {
+  /** "A claim starts moving": the arrow and the claim come in. */
+  claimAt: number;
+  /** The picture changes to Deloitte's survey, then to the eight forces. */
+  surveyAt: number;
+  forcesAt: number;
+  /** When each force card pops in, in the order of `forces`. */
+  forceAt: number[];
+}
 
 // A worker is hurt, a claim starts; Deloitte asked Canada's WCB leaders; eight forces.
-// The picture changes with Riphay's lines: the claim (line 1), the survey (line 2), the forces (lines 3 and 4).
-export function Verse1() {
-  const claimAt = useCue(0, "a claim starts moving");
-  const surveyAt = useCue(1) - 0.2;
-  const forcesAt = useCue(2) - 0.2;
-  const forceAt = named.map((phrase) => useCue(2, phrase) - forcesAt);
+export function Verse1({ cues }: { cues: Verse1Cues }) {
+  const { claimAt, surveyAt, forcesAt } = cues;
+  const forceAt = cues.forceAt.map((at) => at - forcesAt);
   const survey = Math.round(surveyAt * FPS);
   const forces = Math.round(forcesAt * FPS);
   return (

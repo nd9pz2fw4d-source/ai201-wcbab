@@ -4,13 +4,18 @@ import { acts } from "../content";
 import { Header } from "../components/Header";
 import { Sfx } from "../components/Sfx";
 import { Stage } from "../components/Stage";
-import { useCue } from "../explainer/beat";
 
-// The day: one claim, three acts. Each act lands as Riphay names it.
-export function Agenda() {
-  const actAt = [useCue(1, "Act one"), useCue(1, "Act two"), useCue(1, "Act three")];
+/** Seconds into the scene: each act lands, then the footer. */
+export interface AgendaCues {
+  actAt: number[];
+  footAt: number;
+}
+
+// The day: one claim, three acts, each landing as it is named.
+export function Agenda({ cues }: { cues: AgendaCues }) {
+  const { actAt } = cues;
   const head = useIn(0);
-  const foot = useIn(useCue(2));
+  const foot = useIn(cues.footAt);
 
   return (
     <Stage chip="The day ahead">
