@@ -2,11 +2,11 @@
 
 A narrated pre-read that goes out before the Executive AI Academy session, with a one-page cheat sheet. It uses Remotion for the video and ElevenLabs for the voices and sound effects. There is no song.
 
-Finished file: `out/follow-the-claim-before-the-session.mp4` (render it with `npm run render`; `out/` is not committed).
+Finished file: `out/follow-the-claim-before-the-session.mp4`, 11:27 (render it with `npm run render`; `out/` is not committed).
 
 It has two parts, in three voices:
 
-**Before the session (about 9 minutes).** Two co-narrators, Ava and Sam, trade lines: witty, warm and steady, with a light Alberta touch (construction season, the forecast, the block heater). It is deliberately not a walk through the session's slides: the session is about WCB (the claim, our choices); this part is about you and the world.
+**Before the session (about 8 minutes).** Two co-narrators, Ava and Sam, trade lines: witty, warm and steady, with a light Alberta touch (construction season, the forecast, the block heater). It is deliberately not a walk through the session's slides: the session is about WCB (the claim, our choices); this part is about you and the world.
 
 | Part | What happens |
 |---|---|
@@ -41,7 +41,7 @@ ElevenLabs, model `eleven_v4` (`voices` in `scripts/explainer.mjs`):
 node scripts/explainer.mjs lines      # every line's id, speaker, voice and the exact text to send
 # Generate each line with ElevenLabs (flow "Follow the claim: narration"), then download it:
 node scripts/explainer.mjs fetch <id> <url>   # saves voice-raw/<id>.mp3 and <id>.txt (the text it was made from)
-npm run voice                         # slows each line to 92% (pitch kept), levels all voices to -16 LUFS, re-measures
+npm run voice                         # levels all voices to -16 LUFS, re-measures every line
 npm run render                        # writes out/follow-the-claim-before-the-session.mp4
 npm run stills                        # review stills, one per scene, to out/stills
 ```

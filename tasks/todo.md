@@ -203,7 +203,8 @@ Decisions (from the user):
 - [x] One timeline: the session scenes move from song-lyric timing to the voice timing (`useCue`), sound effects sit in the scenes (`<Sfx>`); the song, the lyric timeline, the music-video composition and the lyric aligner are removed
 - [x] Generate all 65 lines (about 9,000 credits), level them, transcribe every line to check the words
 - [x] Verify: typecheck, stills of every scene, full render
-- [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing; length is about 12½ minutes
+- [x] Length: the user asked to remove the 92% slowdown to get closer to 10 minutes: 12:20 became 11:27
+- [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing
 
 ## Round 7b: side version, the song as an upbeat country song
 The user asked for a separate, side version: the "Follow the claim" song remade as upbeat country, in the spirit of Alberta country hits. Not part of the main video.
