@@ -138,7 +138,7 @@ export default function SlideCopilotOS() {
   };
 
   return (
-    <TeachLayout strand="where" headline="Copilot becomes the operating system of work">
+    <TeachLayout strand="where" headline="Copilot becomes an operating system of work">
       <Interactive className="absolute right-[100px] top-[250px] z-10 flex rounded-full bg-white p-1.5 shadow-[0_1px_0_#C9DDEA]">
         {(["today", "next"] as const).map((m) => (
           <button
@@ -152,7 +152,7 @@ export default function SlideCopilotOS() {
             className="rounded-full px-7 py-3 text-[24px] font-medium"
             style={{ background: mode === m ? (m === "today" ? theme.human : theme.agent) : "transparent", color: mode === m ? "#fff" : theme.brandPrimary }}
           >
-            {m === "today" ? "Today" : "Copilot as the OS"}
+            {m === "today" ? "Today" : "Copilot as an OS"}
           </button>
         ))}
       </Interactive>

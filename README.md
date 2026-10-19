@@ -4,7 +4,7 @@ A browser slide deck for the WCB-Alberta Executive AI Academy. The whole session
 
 Each act carries one learning objective: (1) recognize where AI creates value and how transformation is accomplished; (2) distinguish and evaluate AI opportunity types; (3) understand executive accountabilities for driving adoption. One thread runs through all three: AI is more than Copilot and personal productivity.
 
-Act 1 also carries the teaching block: **How it works** (what a model does, grounding, what makes an agent, the agent loop, tools and permissions, the autonomy dial, teams of agents, testing) and **Where it's going** (five trends, the METR task-length chart, agents with their own computers, Copilot as the operating system of work, the worker's agent meeting ours, a day in 2028, what shifts for us, what doesn't change).
+Act 1 also carries the teaching block: **How it works** (what a model does, grounding, what makes an agent, the agent loop, tools and permissions, the autonomy dial, teams of agents, testing) and **Where it's going** (five trends, the METR task-length chart, agents with their own computers, Copilot as an operating system of work, the worker's agent meeting ours, a day in 2028, what shifts for us, what doesn't change).
 
 ## Run it
 
@@ -38,7 +38,7 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 
 | Slides | 60 | 75 | 90 | 120 |
 |---|---|---|---|---|
-| Core deck, plus three things to leave with, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as the operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (plays by itself: start now versus wait a year), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
+| Core deck, plus three things to leave with, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as an operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (plays by itself: start now versus wait a year), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
 | Live moment, agents with their own computers, their agent will call our agent, how we must adapt (click to reveal), build your agent team (live governance check) | | shown | shown | shown |
 | How it works (section card), give it the right sources, tools are its hands, five things to watch, what shifts for us, what doesn't change, many ideas a few patterns, where do our five sit?, four questions for any opportunity, how ready are we? (room scores six foundations, radar, CSV download), agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, open discussion | | | shown | shown |
 | Myth or reality? | | | | shown |
@@ -56,7 +56,7 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 - On-screen numbers: `src/data/claimFacts.ts`
 - Teaching content (next-word example, loop steps, tools, autonomy levels, myths, trends, METR data): `src/data/teaching.ts`
 - Objectives, opportunity types, the suggested placement of our five, evaluation questions, executive accountabilities, the electrification source: `src/data/strategy.ts`
-- Copilot as the operating system content, agent team rules, readiness foundations, the cost-of-waiting assumption: `src/data/osOfWork.ts`
+- Copilot as an operating system content, agent team rules, readiness foundations, the cost-of-waiting assumption: `src/data/osOfWork.ts`
 - Colours: `src/theme.ts` (the only place colours are defined). Everything uses the WCB-Alberta palette: AI and agents in WCB blue `#3399CC`, people deciding in WCB green (`#98C857`, deepened to `#5F9230` where white text sits on it), the claim file in WCB dark blue `#117BBC`, key moments in WCB gold `#FBB43A`. Red is for risk only
 
 ## Before the session: items to confirm
