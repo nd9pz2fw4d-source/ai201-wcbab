@@ -96,6 +96,12 @@ export default function Slide10LiveMoment() {
                     e.stopPropagation();
                     vote(i, -1);
                   }}
+                  onKeyDown={(e) => {
+                    // Keyboard twin of right-click: Delete or Backspace removes a vote.
+                    if (e.key !== "Delete" && e.key !== "Backspace") return;
+                    e.preventDefault();
+                    vote(i, -1);
+                  }}
                 >
                   <motion.span key={n} initial={{ scale: n ? 1.3 : 1 }} animate={{ scale: 1 }}>
                     <StopSign size={48} filled={n > 0} count={n} />

@@ -41,6 +41,12 @@ export function VoteTiles({ id, options }: { id: string; options: VoteOption[] }
                 e.stopPropagation();
                 bump(o.id, -1);
               }}
+              onKeyDown={(e) => {
+                // Keyboard twin of right-click: Delete or Backspace removes a vote.
+                if (e.key !== "Delete" && e.key !== "Backspace") return;
+                e.preventDefault();
+                bump(o.id, -1);
+              }}
               className="relative flex h-[440px] w-[300px] flex-col items-center overflow-hidden rounded-3xl bg-white pt-9 text-center"
               style={{
                 boxShadow: lead ? `0 0 0 5px ${theme.brandAccent}, 0 16px 40px rgba(12,53,83,0.18)` : "0 1px 0 #C9DDEA, 0 10px 30px rgba(12,53,83,0.08)",

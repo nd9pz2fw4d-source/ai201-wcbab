@@ -1,6 +1,6 @@
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { ShieldCheck, UserRound } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Interactive } from "../components/Interactive";
 import { autonomyLevels } from "../data/teaching";
 import { useSlideState } from "../hooks/useSlideState";
@@ -30,6 +30,7 @@ function arc(k: number) {
 
 export default function SlideAutonomyDial() {
   const [level, setLevel] = useSlideState("dial:level", 2);
+  const [focused, setFocused] = useState<number | null>(null); // keyboard focus ring
   const current = autonomyLevels[level];
   // The needle's angle is animated; its shape is recomputed from the angle.
   const angle = useMotionValue(180);
@@ -52,7 +53,27 @@ export default function SlideAutonomyDial() {
             const on = k === level;
             const lp = polar(segAngle(k), R + 70);
             return (
-              <g key={l.label} style={{ pointerEvents: "auto", cursor: "pointer" }} data-interactive onClick={(e) => { e.stopPropagation(); setLevel(k); }}>
+              <g
+                key={l.label}
+                role="radio"
+                aria-checked={on}
+                aria-label={`Autonomy: ${l.label}`}
+                tabIndex={0}
+                style={{ pointerEvents: "auto", cursor: "pointer", outline: "none" }}
+                data-interactive
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLevel(k);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key !== " " && e.key !== "Enter") return;
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setLevel(k);
+                }}
+                onFocus={(e) => setFocused(e.currentTarget.matches(":focus-visible") ? k : null)}
+                onBlur={() => setFocused(null)}
+              >
                 <motion.path
                   d={arc(k)}
                   fill={segColors[k]}
@@ -60,6 +81,7 @@ export default function SlideAutonomyDial() {
                   animate={{ opacity: on ? 1 : 0.35 }}
                   transition={{ delay: 0.2 + k * 0.08 }}
                 />
+                {focused === k && <path d={arc(k)} fill="none" stroke={theme.brandAccent} strokeWidth={8} />}
                 <text
                   x={lp.x}
                   y={lp.y}

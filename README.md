@@ -22,14 +22,15 @@ npm run dev       # live preview while editing
 
 | Input | Action |
 |---|---|
-| Click the slide background, →, Page Down, Space | Next slide |
-| ←, Page Up | Previous slide |
+| Click the slide background, →, ↓, Page Down, Space | Next slide |
+| ←, ↑, Page Up | Previous slide |
 | Home / End | First / last slide |
 | `F` or the top-right button | Full screen |
 | `M` or the top-left button | Slide menu (also switches 60 / 75 / 90 / 120 and the timer) |
 | `S`, or "Pick slides" in the menu | Slide sorter: every slide as a thumbnail with a check mark. Only checked slides are presented. Start from a standard version (60 / 75 / 90 / 120), then tick or untick slides, or a whole act at once. Your pick is saved in this browser; choosing a length in the menu (or "Reset") goes back to the standard version |
 | `T` | Presenter timer (turns amber 2 minutes over the act's plan) |
 | `Esc` | Close menu or leave full screen |
+| `Tab` / `Shift+Tab` | Move between the buttons, toggles, vote tiles, dial segments and sort cards on a slide (gold ring shows where you are). Then `Space` or `Enter` presses it, `Delete` or `Backspace` removes a vote, and on the sort board `Space` moves a card one column right and ←/→ move it either way. With nothing focused, `Space` still changes slides |
 
 Buttons, vote tiles, drag cards and timers never advance the slide. On-slide animations play by themselves. Vote tiles: click to add a hand, right-click to remove one. The URL hash (`#/7`) keeps your place on refresh.
 

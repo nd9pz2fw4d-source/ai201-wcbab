@@ -58,7 +58,10 @@ function Column({ place }: { place: Place }) {
   );
 }
 
-function Card({ station, place, slot }: { station: Station; place: Place; slot: number }) {
+// Keyboard: Space or Enter moves a card one column right (wrapping back to the tray); arrows move it left or right.
+const KEY_STEP: Record<string, number> = { " ": 1, Enter: 1, ArrowRight: 1, ArrowLeft: -1 };
+
+function Card({ station, place, slot, onMove }: { station: Station; place: Place; slot: number; onMove: (step: number, wrap: boolean) => void }) {
   const scale = useStageScale();
   const { setNodeRef, listeners, attributes, transform, isDragging } = useDraggable({ id: station.id });
   const target = { left: colX(place) + 15, top: HEADER + slot * STEP };
@@ -108,6 +111,14 @@ function Card({ station, place, slot }: { station: Station; place: Place; slot: 
         {...listeners}
         {...attributes}
         data-interactive
+        aria-label={`${station.name}: ${header[place].label}`}
+        onKeyDown={(e) => {
+          const step = KEY_STEP[e.key];
+          if (!step) return;
+          e.preventDefault();
+          e.stopPropagation(); // don't change slides
+          onMove(step, e.key === " " || e.key === "Enter");
+        }}
         className="flex h-full cursor-grab items-center gap-4 rounded-2xl bg-white px-4 active:cursor-grabbing"
         style={{
           transform: `translate(${dx}px, ${dy}px) scale(${isDragging ? 1.05 : 1})`,
@@ -137,6 +148,13 @@ export function SortBoard() {
     setPlacement((p) => ({ ...p, [e.active.id as StationId]: to }));
   };
 
+  const move = (id: StationId, step: number, wrap: boolean) =>
+    setPlacement((p) => {
+      const i = places.indexOf(p[id]) + step;
+      const to = wrap ? places[(i + places.length) % places.length] : places[Math.max(0, Math.min(places.length - 1, i))];
+      return { ...p, [id]: to };
+    });
+
   const slotOf = (id: StationId) => {
     const place = placement[id];
     return stations.filter((s) => placement[s.id] === place).findIndex((s) => s.id === id);
@@ -144,13 +162,18 @@ export function SortBoard() {
 
   return (
     <Interactive className="flex flex-col items-center gap-6">
-      <DndContext sensors={sensors} collisionDetection={pointerWithin} onDragEnd={onDragEnd}>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={pointerWithin}
+        onDragEnd={onDragEnd}
+        accessibility={{ screenReaderInstructions: { draggable: "Drag to a column, or press Space to move it one column right. Left and right arrows also move it." } }}
+      >
         <div className="relative" style={{ width: BOARD_W, height: BOARD_H }}>
           {places.map((p) => (
             <Column key={p} place={p} />
           ))}
           {stations.map((s) => (
-            <Card key={s.id} station={s} place={placement[s.id]} slot={slotOf(s.id)} />
+            <Card key={s.id} station={s} place={placement[s.id]} slot={slotOf(s.id)} onMove={(step, wrap) => move(s.id, step, wrap)} />
           ))}
         </div>
       </DndContext>

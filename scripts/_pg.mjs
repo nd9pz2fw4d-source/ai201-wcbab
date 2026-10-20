@@ -1,0 +1,12 @@
+import { chromium } from "playwright";
+import path from "node:path";
+const file = "file://" + path.resolve("dist/index.html");
+const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
+const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
+await p.goto(file + "?length=75#/copilot-os"); await p.reload(); await p.waitForTimeout(800);
+const h0 = await p.evaluate(() => location.hash);
+await p.getByRole("button", { name: "Copilot as an OS" }).click();
+await p.getByLabel("Goal for Copilot").click();
+await p.keyboard.press("PageDown"); await p.waitForTimeout(300);
+console.log("PageDown from text box:", h0, "->", await p.evaluate(() => location.hash));
+await b.close();
