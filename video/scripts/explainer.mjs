@@ -8,8 +8,8 @@
 //                                         text no longer matches the script is ignored, so an edited line can never
 //                                         play its old words.
 //
-//   node scripts/explainer.mjs voice      prepare each downloaded line: public/explainer/voice-raw/<id>.mp3 is slowed
-//                                         a little (pitch kept) and levelled, into public/explainer/voice/<id>.mp3
+//   node scripts/explainer.mjs voice      prepare each downloaded line: public/explainer/voice-raw/<id>.mp3 is levelled
+//                                         into public/explainer/voice/<id>.mp3
 //   node scripts/explainer.mjs manifest   measure public/explainer/voice/<id>.mp3 and write public/explainer/manifest.json
 //                                         (a line with no voice file yet gets an estimated length, marked "estimated")
 //
@@ -26,9 +26,8 @@ const scriptPath = path.join(root, "explainer/script.md");
 const voiceDir = path.join(root, "public/explainer/voice");
 const rawDir = path.join(root, "public/explainer/voice-raw");
 
-// Generated speech runs about 165 words a minute; slowing it to 92% (pitch kept) and pausing
-// between lines (src/explainer/timing.ts) brings the whole explainer to about 130.
-const TEMPO = 0.92;
+// Lines play at the speed they were generated (about 155 words a minute); the pauses between lines
+// (src/explainer/timing.ts) give the viewer room. An earlier cut slowed every line to 92%: it ran 12:20.
 // Both voices are levelled to the same loudness, so neither jumps out.
 const LOUDNESS = "loudnorm=I=-16:TP=-1.5:LRA=11";
 const manifestPath = path.join(root, "public/explainer/manifest.json");
@@ -80,7 +79,7 @@ if (step === "voice") {
   for (const l of parseScript().flatMap((sc) => sc.lines)) {
     const raw = path.join(rawDir, `${l.id}.mp3`);
     if (!existsSync(raw) || !matchesScript(l)) continue;
-    execFileSync("ffmpeg", ["-v", "error", "-y", "-i", raw, "-af", `atempo=${TEMPO},${LOUDNESS}`, "-ar", "44100", "-b:a", "160k", path.join(voiceDir, `${l.id}.mp3`)]);
+    execFileSync("ffmpeg", ["-v", "error", "-y", "-i", raw, "-af", LOUDNESS, "-ar", "44100", "-b:a", "160k", path.join(voiceDir, `${l.id}.mp3`)]);
     n++;
   }
   console.log(`voice: prepared ${n} lines`);

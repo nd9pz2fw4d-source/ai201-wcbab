@@ -203,7 +203,8 @@ Decisions (from the user):
 - [x] One timeline: the session scenes move from song-lyric timing to the voice timing (`useCue`), sound effects sit in the scenes (`<Sfx>`); the song, the lyric timeline, the music-video composition and the lyric aligner are removed
 - [x] Generate all 65 lines (about 9,000 credits), level them, transcribe every line to check the words
 - [x] Verify: typecheck, stills of every scene, full render
-- [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing; length is about 12½ minutes
+- [x] Length: the user asked to remove the 92% slowdown to get closer to 10 minutes: 12:20 became 11:27
+- [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing
 
 ## Round 7b: side version, the song as an upbeat country song
 The user asked for a separate, side version: the "Follow the claim" song remade as upbeat country, in the spirit of Alberta country hits. Not part of the main video.
@@ -213,3 +214,5 @@ The user asked for a separate, side version: the "Follow the claim" song remade 
 - [x] Two takes from ElevenLabs Music; take 2 kept (take 1 skipped the intro shout)
 - [x] `scripts/align_lyrics.py` back, pointed at the country take, with a second listening pass for lines the first pass misses: 52 of 52 lines timed
 - [x] Stills checked; full render
+- [x] The user found the first take too rock and not high-quality enough: two new arrangements, traditional two-step and bluegrass, both more acoustic; traditional in the video, both sent to compare. Both skip the "least privilege" line, so unsung lines get no caption
+- [x] The user picked traditional, but the intro ran too long: cut 2 bars (4.1 s) of fiddle between the shout and the first verse, beat to beat; the original take is kept as song-take.mp3

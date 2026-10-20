@@ -1,6 +1,6 @@
 # Follow the claim: before the session
 
-A pre-read for the Executive AI Academy, in three voices: about 8 minutes with two narrators, then about 2½ minutes where the session's host introduces the day. It goes out with a one-page cheat sheet. No song.
+A pre-read for the Executive AI Academy, in three voices: about 8 minutes with two narrators, then about 3 minutes where the session's host introduces the day (11½ minutes in all). It goes out with a one-page cheat sheet. No song.
 
 The session is about WCB: the claim, our choices, our accountabilities. The narrators' part is about you and the world: the AI you already meet, what it looks like when it works and when it slips, how to see through a pitch, and the questions to bring. It does not walk through the session's slides. The host's part is the trailer for the day itself.
 
@@ -8,7 +8,7 @@ The session is about WCB: the claim, our choices, our accountabilities. The narr
 
 Pronunciation: the voice is sent "Rifai" wherever the script says "Riphay" (scripts/explainer.mjs); captions keep "Riphay".
 
-Pace: slow, about 130 words a minute, with a short pause between scenes. "(pause 2.5s)" after a line holds the picture for the viewer to think before the answer. Every spoken line is captioned. Lines marked **Ava:**, **Sam:** or **Host:** are spoken; words in [square brackets] direct the delivery and are neither spoken nor captioned. Lines starting "On screen" describe the picture and are not spoken. The three demos are made-up examples, labelled "Illustrative" on screen.
+Pace: the voices' natural speed (about 155 words a minute), with a short pause between lines and between scenes. "(pause 2.5s)" after a line holds the picture for the viewer to think before the answer. Every spoken line is captioned. Lines marked **Ava:**, **Sam:** or **Host:** are spoken; words in [square brackets] direct the delivery and are neither spoken nor captioned. Lines starting "On screen" describe the picture and are not spoken. The three demos are made-up examples, labelled "Illustrative" on screen.
 
 ---
 

@@ -50,7 +50,7 @@ export function CountrySong({ timing, hasSong }: CountrySongProps) {
           </Sequence>
         );
       })}
-      <Caption lines={timing.lines} />
+      <Caption lines={timing.lines.filter((l) => l.heard !== false)} />
       {hasSong && <Audio src={staticFile("audio/country/song.mp3")} volume={SONG_VOLUME} />}
     </AbsoluteFill>
   );
