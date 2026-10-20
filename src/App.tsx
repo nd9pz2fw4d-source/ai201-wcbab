@@ -53,6 +53,7 @@ function save(key: string, value: string | null) {
 }
 
 const INTERACTIVE = "button, a, input, select, textarea, [data-interactive]";
+const FOCUSABLE = "button, a, [role='button'], [role='radio'], [tabindex]:not([tabindex='-1'])";
 
 export default function App() {
   const [sessionLength, setSessionLength] = useState<SessionLength>(initialLength);
@@ -94,6 +95,9 @@ export default function App() {
       const t = e.target as HTMLElement | null;
       if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
       const k = e.key;
+      if (e.defaultPrevented) return; // a control already handled it (e.g. a sort card)
+      // Tab to a button, then Space or Enter presses it rather than changing slides.
+      if ((k === " " || k === "Enter") && t?.closest(FOCUSABLE)) return;
       if (sorterOpen) {
         if (k === "Escape" || k === "s" || k === "S") setSorterOpen(false);
         return;

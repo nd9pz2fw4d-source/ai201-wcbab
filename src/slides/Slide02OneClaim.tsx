@@ -84,6 +84,12 @@ export default function Slide02OneClaim() {
                 e.stopPropagation();
                 vote(r, -1);
               }}
+              onKeyDown={(e) => {
+                // Keyboard twin of right-click: Delete or Backspace removes a vote.
+                if (e.key !== "Delete" && e.key !== "Backspace") return;
+                e.preventDefault();
+                vote(r, -1);
+              }}
               className="relative flex h-[70px] items-center overflow-hidden rounded-2xl px-5 text-left"
               style={{ background: "#F2F7FA" }}
             >

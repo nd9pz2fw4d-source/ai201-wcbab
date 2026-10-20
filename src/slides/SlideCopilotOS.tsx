@@ -158,7 +158,7 @@ export default function SlideCopilotOS() {
       </Interactive>
 
       {mode === "next" && (
-        <Interactive className="absolute left-1/2 top-[335px] z-10 flex w-[1000px] -translate-x-1/2 items-center gap-3 rounded-full bg-white py-2 pl-3 pr-2" style={{ boxShadow: `0 0 0 3px ${theme.human}` }}>
+        <Interactive className="focus-ring absolute left-1/2 top-[335px] z-10 flex w-[1000px] -translate-x-1/2 items-center gap-3 rounded-full bg-white py-2 pl-3 pr-2" style={{ boxShadow: `0 0 0 3px ${theme.human}` }}>
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full" style={{ background: theme.human }}>
             <UserRound size={28} color="#fff" />
           </span>

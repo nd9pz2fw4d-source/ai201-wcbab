@@ -267,6 +267,72 @@ await page.context().close();
   await ctx.close();
 }
 
+// ---- Keyboard only: Tab to a control, then Space / Enter / Delete / arrows ----
+{
+  const kp = await open({}, "?length=75");
+  const tabTo = async (label) => {
+    for (let i = 0; i < 40; i++) {
+      await kp.keyboard.press("Tab");
+      if ((await kp.evaluate(() => document.activeElement?.getAttribute("aria-label"))) === label) return true;
+    }
+    return false;
+  };
+  const label = (l) => kp.getByRole("button", { name: l });
+  let kh = await goId(kp, "one-claim", 75, 900);
+  check("Tab reaches a vote button", await tabTo("Vote: 5 to 10"));
+  check("Tab shows the controls", (await kp.locator("button[aria-label='Open slide menu (M)']").evaluate((b) => getComputedStyle(b.parentElement).opacity)) === "1");
+  await kp.keyboard.press("Space");
+  await kp.keyboard.press("Enter");
+  await kp.keyboard.press("Space");
+  await kp.keyboard.press("Delete");
+  await kp.waitForTimeout(300);
+  check("Space/Enter vote and Delete removes, slide stays", (await kp.evaluate(() => location.hash)) === kh && (await label("Vote: 5 to 10").innerText()).trim().endsWith("2"));
+  const ring = await kp.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
+  check("keyboard focus shows a ring", ring === "solid", ring);
+  await kp.screenshot({ path: `${out}/kbd-focus.png` });
+
+  kh = await goId(kp, "autonomy-dial", 75, 900);
+  const dialLabel = await kp.getByRole("radio").first().getAttribute("aria-label");
+  check("Tab reaches the autonomy dial", await tabTo(dialLabel));
+  await kp.keyboard.press("Space");
+  await kp.waitForTimeout(300);
+  check("Space picks a dial level, slide stays", (await kp.getByRole("radio").first().getAttribute("aria-checked")) === "true" && (await kp.evaluate(() => location.hash)) === kh);
+  await kp.screenshot({ path: `${out}/kbd-dial.png` });
+
+  kh = await goId(kp, "sort", 75, 900);
+  const card = kp.locator("[aria-roledescription='draggable']").first();
+  const name0 = await card.getAttribute("aria-label");
+  check("Tab reaches a sort card", await tabTo(name0));
+  await kp.keyboard.press("Space");
+  await kp.keyboard.press("ArrowRight");
+  await kp.waitForTimeout(600);
+  const name1 = await card.getAttribute("aria-label");
+  check("Space and arrows move a sort card, slide stays", /Assist/.test(name1) && (await kp.evaluate(() => location.hash)) === kh, name1);
+  await kp.keyboard.press("ArrowLeft");
+  await kp.keyboard.press("ArrowLeft");
+  await kp.keyboard.press("ArrowLeft");
+  check("ArrowLeft returns a sort card to the tray", /Journey stations/.test(await card.getAttribute("aria-label")));
+  await kp.screenshot({ path: `${out}/kbd-sort.png` });
+
+  kh = await goId(kp, "copilot-os", 75, 900);
+  check("Tab reaches the Copilot toggle", await (async () => {
+    for (let i = 0; i < 40; i++) {
+      await kp.keyboard.press("Tab");
+      if ((await kp.evaluate(() => document.activeElement?.textContent)) === "Copilot as an OS") return true;
+    }
+    return false;
+  })());
+  await kp.keyboard.press("Enter");
+  await kp.waitForTimeout(500);
+  check("Enter flips the Copilot toggle, slide stays", (await kp.getByLabel("Goal for Copilot").count()) === 1 && (await kp.evaluate(() => location.hash)) === kh);
+  // With nothing focused, Space still changes slides.
+  await kp.evaluate(() => document.activeElement?.blur());
+  await kp.keyboard.press("Space");
+  await kp.waitForTimeout(300);
+  check("Space with nothing focused still advances", (await kp.evaluate(() => location.hash)) !== kh);
+  await kp.context().close();
+}
+
 // ---- Reduced motion ----
 page = await open({ reducedMotion: "reduce" }, "?length=75", "#/era-1");
 await page.waitForTimeout(1500);

@@ -18,9 +18,18 @@ button {
   font: inherit;
 }
 
-button:focus-visible {
-  outline: 3px solid var(--brand-accent);
-  outline-offset: 3px;
+/* Keyboard focus (Tab): a gold ring on anything you can press. Mouse clicks don't show it. */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 4px solid var(--brand-accent);
+  outline-offset: 4px;
+}
+/* Text boxes show focus on their pill instead. */
+.focus-ring:focus-within {
+  outline: 4px solid var(--brand-accent);
+  outline-offset: 4px;
 }
 
 .hide-cursor,

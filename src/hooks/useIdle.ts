@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-/** True after `ms` without mouse movement. */
+/** True after `ms` without mouse movement or Tab. */
 export function useIdle(ms = 2000) {
   const [idle, setIdle] = useState(false);
 
@@ -13,7 +13,10 @@ export function useIdle(ms = 2000) {
     };
     window.addEventListener("mousemove", wake);
     window.addEventListener("pointerdown", wake);
+    const onKey = (e: KeyboardEvent) => e.key === "Tab" && wake();
+    window.addEventListener("keydown", onKey);
     return () => {
+      window.removeEventListener("keydown", onKey);
       window.clearTimeout(timer);
       window.removeEventListener("mousemove", wake);
       window.removeEventListener("pointerdown", wake);
