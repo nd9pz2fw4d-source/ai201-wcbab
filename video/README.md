@@ -2,7 +2,7 @@
 
 A narrated pre-read that goes out before the Executive AI Academy session, with a one-page cheat sheet. It uses Remotion for the video and ElevenLabs for the voices and sound effects. There is no song.
 
-Finished file: `out/follow-the-claim-before-the-session.mp4`, 11:27 (render it with `npm run render`; `out/` is not committed).
+Finished file: `out/follow-the-claim-before-the-session.mp4`, 10:50 (render it with `npm run render`; `out/` is not committed).
 
 It has two parts, in three voices:
 
@@ -16,7 +16,7 @@ It has two parts, in three voices:
 | Decode the pitch | "99% accurate, fully autonomous, learns your business, plugs into all your systems" becomes five questions to ask |
 | Three questions to bring | Deloitte's 83% (nobody is far ahead), three questions about the viewer's own area, and the cheat sheet |
 
-**The day (about 3 minutes).** Riphay Al-Hussein, who leads the session, introduces it in their own cloned voice, over the session scenes: one claim and Deloitte's eight forces, the claim's journey, Deloitte's four shifts, the three acts (See it, Choose it, Govern it), a lightning round of the eight words, the claim done well ("a person decides"), and "See you in the room" with Deloitte's readiness question and the date.
+**The day (about 2½ minutes).** Riphay Al-Hussein, who leads the session, introduces it in their own cloned voice, over the session scenes: one claim and Deloitte's eight forces, the claim's journey, Deloitte's four shifts, the three acts (See it, Choose it, Govern it), the claim done well ("a person decides"), and "See you in the room" with Deloitte's readiness question and the date.
 
 The first part follows the deck's light content-slide look (light WCB blue, WCB blue for AI and agents, WCB green for people); the session part switches to the deck's dark title look, so the handover is visible. Every spoken line is captioned with its speaker's name.
 

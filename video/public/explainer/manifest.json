@@ -435,52 +435,22 @@
     },
     {
       "n": 16,
-      "title": "Eight words",
-      "lines": [
-        {
-          "id": "s16-01",
-          "speaker": "Host",
-          "text": "You've met the words already. Here's the lightning round.",
-          "seconds": 2.85
-        },
-        {
-          "id": "s16-02",
-          "speaker": "Host",
-          "text": "LLM: predicts the next word. Hallucination: confident, but wrong. Grounding, or RAG: answers from trusted sources, and shows them.",
-          "seconds": 10.53
-        },
-        {
-          "id": "s16-03",
-          "speaker": "Host",
-          "text": "Agent: a goal, tools, memory and instructions. The agent loop: plan, act, check, repeat. Least privilege: only the access the job needs.",
-          "seconds": 11.73
-        },
-        {
-          "id": "s16-04",
-          "speaker": "Host",
-          "text": "The autonomy dial: how much it does alone is a choice we make. And evals: test before you trust, with a human in the loop.",
-          "seconds": 8.83
-        }
-      ]
-    },
-    {
-      "n": 17,
       "title": "The claim, done well",
       "lines": [
         {
-          "id": "s17-01",
+          "id": "s16-01",
           "speaker": "Host",
           "text": "Now picture that claim, done well. Agents do the legwork: they gather the reports, check the facts, and draft the summary.",
           "seconds": 8.12
         },
         {
-          "id": "s17-02",
+          "id": "s16-02",
           "speaker": "Host",
           "text": "Then a person decides. That part stays the same.",
           "seconds": 3.24
         },
         {
-          "id": "s17-03",
+          "id": "s16-03",
           "speaker": "Host",
           "text": "And the worker gets on with what matters: getting better, and getting back to work.",
           "seconds": 4.68
@@ -488,17 +458,17 @@
       ]
     },
     {
-      "n": 18,
+      "n": 17,
       "title": "See you in the room",
       "lines": [
         {
-          "id": "s18-01",
+          "id": "s17-01",
           "speaker": "Host",
           "text": "One question to chew on, straight from Deloitte: is AI embedded in the fabric of your business model, or do you still see it as a standalone capability?",
           "seconds": 9.25
         },
         {
-          "id": "s18-02",
+          "id": "s17-02",
           "speaker": "Host",
           "text": "Bring your answer, bring your cheat sheet, and bring a coffee. See you in the room on Monday, October 26.",
           "seconds": 6.43

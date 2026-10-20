@@ -3,7 +3,6 @@ import type { ChorusCues } from "../scenes/Chorus";
 import type { DoneWellCues } from "../scenes/DoneWell";
 import type { IntroCues } from "../scenes/Intro";
 import type { ShiftsCues } from "../scenes/Shifts";
-import type { TermsCues } from "../scenes/Terms";
 import type { Verse1Cues } from "../scenes/Verse1";
 import { session } from "../content";
 import { cue, type Beat } from "./timing";
@@ -44,23 +43,6 @@ export const shiftsCues = (b: Beat): ShiftsCues => ({
 export const agendaCues = (b: Beat): AgendaCues => ({
   actAt: ["Act one", "Act two", "Act three"].map((phrase) => cue(b, 1, phrase)),
   footAt: cue(b, 2),
-});
-
-/** Where Riphay names each term in the lightning round (line, phrase), in the order of `terms` in src/content.ts. */
-const termsSaid: [number, string][] = [
-  [1, "LLM"],
-  [1, "Hallucination"],
-  [1, "Grounding"],
-  [2, "Agent:"],
-  [2, "The agent loop"],
-  [2, "Least privilege"],
-  [3, "The autonomy dial"],
-  [3, "And evals"],
-];
-
-export const termsCues = (b: Beat): TermsCues => ({
-  cardStart: termsSaid.map(([line, phrase], i) => (i === 0 ? 0 : cue(b, line, phrase) - 0.2)),
-  seconds: b.seconds,
 });
 
 export const doneWellCues = (b: Beat): DoneWellCues => {

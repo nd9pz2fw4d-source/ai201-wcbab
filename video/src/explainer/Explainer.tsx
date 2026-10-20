@@ -8,10 +8,9 @@ import { DoneWell } from "../scenes/DoneWell";
 import { Intro } from "../scenes/Intro";
 import { Outro } from "../scenes/Outro";
 import { Shifts } from "../scenes/Shifts";
-import { Terms } from "../scenes/Terms";
 import { Verse1 } from "../scenes/Verse1";
 import { BeatContext } from "./beat";
-import { agendaCues, chorusCues, doneWellCues, introCues, shiftsCues, termsCues, verse1Cues } from "./sessionCues";
+import { agendaCues, chorusCues, doneWellCues, introCues, shiftsCues, verse1Cues } from "./sessionCues";
 import { ConfidentAnswer, TheDraft, TwoSummaries } from "./scenes/Demos";
 import { DecodePitch, ThreeQuestions } from "./scenes/Pitch";
 import { BankAlert, NextWord, PageFour, Sting, Trip, WhyWatch } from "./scenes/Tuesday";
@@ -39,9 +38,8 @@ const scenes: Record<number, (b: Beat) => ReactNode> = {
   13: (b) => <Chorus cues={chorusCues(b)} />,
   14: (b) => <Shifts cues={shiftsCues(b)} />,
   15: (b) => <Agenda cues={agendaCues(b)} />,
-  16: (b) => <Terms cues={termsCues(b)} />,
-  17: (b) => <DoneWell cues={doneWellCues(b)} />,
-  18: () => <Outro />,
+  16: (b) => <DoneWell cues={doneWellCues(b)} />,
+  17: () => <Outro />,
 };
 
 const frames = (s: number) => Math.round(s * FPS);

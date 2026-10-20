@@ -1,1 +1,1 @@
-Agent: a goal, tools, memory and instructions. The agent loop: plan, act, check, repeat. Least privilege: only the access the job needs.
+And the worker gets on with what matters: getting better, and getting back to work.

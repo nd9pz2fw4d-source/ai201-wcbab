@@ -204,6 +204,7 @@ Decisions (from the user):
 - [x] Generate all 65 lines (about 9,000 credits), level them, transcribe every line to check the words
 - [x] Verify: typecheck, stills of every scene, full render
 - [x] Length: the user asked to remove the 92% slowdown to get closer to 10 minutes: 12:20 became 11:27
+- [x] The user asked to cut the lightning round: the host's "Eight words" scene (4 lines) is gone, the last two scenes renumbered with their voice files; 11:27 became 10:50
 - [ ] User listens through: "Rifai Al-Hussein", the jokes, the pacing
 
 ## Round 7b: side version, the song as an upbeat country song

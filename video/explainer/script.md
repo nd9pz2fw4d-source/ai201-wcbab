@@ -1,6 +1,6 @@
 # Follow the claim: before the session
 
-A pre-read for the Executive AI Academy, in three voices: about 8 minutes with two narrators, then about 3 minutes where the session's host introduces the day (11½ minutes in all). It goes out with a one-page cheat sheet. No song.
+A pre-read for the Executive AI Academy, in three voices: about 8 minutes with two narrators, then about 2½ minutes where the session's host introduces the day (just under 11 minutes in all). It goes out with a one-page cheat sheet. No song.
 
 The session is about WCB: the claim, our choices, our accountabilities. The narrators' part is about you and the world: the AI you already meet, what it looks like when it works and when it slips, how to see through a pitch, and the questions to bring. It does not walk through the session's slides. The host's part is the trailer for the day itself.
 
@@ -192,19 +192,7 @@ On screen: "One claim. Three acts." Then the three act cards: See it, Choose it,
 
 **Host:** Three acts, no intermission. [short pause] There will be coffee.
 
-## 16. Eight words
-
-On screen: the eight key terms, one card at a time.
-
-**Host:** You've met the words already. Here's the lightning round.
-
-**Host:** LLM: predicts the next word. Hallucination: confident, but wrong. Grounding, or RAG: answers from trusted sources, and shows them.
-
-**Host:** Agent: a goal, tools, memory and instructions. The agent loop: plan, act, check, repeat. Least privilege: only the access the job needs.
-
-**Host:** The autonomy dial: how much it does alone is a choice we make. And evals: test before you trust, with a human in the loop.
-
-## 17. The claim, done well
+## 16. The claim, done well
 
 On screen: agents carry the claim along the journey; it stops at the decision, where "A person decides" lands; then it moves on to the end of the journey.
 
@@ -214,7 +202,7 @@ On screen: agents carry the claim along the journey; it stops at the decision, w
 
 **Host:** And the worker gets on with what matters: getting better, and getting back to work.
 
-## 18. See you in the room
+## 17. See you in the room
 
 On screen: "See you in the room", Deloitte's readiness question, "Bring your answer", and the session date.
 
