@@ -22,8 +22,8 @@ npm run dev       # live preview while editing
 
 | Input | Action |
 |---|---|
-| Click the slide background, →, Page Down, Space | Next slide |
-| ←, Page Up | Previous slide |
+| Click the slide background, →, ↓, Page Down, Space | Next slide |
+| ←, ↑, Page Up | Previous slide |
 | Home / End | First / last slide |
 | `F` or the top-right button | Full screen |
 | `M` or the top-left button | Slide menu (also switches 60 / 75 / 90 / 120 and the timer) |

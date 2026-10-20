@@ -98,10 +98,10 @@ export default function App() {
         if (k === "Escape" || k === "s" || k === "S") setSorterOpen(false);
         return;
       }
-      if (k === "ArrowRight" || k === "PageDown" || k === " " || k === "Spacebar") {
+      if (k === "ArrowRight" || k === "ArrowDown" || k === "PageDown" || k === " " || k === "Spacebar") {
         e.preventDefault();
         nav.next();
-      } else if (k === "ArrowLeft" || k === "PageUp") {
+      } else if (k === "ArrowLeft" || k === "ArrowUp" || k === "PageUp") {
         e.preventDefault();
         nav.prev();
       } else if (k === "Home") {

@@ -148,7 +148,7 @@ export function SlideMenu(p: Props) {
             </div>
 
             <div className="border-t border-white/10 px-5 py-3 text-[12px] leading-relaxed text-white/55">
-              Click or → next · ← back · Home/End · F full screen · M menu · S pick slides · T timer · Esc close
+              Click, → or ↓ next · ← or ↑ back · Home/End · F full screen · M menu · S pick slides · T timer · Esc close
             </div>
           </motion.nav>
         </>

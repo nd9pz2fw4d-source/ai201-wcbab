@@ -34,7 +34,7 @@ let page = await open({}, "?length=75");
 await page.mouse.click(960, 540);
 await page.waitForTimeout(300);
 check("click on background advances", (await hash(page)) === "#/2");
-for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/49"], ["Home", "#/1"]]) {
+for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowDown", "#/6"], ["ArrowUp", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/49"], ["Home", "#/1"]]) {
   await page.keyboard.press(key === " " ? "Space" : key);
   await page.waitForTimeout(250);
   check(`key ${key === " " ? "Space" : key}`, (await hash(page)) === want, await hash(page));
