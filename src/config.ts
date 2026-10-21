@@ -7,6 +7,9 @@ export const config = {
   workerName: "[WORKER_NAME]", // composite, fictional
   claimType: "physical" as "physical" | "psychological",
   soundOnByDefault: false, // countdown chime
+  // Slide mix the deck opens with (src/data/presets.ts), or null for the standard sessionLength version.
+  // `?length=75` in the URL, or a length chosen in the menu, shows the standard version instead.
+  defaultPreset: "myMix" as "myMix" | null,
 };
 
 export type ActId = "opening" | "see" | "choose" | "govern" | "discussion" | "close";

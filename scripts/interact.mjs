@@ -34,7 +34,7 @@ let page = await open({}, "?length=75");
 await page.mouse.click(960, 540);
 await page.waitForTimeout(300);
 check("click on background advances", (await hash(page)) === "#/2");
-for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowDown", "#/6"], ["ArrowUp", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/49"], ["Home", "#/1"]]) {
+for (const [key, want] of [["ArrowRight", "#/3"], ["PageDown", "#/4"], [" ", "#/5"], ["ArrowDown", "#/6"], ["ArrowUp", "#/5"], ["ArrowLeft", "#/4"], ["PageUp", "#/3"], ["End", "#/50"], ["Home", "#/1"]]) {
   await page.keyboard.press(key === " " ? "Space" : key);
   await page.waitForTimeout(250);
   check(`key ${key === " " ? "Space" : key}`, (await hash(page)) === want, await hash(page));
@@ -184,7 +184,7 @@ for (let i = 0; i < 55; i++) {
   await page.waitForTimeout(120);
 }
 const uniq = [...new Set(seen)];
-check("60 shows 26 slides", uniq.length === 26, uniq.join(" "));
+check("60 shows 27 slides", uniq.length === 27, uniq.join(" "));
 const hidden60 = ["live-moment", "grounding", "tools", "agent-teams", "evaluations", "myths", "where-going", "time-horizon", "computer-agents", "agent-meets-agent", "day-in-2028", "what-shifts", "what-stays", "supervisor", "discussion", "dynamo", "place-our-five", "adapt-os", "agent-team", "patterns", "four-questions", "readiness", "how-it-works"];
 const hiddenNums = [];
 for (const id of hidden60) hiddenNums.push(await goId(page, id, 120, 300));
@@ -240,7 +240,7 @@ await page.getByRole("button", { name: /Show a suggested placement/ }).click();
 await page.waitForTimeout(600);
 check("our-five matrix and suggestion do not advance", (await hash(page)) === h && (await page.locator("text=A strong first wave. Next: the journey.").count()) > 0);
 await page.screenshot({ path: `${out}/place-five-suggested.png` });
-for (const [len, want] of [[60, 26], [75, 31], [90, 48], [120, 49]]) {
+for (const [len, want] of [[60, 27], [75, 32], [90, 49], [120, 50]]) {
   await page.goto(file + `?length=${len}#/1`);
   await page.reload();
   await page.waitForTimeout(300);

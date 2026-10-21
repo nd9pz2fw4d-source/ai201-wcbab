@@ -10,11 +10,12 @@ import { SlideSorter } from "./components/SlideSorter";
 import { useDeckNavigation } from "./hooks/useDeckNavigation";
 import { useFullscreen } from "./hooks/useFullscreen";
 import { useIdle } from "./hooks/useIdle";
+import { presets, type PresetId } from "./data/presets";
 import { slides } from "./slides";
 import { toneBackground } from "./theme";
 
 const LENGTH_KEY = "ftc.sessionLength";
-const PICK_KEY = "ftc.picked";
+const PICK_KEY = "ftc.picked.v2";
 
 // config.ts sets the default. `?length=120` in the URL, or the menu switch, overrides it.
 function initialLength(): SessionLength {
@@ -29,18 +30,29 @@ function initialLength(): SessionLength {
   return config.sessionLength;
 }
 
-// The presenter's own pick of slides (slide sorter), kept in this browser. null = a standard version.
+/** Slide ids in deck order, keeping only ids that exist. */
+const inDeckOrder = (ids: readonly string[]) => slides.filter((s) => ids.includes(s.id)).map((s) => s.id);
+const presetIds = (p: PresetId) => inDeckOrder(presets[p].ids);
+const sameIds = (a: string[], b: string[]) => a.length === b.length && a.every((x, i) => x === b[i]);
+
+// The slides to present: the presenter's own pick (slide sorter) kept in this browser, else the
+// default preset (unless the URL asks for a length). null = the standard version for the session length.
 function initialPick(): string[] | null {
   try {
     const saved = JSON.parse(localStorage.getItem(PICK_KEY) ?? "null");
+    // A saved preset is stored by name, so edits to presets.ts still reach it.
+    if (typeof saved === "string" && saved in presets) return presetIds(saved as PresetId);
+    if (saved === "standard") return null;
     if (Array.isArray(saved)) {
-      const ids = slides.filter((s) => saved.includes(s.id)).map((s) => s.id);
+      const ids = inDeckOrder(saved);
       if (ids.length) return ids;
     }
   } catch {
     /* storage unavailable or unreadable */
   }
-  return null;
+  // `?length=75` asks for a standard version instead of the default preset.
+  if (new URLSearchParams(window.location.search).has("length")) return null;
+  return config.defaultPreset ? presetIds(config.defaultPreset) : null;
 }
 
 function save(key: string, value: string | null) {
@@ -74,13 +86,15 @@ export default function App() {
     setSessionLength(l);
     setPicked(null);
     save(LENGTH_KEY, String(l));
-    save(PICK_KEY, null);
+    save(PICK_KEY, JSON.stringify("standard"));
   }, []);
 
   const pick = useCallback((ids: string[]) => {
     setPicked(ids);
-    save(PICK_KEY, JSON.stringify(ids));
+    const preset = (Object.keys(presets) as PresetId[]).find((p) => sameIds(presetIds(p), ids));
+    save(PICK_KEY, JSON.stringify(preset ?? ids));
   }, []);
+  const pickedPreset = picked ? (Object.keys(presets) as PresetId[]).find((p) => sameIds(presetIds(p), picked)) : undefined;
 
   // Presenter timer: time accrues to the act of the slide on screen.
   useEffect(() => {
@@ -215,6 +229,7 @@ export default function App() {
           sessionLength={sessionLength}
           onSessionLength={changeLength}
           picked={picked}
+          pickedLabel={pickedPreset ? presets[pickedPreset].label : undefined}
           onOpenSorter={() => {
             setMenuOpen(false);
             setSorterOpen(true);
@@ -230,6 +245,8 @@ export default function App() {
           shown={shownIds}
           onPick={pick}
           onStandard={changeLength}
+          presets={(Object.keys(presets) as PresetId[]).map((p) => ({ label: presets[p].label, ids: presetIds(p) }))}
+          presetLabel={pickedPreset ? presets[pickedPreset].label : undefined}
           sessionLength={sessionLength}
           custom={picked !== null}
         />

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Database, Eye, Gauge, Gem, Route, ShieldCheck, Shuffle, UserCheck, Users } from "lucide-react";
+import { Activity, Database, Eye, Gauge, Gem, Hand, History, Lock, Route, Scale, ShieldCheck, Shuffle, UserCheck, Users } from "lucide-react";
 
 // ---------- Learning objectives, one per act ----------
 
@@ -35,6 +35,20 @@ export const evaluationQuestions: { word: string; icon: LucideIcon; question: st
   { word: "Feasible", icon: Database, question: "Is the data there, and is the technology proven?" },
   { word: "Safe", icon: ShieldCheck, question: "If it is wrong, who is affected, and who checks?" },
   { word: "Ready", icon: Users, question: "Are our people and processes ready to change?" },
+];
+
+// ---------- What we govern (Act 3 opener) ----------
+// Six questions every agent on a claim must answer before it goes live. Each one maps to
+// what follows: the claim that went wrong (Accurate, Traceable), Find it (Owned, Private, Fair),
+// agents watching agents (Accurate), and the build-your-team slide (Decided by a person).
+
+export const governanceQuestions: { word: string; icon: LucideIcon; question: string }[] = [
+  { word: "Owned", icon: UserCheck, question: "Who is accountable for this agent?" },
+  { word: "Decided by a person", icon: Hand, question: "Which calls stay with a person?" },
+  { word: "Private", icon: Lock, question: "Does it see only what its job needs?" },
+  { word: "Traceable", icon: History, question: "Can we explain and rebuild every step?" },
+  { word: "Accurate", icon: Activity, question: "Tested before, watched after: is it still right?" },
+  { word: "Fair", icon: Scale, question: "Can the worker ask for a person, and challenge it?" },
 ];
 
 // ---------- What only executives can do ----------

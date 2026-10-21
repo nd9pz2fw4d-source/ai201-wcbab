@@ -18,6 +18,10 @@ interface Props {
   sessionLength: SessionLength;
   /** True when the presenter has their own pick (not a standard version). */
   custom: boolean;
+  /** Named mixes (src/data/presets.ts). */
+  presets: { label: string; ids: string[] }[];
+  /** Label of the preset the current pick matches, if any. */
+  presetLabel?: string;
 }
 
 const THUMB_W = 256;
@@ -78,11 +82,21 @@ export function SlideSorter(p: Props) {
               <div className="text-2xl font-medium">Pick your slides</div>
               <div className="text-sm text-white/60">
                 <span className="tabular-nums">{picked.size}</span> of {p.slides.length} picked
-                {p.custom ? " · your own pick" : ` · the ${p.sessionLength}-minute version`}. Only checked slides are presented.
+                {p.presetLabel ? ` · ${p.presetLabel}` : p.custom ? " · your own pick" : ` · the ${p.sessionLength}-minute version`}. Only checked slides are presented.
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-white/60">Start from</span>
+              {p.presets.map((m) => (
+                <button
+                  key={m.label}
+                  type="button"
+                  onClick={() => p.onPick(m.ids)}
+                  className={`rounded-full px-3 py-1 ${p.presetLabel === m.label ? "bg-brand-accent text-brand-primary" : "bg-white/10 hover:bg-white/20"}`}
+                >
+                  {m.label}
+                </button>
+              ))}
               {SESSION_LENGTHS.map((l) => (
                 <button
                   key={l}

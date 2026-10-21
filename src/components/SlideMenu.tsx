@@ -14,6 +14,8 @@ interface Props {
   onSessionLength: (l: SessionLength) => void;
   /** The presenter's own pick of slide ids, or null for a standard version. */
   picked: string[] | null;
+  /** Name of the preset the pick matches, if any. */
+  pickedLabel?: string;
   onOpenSorter: () => void;
   timerOn: boolean;
   onToggleTimer: () => void;
@@ -93,7 +95,7 @@ export function SlideMenu(p: Props) {
                 title="Slide sorter (S)"
                 className={`flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1 ${p.picked ? "bg-brand-accent text-brand-primary" : "bg-white/10 hover:bg-white/20"}`}
               >
-                <LayoutGrid size={15} /> {p.picked ? `Your pick: ${p.picked.length} slides` : "Pick slides"}
+                <LayoutGrid size={15} /> {p.picked ? `${p.pickedLabel ?? "Your pick"}: ${p.picked.length} slides` : "Pick slides"}
               </button>
               {p.picked && (
                 <button type="button" onClick={() => p.onSessionLength(p.sessionLength)} className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1 hover:bg-white/20">

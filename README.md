@@ -28,6 +28,9 @@ npm run dev       # live preview while editing
 | `F` or the top-right button | Full screen |
 | `M` or the top-left button | Slide menu (also switches 60 / 75 / 90 / 120 and the timer) |
 | `S`, or "Pick slides" in the menu | Slide sorter: every slide as a thumbnail with a check mark. Only checked slides are presented. Start from a standard version (60 / 75 / 90 / 120), then tick or untick slides, or a whole act at once. Your pick is saved in this browser; choosing a length in the menu (or "Reset") goes back to the standard version |
+
+**My mix.** The deck opens with your own mix of 38 slides (`src/data/presets.ts`, set as `defaultPreset` in `src/config.ts`). It is also a button in the slide sorter. `?length=75` in the URL, or choosing a length in the menu, shows a standard version instead.
+
 | `T` | Presenter timer (turns amber 2 minutes over the act's plan) |
 | `Esc` | Close menu or leave full screen |
 | `Tab` / `Shift+Tab` | Move between the buttons, toggles, vote tiles, dial segments and sort cards on a slide (gold ring shows where you are). Then `Space` or `Enter` presses it, `Delete` or `Backspace` removes a vote, and on the sort board `Space` moves a card one column right and ←/→ move it either way. With nothing focused, `Space` still changes slides |
@@ -40,11 +43,11 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 
 | Slides | 60 | 75 | 90 | 120 |
 |---|---|---|---|---|
-| Core deck, plus three things to leave with, next word, what makes an agent, the agent loop, the autonomy dial, Copilot as an operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (plays by itself: start now versus wait a year), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
+| Core deck, plus three things to leave with, six questions before an agent touches a claim (opens Act 3), next word, what makes an agent, the agent loop, the autonomy dial, Copilot as an operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (plays by itself: start now versus wait a year), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
 | Live moment, agents with their own computers, their agent will call our agent, how we must adapt (click to reveal), build your agent team (live governance check) | | shown | shown | shown |
 | How it works (section card), give it the right sources, tools are its hands, five things to watch, what shifts for us, what doesn't change, many ideas a few patterns, where do our five sit?, four questions for any opportunity, how ready are we? (room scores six foundations, radar, CSV download), agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, open discussion | | | shown | shown |
 | Myth or reality? | | | | shown |
-| **Slides in total** | 26 | 31 | 48 | 49 |
+| **Slides in total** | 27 | 32 | 49 | 50 |
 
 Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 90 = 5 / 35 / 20 / 20 / discussion 5 / 5; 120 = 5 / 45 / 27 / 28 / discussion 10 / 5.
 

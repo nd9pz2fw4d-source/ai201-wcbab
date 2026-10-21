@@ -48,6 +48,7 @@ import SlideAdaptOS from "./SlideAdaptOS";
 import SlideAgentTeamBuilder from "./SlideAgentTeamBuilder";
 import SlideCostOfWaiting from "./SlideCostOfWaiting";
 import SlideReadiness from "./SlideReadiness";
+import SlideGovernQuestions from "./SlideGovernQuestions";
 
 const ALL: SlideDef["include"] = [60, 75, 90, 120];
 const FROM_75: SlideDef["include"] = [75, 90, 120];
@@ -482,6 +483,16 @@ export const slides: SlideDef[] = [
     component: Slide15ActGovern,
     tone: "dark",
     notes: "Act 3: what happens when it goes wrong, and who owns that?",
+  },
+  {
+    id: "govern-questions",
+    act: "govern",
+    title: "Six questions before an agent touches a claim",
+    include: ALL,
+    component: SlideGovernQuestions,
+    tone: "light",
+    notes:
+      "Before the activity, name what we are governing. Six questions every agent on a claim must answer before it goes live. Owned: who is accountable for this agent? Every agent has a named person who answers for it, like a new hire's manager. Decided by a person: which calls stay with a person? Entitlement decisions, letters to the worker and payments; intake, sorting and evidence requests can run on their own. Private: does it see only what its job needs? Least-privilege access, and Alberta's privacy and access laws apply (Protection of Privacy Act, Access to Information Act, Health Information Act). Traceable: can we explain and rebuild every step? If we can't rebuild a decision, we can't defend it. Accurate: tested before it goes live, watched after, because errors carry forward from one agent to the next. Fair: can the worker ask for a person and challenge the outcome? The line underneath is the short version: govern an agent like a new hire, with an owner, limited access, supervision and a record. Then: let's see what happens when one of these is missing.",
   },
   {
     id: "went-wrong",
