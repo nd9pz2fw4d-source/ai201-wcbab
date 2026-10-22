@@ -1,4 +1,4 @@
-// Drives "Design an agent", the recap and the quiz, and screenshots them.
+// Drives "Design an agent" (assign, design, share back) and the recap, and screenshots them.
 import { chromium } from "playwright";
 import path from "node:path";
 const file = "file://" + path.resolve("dist/index.html");
@@ -10,38 +10,59 @@ p.on("pageerror", (e) => errors.push(e.message));
 p.on("console", (m) => m.type() === "error" && errors.push(m.text()));
 const go = async (id) => { await p.goto(file + `?length=120#/${id}`); await p.reload(); await p.waitForTimeout(1600); return p.evaluate(() => location.hash); };
 const ok = (name, cond, extra = "") => console.log(`${cond ? "PASS" : "FAIL"}  ${name}${extra ? "  (" + extra + ")" : ""}`);
+const taskOf = (n) => p.evaluate((n) => {
+  const tok = [...document.querySelectorAll("[aria-label]")].find((e) => e.getAttribute("aria-label") === `Table ${n}`);
+  return tok?.closest("[aria-label^='Task: ']")?.getAttribute("aria-label")?.slice(6) ?? "tray";
+}, n);
+async function drag(from, to) {
+  const a = await from.boundingBox();
+  const c = await to.boundingBox();
+  await p.mouse.move(a.x + a.width / 2, a.y + a.height / 2);
+  await p.mouse.down();
+  await p.mouse.move(a.x + a.width / 2 + 10, a.y + a.height / 2 + 10, { steps: 3 });
+  await p.mouse.move(c.x + c.width / 2, c.y + c.height / 2, { steps: 12 });
+  await p.mouse.up();
+  await p.waitForTimeout(400);
+}
 
 let h = await go("design-agent");
-await p.screenshot({ path: `${out}/design-agent.png` });
+await p.screenshot({ path: `${out}/design-assign.png` });
+ok("starts on Assign with 6 tables placed", (await taskOf(1)) === "Intake agent" && (await taskOf(6)) === "Payment agent");
 await p.getByRole("button", { name: "Add a table" }).click();
-await p.getByRole("button", { name: /^Table 2: Evidence agent/ }).click();
-ok("table changes step, no duplicates", (await p.getByRole("button", { name: /^Table 2: Sorting agent|^Table 2: Return-to-work agent/ }).count()) === 1, await p.getByRole("button", { name: /^Table 2:/ }).getAttribute("aria-label"));
-ok("7 tables", (await p.getByRole("button", { name: /^Table \d+:/ }).count()) === 7);
-await p.getByRole("button", { name: /Example/ }).click();
-await p.getByRole("button", { name: /Autonomy/ }).click();
-await p.waitForTimeout(600);
+ok("new table waits in the tray", (await taskOf(7)) === "tray");
+await drag(p.getByLabel("Table 7", { exact: true }), p.getByLabel("Task: Sorting agent"));
+ok("drag a table onto a task", (await taskOf(7)) === "Sorting agent", await taskOf(7));
+await drag(p.getByLabel("Table 7", { exact: true }), p.getByLabel("Task: Intake agent"));
+ok("drop on a taken task swaps", (await taskOf(7)) === "Intake agent" && (await taskOf(1)) === "Sorting agent", `${await taskOf(7)} / ${await taskOf(1)}`);
+await p.getByLabel("Table 2", { exact: true }).click();
+await p.getByLabel("Task: Return-to-work agent").click();
+ok("click a table then a task", (await taskOf(2)) === "Return-to-work agent", await taskOf(2));
+ok("assign never advances", (await p.evaluate(() => location.hash)) === h);
+await p.screenshot({ path: `${out}/design-assign-moved.png` });
+
+await p.getByRole("button", { name: "2 Design · 5 min" }).click();
+await p.waitForTimeout(900);
+await p.screenshot({ path: `${out}/design-agent.png` });
+await p.getByRole("button", { name: "Ingredients" }).click();
+await p.getByRole("button", { name: "+ Autonomy" }).click();
+await p.waitForTimeout(700);
+ok("ingredients show", (await p.locator("text=Never guess: ask a person").count()) === 1);
+await p.screenshot({ path: `${out}/design-ingredients.png` });
+await p.getByRole("button", { name: "Example" }).click();
+await p.waitForTimeout(700);
+ok("detailed example shows", (await p.locator("text=Never change claim details").count()) === 1 && (await p.locator("text=Example: Sorting agent").count()) === 1);
 await p.screenshot({ path: `${out}/design-agent-example.png` });
-ok("example shows", (await p.locator("text=Example: Sorting agent").count()) === 1);
-await p.getByRole("button", { name: "Share back" }).click();
+
+await p.getByRole("button", { name: "3 Share back" }).click();
 await p.waitForTimeout(1800);
 await p.getByRole("button", { name: /^Table 1 shared/ }).click();
 await p.getByRole("button", { name: /^Table 3 shared/ }).click();
 await p.waitForTimeout(400);
 await p.screenshot({ path: `${out}/design-agent-share.png` });
+ok("share back shows 7 tables", (await p.getByRole("button", { name: /^Table \d shared/ }).count()) === 7);
 ok("share-back marks tables", (await p.locator("[aria-pressed='true'][aria-label^='Table']").count()) === 2);
 ok("design-agent never advances", (await p.evaluate(() => location.hash)) === h);
 
-h = await go("recap"); await p.waitForTimeout(800); await p.screenshot({ path: `${out}/recap.png` });
-h = await go("quiz");
-await p.getByRole("button", { name: "Question 1: A chat window" }).click();
-await p.getByRole("button", { name: "Question 2: Check" }).click();
-await p.waitForTimeout(600);
-await p.screenshot({ path: `${out}/quiz.png` });
-ok("quiz right answer shows why", (await p.locator("text=Checking is where it catches its own gaps").count()) === 1);
-await p.getByRole("button", { name: /Show all answers/ }).click();
-await p.waitForTimeout(500);
-ok("show all answers", (await p.locator("text=Test before you trust, then keep watching.").count()) === 1);
-ok("quiz never advances", (await p.evaluate(() => location.hash)) === h);
-await p.screenshot({ path: `${out}/quiz-all.png` });
+await go("recap"); await p.waitForTimeout(800); await p.screenshot({ path: `${out}/recap.png` });
 console.log(errors.length ? errors : "no console errors");
 await b.close();

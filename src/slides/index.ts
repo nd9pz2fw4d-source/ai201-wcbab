@@ -50,7 +50,6 @@ import SlideReadiness from "./SlideReadiness";
 import SlideGovernQuestions from "./SlideGovernQuestions";
 import SlideDesignAgent from "./SlideDesignAgent";
 import SlideRecap from "./SlideRecap";
-import SlideQuiz from "./SlideQuiz";
 
 const ALL: SlideDef["include"] = [60, 75, 90, 120];
 const FROM_75: SlideDef["include"] = [75, 90, 120];
@@ -404,7 +403,7 @@ export const slides: SlideDef[] = [
     component: SlideDesignAgent,
     tone: "light",
     notes:
-      "Table exercise, about 5 minutes, then share back. No laptops: each table designs one agent on paper (handouts: the printer button on the worksheet, or handout/design-an-agent.pdf), with a Deloitte facilitator. Before you start, set the tables strip: the minus and plus buttons set the number of tables, and clicking a table gives it a different step of the claim (no two tables get the same agent). Each table fills in the four parts from 'What makes an agent': Goal (what is it for?), Instructions (how should it behave?), Memory (what should it know about the claim?), Tools (what can it use?). '+ Autonomy' adds an optional fifth row: read, draft or act, and when does a person approve? 'Example' shows a worked Sorting agent if a table is stuck. A light touch on instructions, not a prompt-writing workshop: good instructions give it the right instructions (what good looks like, the rules, the tone), the right actions (what it may do on its own, and what not) and the right checks (when it stops and asks a person, and how we test it). Start the timer. Then switch to 'Share back': each table gets 30 seconds: its agent's name and goal, one instruction, and one check. Click the table's card as it shares. By the end, the room has designed a whole claims agent team together. Point at the green line: people still decide on entitlement, letters to the worker and payments. Facilitators: keep tables inside the claims process, and push for one concrete check.",
+      "Table exercise in three steps (the buttons top right), about 5 minutes of design plus share back. No laptops: each table designs one agent on paper, with a Deloitte facilitator. 1 Assign tables: eight task cards, one per step of the claim, each with one sentence on what the agent does. Drag each table onto a task (or click a table, then a task). Dropping onto a taken task swaps the two. Minus and plus set the number of tables; Clear sends every table back to the tray. 2 Design: the worksheet from 'What makes an agent': Goal (what is it for?), Instructions (how should it behave?), Memory (what should it know about the claim?), Tools (what can it use?). Switch the worksheet between 'Worksheet' (blank lines), 'Ingredients' (ready-made pieces tables can pull from, with tools marked read, draft or act) and 'Example' (a fully worked Sorting agent, a task no table gets by default). '+ Autonomy' adds an optional fifth row: read, draft or act, and when does a person approve? A light touch on instructions, not a prompt-writing workshop: good instructions give it the right instructions (what good looks like, the rules, the tone), the right actions (what it may do on its own, and what not) and the right checks (when it stops and asks a person, and how we test it). Start the timer. 3 Share back: each table gets 30 seconds: its agent's name and goal, one instruction, and one check. Click the table's card as it shares. By the end, the room has designed a whole claims agent team together. Point at the green line: people still decide on entitlement, letters to the worker and payments. Facilitators: keep tables inside the claims process, and push for one concrete check.",
   },
   {
     id: "recap",
@@ -414,17 +413,7 @@ export const slides: SlideDef[] = [
     component: SlideRecap,
     tone: "light",
     notes:
-      "Recap before we move on. One: what an agent is: a model with a goal, instructions, memory and tools, and a person who approves. That is the worksheet you just filled in. Two: how it works: it plans, acts, checks and repeats, and hands to a person when the call is ours. Three: how we trust it: we test it on real past cases before it goes live, and keep watching after (evals). If there's time, the optional quiz is next.",
-  },
-  {
-    id: "quiz",
-    act: "see",
-    title: "Quick quiz",
-    include: FROM_90,
-    component: SlideQuiz,
-    tone: "light",
-    notes:
-      "Optional, about 3 minutes (not in My mix until confirmed; tick it in the slide sorter to use it). Read each question and let the room call out A, B or C, then click their answer: a wrong one shakes and is struck through, the right one turns green with a one-line reason. 'Show all answers' reveals the lot. Answers: 1 B (goal, instructions, memory and tools), 2 B (check), 3 C (the decision letter: anything that reaches the worker or moves money), 4 B (testing on real cases, and watching after).",
+      "Recap before we move on. One: what an agent is: a model with a goal, instructions, memory and tools, and a person who approves. That is the worksheet you just filled in. Two: how it works: it plans, acts, checks and repeats, and hands to a person when the call is ours. Three: how we trust it: we test it on real past cases before it goes live, and keep watching after (evals).",
   },
   {
     id: "act-choose",

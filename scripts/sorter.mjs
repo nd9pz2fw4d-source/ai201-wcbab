@@ -12,7 +12,7 @@ await p.waitForTimeout(600);
 await p.keyboard.press("s");
 await p.waitForTimeout(1500);
 await p.screenshot({ path: "screenshots/interact/sorter.png" });
-const count = async () => (await p.locator("header").innerText()).match(/(\d+) of 52 picked/)?.[1];
+const count = async () => (await p.locator("header").innerText()).match(/(\d+) of 51 picked/)?.[1];
 console.log("75 picked", await count());
 await p.getByRole("button", { name: "Pick: One claim" }).click();
 await p.getByRole("button", { name: "Pick: How ready are we?" }).click();
@@ -36,7 +36,7 @@ const fresh = await (await b.newContext({ viewport: { width: 1920, height: 1080 
 await fresh.goto(file + "#/1"); await fresh.waitForTimeout(600);
 console.log("fresh opens My mix:", await fresh.locator("text=/^1 \\/ 39$/").count() === 1);
 await fresh.keyboard.press("s"); await fresh.waitForTimeout(600);
-console.log("sorter says My mix:", /39 of 52 picked · My mix/.test(await fresh.locator("header").innerText()));
+console.log("sorter says My mix:", /39 of 51 picked · My mix/.test(await fresh.locator("header").innerText()));
 await fresh.getByRole("button", { name: "Pick: How ready are we?" }).click();
 await fresh.getByRole("button", { name: "Pick: How ready are we?" }).click();
 await fresh.keyboard.press("Escape"); await fresh.reload(); await fresh.waitForTimeout(600);

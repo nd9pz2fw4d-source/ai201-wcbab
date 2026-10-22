@@ -47,30 +47,3 @@ a:focus-visible,
   }
 }
 
-/* Printed handout ("Design an agent"): hidden on screen; when printing, the deck is hidden instead. */
-@media screen {
-  .print-only {
-    display: none;
-  }
-}
-@media print {
-  @page {
-    size: letter landscape;
-    margin: 0.45in;
-  }
-  html,
-  body,
-  #root {
-    height: auto;
-    overflow: visible;
-    background: #fff;
-  }
-  .deck {
-    display: none !important;
-  }
-  .handout-page {
-    break-after: page;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-}

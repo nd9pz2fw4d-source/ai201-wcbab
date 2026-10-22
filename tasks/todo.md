@@ -237,3 +237,11 @@ Brief: tables design one agent for one step of the claims journey on paper (abou
 - Built and verified: design-agent.mjs (8 checks), sorter.mjs (My mix is now 39 slides), interact.mjs 65/65, handout PDF 9 pages, no console errors
 - Counts: 60 = 28, 75 = 33, 90 = 51, 120 = 52. "Build your agent team" and its data are removed
 - Open items left to the user: number of tables, steps per table (both settable live on the slide), facilitators, whether autonomy goes on the worksheet (on the handout as optional; a toggle on screen), whether the quiz is in
+
+## Round 2 (user feedback)
+- [x] Remove the quiz (slide, data, tests)
+- [x] Remove printing (button, print-only handout, PDF and its script)
+- [x] Worked example in more detail (bullets per row)
+- [x] Ingredients: ready-made pieces per row, tools tagged read, draft or act
+- [x] Tables: a new "1 Assign tables" step: drag each table onto a task card (one sentence each); click-then-click and keyboard also work; dropping on a taken task swaps
+- [x] Verified: design-agent.mjs 11/11, interact 65/65, sorter, no console errors. Counts 28 / 33 / 50 / 51
