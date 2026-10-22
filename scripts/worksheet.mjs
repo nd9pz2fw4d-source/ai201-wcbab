@@ -104,8 +104,6 @@ td.ingr{background:#FAFCFE}
 .right{display:flex;gap:5pt;margin-top:3.5pt;font-size:8pt}.right b{color:${theme.brandPrimary};font-size:8.6pt}
 .ric{flex:0 0 auto;width:18pt;height:18pt;border-radius:50%;background:${theme.brandAccent};display:grid;place-items:center}
 .ex{flex:1}.exrow{display:flex;gap:6pt;font-size:7.5pt;line-height:1.25;margin-top:2pt}.exrow b{flex:0 0 0.72in;color:${theme.brandPrimary}}
-.foot{display:flex;justify-content:space-between;margin-top:6pt;font-size:7.5pt;color:${theme.muted}}
-.person{color:#fff;background:${theme.human};border-radius:8pt;padding:1.5pt 7pt;font-weight:500}
 </style></head><body>
 <div class="top">
   <div><div class="kicker">Follow the claim · Executive AI Academy</div><h1>Design an agent</h1></div>
@@ -130,10 +128,6 @@ td.ingr{background:#FAFCFE}
 <div class="bottom">
   <div class="box rights"><h2>Good instructions give it</h2>${rights}</div>
   <div class="box ex"><h2>Example: ${workedExample.agent}</h2>${example}</div>
-</div>
-<div class="foot">
-  <span><span class="person">A person approves</span>&nbsp; anything that reaches the worker or moves money: letters and payments.</span>
-  <span>Composite example. Not a real claim or person.</span>
 </div>
 </body></html>`;
 
