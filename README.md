@@ -80,6 +80,10 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 - [ ] The next-word scores on "It predicts the next word" are illustrative, not real model output
 - [ ] Agent products (Grok Bot, Muse, Dots) and Microsoft's Copilot direction were checked on 30 September 2026, days after launch. Recheck names, availability and the Nadella quote the week of the session (sources in `src/data/teaching.ts` and the slide notes)
 
+## Worksheet: Design an agent
+
+`handout/design-an-agent-worksheet.pdf` is a one-page printout for the table exercise (US Letter): the three steps, the eight tasks with one sentence each, the worksheet (Goal, Instructions, Memory, Tools, optional Autonomy) with room to write and the ingredients beside each row, the three rights, and the worked Sorting agent example. It is built from the same content as the slide (`src/data/designAgent.ts`): run `node scripts/worksheet.mjs` after editing it.
+
 ## Pre-read video
 
 `video/` holds a 2 minute 20 second music video to send before the session: the agenda, the key terms and Deloitte's August 2026 view of the future of workers' compensation, set to a song. Built with Remotion; the song and sound effects come from ElevenLabs. See `video/README.md`.
