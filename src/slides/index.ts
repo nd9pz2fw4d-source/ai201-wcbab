@@ -45,10 +45,12 @@ import SlideFourQuestions from "./SlideFourQuestions";
 import SlidePlaceOurFive from "./SlidePlaceOurFive";
 import SlideExecAccountabilities from "./SlideExecAccountabilities";
 import SlideAdaptOS from "./SlideAdaptOS";
-import SlideAgentTeamBuilder from "./SlideAgentTeamBuilder";
 import SlideCostOfWaiting from "./SlideCostOfWaiting";
 import SlideReadiness from "./SlideReadiness";
 import SlideGovernQuestions from "./SlideGovernQuestions";
+import SlideDesignAgent from "./SlideDesignAgent";
+import SlideRecap from "./SlideRecap";
+import SlideQuiz from "./SlideQuiz";
 
 const ALL: SlideDef["include"] = [60, 75, 90, 120];
 const FROM_75: SlideDef["include"] = [75, 90, 120];
@@ -303,16 +305,6 @@ export const slides: SlideDef[] = [
       "If Copilot becomes an operating system of work, the organization has to change around it. Read each 'from', ask the room what it becomes, then click to reveal. Where work starts: from opening an app to stating an outcome. Jobs: from doing the steps to directing, checking and deciding. The org chart: from people only to people plus agents, each agent with a named human owner. Access: from staff accounts to agent identities with least privilege and credentials that expire. Knowledge: from what is in people's heads and shared drives to current, permissioned sources agents can cite. Oversight: from periodic review to continuous monitoring of what agents do. The executive point: an agent can only use data that is clean, rules that are written down, permissions that are set and processes someone owns. That is the investment, and it cannot be rushed later.",
   },
   {
-    id: "agent-team",
-    act: "see",
-    title: "Build your agent team",
-    include: FROM_75,
-    component: SlideAgentTeamBuilder,
-    tone: "light",
-    notes:
-      "Hands-on: the room builds an adjudicator's agent team. Add agents with the plus button and give each Read, Draft or Act access. Not every action needs a person: intake checks, evidence requests to clinics and medical summaries can run on their own, with every step recorded. What reaches the worker (letters) or moves money (payments) needs a person to approve. The governance check reacts live: no named owner, or the Letters or Payment agent acting with no one approving. Try it: give Intake, Evidence and Medical 'Act' (no flags), then add the Payment agent with Act (red flag), add the approval step, then name an owner, until it reads 'Owned, approved, governed'. The lesson: in Copilot's world, giving agents identities, permissions and owners is a leadership decision, not an IT setting.",
-  },
-  {
     id: "floor-not-ceiling",
     act: "see",
     title: "Copilot is the floor, not the ceiling",
@@ -404,6 +396,36 @@ export const slides: SlideDef[] = [
   },
 
   // ---------- Act 2: Choose it ----------
+  {
+    id: "design-agent",
+    act: "see",
+    title: "Design an agent",
+    include: FROM_75,
+    component: SlideDesignAgent,
+    tone: "light",
+    notes:
+      "Table exercise, about 5 minutes, then share back. No laptops: each table designs one agent on paper (handouts: the printer button on the worksheet, or handout/design-an-agent.pdf), with a Deloitte facilitator. Before you start, set the tables strip: the minus and plus buttons set the number of tables, and clicking a table gives it a different step of the claim (no two tables get the same agent). Each table fills in the four parts from 'What makes an agent': Goal (what is it for?), Instructions (how should it behave?), Memory (what should it know about the claim?), Tools (what can it use?). '+ Autonomy' adds an optional fifth row: read, draft or act, and when does a person approve? 'Example' shows a worked Sorting agent if a table is stuck. A light touch on instructions, not a prompt-writing workshop: good instructions give it the right instructions (what good looks like, the rules, the tone), the right actions (what it may do on its own, and what not) and the right checks (when it stops and asks a person, and how we test it). Start the timer. Then switch to 'Share back': each table gets 30 seconds: its agent's name and goal, one instruction, and one check. Click the table's card as it shares. By the end, the room has designed a whole claims agent team together. Point at the green line: people still decide on entitlement, letters to the worker and payments. Facilitators: keep tables inside the claims process, and push for one concrete check.",
+  },
+  {
+    id: "recap",
+    act: "see",
+    title: "What to remember",
+    include: ALL,
+    component: SlideRecap,
+    tone: "light",
+    notes:
+      "Recap before we move on. One: what an agent is: a model with a goal, instructions, memory and tools, and a person who approves. That is the worksheet you just filled in. Two: how it works: it plans, acts, checks and repeats, and hands to a person when the call is ours. Three: how we trust it: we test it on real past cases before it goes live, and keep watching after (evals). If there's time, the optional quiz is next.",
+  },
+  {
+    id: "quiz",
+    act: "see",
+    title: "Quick quiz",
+    include: FROM_90,
+    component: SlideQuiz,
+    tone: "light",
+    notes:
+      "Optional, about 3 minutes (not in My mix until confirmed; tick it in the slide sorter to use it). Read each question and let the room call out A, B or C, then click their answer: a wrong one shakes and is struck through, the right one turns green with a one-line reason. 'Show all answers' reveals the lot. Answers: 1 B (goal, instructions, memory and tools), 2 B (check), 3 C (the decision letter: anything that reaches the worker or moves money), 4 B (testing on real cases, and watching after).",
+  },
   {
     id: "act-choose",
     act: "choose",

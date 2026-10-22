@@ -1,0 +1,47 @@
+// Drives "Design an agent", the recap and the quiz, and screenshots them.
+import { chromium } from "playwright";
+import path from "node:path";
+const file = "file://" + path.resolve("dist/index.html");
+const out = "screenshots/interact";
+const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
+const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
+const errors = [];
+p.on("pageerror", (e) => errors.push(e.message));
+p.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+const go = async (id) => { await p.goto(file + `?length=120#/${id}`); await p.reload(); await p.waitForTimeout(1600); return p.evaluate(() => location.hash); };
+const ok = (name, cond, extra = "") => console.log(`${cond ? "PASS" : "FAIL"}  ${name}${extra ? "  (" + extra + ")" : ""}`);
+
+let h = await go("design-agent");
+await p.screenshot({ path: `${out}/design-agent.png` });
+await p.getByRole("button", { name: "Add a table" }).click();
+await p.getByRole("button", { name: /^Table 2: Evidence agent/ }).click();
+ok("table changes step, no duplicates", (await p.getByRole("button", { name: /^Table 2: Sorting agent|^Table 2: Return-to-work agent/ }).count()) === 1, await p.getByRole("button", { name: /^Table 2:/ }).getAttribute("aria-label"));
+ok("7 tables", (await p.getByRole("button", { name: /^Table \d+:/ }).count()) === 7);
+await p.getByRole("button", { name: /Example/ }).click();
+await p.getByRole("button", { name: /Autonomy/ }).click();
+await p.waitForTimeout(600);
+await p.screenshot({ path: `${out}/design-agent-example.png` });
+ok("example shows", (await p.locator("text=Example: Sorting agent").count()) === 1);
+await p.getByRole("button", { name: "Share back" }).click();
+await p.waitForTimeout(1800);
+await p.getByRole("button", { name: /^Table 1 shared/ }).click();
+await p.getByRole("button", { name: /^Table 3 shared/ }).click();
+await p.waitForTimeout(400);
+await p.screenshot({ path: `${out}/design-agent-share.png` });
+ok("share-back marks tables", (await p.locator("[aria-pressed='true'][aria-label^='Table']").count()) === 2);
+ok("design-agent never advances", (await p.evaluate(() => location.hash)) === h);
+
+h = await go("recap"); await p.waitForTimeout(800); await p.screenshot({ path: `${out}/recap.png` });
+h = await go("quiz");
+await p.getByRole("button", { name: "Question 1: A chat window" }).click();
+await p.getByRole("button", { name: "Question 2: Check" }).click();
+await p.waitForTimeout(600);
+await p.screenshot({ path: `${out}/quiz.png` });
+ok("quiz right answer shows why", (await p.locator("text=Checking is where it catches its own gaps").count()) === 1);
+await p.getByRole("button", { name: /Show all answers/ }).click();
+await p.waitForTimeout(500);
+ok("show all answers", (await p.locator("text=Test before you trust, then keep watching.").count()) === 1);
+ok("quiz never advances", (await p.evaluate(() => location.hash)) === h);
+await p.screenshot({ path: `${out}/quiz-all.png` });
+console.log(errors.length ? errors : "no console errors");
+await b.close();

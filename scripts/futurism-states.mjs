@@ -1,4 +1,4 @@
-// Drives the interactive futurism slides (Copilot OS, adapt, agent team, cost of waiting, readiness) and screenshots them.
+// Drives the interactive futurism slides (Copilot OS, adapt, cost of waiting, readiness) and screenshots them.
 import { chromium } from "playwright";
 import path from "node:path";
 const file = "file://" + path.resolve("dist/index.html");
@@ -16,12 +16,6 @@ await p.getByRole("button", { name: /Run/ }).click(); await p.waitForTimeout(320
 console.log("copilot stays", (await p.evaluate(() => location.hash)) === h);
 h = await go("adapt-os"); await p.getByRole("button", { name: /Reveal all/ }).click(); await p.waitForTimeout(800); await shot("s-adapt");
 console.log("adapt stays", (await p.evaluate(() => location.hash)) === h);
-h = await go("agent-team");
-await p.getByRole("button", { name: "Add Payment agent" }).click();
-await p.locator("button:has-text('Act')").nth(4).click(); await p.waitForTimeout(500); await shot("s-team-risky");
-await p.getByRole("button", { name: "No approval" }).click();
-await p.getByRole("button", { name: /Name an accountable owner/ }).click(); await p.waitForTimeout(500); await shot("s-team-clean");
-console.log("team stays", (await p.evaluate(() => location.hash)) === h, await p.locator("text=Owned, approved, governed").count());
 h = await go("cost-of-waiting");
 await p.waitForTimeout(7500); await shot("s-wait");
 console.log("wait stays", (await p.evaluate(() => location.hash)) === h);

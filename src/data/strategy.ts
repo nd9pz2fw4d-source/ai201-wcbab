@@ -40,7 +40,7 @@ export const evaluationQuestions: { word: string; icon: LucideIcon; question: st
 // ---------- What we govern (Act 3 opener) ----------
 // Six questions every agent on a claim must answer before it goes live. Each one maps to
 // what follows: the claim that went wrong (Accurate, Traceable), Find it (Owned, Private, Fair),
-// agents watching agents (Accurate), and the build-your-team slide (Decided by a person).
+// agents watching agents (Accurate), and the design-an-agent exercise (Decided by a person).
 
 export const governanceQuestions: { word: string; icon: LucideIcon; question: string }[] = [
   { word: "Owned", icon: UserCheck, question: "Who is accountable for this agent?" },

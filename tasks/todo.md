@@ -217,3 +217,23 @@ The user asked for a separate, side version: the "Follow the claim" song remade 
 - [x] Stills checked; full render
 - [x] The user found the first take too rock and not high-quality enough: two new arrangements, traditional two-step and bluegrass, both more acoustic; traditional in the video, both sent to compare. Both skip the "least privilege" line, so unsung lines get no caption
 - [x] The user picked traditional, but the intro ran too long: cut 2 bars (4.1 s) of fiddle between the shout and the first verse, beat to beat; the original take is kept as song-take.mp3
+
+---
+
+# Deck: "Design an agent" table exercise (replaces "Build your agent team")
+
+Brief: tables design one agent for one step of the claims journey on paper (about 5 minutes), share back, and the room ends up with a multi-agent claims system. Worksheet from "What makes an agent": Goal, Instructions, Memory, Tools. A light touch on good instructions: the right instructions, actions and checks. Plus a recap of core concepts and an optional 4-question quiz. Time is about 50 minutes.
+
+## Plan
+- [x] `src/data/designAgent.ts`: agent catalog (one per claims step), worksheet rows, the three "rights", worked example, quiz, recap
+- [x] Slide "Design an agent": Design phase (worksheet, three rights, 5-minute timer, tables strip: number of tables and each table's agent set live, optional autonomy row) and Share back phase (each table's agent placed on the claims journey; click to mark shared)
+- [x] Printable handout: one worksheet page per agent, printed from the slide (Print handouts) and as `handout/design-an-agent.pdf`
+- [x] Slide "What to remember": what an agent is, how it works, how we trust it (evals)
+- [x] Slide "Quick quiz" (optional, 4 questions, not in My mix until confirmed)
+- [x] Remove "Build your agent team"; place the new slides at the end of See it; My mix swaps agent-team for design-agent and adds the recap
+- [x] Tests, notes, README; verify with screenshots
+
+## Review
+- Built and verified: design-agent.mjs (8 checks), sorter.mjs (My mix is now 39 slides), interact.mjs 65/65, handout PDF 9 pages, no console errors
+- Counts: 60 = 28, 75 = 33, 90 = 51, 120 = 52. "Build your agent team" and its data are removed
+- Open items left to the user: number of tables, steps per table (both settable live on the slide), facilitators, whether autonomy goes on the worksheet (on the handout as optional; a toggle on screen), whether the quiz is in

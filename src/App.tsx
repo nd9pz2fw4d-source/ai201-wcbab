@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState, type MouseEvent } from "reac
 import { config, plannedMinutes, SESSION_LENGTHS as LENGTHS, type ActId, type SessionLength } from "./config";
 import { Controls } from "./components/Controls";
 import { Footer } from "./components/Footer";
+import { Handout } from "./components/Handout";
 import { PresenterTimer } from "./components/PresenterTimer";
 import { ScaledStage } from "./components/ScaledStage";
 import { SlideMenu } from "./components/SlideMenu";
@@ -176,9 +177,10 @@ export default function App() {
   const shownIds = nav.visible.map((i) => slides[i].id);
 
   return (
+    <>
     <MotionConfig reducedMotion="user">
       <div
-        className={`fixed inset-0 select-none ${controlsVisible ? "" : "hide-cursor"}`}
+        className={`deck fixed inset-0 select-none ${controlsVisible ? "" : "hide-cursor"}`}
         onClick={onStageClick}
       >
         <ScaledStage background={toneBackground[slide.tone]}>
@@ -252,5 +254,7 @@ export default function App() {
         />
       </div>
     </MotionConfig>
+    <Handout />
+    </>
   );
 }

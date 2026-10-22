@@ -29,7 +29,7 @@ npm run dev       # live preview while editing
 | `M` or the top-left button | Slide menu (also switches 60 / 75 / 90 / 120 and the timer) |
 | `S`, or "Pick slides" in the menu | Slide sorter: every slide as a thumbnail with a check mark. Only checked slides are presented. Start from a standard version (60 / 75 / 90 / 120), then tick or untick slides, or a whole act at once. Your pick is saved in this browser; choosing a length in the menu (or "Reset") goes back to the standard version |
 
-**My mix.** The deck opens with your own mix of 38 slides (`src/data/presets.ts`, set as `defaultPreset` in `src/config.ts`). It is also a button in the slide sorter. `?length=75` in the URL, or choosing a length in the menu, shows a standard version instead.
+**My mix.** The deck opens with your own mix of 39 slides (`src/data/presets.ts`, set as `defaultPreset` in `src/config.ts`). It is also a button in the slide sorter. `?length=75` in the URL, or choosing a length in the menu, shows a standard version instead.
 
 | `T` | Presenter timer (turns amber 2 minutes over the act's plan) |
 | `Esc` | Close menu or leave full screen |
@@ -43,11 +43,11 @@ Buttons, vote tiles, drag cards and timers never advance the slide. On-slide ani
 
 | Slides | 60 | 75 | 90 | 120 |
 |---|---|---|---|---|
-| Core deck, plus three things to leave with, six questions before an agent touches a claim (opens Act 3), next word, what makes an agent, the agent loop, the autonomy dial, Copilot as an operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (plays by itself: start now versus wait a year), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
-| Live moment, agents with their own computers, their agent will call our agent, how we must adapt (click to reveal), build your agent team (live governance check) | | shown | shown | shown |
-| How it works (section card), give it the right sources, tools are its hands, five things to watch, what shifts for us, what doesn't change, many ideas a few patterns, where do our five sit?, four questions for any opportunity, how ready are we? (room scores six foundations, radar, CSV download), agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, open discussion | | | shown | shown |
+| Core deck, plus three things to leave with, what to remember (recap: what an agent is, how it works, how we trust it), six questions before an agent touches a claim (opens Act 3), next word, what makes an agent, the agent loop, the autonomy dial, Copilot as an operating system of work (interactive: Today versus Next, and a goal the room types in), the cost of waiting (plays by itself: start now versus wait a year), Copilot is the floor not the ceiling, four kinds of AI opportunity, what only executives can do | shown | shown | shown | shown |
+| Live moment, agents with their own computers, their agent will call our agent, how we must adapt (click to reveal), design an agent (table exercise: each table designs one agent for one claims step on a printed worksheet, then the room sees the agent team it built; set the number of tables and each table's step live) | | shown | shown | shown |
+| How it works (section card), give it the right sources, tools are its hands, five things to watch, what shifts for us, what doesn't change, many ideas a few patterns, where do our five sit?, four questions for any opportunity, how ready are we? (room scores six foundations, radar, CSV download), agents work in teams, test before you trust, task-length chart, the gain came from redesign, a day in 2028, agents watching agents, quick quiz (4 questions, optional), open discussion | | | shown | shown |
 | Myth or reality? | | | | shown |
-| **Slides in total** | 27 | 32 | 49 | 50 |
+| **Slides in total** | 28 | 33 | 51 | 52 |
 
 Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 90 = 5 / 35 / 20 / 20 / discussion 5 / 5; 120 = 5 / 45 / 27 / 28 / discussion 10 / 5.
 
@@ -61,7 +61,8 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 - On-screen numbers: `src/data/claimFacts.ts`
 - Teaching content (next-word example, loop steps, tools, autonomy levels, myths, trends, METR data): `src/data/teaching.ts`
 - Objectives, opportunity types, the suggested placement of our five, evaluation questions, executive accountabilities, the electrification source: `src/data/strategy.ts`
-- Copilot as an operating system content, agent team rules, readiness foundations, the cost-of-waiting assumption: `src/data/osOfWork.ts`
+- The design-an-agent exercise (agents per claims step, worksheet, the three rights, worked example), the recap and the quiz: `src/data/designAgent.ts`
+- Copilot as an operating system content, readiness foundations, the cost-of-waiting assumption: `src/data/osOfWork.ts`
 - Colours: `src/theme.ts` (the only place colours are defined). Everything uses the WCB-Alberta palette: AI and agents in WCB blue `#3399CC`, people deciding in WCB green (`#98C857`, deepened to `#5F9230` where white text sits on it), the claim file in WCB dark blue `#117BBC`, key moments in WCB gold `#FBB43A`. Red is for risk only
 
 ## Before the session: items to confirm
@@ -79,10 +80,14 @@ Planned minutes per act: 60 = 5 / 22 / 14 / 14 / 5; 75 = 5 / 30 / 18 / 17 / 5; 9
 - [ ] The next-word scores on "It predicts the next word" are illustrative, not real model output
 - [ ] Agent products (Grok Bot, Muse, Dots) and Microsoft's Copilot direction were checked on 30 September 2026, days after launch. Recheck names, availability and the Nadella quote the week of the session (sources in `src/data/teaching.ts` and the slide notes)
 
+## Handout: Design an agent
+
+`handout/design-an-agent.pdf` is the printed worksheet for the table exercise: one landscape page per claims agent (Intake, Sorting, Evidence, Medical summary, Decision support, Letters, Payment, Return to work) plus a blank one. Print it from the deck too: the printer button on the "Design an agent" worksheet, or Ctrl+P on any slide. Rebuild the PDF with `node scripts/handout.mjs` after `npm run build`.
+
 ## Pre-read video
 
 `video/` holds a 2 minute 20 second music video to send before the session: the agenda, the key terms and Deloitte's August 2026 view of the future of workers' compensation, set to a song. Built with Remotion; the song and sound effects come from ElevenLabs. See `video/README.md`.
 
 ## Checks
 
-`scripts/shoot.mjs` screenshots every slide from the built file; `scripts/sorter.mjs` tests the slide sorter; `scripts/interact.mjs` tests navigation, interactive elements, drag and drop (mouse and touch), session lengths, the menu and the presenter timer. Both need Playwright and Chromium.
+`scripts/shoot.mjs` screenshots every slide from the built file; `scripts/sorter.mjs` tests the slide sorter and My mix; `scripts/design-agent.mjs` tests the design-an-agent exercise, the recap and the quiz; `scripts/handout.mjs` prints the handout PDF; `scripts/interact.mjs` tests navigation, interactive elements, drag and drop (mouse and touch), session lengths, the menu and the presenter timer. Both need Playwright and Chromium.
